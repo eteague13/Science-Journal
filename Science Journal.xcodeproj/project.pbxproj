@@ -14,14 +14,16 @@
 		BD08A19719A26BE400EE1B97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A19619A26BE400EE1B97 /* main.m */; };
 		BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A19A19A26BE400EE1B97 /* AppDelegate.m */; };
 		BD08A19E19A26BE400EE1B97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD08A19C19A26BE400EE1B97 /* Main.storyboard */; };
-		BD08A1A119A26BE400EE1B97 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A1A019A26BE400EE1B97 /* FirstViewController.m */; };
-		BD08A1A419A26BE400EE1B97 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A1A319A26BE400EE1B97 /* SecondViewController.m */; };
+		BD08A1A119A26BE400EE1B97 /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A1A019A26BE400EE1B97 /* MapController.m */; };
+		BD08A1A419A26BE400EE1B97 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A1A319A26BE400EE1B97 /* EntriesController.m */; };
 		BD08A1A619A26BE400EE1B97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD08A1A519A26BE400EE1B97 /* Images.xcassets */; };
 		BD08A1AD19A26BE400EE1B97 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A1AC19A26BE400EE1B97 /* XCTest.framework */; };
 		BD08A1AE19A26BE400EE1B97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18A19A26BE400EE1B97 /* Foundation.framework */; };
 		BD08A1AF19A26BE400EE1B97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18E19A26BE400EE1B97 /* UIKit.framework */; };
 		BD08A1B719A26BE400EE1B97 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD08A1B519A26BE400EE1B97 /* InfoPlist.strings */; };
 		BD08A1B919A26BE400EE1B97 /* Science_JournalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A1B819A26BE400EE1B97 /* Science_JournalTests.m */; };
+		BD3FB96919A278DE002496CE /* ExportController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96819A278DE002496CE /* ExportController.m */; };
+		BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96B19A278F1002496CE /* SettingsController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,16 +48,20 @@
 		BD08A19919A26BE400EE1B97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BD08A19A19A26BE400EE1B97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		BD08A19D19A26BE400EE1B97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BD08A19F19A26BE400EE1B97 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		BD08A1A019A26BE400EE1B97 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		BD08A1A219A26BE400EE1B97 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		BD08A1A319A26BE400EE1B97 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		BD08A19F19A26BE400EE1B97 /* MapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MapController.h; path = "/Users/evanteague/Desktop/Science Journal/Science Journal/MapController.h"; sourceTree = "<absolute>"; };
+		BD08A1A019A26BE400EE1B97 /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MapController.m; path = "/Users/evanteague/Desktop/Science Journal/Science Journal/MapController.m"; sourceTree = "<absolute>"; };
+		BD08A1A219A26BE400EE1B97 /* EntriesController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EntriesController.h; path = "/Users/evanteague/Desktop/Science Journal/Science Journal/EntriesController.h"; sourceTree = "<absolute>"; };
+		BD08A1A319A26BE400EE1B97 /* EntriesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EntriesController.m; path = "/Users/evanteague/Desktop/Science Journal/Science Journal/EntriesController.m"; sourceTree = "<absolute>"; };
 		BD08A1A519A26BE400EE1B97 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BD08A1AB19A26BE400EE1B97 /* Science JournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Science JournalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD08A1AC19A26BE400EE1B97 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BD08A1B419A26BE400EE1B97 /* Science JournalTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Science JournalTests-Info.plist"; sourceTree = "<group>"; };
 		BD08A1B619A26BE400EE1B97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BD08A1B819A26BE400EE1B97 /* Science_JournalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Science_JournalTests.m; sourceTree = "<group>"; };
+		BD3FB96719A278DE002496CE /* ExportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportController.h; sourceTree = "<group>"; };
+		BD3FB96819A278DE002496CE /* ExportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportController.m; sourceTree = "<group>"; };
+		BD3FB96A19A278F1002496CE /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		BD3FB96B19A278F1002496CE /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,10 +124,14 @@
 				BD08A19919A26BE400EE1B97 /* AppDelegate.h */,
 				BD08A19A19A26BE400EE1B97 /* AppDelegate.m */,
 				BD08A19C19A26BE400EE1B97 /* Main.storyboard */,
-				BD08A19F19A26BE400EE1B97 /* FirstViewController.h */,
-				BD08A1A019A26BE400EE1B97 /* FirstViewController.m */,
-				BD08A1A219A26BE400EE1B97 /* SecondViewController.h */,
-				BD08A1A319A26BE400EE1B97 /* SecondViewController.m */,
+				BD08A19F19A26BE400EE1B97 /* MapController.h */,
+				BD08A1A019A26BE400EE1B97 /* MapController.m */,
+				BD08A1A219A26BE400EE1B97 /* EntriesController.h */,
+				BD08A1A319A26BE400EE1B97 /* EntriesController.m */,
+				BD3FB96719A278DE002496CE /* ExportController.h */,
+				BD3FB96819A278DE002496CE /* ExportController.m */,
+				BD3FB96A19A278F1002496CE /* SettingsController.h */,
+				BD3FB96B19A278F1002496CE /* SettingsController.m */,
 				BD08A1A519A26BE400EE1B97 /* Images.xcassets */,
 				BD08A19119A26BE400EE1B97 /* Supporting Files */,
 			);
@@ -254,9 +264,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD08A1A419A26BE400EE1B97 /* SecondViewController.m in Sources */,
+				BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */,
+				BD08A1A419A26BE400EE1B97 /* EntriesController.m in Sources */,
 				BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */,
-				BD08A1A119A26BE400EE1B97 /* FirstViewController.m in Sources */,
+				BD08A1A119A26BE400EE1B97 /* MapController.m in Sources */,
+				BD3FB96919A278DE002496CE /* ExportController.m in Sources */,
 				BD08A19719A26BE400EE1B97 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +474,7 @@
 				BD08A1BE19A26BE400EE1B97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BD08A1BF19A26BE400EE1B97 /* Build configuration list for PBXNativeTarget "Science JournalTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +483,7 @@
 				BD08A1C119A26BE400EE1B97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

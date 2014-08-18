@@ -1,18 +1,18 @@
 //
-//  FirstViewController.m
+//  SecondViewController.m
 //  Science Journal
 //
 //  Created by Evan Teague on 8/18/14.
 //  Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "EntriesController.h"
 
-@interface FirstViewController ()
+@interface EntriesController ()
 
 @end
 
-@implementation FirstViewController
+@implementation EntriesController
 
 - (void)viewDidLoad
 {
