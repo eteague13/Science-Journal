@@ -15,7 +15,6 @@
 		BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A19A19A26BE400EE1B97 /* AppDelegate.m */; };
 		BD08A19E19A26BE400EE1B97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD08A19C19A26BE400EE1B97 /* Main.storyboard */; };
 		BD08A1A119A26BE400EE1B97 /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A1A019A26BE400EE1B97 /* MapController.m */; };
-		BD08A1A419A26BE400EE1B97 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A1A319A26BE400EE1B97 /* EntriesController.m */; };
 		BD08A1A619A26BE400EE1B97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD08A1A519A26BE400EE1B97 /* Images.xcassets */; };
 		BD08A1AD19A26BE400EE1B97 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A1AC19A26BE400EE1B97 /* XCTest.framework */; };
 		BD08A1AE19A26BE400EE1B97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18A19A26BE400EE1B97 /* Foundation.framework */; };
@@ -26,6 +25,9 @@
 		BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96B19A278F1002496CE /* SettingsController.m */; };
 		BD3FB97019A2C314002496CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3FB96F19A2C314002496CE /* MapKit.framework */; };
 		BD3FB97F19A2D5EA002496CE /* EntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB97E19A2D5EA002496CE /* EntryController.m */; };
+		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
+		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
+		BD7D734219A3ED1D0034E504 /* SingleEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +54,6 @@
 		BD08A19D19A26BE400EE1B97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BD08A19F19A26BE400EE1B97 /* MapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MapController.h; path = "/Users/evanteague/Desktop/Science Journal/Science Journal/MapController.h"; sourceTree = "<absolute>"; };
 		BD08A1A019A26BE400EE1B97 /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MapController.m; path = "/Users/evanteague/Desktop/Science Journal/Science Journal/MapController.m"; sourceTree = "<absolute>"; };
-		BD08A1A219A26BE400EE1B97 /* EntriesController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EntriesController.h; path = "/Users/evanteague/Desktop/Science Journal/Science Journal/EntriesController.h"; sourceTree = "<absolute>"; };
-		BD08A1A319A26BE400EE1B97 /* EntriesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EntriesController.m; path = "/Users/evanteague/Desktop/Science Journal/Science Journal/EntriesController.m"; sourceTree = "<absolute>"; };
 		BD08A1A519A26BE400EE1B97 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BD08A1AB19A26BE400EE1B97 /* Science JournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Science JournalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD08A1AC19A26BE400EE1B97 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -67,6 +67,12 @@
 		BD3FB96F19A2C314002496CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		BD3FB97D19A2D5EA002496CE /* EntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryController.h; sourceTree = "<group>"; };
 		BD3FB97E19A2D5EA002496CE /* EntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryController.m; sourceTree = "<group>"; };
+		BD7D733A19A3E1850034E504 /* EntriesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesController.h; sourceTree = "<group>"; };
+		BD7D733B19A3E1850034E504 /* EntriesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesController.m; sourceTree = "<group>"; };
+		BD7D733D19A3E1E30034E504 /* EntriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesCell.h; sourceTree = "<group>"; };
+		BD7D733E19A3E1E30034E504 /* EntriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesCell.m; sourceTree = "<group>"; };
+		BD7D734019A3ED1D0034E504 /* SingleEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntryViewController.h; sourceTree = "<group>"; };
+		BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntryViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +139,6 @@
 				BD08A19C19A26BE400EE1B97 /* Main.storyboard */,
 				BD08A19F19A26BE400EE1B97 /* MapController.h */,
 				BD08A1A019A26BE400EE1B97 /* MapController.m */,
-				BD08A1A219A26BE400EE1B97 /* EntriesController.h */,
-				BD08A1A319A26BE400EE1B97 /* EntriesController.m */,
 				BD3FB96719A278DE002496CE /* ExportController.h */,
 				BD3FB96819A278DE002496CE /* ExportController.m */,
 				BD3FB96A19A278F1002496CE /* SettingsController.h */,
@@ -143,6 +147,12 @@
 				BD08A19119A26BE400EE1B97 /* Supporting Files */,
 				BD3FB97D19A2D5EA002496CE /* EntryController.h */,
 				BD3FB97E19A2D5EA002496CE /* EntryController.m */,
+				BD7D733A19A3E1850034E504 /* EntriesController.h */,
+				BD7D733B19A3E1850034E504 /* EntriesController.m */,
+				BD7D733D19A3E1E30034E504 /* EntriesCell.h */,
+				BD7D733E19A3E1E30034E504 /* EntriesCell.m */,
+				BD7D734019A3ED1D0034E504 /* SingleEntryViewController.h */,
+				BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */,
 			);
 			path = "Science Journal";
 			sourceTree = "<group>";
@@ -274,10 +284,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */,
-				BD08A1A419A26BE400EE1B97 /* EntriesController.m in Sources */,
 				BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */,
+				BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */,
+				BD7D734219A3ED1D0034E504 /* SingleEntryViewController.m in Sources */,
 				BD08A1A119A26BE400EE1B97 /* MapController.m in Sources */,
 				BD3FB97F19A2D5EA002496CE /* EntryController.m in Sources */,
+				BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */,
 				BD3FB96919A278DE002496CE /* ExportController.m in Sources */,
 				BD08A19719A26BE400EE1B97 /* main.m in Sources */,
 			);

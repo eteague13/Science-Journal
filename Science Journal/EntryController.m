@@ -7,6 +7,8 @@
 //
 
 #import "EntryController.h"
+#import "EntriesCell.h"
+#import "SingleEntryViewController.h"
 
 @interface EntryController ()
 
