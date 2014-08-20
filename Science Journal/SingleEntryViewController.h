@@ -21,7 +21,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *entryDetailLongitude;
 @property (strong, nonatomic) IBOutlet UITextView *entryDetailWeather;
 @property (strong, nonatomic) IBOutlet UITextField *entryDetailMagnet;
-//@property (strong, nonatomic) IBOutlet UITextView *entryDetailPartners;
 @property (strong, nonatomic) IBOutlet UITextView *entryDetailPartners;
 @property (strong, nonatomic) IBOutlet UITextView *entryDetailPermissions;
 @property (strong, nonatomic) IBOutlet UITextView *entryOutcrop;

@@ -8,6 +8,7 @@
 
 #import "SingleEntryViewController.h"
 #import "EntriesController.h"
+#import "EntriesCell.h"
 
 @interface SingleEntryViewController ()
     
@@ -48,6 +49,9 @@
     _entryStructuralData.text = _entryDetailsModel[11];
     _entryDetailSampleNum.text = _entryDetailsModel[12];
     _entryDetailNotes.text = _entryDetailsModel[13];
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

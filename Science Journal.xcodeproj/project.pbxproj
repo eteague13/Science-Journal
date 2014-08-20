@@ -52,8 +52,8 @@
 		BD08A19919A26BE400EE1B97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BD08A19A19A26BE400EE1B97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		BD08A19D19A26BE400EE1B97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BD08A19F19A26BE400EE1B97 /* MapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MapController.h; path = "/Users/evanteague/Desktop/Science Journal/Science Journal/MapController.h"; sourceTree = "<absolute>"; };
-		BD08A1A019A26BE400EE1B97 /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MapController.m; path = "/Users/evanteague/Desktop/Science Journal/Science Journal/MapController.m"; sourceTree = "<absolute>"; };
+		BD08A19F19A26BE400EE1B97 /* MapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
+		BD08A1A019A26BE400EE1B97 /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
 		BD08A1A519A26BE400EE1B97 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BD08A1AB19A26BE400EE1B97 /* Science JournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Science JournalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD08A1AC19A26BE400EE1B97 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };

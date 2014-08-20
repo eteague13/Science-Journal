@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface EntriesCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *entryNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *entryNameLabel;
 
 
 @end
