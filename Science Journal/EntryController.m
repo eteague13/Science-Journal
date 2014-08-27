@@ -9,6 +9,9 @@
 #import "EntryController.h"
 #import "EntriesCell.h"
 #import "SingleEntryViewController.h"
+#import "EntriesController.h"
+#import "SingleEntryViewController.h"
+#import "Entry.h"
 
 @interface EntryController ()
 
@@ -29,8 +32,9 @@
 {
     [super viewDidLoad];
     [entryScroller setScrollEnabled:YES];
-    [entryScroller setContentSize:CGSizeMake(320, 1958)];
+    [entryScroller setContentSize:CGSizeMake(320, 2010)];
     [datePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
+    databaseCopy = [UserEntryDatabase userEntryDatabase];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,5 +61,68 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+- (IBAction)submitButtonPressed:(id)sender {
+    Entry *newEntry = [[Entry alloc] init];
+    newEntry.name = entryNameField.text;
+    newEntry.date = dateDisplayFieldA.text;
+    newEntry.projectName = projectNameField.text;
+    newEntry.goal = goalField.text;
+    newEntry.latitude = latitudeField.text;
+    newEntry.longitude = longitudeField.text;
+    newEntry.weather = weatherField.text;
+    newEntry.magnet = magneticField.text;
+    newEntry.partners = partnersField.text;
+    newEntry.permissions = permissionsField.text;
+    newEntry.outcrop = outcropField.text;
+    newEntry.structuralData = structuralField.text;
+    newEntry.sampleNum = sampleNumField.text;
+    newEntry.notes = notesField.text;
+    
+    [databaseCopy addEntry:newEntry];
+    NSLog(@"Number of elements in table: %lu", (unsigned long)[databaseCopy.entries count]);
+    for (int i = 0; i < [databaseCopy.entries count]; i++) {
+        Entry *testEntry = [databaseCopy.entries objectAtIndex: i];
+        NSLog(@"Entries: %@", testEntry.name);
+    }
+    
+    
+    
+    
+    /*
+    NSMutableArray *entriesNames = [entries.allEntryNames mutableCopy];
+    NSLog(@"%lu", (unsigned long)[entries.allEntryNames count]);
+    */
+    //[entries createNewEntry:@"test 2"];
+    //[_allEntryNames addObject:@entryNameField.text];
+    //_allEntryDates = @[@"date"];
+    //_allProjectNames = @[@"project name"];
+    //_allGoals = @[@"goal"];
+    //_allLats = @[@"lat"];
+    //_allLongs = @[@"long"];
+    //_allWeather = @[@"weather"];
+    //_allMagnets = @[@"magnets"];
+    //_allPartners = @[@"partners"];
+    //_allPermissions = @[@"permissions"];
+    //_allOutcrops = @[@"outcrops"];
+    //_allStructuralData = @[@"structural data"];
+    //_allSampleNums = @[@"sample num"];
+    //_allNotes = @[@"notes"];
+}
+
+-(IBAction)textFieldReturn:(id)sender
+{
+    [sender resignFirstResponder];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+    }
+    return YES;
+}
 
 @end

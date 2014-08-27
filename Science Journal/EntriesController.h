@@ -7,22 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserEntryDatabase.h"
 
-@interface EntriesController : UITableViewController
-@property (strong, nonatomic) NSArray *allEntryNames;
-@property (strong, nonatomic) NSArray *allEntryDates;
-@property (strong, nonatomic) NSArray *allProjectNames;
-@property (strong, nonatomic) NSArray *allGoals;
-@property (strong, nonatomic) NSArray *allLats;
-@property (strong, nonatomic) NSArray *allLongs;
-@property (strong, nonatomic) NSArray *allWeather;
-@property (strong, nonatomic) NSArray *allMagnets;
-@property (strong, nonatomic) NSArray *allPartners;
-@property (strong, nonatomic) NSArray *allPermissions;
-@property (strong, nonatomic) NSArray *allOutcrops;
-@property (strong, nonatomic) NSArray *allStructuralData;
-@property (strong, nonatomic) NSArray *allSampleNums;
-@property (strong, nonatomic) NSArray *allNotes;
-    
-
+@interface EntriesController : UITableViewController{
+    //UserEntryDatabase *database;
+}
+   
+@property (strong, nonatomic) NSMutableArray *allEntryNames;
+@property (strong, nonatomic) NSMutableArray *allEntryDates;
+@property (strong, nonatomic) NSMutableArray *allProjectNames;
+@property (strong, nonatomic) NSMutableArray *allGoals;
+@property (strong, nonatomic) NSMutableArray *allLats;
+@property (strong, nonatomic) NSMutableArray *allLongs;
+@property (strong, nonatomic) NSMutableArray *allWeather;
+@property (strong, nonatomic) NSMutableArray *allMagnets;
+@property (strong, nonatomic) NSMutableArray *allPartners;
+@property (strong, nonatomic) NSMutableArray *allPermissions;
+@property (strong, nonatomic) NSMutableArray *allOutcrops;
+@property (strong, nonatomic) NSMutableArray *allStructuralData;
+@property (strong, nonatomic) NSMutableArray *allSampleNums;
+@property (strong, nonatomic) NSMutableArray *allNotes;
+@property (strong, nonatomic) UserEntryDatabase *database;
+//+ (id) sharedInstance;
+//@property (strong, nonatomic) UserEntryDatabase *database;
 @end
