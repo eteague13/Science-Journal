@@ -27,6 +27,7 @@
 		BD3FB97F19A2D5EA002496CE /* EntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB97E19A2D5EA002496CE /* EntryController.m */; };
 		BD4BFF0619ABC92600242844 /* UserEntryDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0519ABC92600242844 /* UserEntryDatabase.m */; };
 		BD4BFF0919ABC9B300242844 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0819ABC9B300242844 /* Entry.m */; };
+		BD4BFF0C19AFCC9900242844 /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0B19AFCC9900242844 /* MyLocation.m */; };
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
 		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
 		BD7D734219A3ED1D0034E504 /* SingleEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */; };
@@ -73,6 +74,8 @@
 		BD4BFF0519ABC92600242844 /* UserEntryDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntryDatabase.m; sourceTree = "<group>"; };
 		BD4BFF0719ABC9B300242844 /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entry.h; sourceTree = "<group>"; };
 		BD4BFF0819ABC9B300242844 /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entry.m; sourceTree = "<group>"; };
+		BD4BFF0A19AFCC9900242844 /* MyLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocation.h; sourceTree = "<group>"; };
+		BD4BFF0B19AFCC9900242844 /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocation.m; sourceTree = "<group>"; };
 		BD7D733A19A3E1850034E504 /* EntriesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesController.h; sourceTree = "<group>"; };
 		BD7D733B19A3E1850034E504 /* EntriesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesController.m; sourceTree = "<group>"; };
 		BD7D733D19A3E1E30034E504 /* EntriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesCell.h; sourceTree = "<group>"; };
@@ -163,6 +166,8 @@
 				BD4BFF0519ABC92600242844 /* UserEntryDatabase.m */,
 				BD4BFF0719ABC9B300242844 /* Entry.h */,
 				BD4BFF0819ABC9B300242844 /* Entry.m */,
+				BD4BFF0A19AFCC9900242844 /* MyLocation.h */,
+				BD4BFF0B19AFCC9900242844 /* MyLocation.m */,
 			);
 			path = "Science Journal";
 			sourceTree = "<group>";
@@ -303,6 +308,7 @@
 				BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */,
 				BD3FB96919A278DE002496CE /* ExportController.m in Sources */,
 				BD4BFF0619ABC92600242844 /* UserEntryDatabase.m in Sources */,
+				BD4BFF0C19AFCC9900242844 /* MyLocation.m in Sources */,
 				BD08A19719A26BE400EE1B97 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

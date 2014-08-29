@@ -49,8 +49,8 @@
     testEntry.date = @"date";
     testEntry.projectName = @"project name";
     testEntry.goal = @"goal";
-    testEntry.latitude = @"lat";
-    testEntry.longitude = @"long";
+    testEntry.latitude = @"37.008203";
+    testEntry.longitude = @"-79.522963";
     testEntry.weather = @"weather";
     testEntry.magnet = @"magnets";
     testEntry.partners = @"partners";
@@ -67,8 +67,8 @@
     testEntry2.date = @"date";
     testEntry2.projectName = @"project name";
     testEntry2.goal = @"goal";
-    testEntry2.latitude = @"lat";
-    testEntry2.longitude = @"long";
+    testEntry2.latitude = @"38.008203";
+    testEntry2.longitude = @"-78.522963";
     testEntry2.weather = @"weather";
     testEntry2.magnet = @"magnets";
     testEntry2.partners = @"partners";
