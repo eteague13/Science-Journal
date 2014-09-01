@@ -12,6 +12,7 @@
 #import "EntriesController.h"
 #import "SingleEntryViewController.h"
 #import "Entry.h"
+#import "CameraRollController.h"
 
 @interface EntryController ()
 
@@ -125,4 +126,20 @@
     return YES;
 }
 
+/*
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([segue.identifier isEqualToString:@"showCameraRoll"])
+    {
+        
+        CameraRollController *cameraController = segue.destinationViewController;
+        
+        
+        
+    }
+ 
+    
+}
+*/
 @end

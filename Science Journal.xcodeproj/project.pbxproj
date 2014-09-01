@@ -28,6 +28,8 @@
 		BD4BFF0619ABC92600242844 /* UserEntryDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0519ABC92600242844 /* UserEntryDatabase.m */; };
 		BD4BFF0919ABC9B300242844 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0819ABC9B300242844 /* Entry.m */; };
 		BD4BFF0C19AFCC9900242844 /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0B19AFCC9900242844 /* MyLocation.m */; };
+		BD76F5C819B4F8A5000A1349 /* CameraRollController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD76F5C719B4F8A5000A1349 /* CameraRollController.m */; };
+		BD76F5CA19B5001D000A1349 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD76F5C919B5001D000A1349 /* MobileCoreServices.framework */; };
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
 		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
 		BD7D734219A3ED1D0034E504 /* SingleEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */; };
@@ -76,6 +78,9 @@
 		BD4BFF0819ABC9B300242844 /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entry.m; sourceTree = "<group>"; };
 		BD4BFF0A19AFCC9900242844 /* MyLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocation.h; sourceTree = "<group>"; };
 		BD4BFF0B19AFCC9900242844 /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocation.m; sourceTree = "<group>"; };
+		BD76F5C619B4F8A5000A1349 /* CameraRollController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraRollController.h; sourceTree = "<group>"; };
+		BD76F5C719B4F8A5000A1349 /* CameraRollController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraRollController.m; sourceTree = "<group>"; };
+		BD76F5C919B5001D000A1349 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		BD7D733A19A3E1850034E504 /* EntriesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesController.h; sourceTree = "<group>"; };
 		BD7D733B19A3E1850034E504 /* EntriesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesController.m; sourceTree = "<group>"; };
 		BD7D733D19A3E1E30034E504 /* EntriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesCell.h; sourceTree = "<group>"; };
@@ -89,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD76F5CA19B5001D000A1349 /* MobileCoreServices.framework in Frameworks */,
 				BD3FB97019A2C314002496CE /* MapKit.framework in Frameworks */,
 				BD08A18D19A26BE400EE1B97 /* CoreGraphics.framework in Frameworks */,
 				BD08A18F19A26BE400EE1B97 /* UIKit.framework in Frameworks */,
@@ -131,6 +137,7 @@
 		BD08A18919A26BE400EE1B97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD76F5C919B5001D000A1349 /* MobileCoreServices.framework */,
 				BD3FB96F19A2C314002496CE /* MapKit.framework */,
 				BD08A18A19A26BE400EE1B97 /* Foundation.framework */,
 				BD08A18C19A26BE400EE1B97 /* CoreGraphics.framework */,
@@ -168,6 +175,8 @@
 				BD4BFF0819ABC9B300242844 /* Entry.m */,
 				BD4BFF0A19AFCC9900242844 /* MyLocation.h */,
 				BD4BFF0B19AFCC9900242844 /* MyLocation.m */,
+				BD76F5C619B4F8A5000A1349 /* CameraRollController.h */,
+				BD76F5C719B4F8A5000A1349 /* CameraRollController.m */,
 			);
 			path = "Science Journal";
 			sourceTree = "<group>";
@@ -308,6 +317,7 @@
 				BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */,
 				BD3FB96919A278DE002496CE /* ExportController.m in Sources */,
 				BD4BFF0619ABC92600242844 /* UserEntryDatabase.m in Sources */,
+				BD76F5C819B4F8A5000A1349 /* CameraRollController.m in Sources */,
 				BD4BFF0C19AFCC9900242844 /* MyLocation.m in Sources */,
 				BD08A19719A26BE400EE1B97 /* main.m in Sources */,
 			);
