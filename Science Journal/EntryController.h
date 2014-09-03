@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "UserEntryDatabase.h"
+#import "CoreLocation/CoreLocation.h"
 
-@interface EntryController : UIViewController <UITextFieldDelegate, UITextViewDelegate>{
+@interface EntryController : UIViewController <UITextFieldDelegate, UITextViewDelegate, CLLocationManagerDelegate>
+{
     IBOutlet UIScrollView *entryScroller;
     IBOutlet UIDatePicker *datePicker;
     IBOutlet UITextField *dateDisplayFieldA;
@@ -29,5 +31,6 @@
     __weak IBOutlet UITextView *notesField;
     UserEntryDatabase *databaseCopy;
 }
+- (IBAction)getCurrentLocation:(id)sender;
 -(IBAction)textFieldReturn:(id)sender;
 @end

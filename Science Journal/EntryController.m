@@ -18,7 +18,9 @@
 
 @end
 
-@implementation EntryController
+@implementation EntryController {
+    CLLocationManager *locationManager;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +38,7 @@
     [entryScroller setContentSize:CGSizeMake(320, 2010)];
     [datePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
     databaseCopy = [UserEntryDatabase userEntryDatabase];
+    locationManager = [[CLLocationManager alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,6 +115,30 @@
     //_allNotes = @[@"notes"];
 }
 
+- (IBAction)getCurrentLocation:(id)sender {
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    [locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    NSLog(@"Get somewhere outside!");
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"didUpdateToLocation: %@", newLocation);
+    CLLocation *currentLocation = newLocation;
+    
+    if (currentLocation != nil) {
+        latitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
+        longitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+    }
+}
+
 -(IBAction)textFieldReturn:(id)sender
 {
     [sender resignFirstResponder];
@@ -125,6 +152,7 @@
     }
     return YES;
 }
+
 
 /*
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
