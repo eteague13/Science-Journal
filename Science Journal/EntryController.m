@@ -12,7 +12,7 @@
 #import "EntriesController.h"
 #import "SingleEntryViewController.h"
 #import "Entry.h"
-#import "CameraRollController.h"
+
 
 @interface EntryController ()
 
@@ -35,10 +35,27 @@
 {
     [super viewDidLoad];
     [entryScroller setScrollEnabled:YES];
-    [entryScroller setContentSize:CGSizeMake(320, 2010)];
+    [entryScroller setContentSize:CGSizeMake(320, 2500)];
     [datePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
     databaseCopy = [UserEntryDatabase userEntryDatabase];
     locationManager = [[CLLocationManager alloc] init];
+    goalField.layer.borderColor = [[UIColor blackColor] CGColor];
+    goalField.layer.borderWidth = 1.0;
+    weatherField.layer.borderColor = [[UIColor blackColor] CGColor];
+    weatherField.layer.borderWidth = 1.0;
+    partnersField.layer.borderColor = [[UIColor blackColor] CGColor];
+    partnersField.layer.borderWidth = 1.0;
+    permissionsField.layer.borderColor = [[UIColor blackColor] CGColor];
+    permissionsField.layer.borderWidth = 1.0;
+    outcropField.layer.borderColor = [[UIColor blackColor] CGColor];
+    outcropField.layer.borderWidth = 1.0;
+    structuralField.layer.borderColor = [[UIColor blackColor] CGColor];
+    structuralField.layer.borderWidth = 1.0;
+    notesField.layer.borderColor = [[UIColor blackColor] CGColor];
+    notesField.layer.borderWidth = 1.0;
+    
+    
+   
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,6 +101,11 @@
     newEntry.sampleNum = sampleNumField.text;
     newEntry.notes = notesField.text;
     
+    newEntry.sketch = sketchDisplay.image;
+    newEntry.photo = photoDisplay.image;
+    
+
+    
     [databaseCopy addEntry:newEntry];
     NSLog(@"Number of elements in table: %lu", (unsigned long)[databaseCopy.entries count]);
     for (int i = 0; i < [databaseCopy.entries count]; i++) {
@@ -115,6 +137,58 @@
     //_allNotes = @[@"notes"];
 }
 
+
+
+- (IBAction)useCameraRoll:(id)sender {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    NSLog(@"using photo");
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+- (IBAction)useCamera:(id)sender {
+    /*
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+     */
+}
+
+- (IBAction)getWeather:(id)sender {
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    [locationManager startUpdatingLocation];
+    
+    NSString *currentLocationURL = @"api.openweathermap.org/data/2.5/weather?lat=35&lon=139";
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:@"http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139"] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSLog(@"%@", json);
+    }];
+    [dataTask resume];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    photoDisplay.image = chosenImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
 - (IBAction)getCurrentLocation:(id)sender {
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -134,6 +208,8 @@
     CLLocation *currentLocation = newLocation;
     
     if (currentLocation != nil) {
+        latitudeValue = currentLocation.coordinate.latitude;
+        longitudeValue = currentLocation.coordinate.longitude;
         latitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
         longitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
     }
@@ -170,4 +246,23 @@
     
 }
 */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"sketchSegue"]){
+        
+        [segue.destinationViewController setDelegate:self]; 
+        
+    }else if([segue.identifier isEqualToString:@"photoSegue"]){
+        [segue.destinationViewController setDelegate:self];
+    }
+}
+- (void) passBackSketch:(SketchController *)controller didFinishSketch:(UIImage *)item{
+    
+    sketchDisplay.image = item;
+    
+    
+}
+
+
+
 @end

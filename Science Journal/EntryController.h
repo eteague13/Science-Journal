@@ -9,13 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "UserEntryDatabase.h"
 #import "CoreLocation/CoreLocation.h"
+#import "SketchController.h"
 
-@interface EntryController : UIViewController <UITextFieldDelegate, UITextViewDelegate, CLLocationManagerDelegate>
+
+@interface EntryController : UIViewController <UITextFieldDelegate, UITextViewDelegate, CLLocationManagerDelegate,SketchControllerDelegate>
 {
     IBOutlet UIScrollView *entryScroller;
     IBOutlet UIDatePicker *datePicker;
     IBOutlet UITextField *dateDisplayFieldA;
+    __weak IBOutlet UIImageView *photoDisplay;
     
+    __weak IBOutlet UIImageView *sketchDisplay;
     __weak IBOutlet UITextField *entryNameField;
     __weak IBOutlet UITextField *projectNameField;
     __weak IBOutlet UITextView *goalField;
@@ -30,7 +34,13 @@
     __weak IBOutlet UITextField *sampleNumField;
     __weak IBOutlet UITextView *notesField;
     UserEntryDatabase *databaseCopy;
+    float latitudeValue;
+    float longitudeValue;
 }
+- (IBAction)useCameraRoll:(id)sender;
+- (IBAction)useCamera:(id)sender;
+- (IBAction)getWeather:(id)sender;
+
 - (IBAction)getCurrentLocation:(id)sender;
 -(IBAction)textFieldReturn:(id)sender;
 @end
