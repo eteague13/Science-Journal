@@ -12,6 +12,7 @@
 #import "SketchController.h"
 
 
+
 @interface EntryController : UIViewController <UITextFieldDelegate, UITextViewDelegate, CLLocationManagerDelegate,SketchControllerDelegate>
 {
     IBOutlet UIScrollView *entryScroller;
@@ -36,10 +37,10 @@
     UserEntryDatabase *databaseCopy;
     float latitudeValue;
     float longitudeValue;
+    NSDictionary *jsonWeather;
 }
 - (IBAction)useCameraRoll:(id)sender;
 - (IBAction)useCamera:(id)sender;
-- (IBAction)getWeather:(id)sender;
 
 - (IBAction)getCurrentLocation:(id)sender;
 -(IBAction)textFieldReturn:(id)sender;
