@@ -9,6 +9,7 @@
 #import "SingleEntryViewController.h"
 #import "EntriesController.h"
 #import "EntriesCell.h"
+#import <MessageUI/MessageUI.h>
 
 @interface SingleEntryViewController ()
     
@@ -78,5 +79,58 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)deleteEntry:(id)sender {
+    
+}
+- (IBAction)emailEntry:(id)sender {
+        
+    
+        
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        mc.mailComposeDelegate = self;
+    
+        NSString *documentsDirectory = [NSHomeDirectory()
+                                    stringByAppendingPathComponent:@"Documents"];
+        NSString *fileName = [NSMutableString stringWithFormat:@"%@%@", _entryDetailName.text, @".txt"];
+        NSString *filePath = [documentsDirectory
+                          stringByAppendingPathComponent:fileName];
+        NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    
+        // Determine the MIME type
+        NSString *mimeType = @"application/txt";
+        
+        // Add attachment
+        [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
+        
+        // Present mail view controller on screen
+        [self presentViewController:mc animated:YES completion:NULL];
+        
+}
+    
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+    {
+        switch (result)
+        {
+            case MFMailComposeResultCancelled:
+                NSLog(@"Mail cancelled");
+                break;
+            case MFMailComposeResultSaved:
+                NSLog(@"Mail saved");
+                break;
+            case MFMailComposeResultSent:
+                NSLog(@"Mail sent");
+                break;
+            case MFMailComposeResultFailed:
+                NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+                break;
+            default:
+                break;
+        }
+        
+        // Close the Mail Interface
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
+
 
 @end

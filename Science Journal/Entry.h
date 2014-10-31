@@ -1,4 +1,4 @@
-//
+    //
 //  Entry.h
 //  Science Journal
 //

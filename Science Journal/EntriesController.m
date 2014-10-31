@@ -42,7 +42,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    /*
     Entry *testEntry = [[Entry alloc] init];
                         //initWithTitle:@"1" date:@"2" projectName:@"3" goal:@"4" latitude:@"5" longitude:@"6" weather:@"7" magnet:@"8" partners:@"9" permissions:@"10" outcrop:@"11" structuralData:@"12" sampleNum:@"13" notes:@"14"];
     testEntry.name = @"Test 1";
@@ -78,6 +78,7 @@
     testEntry2.sampleNum = @"sampleNum";
     testEntry2.notes = @"notes";
     [_database addEntry: testEntry2];
+     */
     //NSLog(@"Number of rows: %d", [_database.entries count]);
     //NSLog(@"%@", _database.entries );
     /*
@@ -174,6 +175,20 @@
     [super viewDidAppear:animated];
     
     [self.tableView reloadData];
+}
+
+-(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here to do what you want when you hit delete
+        [_database deleteEntryAtIndex:[indexPath row]];
+        [tableView reloadData];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
 }
 
 

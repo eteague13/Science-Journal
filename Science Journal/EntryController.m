@@ -56,6 +56,10 @@
     notesField.layer.borderWidth = 1.0;
     
     
+    
+    
+    
+    
    
 }
 
@@ -101,9 +105,19 @@
     newEntry.structuralData = structuralField.text;
     newEntry.sampleNum = sampleNumField.text;
     newEntry.notes = notesField.text;
+    if (sketchDisplay.image == nil){
+        UIImage *placeHolder = [[UIImage alloc] init];
+        sketchDisplay.image = placeHolder;
+    }else {
+        newEntry.sketch = sketchDisplay.image;
+    }
+    if (photoDisplay.image == nil){
+        UIImage *placeHolder = [[UIImage alloc] init];
+        photoDisplay.image = placeHolder;
+    }else {
+        newEntry.photo = photoDisplay.image;
+    }
     
-    newEntry.sketch = sketchDisplay.image;
-    newEntry.photo = photoDisplay.image;
     
 
     
@@ -114,6 +128,26 @@
         NSLog(@"Entries: %@", testEntry.name);
     }
     
+    //NSMutableString *printString = [NSMutableString stringWithString:@""];
+    //[printString appendString: entryNameField.text ];
+    NSMutableString *printString = [NSMutableString stringWithFormat:@"Entry name: %@; Date: %@; Project Name: %@; Goal: %@; Latitude: %@; Longitude: %@; Weather: %@; Magnetic Field: %@; Partners: %@; Permissions: %@; Outcrop: %@; Structural: %@; Sample Number: %@; Notes: %@", entryNameField.text, dateDisplayFieldA.text, projectNameField.text, goalField.text, latitudeField.text, longitudeField.text, weatherField.text, magneticField.text, partnersField.text, permissionsField.text, outcropField.text, structuralField.text, sampleNumField.text, notesField.text];
+    
+    
+    NSError *error;
+    
+    
+    NSString *documentsDirectory = [NSHomeDirectory()
+                                    stringByAppendingPathComponent:@"Documents"];
+    NSString *fileName = [NSMutableString stringWithFormat:@"%@%@", entryNameField.text, @".txt"];
+    NSString *filePath = [documentsDirectory
+                          stringByAppendingPathComponent:fileName];
+    
+    NSLog(@"string to write:%@", printString);
+    
+    [printString writeToFile:filePath atomically:YES
+                    encoding:NSUTF8StringEncoding error:&error];
+    
+    NSLog(@"%@", filePath);
     
     
     
@@ -198,8 +232,8 @@
     if (currentLocation != nil) {
         latitudeValue = currentLocation.coordinate.latitude;
         longitudeValue = currentLocation.coordinate.longitude;
-        latitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-        longitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+        latitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+        longitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
         
         NSString *currentLocationURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitudeValue, longitudeValue];
         NSURLSession *session = [NSURLSession sharedSession];
@@ -240,6 +274,7 @@
             }
             
         }
+        [locationManager stopUpdatingLocation];
         
         
         

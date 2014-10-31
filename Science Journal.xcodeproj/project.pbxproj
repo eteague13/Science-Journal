@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD02064519EC64B3005ACDD0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064419EC64B3005ACDD0 /* CFNetwork.framework */; };
+		BD02064719EC64BB005ACDD0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064619EC64BB005ACDD0 /* Security.framework */; };
+		BD02064919EC64C9005ACDD0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064819EC64C9005ACDD0 /* SystemConfiguration.framework */; };
+		BD02064B19EC64D2005ACDD0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064A19EC64D2005ACDD0 /* QuartzCore.framework */; };
+		BD02064D19EC64E4005ACDD0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064C19EC64E4005ACDD0 /* libc++.dylib */; };
+		BD02064F19EC64ED005ACDD0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064E19EC64ED005ACDD0 /* libz.dylib */; };
 		BD08A18B19A26BE400EE1B97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18A19A26BE400EE1B97 /* Foundation.framework */; };
 		BD08A18D19A26BE400EE1B97 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18C19A26BE400EE1B97 /* CoreGraphics.framework */; };
 		BD08A18F19A26BE400EE1B97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18E19A26BE400EE1B97 /* UIKit.framework */; };
@@ -25,6 +31,7 @@
 		BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96B19A278F1002496CE /* SettingsController.m */; };
 		BD3FB97019A2C314002496CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3FB96F19A2C314002496CE /* MapKit.framework */; };
 		BD3FB97F19A2D5EA002496CE /* EntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB97E19A2D5EA002496CE /* EntryController.m */; };
+		BD42937619C9082100035154 /* MapCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD42937519C9082100035154 /* MapCalloutView.m */; };
 		BD4BFF0619ABC92600242844 /* UserEntryDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0519ABC92600242844 /* UserEntryDatabase.m */; };
 		BD4BFF0919ABC9B300242844 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0819ABC9B300242844 /* Entry.m */; };
 		BD4BFF0C19AFCC9900242844 /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0B19AFCC9900242844 /* MyLocation.m */; };
@@ -35,6 +42,8 @@
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
 		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
 		BD7D734219A3ED1D0034E504 /* SingleEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */; };
+		BD83004519DF1BFB004CF78C /* MapAnnotationDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD83004419DF1BFB004CF78C /* MapAnnotationDisplayController.m */; };
+		BDA0A73F1A00863100B421FB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA0A73E1A00863100B421FB /* Dropbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +57,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD02064219EC647C005ACDD0 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
+		BD02064419EC64B3005ACDD0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		BD02064619EC64BB005ACDD0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BD02064819EC64C9005ACDD0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BD02064A19EC64D2005ACDD0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BD02064C19EC64E4005ACDD0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		BD02064E19EC64ED005ACDD0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BD08A18719A26BE400EE1B97 /* Science Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Science Journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD08A18A19A26BE400EE1B97 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BD08A18C19A26BE400EE1B97 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -74,6 +90,8 @@
 		BD3FB96F19A2C314002496CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		BD3FB97D19A2D5EA002496CE /* EntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryController.h; sourceTree = "<group>"; };
 		BD3FB97E19A2D5EA002496CE /* EntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryController.m; sourceTree = "<group>"; };
+		BD42937419C9082100035154 /* MapCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCalloutView.h; sourceTree = "<group>"; };
+		BD42937519C9082100035154 /* MapCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCalloutView.m; sourceTree = "<group>"; };
 		BD4BFF0419ABC92600242844 /* UserEntryDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntryDatabase.h; sourceTree = "<group>"; };
 		BD4BFF0519ABC92600242844 /* UserEntryDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntryDatabase.m; sourceTree = "<group>"; };
 		BD4BFF0719ABC9B300242844 /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entry.h; sourceTree = "<group>"; };
@@ -92,6 +110,9 @@
 		BD7D733E19A3E1E30034E504 /* EntriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesCell.m; sourceTree = "<group>"; };
 		BD7D734019A3ED1D0034E504 /* SingleEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntryViewController.h; sourceTree = "<group>"; };
 		BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntryViewController.m; sourceTree = "<group>"; };
+		BD83004319DF1BFB004CF78C /* MapAnnotationDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotationDisplayController.h; sourceTree = "<group>"; };
+		BD83004419DF1BFB004CF78C /* MapAnnotationDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotationDisplayController.m; sourceTree = "<group>"; };
+		BDA0A73E1A00863100B421FB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "../../Downloads/dropbox-ios-sync-sdk-3.1-2.1/Dropbox.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +120,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDA0A73F1A00863100B421FB /* Dropbox.framework in Frameworks */,
+				BD02064F19EC64ED005ACDD0 /* libz.dylib in Frameworks */,
+				BD02064D19EC64E4005ACDD0 /* libc++.dylib in Frameworks */,
+				BD02064B19EC64D2005ACDD0 /* QuartzCore.framework in Frameworks */,
+				BD02064919EC64C9005ACDD0 /* SystemConfiguration.framework in Frameworks */,
+				BD02064719EC64BB005ACDD0 /* Security.framework in Frameworks */,
+				BD02064519EC64B3005ACDD0 /* CFNetwork.framework in Frameworks */,
 				BD5C6E6619B681D100342E4B /* CoreLocation.framework in Frameworks */,
 				BD76F5CA19B5001D000A1349 /* MobileCoreServices.framework in Frameworks */,
 				BD3FB97019A2C314002496CE /* MapKit.framework in Frameworks */,
@@ -143,6 +171,14 @@
 		BD08A18919A26BE400EE1B97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BDA0A73E1A00863100B421FB /* Dropbox.framework */,
+				BD02064E19EC64ED005ACDD0 /* libz.dylib */,
+				BD02064C19EC64E4005ACDD0 /* libc++.dylib */,
+				BD02064A19EC64D2005ACDD0 /* QuartzCore.framework */,
+				BD02064819EC64C9005ACDD0 /* SystemConfiguration.framework */,
+				BD02064619EC64BB005ACDD0 /* Security.framework */,
+				BD02064419EC64B3005ACDD0 /* CFNetwork.framework */,
+				BD02064219EC647C005ACDD0 /* Dropbox.framework */,
 				BD5C6E6519B681D100342E4B /* CoreLocation.framework */,
 				BD76F5C919B5001D000A1349 /* MobileCoreServices.framework */,
 				BD3FB96F19A2C314002496CE /* MapKit.framework */,
@@ -186,6 +222,10 @@
 				BD5C6E6819B7848E00342E4B /* SketchController.m */,
 				BD5C6E6A19B797CD00342E4B /* ReturnSegue.h */,
 				BD5C6E6B19B797CD00342E4B /* ReturnSegue.m */,
+				BD42937419C9082100035154 /* MapCalloutView.h */,
+				BD42937519C9082100035154 /* MapCalloutView.m */,
+				BD83004319DF1BFB004CF78C /* MapAnnotationDisplayController.h */,
+				BD83004419DF1BFB004CF78C /* MapAnnotationDisplayController.m */,
 			);
 			path = "Science Journal";
 			sourceTree = "<group>";
@@ -323,10 +363,12 @@
 				BD7D734219A3ED1D0034E504 /* SingleEntryViewController.m in Sources */,
 				BD08A1A119A26BE400EE1B97 /* MapController.m in Sources */,
 				BD3FB97F19A2D5EA002496CE /* EntryController.m in Sources */,
+				BD42937619C9082100035154 /* MapCalloutView.m in Sources */,
 				BD5C6E6C19B797CD00342E4B /* ReturnSegue.m in Sources */,
 				BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */,
 				BD3FB96919A278DE002496CE /* ExportController.m in Sources */,
 				BD4BFF0619ABC92600242844 /* UserEntryDatabase.m in Sources */,
+				BD83004519DF1BFB004CF78C /* MapAnnotationDisplayController.m in Sources */,
 				BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */,
 				BD4BFF0C19AFCC9900242844 /* MyLocation.m in Sources */,
 				BD08A19719A26BE400EE1B97 /* main.m in Sources */,
@@ -454,6 +496,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"/Users/evanteague/Downloads/dropbox-ios-sync-sdk-3.1-2.1",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Science Journal/Science Journal-Prefix.pch";
 				INFOPLIST_FILE = "Science Journal/Science Journal-Info.plist";
@@ -467,6 +514,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"/Users/evanteague/Downloads/dropbox-ios-sync-sdk-3.1-2.1",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Science Journal/Science Journal-Prefix.pch";
 				INFOPLIST_FILE = "Science Journal/Science Journal-Info.plist";

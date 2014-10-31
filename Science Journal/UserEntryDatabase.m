@@ -72,4 +72,8 @@
     return entries;
 }
 
+- (void)deleteEntryAtIndex:(int)index {
+    [entries removeObjectAtIndex:index];
+}
+
 @end

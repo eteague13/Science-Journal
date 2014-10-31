@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface SingleEntryViewController : UIViewController
+@interface SingleEntryViewController : UIViewController <MFMailComposeViewControllerDelegate>
+
    
     
 @property (strong, nonatomic) IBOutlet UIScrollView *entryDetailScroller;
@@ -27,8 +29,11 @@
 @property (strong, nonatomic) IBOutlet UITextField *entryDetailSampleNum;
 @property (strong, nonatomic) IBOutlet UITextView *entryDetailNotes;
 @property (strong, nonatomic) IBOutlet UITextView *entryStructuralData;
+- (IBAction)emailEntry:(id)sender;
+
 
 
 @property (strong, nonatomic) NSArray *entryDetailsModel;
+
 
 @end

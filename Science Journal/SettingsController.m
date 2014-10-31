@@ -7,6 +7,7 @@
 //
 
 #import "SettingsController.h"
+#import <Dropbox/Dropbox.h>
 
 @interface SettingsController ()
 
@@ -26,7 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,6 +35,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation
@@ -45,5 +47,8 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
 
 @end

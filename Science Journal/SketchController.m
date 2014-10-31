@@ -130,7 +130,8 @@
     
     
     [self.delegate passBackSketch:self didFinishSketch:SaveImage];
-    [self dismissModalViewControllerAnimated:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo

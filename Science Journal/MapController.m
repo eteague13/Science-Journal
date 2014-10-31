@@ -7,6 +7,8 @@
 //
 
 #import "MapController.h"
+#import "MapCalloutView.h"
+#import "MapAnnotationDisplayController.h"
 
 @interface MapController ()
 
@@ -75,5 +77,65 @@
     
     
 }
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    
+    static NSString *identifier = @"MyLocation";
+    if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
+        
+        MKPinAnnotationView *annotationView =
+        (MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        
+        if (annotationView == nil) {
+            annotationView = [[MKPinAnnotationView alloc]
+                              initWithAnnotation:annotation
+                              reuseIdentifier:identifier];
+        } else {
+            annotationView.annotation = annotation;
+        }
+        
+        annotationView.enabled = YES;
+        annotationView.canShowCallout = YES;
+        
+        // Create a UIButton object to add on the
+        //UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        //[rightButton setTitle:annotation.title forState:UIControlStateNormal];
+        //[annotationView setRightCalloutAccessoryView:rightButton];
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        
+        return annotationView;
+    }
+    
+    return nil; 
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    MKPointAnnotation *location = (MKPointAnnotation*)view.annotation;
+    
+    NSLog(@"CLICKED");
+    _selectedAnnotationName = view.annotation.title;
+    [self performSegueWithIdentifier:@"annotationDetail" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"annotationDetail"])
+    {
+
+        MapAnnotationDisplayController *annotationView = segue.destinationViewController;
+        for (int i = 0; i < _database.entries.count; i++){
+            Entry *tempEntry = _database.entries[i];
+            if (tempEntry.name == _selectedAnnotationName){
+                annotationView.annotationDetailsModel = @[tempEntry.name, tempEntry.date, tempEntry.projectName, tempEntry.goal, tempEntry.latitude, tempEntry.longitude, tempEntry.weather, tempEntry.magnet, tempEntry.partners, tempEntry.permissions, tempEntry.outcrop, tempEntry.structuralData, tempEntry.sampleNum, tempEntry.notes, tempEntry.sketch, tempEntry.photo];
+            }
+        }
+
+        
+    }
+}
+
+
+
+
 
 @end
