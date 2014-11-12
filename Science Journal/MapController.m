@@ -7,7 +7,7 @@
 //
 
 #import "MapController.h"
-#import "MapCalloutView.h"
+
 #import "MapAnnotationDisplayController.h"
 
 @interface MapController ()
@@ -24,6 +24,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.mapView.delegate = self;
     _database = [UserEntryDatabase userEntryDatabase];
+    
     
     
 }
@@ -115,6 +116,9 @@
     NSLog(@"CLICKED");
     _selectedAnnotationName = view.annotation.title;
     [self performSegueWithIdentifier:@"annotationDetail" sender:self];
+   
+    
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -123,12 +127,17 @@
     {
 
         MapAnnotationDisplayController *annotationView = segue.destinationViewController;
+        
+        
+        
         for (int i = 0; i < _database.entries.count; i++){
             Entry *tempEntry = _database.entries[i];
             if (tempEntry.name == _selectedAnnotationName){
-                annotationView.annotationDetailsModel = @[tempEntry.name, tempEntry.date, tempEntry.projectName, tempEntry.goal, tempEntry.latitude, tempEntry.longitude, tempEntry.weather, tempEntry.magnet, tempEntry.partners, tempEntry.permissions, tempEntry.outcrop, tempEntry.structuralData, tempEntry.sampleNum, tempEntry.notes, tempEntry.sketch, tempEntry.photo];
+                annotationView.associatedEntry = tempEntry;
             }
+            
         }
+        
 
         
     }

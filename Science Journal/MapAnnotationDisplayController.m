@@ -8,6 +8,8 @@
 
 #import "MapAnnotationDisplayController.h"
 
+
+
 @interface MapAnnotationDisplayController ()
 
 @end
@@ -16,28 +18,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [_annotationScroller setScrollEnabled:YES];
     [_annotationScroller setContentSize:CGSizeMake(320, 2500)];
-    _annotationEntryName.text = _annotationDetailsModel[0];
-    _annotationDate.text = _annotationDetailsModel[1];
-    _annotationProjectName.text = _annotationDetailsModel[2];
-    _annotationGoal.text = _annotationDetailsModel[3];
-    _annotationLatitude.text = _annotationDetailsModel[4];
-    _annotationLongitude.text = _annotationDetailsModel[5];
-    _annotationWeather.text = _annotationDetailsModel[6];
-    _annotationMagnetic.text = _annotationDetailsModel[7];
+    _annotationEntryName.text = _associatedEntry.name;
+    _annotationDate.text = _associatedEntry.date;
+    _annotationProjectName.text = _associatedEntry.projectName;
+    _annotationGoal.text = _associatedEntry.goal;;
+    _annotationLatitude.text = _associatedEntry.latitude;
+    _annotationLongitude.text = _associatedEntry.longitude;
+    _annotationWeather.text = _associatedEntry.weather;
+    _annotationMagnetic.text = _associatedEntry.magnet;
     _annotationPartners.text = _annotationDetailsModel[8];
-    _annotationPermissions.text = _annotationDetailsModel[9];
-    _annotationOutcrop.text = _annotationDetailsModel[10];
-    _annotationStructuralData.text = _annotationDetailsModel[11];
-    _annotationSampleNum.text = _annotationDetailsModel[12];
-    _annotationNotes.text = _annotationDetailsModel[13];
-    if (_annotationDetailsModel[14] != nil){
-        _annotationSketch.image = _annotationDetailsModel[14];
+    _annotationPermissions.text = _associatedEntry.permissions;
+    _annotationOutcrop.text = _associatedEntry.outcrop;
+    _annotationStructuralData.text = _associatedEntry.structuralData;
+    _annotationSampleNum.text = _associatedEntry.sampleNum;
+    _annotationNotes.text = _associatedEntry.notes;
+    if (_associatedEntry.sketch != nil){
+        _annotationSketch  .image = _associatedEntry.sketch;
     }
-    if (_annotationDetailsModel[15] != nil){
-        _annotationPicture.image = _annotationDetailsModel[15];
+    if (_associatedEntry.photo != nil){
+        _annotationPicture.image = _associatedEntry.photo;
     }
+    
     
     
     // Do any additional setup after loading the view.
@@ -54,6 +58,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
 - (void) viewDidLayoutSubviews
 {
     [self resizeScrollViewContent];
@@ -63,6 +68,8 @@
 {
     self.annotationScroller.contentSize = CGSizeMake(320, 2500);
 }
+ */
+
 
 /*
 #pragma mark - Navigation

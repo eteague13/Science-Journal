@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Entry.h"
 
 @interface MapAnnotationDisplayController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *annotationEntryName;
@@ -30,5 +31,6 @@
 
 
 @property (strong, nonatomic) NSArray *annotationDetailsModel;
+@property (strong, nonatomic) Entry *associatedEntry;
 
 @end

@@ -105,18 +105,14 @@
     newEntry.structuralData = structuralField.text;
     newEntry.sampleNum = sampleNumField.text;
     newEntry.notes = notesField.text;
-    if (sketchDisplay.image == nil){
-        UIImage *placeHolder = [[UIImage alloc] init];
-        sketchDisplay.image = placeHolder;
-    }else {
+    if (sketchDisplay.image != nil){
         newEntry.sketch = sketchDisplay.image;
     }
-    if (photoDisplay.image == nil){
-        UIImage *placeHolder = [[UIImage alloc] init];
-        photoDisplay.image = placeHolder;
-    }else {
+    if (photoDisplay.image != nil){
         newEntry.photo = photoDisplay.image;
     }
+    
+    
     
     
 
