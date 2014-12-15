@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserEntryDatabase.h"
+#import "Entry.h"
 
 @interface ExportController : UIViewController
+@property (strong, nonatomic) UserEntryDatabase *database;
+- (IBAction)exportGooglEarth:(id)sender;
 
 @end

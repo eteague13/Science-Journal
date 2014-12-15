@@ -21,6 +21,11 @@
     
     [_annotationScroller setScrollEnabled:YES];
     [_annotationScroller setContentSize:CGSizeMake(320, 2500)];
+    //Just in case I need more help on this scroller
+    //https://agilewarrior.wordpress.com/2012/05/18/uiscrollview-examples/
+    _annotationScroller.frame = self.view.frame;
+    [self.view addSubview:_annotationScroller];
+    
     _annotationEntryName.text = _associatedEntry.name;
     _annotationDate.text = _associatedEntry.date;
     _annotationProjectName.text = _associatedEntry.projectName;
