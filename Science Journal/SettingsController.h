@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <DropboxSDK/DropboxSDK.h>
 
-@interface SettingsController : UIViewController
+@interface SettingsController : UIViewController <DBRestClientDelegate>
+@property (nonatomic, strong) DBRestClient *restClient;
+- (IBAction)syncDropbox:(id)sender;
+
 
 
 @end

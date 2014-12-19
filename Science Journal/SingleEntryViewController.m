@@ -11,7 +11,7 @@
 #import "EntriesCell.h"
 #import <MessageUI/MessageUI.h>
 
-@interface SingleEntryViewController ()
+@interface SingleEntryViewController () 
     
     
 
@@ -86,7 +86,7 @@
 - (IBAction)emailEntry:(id)sender {
         
     
-        
+        //Doesn't work on the simulator, but should on phone   
         MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
         mc.mailComposeDelegate = self;
     
@@ -98,11 +98,11 @@
         NSData *fileData = [NSData dataWithContentsOfFile:filePath];
     
         // Determine the MIME type
-        NSString *mimeType = @"application/txt";
+        NSString *mimeType = @"text/plain";
         
         // Add attachment
         [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
-        
+    
         // Present mail view controller on screen
         [self presentViewController:mc animated:YES completion:NULL];
         

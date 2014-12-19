@@ -54,8 +54,10 @@
     structuralField.layer.borderWidth = 1.0;
     notesField.layer.borderColor = [[UIColor blackColor] CGColor];
     notesField.layer.borderWidth = 1.0;
-    
-    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+    NSString *strDate = [dateFormatter stringFromDate:datePicker.date];
+    dateDisplayFieldA.text = strDate;
     
     
     
@@ -71,9 +73,11 @@
 
 - (void)datePickerChanged:(UIDatePicker *)datePicker
 {
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm"];
     NSString *strDate = [dateFormatter stringFromDate:datePicker.date];
+    
     dateDisplayFieldA.text = strDate;
 }
 
@@ -166,6 +170,22 @@
     //_allStructuralData = @[@"structural data"];
     //_allSampleNums = @[@"sample num"];
     //_allNotes = @[@"notes"];
+    
+    entryNameField.text = @"";
+    projectNameField.text = @"";
+    goalField.text = @"";
+    latitudeField.text = @"";
+    longitudeField.text = @"";
+    weatherField.text = @"";
+    magneticField.text = @"";
+    partnersField.text = @"";
+    permissionsField.text = @"";
+    outcropField.text = @"";
+    structuralField.text = @"";
+    sampleNumField.text = @"";
+    notesField.text = @"";
+    sketchDisplay.image = nil;
+    photoDisplay.image = nil;
 }
 
 
