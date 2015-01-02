@@ -338,13 +338,13 @@
         
     }else if([segue.identifier isEqualToString:@"photoSegue"]){
         [segue.destinationViewController setDelegate:self];
+    }else if([segue.identifier isEqualToString:@"textEntrySegue"]){
+        [segue.destinationViewController setDelegate:self];
     }
 }
 - (void) passBackSketch:(SketchController *)controller didFinishSketch:(UIImage *)item{
     
     sketchDisplay.image = item;
-    
-    
 }
 
 

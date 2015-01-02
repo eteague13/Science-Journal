@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Entry : NSObject
+@interface Entry : NSObject{
+    @public
+    int entryIdentifier;
+}
+    
 
 @property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *magnet, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes;
 @property (strong, nonatomic) UIImage *sketch;
 @property (strong, nonatomic) UIImage *photo;
+
+
 
 
 @end

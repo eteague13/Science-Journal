@@ -10,6 +10,8 @@
 #import "EntriesCell.h"
 #import "SingleEntryViewController.h"
 #import "Entry.h"
+#import "EntryController.h"
+
 
 @interface EntriesController () 
     
@@ -120,7 +122,7 @@
 
     // Return the number of rows in the section.
     //return _allEntryNames.count;
-    NSLog(@"Number of rows: %d", [_database.entries count]);
+    NSLog(@"Number of rows: %lu", (unsigned long)[_database.entries count]);
     return [_database.entries count];
     //return [database.getEntries count];
 }
@@ -150,17 +152,59 @@
     if ([segue.identifier isEqualToString:@"ShowEntryDetails"])
     {
         
-        SingleEntryViewController *entryDetailController = segue.destinationViewController;
+        SingleEntryViewController *editEntryController = segue.destinationViewController;
+        
+        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        
+        long row = [myIndexPath row];
+        /*
+        Entry *selectedEntry = [_database getEntryAtIndex:row];
+        entryDetailController.entryDetailsModel = @[selectedEntry.name, selectedEntry.date, selectedEntry.projectName, selectedEntry.goal, selectedEntry.latitude, selectedEntry.longitude, selectedEntry.weather, selectedEntry.magnet, selectedEntry.partners, selectedEntry.permissions, selectedEntry.outcrop, selectedEntry.structuralData, selectedEntry.sampleNum, selectedEntry.notes];
+        //entryDetailController.entryDetailsModel = @[_allEntryNames[row], _allEntryDates[row], _allProjectNames[row], _allGoals[row], _allLats[row], _allLongs[row], _allWeather[row], _allMagnets[row], _allPartners[row], _allPermissions[row], _allOutcrops[row], _allStructuralData[row], _allSampleNums[row], _allNotes[row]];
+        */
+    }
+    
+    else if ([segue.identifier isEqualToString:@"AddEntry"])
+    {
+     
+        UINavigationController *navigationController = segue.destinationViewController;
+        AddEntryController *addEntryController = [navigationController viewControllers][0];
+        addEntryController.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"EditEntry"])
+    {
+        UINavigationController *navigationController = segue.destinationViewController;
+        AddEntryController *addEntryController = [navigationController viewControllers][0];
+        addEntryController.delegate = self;
+        [addEntryController setEditEntry:true];
         
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         
         long row = [myIndexPath row];
         
         Entry *selectedEntry = [_database getEntryAtIndex:row];
-        entryDetailController.entryDetailsModel = @[selectedEntry.name, selectedEntry.date, selectedEntry.projectName, selectedEntry.goal, selectedEntry.latitude, selectedEntry.longitude, selectedEntry.weather, selectedEntry.magnet, selectedEntry.partners, selectedEntry.permissions, selectedEntry.outcrop, selectedEntry.structuralData, selectedEntry.sampleNum, selectedEntry.notes];
-        //entryDetailController.entryDetailsModel = @[_allEntryNames[row], _allEntryDates[row], _allProjectNames[row], _allGoals[row], _allLats[row], _allLongs[row], _allWeather[row], _allMagnets[row], _allPartners[row], _allPermissions[row], _allOutcrops[row], _allStructuralData[row], _allSampleNums[row], _allNotes[row]];
+        addEntryController.entryNameField.text = selectedEntry.name;
+        addEntryController.name = selectedEntry.name;
+        addEntryController.dateLabelField.text = selectedEntry.date;
+        addEntryController.date = selectedEntry.date;
+        addEntryController.projectNameField.text = selectedEntry.projectName;
+        addEntryController.projectName = selectedEntry.projectName;
+        addEntryController.goal = selectedEntry.goal;
+        addEntryController.latitude = selectedEntry.latitude;
+        addEntryController.longitude = selectedEntry.longitude;
+        addEntryController.weather = selectedEntry.weather;
+        addEntryController.magnet = selectedEntry.magnet;
+        addEntryController.partners = selectedEntry.partners;
+        addEntryController.permissions = selectedEntry.permissions;
+        addEntryController.outcrop = selectedEntry.outcrop;
+        addEntryController.structuralData = selectedEntry.structuralData;
+        addEntryController.sampleNum = selectedEntry.sampleNum;
+        addEntryController.notes = selectedEntry.notes;
+        addEntryController.photo = selectedEntry.photo;
+        addEntryController.sketch = selectedEntry.sketch;
         
     }
+     
 
     
     
@@ -243,5 +287,24 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)AddEntryControllerDidCancel:(AddEntryController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)AddEntryController:(AddEntryController *)controller didSaveEntry:(Entry *)entry
+{
+    [_database addEntry: entry];
+    [self.tableView reloadData];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)AddEntryController:(AddEntryController *)controller didUpdateEntry:(Entry *)entry{
+    [_database updateEntry:entry];
+    [self.tableView reloadData];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

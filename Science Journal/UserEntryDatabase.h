@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "Entry.h"
 
-@interface UserEntryDatabase : NSObject
+@interface UserEntryDatabase : NSObject {
+    int count;
+}
+    
 
 @property (strong, nonatomic) NSMutableArray *entries;
 +(UserEntryDatabase *)userEntryDatabase;
@@ -17,5 +20,7 @@
 - (void)addEntry:(Entry*)entry;
 - (void)deleteEntryAtIndex:(int)index;
 - (Entry*)getEntryAtIndex:(long)index;
+- (void)updateEntry:(Entry*)entry;
+
 
 @end

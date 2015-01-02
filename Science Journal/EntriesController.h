@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "UserEntryDatabase.h"
+#import "AddEntryController.h"
 
-@interface EntriesController : UITableViewController{
+@interface EntriesController : UITableViewController <AddEntryControllerDelegate>{
     //UserEntryDatabase *database;
 }
    

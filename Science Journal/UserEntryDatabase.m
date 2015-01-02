@@ -37,12 +37,16 @@
     dispatch_once(&pred, ^{
         shared = [[UserEntryDatabase alloc] init];
         shared.entries = [[NSMutableArray alloc]init];
+        shared->count = 0;
     });
     return shared;
 }
 
 -(void)addEntry:(Entry *)entry {
     NSLog(@"%@", entry.name);
+    count++;
+    NSLog(@"Count: %ld", (long)count);
+    entry->entryIdentifier = count;
     [entries addObject:entry];
 }
 -(Entry*)getEntryAtIndex:(long)index{
@@ -74,6 +78,10 @@
 
 - (void)deleteEntryAtIndex:(int)index {
     [entries removeObjectAtIndex:index];
+}
+
+- (void)updateEntry:(Entry*)entry {
+    [entries replaceObjectAtIndex:entry->entryIdentifier withObject:entry];
 }
 
 @end

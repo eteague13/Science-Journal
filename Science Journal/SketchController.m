@@ -35,6 +35,8 @@
     brush = 10.0;
     opacity = 1.0;
     [super viewDidLoad];
+    _drawImage.image = sketch;
+    
     // Do any additional setup after loading the view.
 }
 
@@ -129,7 +131,7 @@
     UIImageWriteToSavedPhotosAlbum(SaveImage, self,@selector(image:didFinishSavingWithError:contextInfo:), nil);
     
     
-    [self.delegate passBackSketch:self didFinishSketch:SaveImage];
+    [self.delegate sketchControllerSave:self didFinishSketch:SaveImage];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -151,6 +153,14 @@
     self.saveImage.image = nil;
 }
 
+- (IBAction)cancelSketchButton:(id)sender {
+    NSLog(@"Did tap cancel");
+    [self.delegate sketchControllerCancel:self];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)setSketch:(UIImage*)item{
+    sketch = item;
+}
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     mouseSwiped = NO;
     UITouch *touch = [touches anyObject];

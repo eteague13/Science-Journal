@@ -9,6 +9,7 @@
 #import "MapController.h"
 
 #import "MapAnnotationDisplayController.h"
+#import "AddEntryController.h"
 
 @interface MapController ()
 
@@ -126,10 +127,17 @@
     if ([segue.identifier isEqualToString:@"annotationDetail"])
     {
 
+        
+        
+        AddEntryController *annotationView = segue.destinationViewController;
+        for (int i = 0; i < _database.entries.count; i++){
+            Entry *tempEntry = _database.entries[i];
+            if (tempEntry.name == _selectedAnnotationName){
+                
+            }
+        }
+        /*
         MapAnnotationDisplayController *annotationView = segue.destinationViewController;
-        
-        
-        
         for (int i = 0; i < _database.entries.count; i++){
             Entry *tempEntry = _database.entries[i];
             if (tempEntry.name == _selectedAnnotationName){
@@ -137,14 +145,9 @@
             }
             
         }
-        
+        */
 
         
     }
 }
-
-
-
-
-
 @end

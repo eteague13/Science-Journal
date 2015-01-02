@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol SketchControllerDelegate;
-
+@class SketchController;
+@protocol SketchControllerDelegate <NSObject>
+- (void)sketchControllerCancel:(SketchController *) controller;
+- (void)sketchControllerSave:(SketchController *)controller didFinishSketch:(UIImage *)item;
+@end
 @interface SketchController : UIViewController {
     CGPoint lastPoint;
     CGFloat red;
@@ -17,18 +20,22 @@
     CGFloat brush;
     CGFloat opacity;
     BOOL mouseSwiped;
+    UIImage * sketch;
 }
+
+
 @property (weak, nonatomic) IBOutlet UIImageView *saveImage;
 @property (weak, nonatomic) IBOutlet UIImageView *drawImage;
 - (IBAction)pencilSelected:(id)sender;
 - (IBAction)eraserSelected:(id)sender;
 - (IBAction)saveSelected:(id)sender;
 - (IBAction)clearSelected:(id)sender;
+- (IBAction)cancelSketchButton:(id)sender;
+- (void)setSketch:(UIImage*)item;
 @property (nonatomic, weak) id <SketchControllerDelegate> delegate;
-@end
 
-@protocol SketchControllerDelegate <NSObject>
 
--(void)passBackSketch:(SketchController *)controller didFinishSketch:(UIImage *)item;
+
+
 
 @end
