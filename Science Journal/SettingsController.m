@@ -15,6 +15,7 @@
 @end
 
 @implementation SettingsController
+@synthesize scroller = _scroller;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,8 +29,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [_scroller setScrollEnabled:YES];
+    [_scroller setContentSize:CGSizeMake(320, 1300)];
+    [self.view addSubview:_scroller];
     self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
     self.restClient.delegate = self;
+    _geoMagDecSwitch.on = NO;
+    _geoOutcropSwitch.on = NO;
+    _geoStopNumSwitch.on = NO;
+    _geoStructDataSwitch.on = NO;
     
     
     
@@ -55,7 +63,7 @@
 
 
 
-
+/*
 - (IBAction)syncDropbox:(id)sender {
     if (![[DBSession sharedSession] isLinked]) {
         [[DBSession sharedSession] linkFromController:self];
@@ -98,4 +106,6 @@
 loadMetadataFailedWithError:(NSError *)error {
     NSLog(@"Error loading metadata: %@", error);
 }
+ */
+ 
 @end

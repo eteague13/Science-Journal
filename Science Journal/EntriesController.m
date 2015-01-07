@@ -149,22 +149,8 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if ([segue.identifier isEqualToString:@"ShowEntryDetails"])
-    {
-        
-        SingleEntryViewController *editEntryController = segue.destinationViewController;
-        
-        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
-        
-        long row = [myIndexPath row];
-        /*
-        Entry *selectedEntry = [_database getEntryAtIndex:row];
-        entryDetailController.entryDetailsModel = @[selectedEntry.name, selectedEntry.date, selectedEntry.projectName, selectedEntry.goal, selectedEntry.latitude, selectedEntry.longitude, selectedEntry.weather, selectedEntry.magnet, selectedEntry.partners, selectedEntry.permissions, selectedEntry.outcrop, selectedEntry.structuralData, selectedEntry.sampleNum, selectedEntry.notes];
-        //entryDetailController.entryDetailsModel = @[_allEntryNames[row], _allEntryDates[row], _allProjectNames[row], _allGoals[row], _allLats[row], _allLongs[row], _allWeather[row], _allMagnets[row], _allPartners[row], _allPermissions[row], _allOutcrops[row], _allStructuralData[row], _allSampleNums[row], _allNotes[row]];
-        */
-    }
     
-    else if ([segue.identifier isEqualToString:@"AddEntry"])
+    if ([segue.identifier isEqualToString:@"AddEntry"])
     {
      
         UINavigationController *navigationController = segue.destinationViewController;
@@ -182,26 +168,8 @@
         
         long row = [myIndexPath row];
         
-        Entry *selectedEntry = [_database getEntryAtIndex:row];
-        addEntryController.entryNameField.text = selectedEntry.name;
-        addEntryController.name = selectedEntry.name;
-        addEntryController.dateLabelField.text = selectedEntry.date;
-        addEntryController.date = selectedEntry.date;
-        addEntryController.projectNameField.text = selectedEntry.projectName;
-        addEntryController.projectName = selectedEntry.projectName;
-        addEntryController.goal = selectedEntry.goal;
-        addEntryController.latitude = selectedEntry.latitude;
-        addEntryController.longitude = selectedEntry.longitude;
-        addEntryController.weather = selectedEntry.weather;
-        addEntryController.magnet = selectedEntry.magnet;
-        addEntryController.partners = selectedEntry.partners;
-        addEntryController.permissions = selectedEntry.permissions;
-        addEntryController.outcrop = selectedEntry.outcrop;
-        addEntryController.structuralData = selectedEntry.structuralData;
-        addEntryController.sampleNum = selectedEntry.sampleNum;
-        addEntryController.notes = selectedEntry.notes;
-        addEntryController.photo = selectedEntry.photo;
-        addEntryController.sketch = selectedEntry.sketch;
+        
+        addEntryController.associatedEntry = [_database getEntryAtIndex:row];
         
     }
      
@@ -224,7 +192,6 @@
 -(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //add code here to do what you want when you hit delete
         [_database deleteEntryAtIndex:[indexPath row]];
         [tableView reloadData];
     }

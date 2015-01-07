@@ -36,7 +36,6 @@
 		BD4BFF0C19AFCC9900242844 /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0B19AFCC9900242844 /* MyLocation.m */; };
 		BD5C6E6619B681D100342E4B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C6E6519B681D100342E4B /* CoreLocation.framework */; };
 		BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C6E6819B7848E00342E4B /* SketchController.m */; };
-		BD5C6E6C19B797CD00342E4B /* ReturnSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C6E6B19B797CD00342E4B /* ReturnSegue.m */; };
 		BD5FD9CF1A4A07FC003CC565 /* AddEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9CE1A4A07FC003CC565 /* AddEntryController.m */; };
 		BD5FD9D21A4BA2F5003CC565 /* datepickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9D11A4BA2F5003CC565 /* datepickerController.m */; };
 		BD5FD9D51A4BBA9B003CC565 /* textEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9D41A4BBA9B003CC565 /* textEntryController.m */; };
@@ -44,7 +43,6 @@
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
 		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
 		BD7D734219A3ED1D0034E504 /* SingleEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */; };
-		BD83004519DF1BFB004CF78C /* MapAnnotationDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD83004419DF1BFB004CF78C /* MapAnnotationDisplayController.m */; };
 		BD9199061A5465B4006E48E1 /* SampleNumController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9199051A5465B4006E48E1 /* SampleNumController.m */; };
 		BD91990C1A573410006E48E1 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD91990B1A573410006E48E1 /* CameraController.m */; };
 		BDA0A73F1A00863100B421FB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA0A73E1A00863100B421FB /* Dropbox.framework */; };
@@ -106,8 +104,6 @@
 		BD5C6E6519B681D100342E4B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BD5C6E6719B7848E00342E4B /* SketchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SketchController.h; sourceTree = "<group>"; };
 		BD5C6E6819B7848E00342E4B /* SketchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SketchController.m; sourceTree = "<group>"; };
-		BD5C6E6A19B797CD00342E4B /* ReturnSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnSegue.h; sourceTree = "<group>"; };
-		BD5C6E6B19B797CD00342E4B /* ReturnSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReturnSegue.m; sourceTree = "<group>"; };
 		BD5FD9CD1A4A07FC003CC565 /* AddEntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEntryController.h; sourceTree = "<group>"; };
 		BD5FD9CE1A4A07FC003CC565 /* AddEntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEntryController.m; sourceTree = "<group>"; };
 		BD5FD9D01A4BA2F5003CC565 /* datepickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = datepickerController.h; sourceTree = "<group>"; };
@@ -121,8 +117,6 @@
 		BD7D733E19A3E1E30034E504 /* EntriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesCell.m; sourceTree = "<group>"; };
 		BD7D734019A3ED1D0034E504 /* SingleEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntryViewController.h; sourceTree = "<group>"; };
 		BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntryViewController.m; sourceTree = "<group>"; };
-		BD83004319DF1BFB004CF78C /* MapAnnotationDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotationDisplayController.h; sourceTree = "<group>"; };
-		BD83004419DF1BFB004CF78C /* MapAnnotationDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotationDisplayController.m; sourceTree = "<group>"; };
 		BD9199041A5465B4006E48E1 /* SampleNumController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleNumController.h; sourceTree = "<group>"; };
 		BD9199051A5465B4006E48E1 /* SampleNumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleNumController.m; sourceTree = "<group>"; };
 		BD91990A1A573410006E48E1 /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
@@ -243,10 +237,6 @@
 				BD4BFF0B19AFCC9900242844 /* MyLocation.m */,
 				BD5C6E6719B7848E00342E4B /* SketchController.h */,
 				BD5C6E6819B7848E00342E4B /* SketchController.m */,
-				BD5C6E6A19B797CD00342E4B /* ReturnSegue.h */,
-				BD5C6E6B19B797CD00342E4B /* ReturnSegue.m */,
-				BD83004319DF1BFB004CF78C /* MapAnnotationDisplayController.h */,
-				BD83004419DF1BFB004CF78C /* MapAnnotationDisplayController.m */,
 				BD5FD9CD1A4A07FC003CC565 /* AddEntryController.h */,
 				BD5FD9CE1A4A07FC003CC565 /* AddEntryController.m */,
 				BD5FD9D01A4BA2F5003CC565 /* datepickerController.h */,
@@ -398,11 +388,9 @@
 				BD08A1A119A26BE400EE1B97 /* MapController.m in Sources */,
 				BD91990C1A573410006E48E1 /* CameraController.m in Sources */,
 				BD3FB97F19A2D5EA002496CE /* EntryController.m in Sources */,
-				BD5C6E6C19B797CD00342E4B /* ReturnSegue.m in Sources */,
 				BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */,
 				BD3FB96919A278DE002496CE /* ExportController.m in Sources */,
 				BD4BFF0619ABC92600242844 /* UserEntryDatabase.m in Sources */,
-				BD83004519DF1BFB004CF78C /* MapAnnotationDisplayController.m in Sources */,
 				BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */,
 				BD9199061A5465B4006E48E1 /* SampleNumController.m in Sources */,
 				BDE248A41A4DEEA500B1F97D /* LocationAndWeatherController.m in Sources */,

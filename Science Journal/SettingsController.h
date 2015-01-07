@@ -9,9 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <DropboxSDK/DropboxSDK.h>
 
-@interface SettingsController : UIViewController <DBRestClientDelegate>
+@interface SettingsController : UIViewController <DBRestClientDelegate, UIScrollViewDelegate>
+
 @property (nonatomic, strong) DBRestClient *restClient;
 - (IBAction)syncDropbox:(id)sender;
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
+@property (weak, nonatomic) IBOutlet UISwitch *geoMagDecSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *geoStopNumSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *geoOutcropSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *geoStructDataSwitch;
+
 
 
 

@@ -13,6 +13,7 @@
 #import "SampleNumController.h"
 #import "SketchController.h"
 #import "CameraController.h"
+#import "Entry.h"
 
 @class AddEntryController;
 @protocol AddEntryControllerDelegate <NSObject>
@@ -40,6 +41,7 @@
 @property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *magnet, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes;
 @property (strong, nonatomic) UIImage *sketch;
 @property (strong, nonatomic) UIImage *photo;
+@property (strong, nonatomic) Entry *associatedEntry;
 
 -(void)setEditEntry:(BOOL)value;
 

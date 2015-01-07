@@ -8,8 +8,7 @@
 
 #import "MapController.h"
 
-#import "MapAnnotationDisplayController.h"
-#import "AddEntryController.h"
+
 
 @interface MapController ()
 
@@ -22,9 +21,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    self.mapView.delegate = self;
     _database = [UserEntryDatabase userEntryDatabase];
+    mapView.delegate = self;
+    mapView.showsUserLocation = YES;
     
     
     
@@ -51,16 +50,11 @@
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+    /*
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-    /*
-    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-    point.coordinate = userLocation.coordinate;
-    point.title = @"Where am I?";
-    point.subtitle = @"I'm here!!!";
-    
-    [self.mapView addAnnotation:point];
      */
+    mapView.centerCoordinate = userLocation.location.coordinate;
  
 }
 
@@ -129,25 +123,45 @@
 
         
         
-        AddEntryController *annotationView = segue.destinationViewController;
-        for (int i = 0; i < _database.entries.count; i++){
-            Entry *tempEntry = _database.entries[i];
-            if (tempEntry.name == _selectedAnnotationName){
-                
-            }
-        }
-        /*
-        MapAnnotationDisplayController *annotationView = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        AddEntryController *annotationView = [navigationController viewControllers][0];
+        annotationView.delegate = self;
+        [annotationView setEditEntry:true];
         for (int i = 0; i < _database.entries.count; i++){
             Entry *tempEntry = _database.entries[i];
             if (tempEntry.name == _selectedAnnotationName){
                 annotationView.associatedEntry = tempEntry;
             }
-            
         }
-        */
 
         
     }
 }
+
+- (void)AddEntryControllerDidCancel:(AddEntryController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (void)AddEntryController:(AddEntryController *)controller didUpdateEntry:(Entry *)entry{
+    [_database updateEntry:entry];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)zoomCurrentLocation:(id)sender {
+    MKUserLocation *userLocation = mapView.userLocation;
+    MKCoordinateRegion region =
+    MKCoordinateRegionMakeWithDistance (
+                                        userLocation.location.coordinate, 20000, 20000);
+    [mapView setRegion:region animated:NO];
+}
+
+- (IBAction)changeMapType:(id)sender {
+    if (mapView.mapType == MKMapTypeStandard)
+        mapView.mapType = MKMapTypeSatellite;
+    else
+        mapView.mapType = MKMapTypeStandard;
+}
+
+
 @end

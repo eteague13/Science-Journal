@@ -25,6 +25,23 @@
     if (isEditEntry){
         _entryTitleLabel.title = @"Edit Entry";
     }
+    _name = _associatedEntry.name;
+    _date = _associatedEntry.date;
+    _projectName = _associatedEntry.projectName;
+    _goal = _associatedEntry.goal;
+    _latitude = _associatedEntry.latitude;
+    _longitude = _associatedEntry.longitude;
+    _weather = _associatedEntry.weather;
+    _magnet = _associatedEntry.magnet;
+    _partners = _associatedEntry.partners;
+    _permissions = _associatedEntry.permissions;
+    _outcrop = _associatedEntry.outcrop;
+    _structuralData = _associatedEntry.structuralData;
+    _sampleNum = _associatedEntry.sampleNum;
+    _notes = _associatedEntry.notes;
+    _photo = _associatedEntry.photo;
+    _sketch = _associatedEntry.sketch;
+    
     _entryNameField.text = _name;
     _projectNameField.text = _projectName;
     _dateLabelField.text = _date;
@@ -117,16 +134,19 @@
 }
 
 - (IBAction)cancelButton:(id)sender {
+    NSLog(@"%@", [self.delegate description]);
     [self.delegate AddEntryControllerDidCancel:self];
 }
 
 - (IBAction)saveButton:(id)sender {
     /*Need to add a check and code to see if you're saving an existing entry in Edit Entry mode */
+    _name = _entryNameField.text;
+    _projectName = _projectNameField.text;
     if (!isEditEntry) {
         Entry *newEntry = [[Entry alloc] init];
-        newEntry.name = _entryNameField.text;
+        newEntry.name = _name;
         newEntry.date = _date;
-        newEntry.projectName = _projectNameField.text;
+        newEntry.projectName = _projectName;
         newEntry.goal = _goal;
         newEntry.latitude = _latitude;
         newEntry.longitude = _longitude;
@@ -134,7 +154,8 @@
         newEntry.notes =_notes;
         newEntry.photo = _photo;
         newEntry.sketch = _sketch;
-        [self.delegate AddEntryController:self didSaveEntry:newEntry];
+        
+        NSLog(@"name text: %@", _entryNameField.text);
         NSMutableString *printString = [NSMutableString stringWithFormat:@"Entry name: %@; Date: %@; Project Name: %@; Goal: %@; Latitude: %@; Longitude: %@; Weather: %@; Magnetic Field: %@; Partners: %@; Permissions: %@; Outcrop: %@; Structural: %@; Sample Number: %@; Notes: %@", _name, _date, _projectName, _goal, _latitude, _longitude, _weather, _magnet, _partners, _permissions, _outcrop, _structuralData, _sampleNum, _notes];
         
         
@@ -153,6 +174,8 @@
                         encoding:NSUTF8StringEncoding error:&error];
         
         NSLog(@"%@", filePath);
+        
+        [self.delegate AddEntryController:self didSaveEntry:newEntry];
     }else{
         Entry *tempEntry = [[Entry alloc] init];
         tempEntry.name = _entryNameField.text;
@@ -166,7 +189,9 @@
         tempEntry.photo = _photo;
         tempEntry.sketch = _sketch;
         [self.delegate AddEntryController:self didUpdateEntry:tempEntry];
+        
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)datepickerControllerCancel:(datepickerController *) controller {
