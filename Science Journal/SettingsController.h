@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <DropboxSDK/DropboxSDK.h>
 
+
+
 @interface SettingsController : UIViewController <DBRestClientDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) DBRestClient *restClient;
@@ -18,6 +20,11 @@
 @property (weak, nonatomic) IBOutlet UISwitch *geoStopNumSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *geoOutcropSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *geoStructDataSwitch;
+- (IBAction)geoMagDecFlip:(id)sender;
+- (IBAction)geoStopNumFlip:(id)sender;
+- (IBAction)geoOutcropFlip:(id)sender;
+- (IBAction)geoStructDataFlip:(id)sender;
+
 
 
 

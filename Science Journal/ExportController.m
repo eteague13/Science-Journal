@@ -29,6 +29,8 @@
 {
     [super viewDidLoad];
     _database = [UserEntryDatabase userEntryDatabase];
+    self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+    self.restClient.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -95,10 +97,13 @@
 }
 - (IBAction)syncDropbox:(id)sender {
     NSLog(@"IN DROPBOX");
+    
     if (![[DBSession sharedSession] isLinked]) {
         [[DBSession sharedSession] linkFromController:self];
         NSLog(@"in the if statement");
     }
+    
+    //[[DBSession sharedSession] linkFromController:self];
     NSString *text = @"Hello world poop.";
     NSString *filename = @"working-draft.txt";
     NSString *documentsDirectory = [NSHomeDirectory()

@@ -12,6 +12,7 @@
 #import "textEntryController.h"
 #import "LocationAndWeatherController.h"
 #import "SampleNumController.h"
+#import "SettingsController.h"
 
 @interface AddEntryController ()
 
@@ -46,6 +47,35 @@
     _projectNameField.text = _projectName;
     _dateLabelField.text = _date;
     NSLog(@"Inside edit entry%@", _date);
+    
+    
+    bool geoMagDecSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoMagDec"];
+    if (geoMagDecSwitch) {
+        _geoMagneticCell.hidden = NO;
+    }else{
+        _geoMagneticCell.hidden = YES;
+    }
+    
+    bool geoOutcropSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoOutcrop"];
+    if (geoOutcropSwitch) {
+        _geoOutcropCell.hidden = NO;
+    }else{
+        _geoOutcropCell.hidden = YES;
+    }
+    bool geoStopNumSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStopNum"];
+    if (geoStopNumSwitch) {
+        _geoStopNumCell.hidden = NO;
+    }else{
+        _geoStopNumCell.hidden = YES;
+    }
+    bool geoStructSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStructData"];
+    if (geoStructSwitch) {
+        _geoStructCell.hidden = NO;
+    }else{
+        _geoStructCell.hidden = YES;
+    }
+    
+     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -298,4 +328,40 @@
     _photo = photo;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    if (cell == _geoMagneticCell){
+        if(_geoMagneticCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _geoOutcropCell){
+        if(_geoOutcropCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _geoStopNumCell){
+        if(_geoStopNumCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _geoStructCell){
+        if(_geoStructCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    
+    }else{
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    }
+    
+}
+
+
 @end

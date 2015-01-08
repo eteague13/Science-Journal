@@ -34,12 +34,12 @@
     [self.view addSubview:_scroller];
     self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
     self.restClient.delegate = self;
-    _geoMagDecSwitch.on = NO;
-    _geoOutcropSwitch.on = NO;
-    _geoStopNumSwitch.on = NO;
-    _geoStructDataSwitch.on = NO;
+    _geoMagDecSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoMagDec"];
+    _geoOutcropSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoOutcrop"];
+    _geoStopNumSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStopNum"];
+    _geoStructDataSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStructData"];
     
-    
+   
     
 }
 
@@ -107,5 +107,27 @@ loadMetadataFailedWithError:(NSError *)error {
     NSLog(@"Error loading metadata: %@", error);
 }
  */
- 
+
+
+- (IBAction)geoMagDecFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_geoMagDecSwitch.on forKey:@"SwitchGeoMagDec"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+- (IBAction)geoStopNumFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_geoStopNumSwitch.on forKey:@"SwitchGeoStopNum"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)geoOutcropFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_geoOutcropSwitch.on forKey:@"SwitchGeoOutcrop"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)geoStructDataFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_geoStructDataSwitch.on forKey:@"SwitchGeoStructData"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

@@ -44,5 +44,9 @@
 @property (strong, nonatomic) Entry *associatedEntry;
 
 -(void)setEditEntry:(BOOL)value;
+@property (weak, nonatomic) IBOutlet UITableViewCell *geoMagneticCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *geoStopNumCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *geoOutcropCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *geoStructCell;
 
 @end
