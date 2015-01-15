@@ -11,8 +11,8 @@
 #import "datepickerController.h"
 #import "textEntryController.h"
 #import "LocationAndWeatherController.h"
-#import "SampleNumController.h"
 #import "SettingsController.h"
+#import "MagneticDecController.h"
 
 @interface AddEntryController ()
 
@@ -46,6 +46,12 @@
     _entryNameField.text = _name;
     _projectNameField.text = _projectName;
     _dateLabelField.text = _date;
+    _sampleNumberField.text = _sampleNum;
+    _stopNumField.text = _stopNum;
+    _magneticValue1 = _associatedEntry.magneticValue1;
+    _magneticValue2 = _associatedEntry.magneticValue2;
+    _magneticType = _associatedEntry.magneticType;
+    
     NSLog(@"Inside edit entry%@", _date);
     
     
@@ -172,6 +178,9 @@
     /*Need to add a check and code to see if you're saving an existing entry in Edit Entry mode */
     _name = _entryNameField.text;
     _projectName = _projectNameField.text;
+    _stopNum = _stopNumField.text;
+    _date = _dateLabelField.text;
+    _sampleNum = _sampleNumberField.text;
     if (!isEditEntry) {
         Entry *newEntry = [[Entry alloc] init];
         newEntry.name = _name;
@@ -184,9 +193,17 @@
         newEntry.notes =_notes;
         newEntry.photo = _photo;
         newEntry.sketch = _sketch;
+        newEntry.outcrop = _outcrop;
+        newEntry.structuralData = _structuralData;
+        newEntry.sampleNum = _sampleNum;
+        newEntry.stopNum = _stopNum;
+        newEntry.magneticValue1 = _magneticValue1;
+        newEntry.magneticValue2 = _magneticValue2;
+        newEntry.magneticType = _magneticType;
+        
         
         NSLog(@"name text: %@", _entryNameField.text);
-        NSMutableString *printString = [NSMutableString stringWithFormat:@"Entry name: %@; Date: %@; Project Name: %@; Goal: %@; Latitude: %@; Longitude: %@; Weather: %@; Magnetic Field: %@; Partners: %@; Permissions: %@; Outcrop: %@; Structural: %@; Sample Number: %@; Notes: %@", _name, _date, _projectName, _goal, _latitude, _longitude, _weather, _magnet, _partners, _permissions, _outcrop, _structuralData, _sampleNum, _notes];
+        NSMutableString *printString = [NSMutableString stringWithFormat:@"Entry name: %@; Date: %@; Project Name: %@; Goal: %@; Latitude: %@; Longitude: %@; Weather: %@; Magnetic Field: %@; Partners: %@; Permissions: %@; Outcrop: %@; Structural: %@; Sample Number: %@; Notes: %@; Stop Number: %@", _name, _date, _projectName, _goal, _latitude, _longitude, _weather, _magnet, _partners, _permissions, _outcrop, _structuralData, _sampleNum, _notes, _stopNum];
         
         
         NSError *error;
@@ -218,6 +235,13 @@
         tempEntry.notes =_notes;
         tempEntry.photo = _photo;
         tempEntry.sketch = _sketch;
+        tempEntry.outcrop = _outcrop;
+        tempEntry.structuralData = _structuralData;
+        tempEntry.sampleNum = _sampleNum;
+        tempEntry.stopNum = _stopNum;
+        tempEntry.magneticValue1 = _magneticValue1;
+        tempEntry.magneticValue2 = _magneticValue2;
+        tempEntry.magneticType = _magneticType;
         [self.delegate AddEntryController:self didUpdateEntry:tempEntry];
         
     }
@@ -238,19 +262,34 @@
 - (void)textEntryControllerCancel:(textEntryController *) controller{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-- (void)textEntryControllerSave:(textEntryController *)controller didSaveText:(NSString*) text rowSelected:(int)row{
-    switch (row) {
-        case 3:
-            _goal = text;
-            break;
-        case 7:
-            _notes = text;
-            break;
-        case 8:
-            _permissions = text;
-        default:
-            NSLog(@"Default");
-            break;
+- (void)textEntryControllerSave:(textEntryController *)controller didSaveText:(NSString*) text rowSelected:(int)row sectionSelected:(int)section{
+    
+    if (section == 0){
+        switch (row) {
+            case 3:
+                _goal = text;
+                break;
+            case 7:
+                _notes = text;
+                break;
+            case 8:
+                _permissions = text;
+                break;
+            default:
+                NSLog(@"Default");
+                break;
+        }
+    }else if (section == 1){
+        switch (row) {
+            case 2:
+                _outcrop = text;
+                break;
+            case 3:
+                _structuralData = text;
+                break;
+            default:
+                break;
+        }
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -267,12 +306,7 @@
     
 }
 
-- (void)SampleNumControllerCancel:(SampleNumController *) controller{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-- (void)SampleNumControllerSave:(SampleNumController *)controller didSaveSample:(NSString*) num{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -287,14 +321,40 @@
         textController.delegate = self;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         int rowSelected = (int)indexPath.row;
-        [textController updateRowSelected:rowSelected];
+        int sectionSelected = (int)indexPath.section;
+        [textController updateRowSelected:rowSelected updateSectionSelected:sectionSelected];
         
+        if (sectionSelected == 0){
+            switch (rowSelected) {
+                case 3:
+                    [textController setTextValue:_goal];
+                    break;
+                case 7:
+                    [textController setTextValue:_notes];
+                    break;
+                case 8:
+                    [textController setTextValue:_permissions];
+                    break;
+                default:
+                    NSLog(@"Default");
+                    break;
+            }
+        }else if (sectionSelected == 1){
+            switch (rowSelected) {
+                case 2:
+                    [textController setTextValue:_outcrop];
+                    break;
+                case 3:
+                    [textController setTextValue:_structuralData];
+                    break;
+                default:
+                    break;
+            }
+        }
     }else if ([segue.identifier isEqualToString:@"LocationAndWeather"]){
         LocationAndWeatherController* locationController = segue.destinationViewController;
         locationController.delegate = self;
-    }else if ([segue.identifier isEqualToString:@"SampleNum"]){
-        SampleNumController* sampleController = segue.destinationViewController;
-        sampleController.delegate = self;
+        [locationController setLat:_latitude setLong:_longitude setWeather:_weather];
     }else if ([segue.identifier isEqualToString:@"Sketch"]){
         SketchController *sketchController = segue.destinationViewController;
         sketchController.delegate = self;
@@ -304,6 +364,10 @@
         CameraController *cameraController = segue.destinationViewController;
         cameraController.delegate = self;
         [cameraController setPhoto:_photo];
+    }else if ([segue.identifier isEqualToString:@"Magnet"]){
+        MagneticDecController *magnetController = segue.destinationViewController;
+        magnetController.delegate = self;
+        [magnetController setVal1:_magneticValue1 setVal2:_magneticValue2 setType:_magneticType];
     }
 }
 
@@ -326,6 +390,16 @@
 }
 - (void)cameraControllerSave:(CameraController *)controller didSavePhoto:(UIImage*) photo{
     _photo = photo;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)magDecControllerCancel:(MagneticDecController *) controller{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)magDecControllerSave:(MagneticDecController *)controller value1:(NSString*)v1 value2:(NSString*)v2 type:(NSString*)type{
+    _magneticValue1 = v1;
+    _magneticValue2 = v2;
+    _magneticType = type;
+    NSLog(@"Magnetic: %@ %@ %@", v1, v2, type);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

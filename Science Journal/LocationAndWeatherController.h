@@ -17,6 +17,9 @@
     float latitudeValue;
     float longitudeValue;
     NSDictionary *jsonWeather;
+    NSString *latitudeArea;
+    NSString *longitudeArea;
+    NSString *weatherArea;
 }
 - (IBAction)locCancelButton:(id)sender;
 - (IBAction)locSaveButton:(id)sender;
@@ -25,5 +28,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *latitudeField;
 @property (weak, nonatomic) IBOutlet UITextField *longitudeField;
 @property (weak, nonatomic) IBOutlet UITextView *weatherField;
+-(void)setLat:(NSString*) latitude setLong:(NSString*) longitude setWeather:(NSString*) weather;
 
 @end

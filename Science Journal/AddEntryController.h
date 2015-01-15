@@ -10,10 +10,10 @@
 #import "UserEntryDatabase.h"
 #import "datepickerController.h"
 #import "LocationAndWeatherController.h"
-#import "SampleNumController.h"
 #import "SketchController.h"
 #import "CameraController.h"
 #import "Entry.h"
+#import "MagneticDecController.h"
 
 @class AddEntryController;
 @protocol AddEntryControllerDelegate <NSObject>
@@ -22,7 +22,7 @@
 - (void)AddEntryController:(AddEntryController *)controller didUpdateEntry:(Entry *)entry;
 @end
 
-@interface AddEntryController : UITableViewController <datepickerControllerDelegate, LocationAndWeatherControllerDelegate, SampleNumControllerDelegate, SketchControllerDelegate, CameraControllerDelegate> {
+@interface AddEntryController : UITableViewController <datepickerControllerDelegate, LocationAndWeatherControllerDelegate, SketchControllerDelegate, CameraControllerDelegate, MagneticDecControllerDelegate> {
     UserEntryDatabase *databaseCopy;
     BOOL isEditEntry;
     
@@ -37,8 +37,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *entryNameField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabelField;
 @property (weak, nonatomic) IBOutlet UITextField *projectNameField;
+@property (weak, nonatomic) IBOutlet UITextField *sampleNumberField;
 
-@property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *magnet, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes;
+@property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *magnet, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType;
 @property (strong, nonatomic) UIImage *sketch;
 @property (strong, nonatomic) UIImage *photo;
 @property (strong, nonatomic) Entry *associatedEntry;
@@ -48,5 +49,6 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *geoStopNumCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *geoOutcropCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *geoStructCell;
+@property (weak, nonatomic) IBOutlet UITextField *stopNumField;
 
 @end

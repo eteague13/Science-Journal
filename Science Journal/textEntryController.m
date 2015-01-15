@@ -16,19 +16,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    switch (addEntryRowSelected) {
-        case 3:
-            _textEntryLabel.text = @"Goal";
-            break;
-        case 7:
-            _textEntryLabel.text = @"Notes";
-            break;
-        case 8:
-            _textEntryLabel.text = @"Permissions and Access";
-        default:
-            NSLog(@"Default");
-            break;
+    NSLog(@"Section: %d", addEntrySectionSelected);
+    if (addEntrySectionSelected == 0){
+        switch (addEntryRowSelected) {
+            case 3:
+                _textEntryLabel.text = @"Goal";
+                break;
+            case 7:
+                _textEntryLabel.text = @"Notes";
+                break;
+            case 8:
+                _textEntryLabel.text = @"Permissions and Access";
+                break;
+            default:
+                NSLog(@"Default");
+                break;
+        }
+    }else if (addEntrySectionSelected == 1){
+        switch (addEntryRowSelected) {
+            case 2:
+                _textEntryLabel.text = @"Outcrop Description";
+                break;
+            case 3:
+                _textEntryLabel.text = @"Structural Data";
+            default:
+                break;
+        }
+    }
+    NSLog(@"Row: %d", addEntryRowSelected);
+    if ([textArea length] != 0){
+        _textField.text = textArea;
     }
     
     // Do any additional setup after loading the view.
@@ -55,11 +72,12 @@
 }
 
 - (IBAction)textSaveButton:(id)sender {
-    [self.delegate textEntryControllerSave:self didSaveText:_textField.text rowSelected:(int)addEntryRowSelected];
+    [self.delegate textEntryControllerSave:self didSaveText:_textField.text rowSelected:(int)addEntryRowSelected sectionSelected:(int)addEntrySectionSelected];
 }
 
-- (void)updateRowSelected:(int)row {
+- (void)updateRowSelected:(int)row updateSectionSelected:(int)section {
     addEntryRowSelected = row;
+    addEntrySectionSelected = section;
 }
 
 -(IBAction)textFieldReturn:(id)sender
@@ -74,5 +92,9 @@
         [textView resignFirstResponder];
     }
     return YES;
+}
+
+- (void)setTextValue:(NSString*)text{
+    textArea = text;
 }
 @end

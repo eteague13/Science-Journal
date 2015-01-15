@@ -20,6 +20,15 @@
     [super viewDidLoad];
     locationManager = [[CLLocationManager alloc] init];
     [locationManager requestWhenInUseAuthorization];
+    if ([latitudeArea length] != 0){
+        _latitudeField.text = latitudeArea;
+    }
+    if ([longitudeArea length] != 0){
+        _longitudeField.text = longitudeArea;
+    }
+    if ([weatherArea length] != 0){
+        _weatherField.text = weatherArea;
+    }
     // Do any additional setup after loading the view.
 }
 
@@ -64,7 +73,6 @@
     //NSLog(@"didUpdateToLocation: %@", newLocation);
     CLLocation *currentLocation = newLocation;
     
-    //Weather currently doesn't work for some reason...
     if (currentLocation != nil) {
         latitudeValue = currentLocation.coordinate.latitude;
         longitudeValue = currentLocation.coordinate.longitude;
@@ -119,5 +127,11 @@
         
         
     }
+}
+
+-(void)setLat:(NSString*) latitude setLong:(NSString*) longitude setWeather:(NSString*) weather{
+    latitudeArea = latitude;
+    longitudeArea = longitude;
+    weatherArea = weather;
 }
 @end

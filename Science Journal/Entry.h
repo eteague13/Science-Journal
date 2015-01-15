@@ -14,9 +14,10 @@
 }
     
 
-@property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *magnet, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes;
+@property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *magnet, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum;
 @property (strong, nonatomic) UIImage *sketch;
 @property (strong, nonatomic) UIImage *photo;
+@property (strong, nonatomic) NSString *magneticValue1, *magneticValue2, *magneticType;
 
 
 

@@ -103,7 +103,6 @@
         NSLog(@"in the if statement");
     }
     
-    //[[DBSession sharedSession] linkFromController:self];
     NSString *text = @"Hello world poop.";
     NSString *filename = @"working-draft.txt";
     NSString *documentsDirectory = [NSHomeDirectory()

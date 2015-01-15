@@ -11,10 +11,12 @@
 @class textEntryController;
 @protocol textEntryControllerDelegate <NSObject>
 - (void)textEntryControllerCancel:(textEntryController *) controller;
-- (void)textEntryControllerSave:(textEntryController *)controller didSaveText:(NSString*) text rowSelected:(int)row;
+- (void)textEntryControllerSave:(textEntryController *)controller didSaveText:(NSString*) text rowSelected:(int)row sectionSelected:(int)section;
 @end
 @interface textEntryController : UIViewController{
     int addEntryRowSelected;
+    NSString *textArea;
+    int addEntrySectionSelected;
     
 }
 
@@ -24,8 +26,8 @@
 - (IBAction)textCancelButton:(id)sender;
 - (IBAction)textSaveButton:(id)sender;
 
-- (void)updateRowSelected:(int)row;
+- (void)updateRowSelected:(int)row updateSectionSelected:(int)section;
 @property (weak, nonatomic) IBOutlet UITextView *textField;
-
+- (void)setTextValue:(NSString*)text;
 
 @end

@@ -43,9 +43,10 @@
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
 		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
 		BD7D734219A3ED1D0034E504 /* SingleEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */; };
-		BD9199061A5465B4006E48E1 /* SampleNumController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9199051A5465B4006E48E1 /* SampleNumController.m */; };
 		BD91990C1A573410006E48E1 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD91990B1A573410006E48E1 /* CameraController.m */; };
 		BDA0A73F1A00863100B421FB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA0A73E1A00863100B421FB /* Dropbox.framework */; };
+		BDBEB5451A607F5C00780EC2 /* MagneticDecController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBEB5441A607F5C00780EC2 /* MagneticDecController.m */; };
+		BDD74CB81A64CFC100635CBA /* TablesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD74CB71A64CFC100635CBA /* TablesViewController.m */; };
 		BDE248A41A4DEEA500B1F97D /* LocationAndWeatherController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE248A31A4DEEA500B1F97D /* LocationAndWeatherController.m */; };
 		BDE8CCC61A44B3BD0013CAB9 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8CCC51A44B3BD0013CAB9 /* DropboxSDK.framework */; };
 		BDFF53BE1A4226C10054B4FA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFF53BD1A4226C10054B4FA /* MessageUI.framework */; };
@@ -117,11 +118,13 @@
 		BD7D733E19A3E1E30034E504 /* EntriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesCell.m; sourceTree = "<group>"; };
 		BD7D734019A3ED1D0034E504 /* SingleEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntryViewController.h; sourceTree = "<group>"; };
 		BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntryViewController.m; sourceTree = "<group>"; };
-		BD9199041A5465B4006E48E1 /* SampleNumController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleNumController.h; sourceTree = "<group>"; };
-		BD9199051A5465B4006E48E1 /* SampleNumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleNumController.m; sourceTree = "<group>"; };
 		BD91990A1A573410006E48E1 /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
 		BD91990B1A573410006E48E1 /* CameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraController.m; sourceTree = "<group>"; };
 		BDA0A73E1A00863100B421FB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "../../Downloads/dropbox-ios-sync-sdk-3.1-2.1/Dropbox.framework"; sourceTree = "<group>"; };
+		BDBEB5431A607F5C00780EC2 /* MagneticDecController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagneticDecController.h; sourceTree = "<group>"; };
+		BDBEB5441A607F5C00780EC2 /* MagneticDecController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagneticDecController.m; sourceTree = "<group>"; };
+		BDD74CB61A64CFC100635CBA /* TablesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TablesViewController.h; sourceTree = "<group>"; };
+		BDD74CB71A64CFC100635CBA /* TablesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TablesViewController.m; sourceTree = "<group>"; };
 		BDE248A21A4DEEA500B1F97D /* LocationAndWeatherController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAndWeatherController.h; sourceTree = "<group>"; };
 		BDE248A31A4DEEA500B1F97D /* LocationAndWeatherController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAndWeatherController.m; sourceTree = "<group>"; };
 		BDE8CCC51A44B3BD0013CAB9 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "../../Downloads/dropbox-ios-sdk-1.3-3.13/DropboxSDK.framework"; sourceTree = "<group>"; };
@@ -245,10 +248,12 @@
 				BD5FD9D41A4BBA9B003CC565 /* textEntryController.m */,
 				BDE248A21A4DEEA500B1F97D /* LocationAndWeatherController.h */,
 				BDE248A31A4DEEA500B1F97D /* LocationAndWeatherController.m */,
-				BD9199041A5465B4006E48E1 /* SampleNumController.h */,
-				BD9199051A5465B4006E48E1 /* SampleNumController.m */,
 				BD91990A1A573410006E48E1 /* CameraController.h */,
 				BD91990B1A573410006E48E1 /* CameraController.m */,
+				BDBEB5431A607F5C00780EC2 /* MagneticDecController.h */,
+				BDBEB5441A607F5C00780EC2 /* MagneticDecController.m */,
+				BDD74CB61A64CFC100635CBA /* TablesViewController.h */,
+				BDD74CB71A64CFC100635CBA /* TablesViewController.m */,
 			);
 			path = "Science Journal";
 			sourceTree = "<group>";
@@ -379,12 +384,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDD74CB81A64CFC100635CBA /* TablesViewController.m in Sources */,
 				BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */,
 				BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */,
 				BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */,
 				BD4BFF0919ABC9B300242844 /* Entry.m in Sources */,
 				BD7D734219A3ED1D0034E504 /* SingleEntryViewController.m in Sources */,
 				BD5FD9D51A4BBA9B003CC565 /* textEntryController.m in Sources */,
+				BDBEB5451A607F5C00780EC2 /* MagneticDecController.m in Sources */,
 				BD08A1A119A26BE400EE1B97 /* MapController.m in Sources */,
 				BD91990C1A573410006E48E1 /* CameraController.m in Sources */,
 				BD3FB97F19A2D5EA002496CE /* EntryController.m in Sources */,
@@ -392,7 +399,6 @@
 				BD3FB96919A278DE002496CE /* ExportController.m in Sources */,
 				BD4BFF0619ABC92600242844 /* UserEntryDatabase.m in Sources */,
 				BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */,
-				BD9199061A5465B4006E48E1 /* SampleNumController.m in Sources */,
 				BDE248A41A4DEEA500B1F97D /* LocationAndWeatherController.m in Sources */,
 				BD4BFF0C19AFCC9900242844 /* MyLocation.m in Sources */,
 				BD5FD9CF1A4A07FC003CC565 /* AddEntryController.m in Sources */,

@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "map30x30.png"
+      "filename" : "geo_fence-25.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "map60x60.png"
+      "filename" : "geo_fence-50.png"
     },
     {
       "idiom" : "universal",
