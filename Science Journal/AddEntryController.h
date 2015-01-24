@@ -14,6 +14,8 @@
 #import "CameraController.h"
 #import "Entry.h"
 #import "MagneticDecController.h"
+#import "DBManager.h"
+
 
 @class AddEntryController;
 @protocol AddEntryControllerDelegate <NSObject>
@@ -27,6 +29,15 @@
     BOOL isEditEntry;
     
 }
+
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSArray *associatedEntryArray;
+@property (nonatomic) int recordIDToEdit;
+-(void)loadInfoToEdit;
+
+
+
+
 @property (nonatomic, weak) id <AddEntryControllerDelegate> delegate;
 
 - (IBAction)cancelButton:(id)sender;

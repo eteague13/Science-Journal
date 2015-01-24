@@ -26,6 +26,8 @@
     if (isEditEntry){
         _entryTitleLabel.title = @"Edit Entry";
     }
+    
+    /*
     _name = _associatedEntry.name;
     _date = _associatedEntry.date;
     _projectName = _associatedEntry.projectName;
@@ -51,6 +53,7 @@
     _magneticValue1 = _associatedEntry.magneticValue1;
     _magneticValue2 = _associatedEntry.magneticValue2;
     _magneticType = _associatedEntry.magneticType;
+     */
     
     NSLog(@"Inside edit entry%@", _date);
     
@@ -80,6 +83,14 @@
     }else{
         _geoStructCell.hidden = YES;
     }
+    
+
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
+    if (self.recordIDToEdit != -1) {
+        // Load the record with the specific ID from the database.
+        [self loadInfoToEdit];
+    }
+    
     
      
     // Uncomment the following line to preserve selection between presentations.
@@ -172,6 +183,8 @@
 - (IBAction)cancelButton:(id)sender {
     NSLog(@"%@", [self.delegate description]);
     [self.delegate AddEntryControllerDidCancel:self];
+    
+    
 }
 
 - (IBAction)saveButton:(id)sender {
@@ -223,6 +236,34 @@
         NSLog(@"%@", filePath);
         
         [self.delegate AddEntryController:self didSaveEntry:newEntry];
+        
+        // Prepare the query string.
+        //It's not working because it can't store photo and sketch
+        //http://www.appcoda.com/sqlite-database-ios-app-tutorial/
+        //NSData *photoData = UIImagePNGRepresentation(_photo);
+        //NSData *sketchData = UIImagePNGRepresentation(_sketch);
+        
+        NSString *query;
+        if(self.recordIDToEdit == -1){
+            query = [NSString stringWithFormat:@"insert into entriesBasic values(null, '%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@', '%@')",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, _sketch, _photo, _notes, _permissions, _sampleNum, _partners];
+        }else{
+            query = [NSString stringWithFormat:@"update set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', photo='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@' where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, _sketch, _photo, _notes, _permissions, _sampleNum, _partners, self.recordIDToEdit];
+        }
+        
+       
+        
+        //name text, projectName text, date text, goal text, latitude text, longitude text, weather text, sketch blob, picture blob, notes text, permissions text, sampleNum text, partners text);
+        
+        // Execute the query.
+        [self.dbManager executeQuery:query];
+        
+        // If the query was successfully executed then pop the view controller.
+        if (self.dbManager.affectedRows != 0) {
+            NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
+        }
+        else{
+            NSLog(@"Could not execute the query.");
+        }
     }else{
         Entry *tempEntry = [[Entry alloc] init];
         tempEntry.name = _entryNameField.text;
@@ -435,6 +476,16 @@
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     }
     
+}
+-(void)loadInfoToEdit{
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic where entriesID = %d", self.recordIDToEdit];
+    NSLog(@"Query: %@", query);
+    
+   
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSLog(@"results: %@", results);
+    _name = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"name"]];
+    _entryNameField.text = _name;
 }
 
 

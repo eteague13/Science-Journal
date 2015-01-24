@@ -11,6 +11,7 @@
 #import "SingleEntryViewController.h"
 #import "Entry.h"
 #import "EntryController.h"
+#import "DBManager.h"
 
 
 @interface EntriesController () 
@@ -39,6 +40,9 @@
     
     
     _database = [UserEntryDatabase userEntryDatabase];
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -122,14 +126,28 @@
 
     // Return the number of rows in the section.
     //return _allEntryNames.count;
-    NSLog(@"Number of rows: %lu", (unsigned long)[_database.entries count]);
-    return [_database.entries count];
+    //NSLog(@"Number of rows: %lu", (unsigned long)[_database.entries count]);
+    //return [_database.entries count];
+    NSString *query = @"select * from entriesBasic";
+    _allEntriesFromDB = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    return _allEntriesFromDB.count;
     //return [database.getEntries count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *CellIdentifier = @"EntriesCell";
+    EntriesCell *cell = [tableView
+                         dequeueReusableCellWithIdentifier:CellIdentifier
+                         forIndexPath:indexPath];
+    
+    NSInteger indexOfEntryName = [self.dbManager.arrColumnNames indexOfObject:@"name"];
+    cell.entryNameLabel.text = [NSString stringWithFormat:@"%@", [[self.allEntriesFromDB objectAtIndex:indexPath.row] objectAtIndex:indexOfEntryName]];
+    
+    
+    return cell;
+    /*
     static NSString *CellIdentifier = @"EntriesCell";
     EntriesCell *cell = [tableView
                               dequeueReusableCellWithIdentifier:CellIdentifier
@@ -144,6 +162,7 @@
     
     
     return cell;
+     */
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -156,6 +175,7 @@
         UINavigationController *navigationController = segue.destinationViewController;
         AddEntryController *addEntryController = [navigationController viewControllers][0];
         addEntryController.delegate = self;
+        addEntryController.recordIDToEdit = -1;
     }
     else if ([segue.identifier isEqualToString:@"EditEntry"])
     {
@@ -166,15 +186,38 @@
         
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         
-        long row = [myIndexPath row];
+        long row = [myIndexPath row] + 1;
         
+        addEntryController.recordIDToEdit = self.recordIDToEdit;
+        NSLog(@"Record id: %d", _recordIDToEdit);
+        /*
+        if (self.recordIDToEdit != -1){
+            NSString *query = [NSString stringWithFormat:@"select * from entriesBasic where entriesID = %d", self.recordIDToEdit];
+            NSLog(@"Query: %@", query);
         
-        addEntryController.associatedEntry = [_database getEntryAtIndex:row];
+            //NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+            //addEntryController.associatedEntryArray = results;
+            
+            NSLog(@"Entry from table%@", self.arrEntryInfo);
+        }
+         */
+
+
+        //addEntryController.associatedEntry = [_database getEntryAtIndex:row];
         
     }
      
 
     
+    
+    
+}
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    self.recordIDToEdit = [[[self.arrEntryInfo objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
+    self.recordIDToEdit +=1;
+    NSLog(@"Trying to add one: %d", _recordIDToEdit);
+    [self performSegueWithIdentifier:@"EditEntry" sender:self];
     
     
 }
@@ -192,7 +235,15 @@
 -(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_database deleteEntryAtIndex:[indexPath row]];
+        int recordIDToDelete = [[[self.arrEntryInfo objectAtIndex:indexPath.row] objectAtIndex:0] intValue]+1;
+        
+        // Prepare the query.
+        NSString *query = [NSString stringWithFormat:@"delete from entriesBasic where entriesID=%d", recordIDToDelete];
+        
+        // Execute the query.
+        [self.dbManager executeQuery:query];
+        
+        //[_database deleteEntryAtIndex:[indexPath row]];
         [tableView reloadData];
     }
 }

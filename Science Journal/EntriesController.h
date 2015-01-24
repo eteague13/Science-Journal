@@ -29,6 +29,12 @@
 @property (strong, nonatomic) NSMutableArray *allSampleNums;
 @property (strong, nonatomic) NSMutableArray *allNotes;
 @property (strong, nonatomic) UserEntryDatabase *database;
+
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic) int recordIDToEdit;
+
+@property (nonatomic, strong) NSArray *arrEntryInfo;
+@property (nonatomic, strong) NSArray *allEntriesFromDB;
 //+ (id) sharedInstance;
 //@property (strong, nonatomic) UserEntryDatabase *database;
 @end

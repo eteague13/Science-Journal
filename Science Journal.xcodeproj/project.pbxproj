@@ -46,6 +46,9 @@
 		BD91990C1A573410006E48E1 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD91990B1A573410006E48E1 /* CameraController.m */; };
 		BDA0A73F1A00863100B421FB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA0A73E1A00863100B421FB /* Dropbox.framework */; };
 		BDBEB5451A607F5C00780EC2 /* MagneticDecController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBEB5441A607F5C00780EC2 /* MagneticDecController.m */; };
+		BDC8358A1A674E46000B60BD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC835891A674E46000B60BD /* libsqlite3.dylib */; };
+		BDC8358D1A675108000B60BD /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC8358C1A675108000B60BD /* DBManager.m */; };
+		BDC835931A675E86000B60BD /* entriesdb.sql in Resources */ = {isa = PBXBuildFile; fileRef = BDC835921A675E86000B60BD /* entriesdb.sql */; };
 		BDD74CB81A64CFC100635CBA /* TablesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD74CB71A64CFC100635CBA /* TablesViewController.m */; };
 		BDE248A41A4DEEA500B1F97D /* LocationAndWeatherController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE248A31A4DEEA500B1F97D /* LocationAndWeatherController.m */; };
 		BDE8CCC61A44B3BD0013CAB9 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8CCC51A44B3BD0013CAB9 /* DropboxSDK.framework */; };
@@ -90,7 +93,7 @@
 		BD08A1B619A26BE400EE1B97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BD08A1B819A26BE400EE1B97 /* Science_JournalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Science_JournalTests.m; sourceTree = "<group>"; };
 		BD3FB96719A278DE002496CE /* ExportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportController.h; sourceTree = "<group>"; };
-		BD3FB96819A278DE002496CE /* ExportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportController.m; sourceTree = "<group>"; };
+		BD3FB96819A278DE002496CE /* ExportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BD3FB96A19A278F1002496CE /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		BD3FB96B19A278F1002496CE /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		BD3FB96F19A2C314002496CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -123,6 +126,10 @@
 		BDA0A73E1A00863100B421FB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "../../Downloads/dropbox-ios-sync-sdk-3.1-2.1/Dropbox.framework"; sourceTree = "<group>"; };
 		BDBEB5431A607F5C00780EC2 /* MagneticDecController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagneticDecController.h; sourceTree = "<group>"; };
 		BDBEB5441A607F5C00780EC2 /* MagneticDecController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagneticDecController.m; sourceTree = "<group>"; };
+		BDC835891A674E46000B60BD /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		BDC8358B1A675108000B60BD /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		BDC8358C1A675108000B60BD /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		BDC835921A675E86000B60BD /* entriesdb.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = entriesdb.sql; sourceTree = "<group>"; };
 		BDD74CB61A64CFC100635CBA /* TablesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TablesViewController.h; sourceTree = "<group>"; };
 		BDD74CB71A64CFC100635CBA /* TablesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TablesViewController.m; sourceTree = "<group>"; };
 		BDE248A21A4DEEA500B1F97D /* LocationAndWeatherController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAndWeatherController.h; sourceTree = "<group>"; };
@@ -136,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDC8358A1A674E46000B60BD /* libsqlite3.dylib in Frameworks */,
 				BDE8CCC61A44B3BD0013CAB9 /* DropboxSDK.framework in Frameworks */,
 				BDFF53BE1A4226C10054B4FA /* MessageUI.framework in Frameworks */,
 				BDA0A73F1A00863100B421FB /* Dropbox.framework in Frameworks */,
@@ -189,6 +197,7 @@
 		BD08A18919A26BE400EE1B97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BDC835891A674E46000B60BD /* libsqlite3.dylib */,
 				BDE8CCC51A44B3BD0013CAB9 /* DropboxSDK.framework */,
 				BDFF53BD1A4226C10054B4FA /* MessageUI.framework */,
 				BDA0A73E1A00863100B421FB /* Dropbox.framework */,
@@ -237,6 +246,7 @@
 				BD4BFF0719ABC9B300242844 /* Entry.h */,
 				BD4BFF0819ABC9B300242844 /* Entry.m */,
 				BD4BFF0A19AFCC9900242844 /* MyLocation.h */,
+				BDC835921A675E86000B60BD /* entriesdb.sql */,
 				BD4BFF0B19AFCC9900242844 /* MyLocation.m */,
 				BD5C6E6719B7848E00342E4B /* SketchController.h */,
 				BD5C6E6819B7848E00342E4B /* SketchController.m */,
@@ -254,6 +264,8 @@
 				BDBEB5441A607F5C00780EC2 /* MagneticDecController.m */,
 				BDD74CB61A64CFC100635CBA /* TablesViewController.h */,
 				BDD74CB71A64CFC100635CBA /* TablesViewController.m */,
+				BDC8358B1A675108000B60BD /* DBManager.h */,
+				BDC8358C1A675108000B60BD /* DBManager.m */,
 			);
 			path = "Science Journal";
 			sourceTree = "<group>";
@@ -366,6 +378,7 @@
 				BD08A1A619A26BE400EE1B97 /* Images.xcassets in Resources */,
 				BD08A19519A26BE400EE1B97 /* InfoPlist.strings in Resources */,
 				BD08A19E19A26BE400EE1B97 /* Main.storyboard in Resources */,
+				BDC835931A675E86000B60BD /* entriesdb.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDC8358D1A675108000B60BD /* DBManager.m in Sources */,
 				BDD74CB81A64CFC100635CBA /* TablesViewController.m in Sources */,
 				BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */,
 				BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */,
