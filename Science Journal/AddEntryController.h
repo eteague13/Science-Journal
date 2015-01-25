@@ -21,11 +21,10 @@
 @protocol AddEntryControllerDelegate <NSObject>
 - (void)AddEntryControllerDidCancel:(AddEntryController *) controller;
 - (void)AddEntryController:(AddEntryController *)controller didSaveEntry:(Entry *)entry;
-- (void)AddEntryController:(AddEntryController *)controller didUpdateEntry:(Entry *)entry;
+
 @end
 
 @interface AddEntryController : UITableViewController <datepickerControllerDelegate, LocationAndWeatherControllerDelegate, SketchControllerDelegate, CameraControllerDelegate, MagneticDecControllerDelegate> {
-    UserEntryDatabase *databaseCopy;
     BOOL isEditEntry;
     
 }
@@ -52,7 +51,7 @@
 
 @property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *magnet, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType;
 @property (strong, nonatomic) UIImage *sketch;
-@property (strong, nonatomic) UIImage *photo;
+@property (strong, nonatomic) UIImage *picture;
 @property (strong, nonatomic) Entry *associatedEntry;
 
 -(void)setEditEntry:(BOOL)value;

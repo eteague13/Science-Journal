@@ -37,6 +37,7 @@
     [super viewDidLoad];
     _drawImage.image = sketch;
     
+    //http://www.raywenderlich.com/18840/how-to-make-a-simple-drawing-app-with-uikit
     // Do any additional setup after loading the view.
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UserEntryDatabase.h"
 #import "AddEntryController.h"
 
 @interface EntriesController : UITableViewController <AddEntryControllerDelegate>{
@@ -28,13 +27,11 @@
 @property (strong, nonatomic) NSMutableArray *allStructuralData;
 @property (strong, nonatomic) NSMutableArray *allSampleNums;
 @property (strong, nonatomic) NSMutableArray *allNotes;
-@property (strong, nonatomic) UserEntryDatabase *database;
+
 
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic) int recordIDToEdit;
-
-@property (nonatomic, strong) NSArray *arrEntryInfo;
+-(void)loadData;
 @property (nonatomic, strong) NSArray *allEntriesFromDB;
-//+ (id) sharedInstance;
-//@property (strong, nonatomic) UserEntryDatabase *database;
+
 @end
