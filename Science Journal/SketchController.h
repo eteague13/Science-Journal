@@ -35,7 +35,4 @@
 @property (nonatomic, weak) id <SketchControllerDelegate> delegate;
 
 
-
-
-
 @end

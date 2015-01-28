@@ -13,6 +13,7 @@
 #import "LocationAndWeatherController.h"
 #import "SettingsController.h"
 #import "MagneticDecController.h"
+#import "SketchController.h"
 
 @interface AddEntryController ()
 
@@ -115,16 +116,30 @@
         //http://www.appcoda.com/sqlite-database-ios-app-tutorial/
         //NSData *photoData = UIImagePNGRepresentation(_photo);
         //NSData *sketchData = UIImagePNGRepresentation(_sketch);
-        
-        NSString *query;
-        if(self.recordIDToEdit == -1){
-            query = [NSString stringWithFormat:@"insert into entriesBasic values(null, '%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@', '%@')",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, _sketch, _picture, _notes, _permissions, _sampleNum, _partners];
-        }else{
-            query = [NSString stringWithFormat:@"update set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', picture='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@' where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, _sketch, _picture, _notes, _permissions, _sampleNum, _partners, self.recordIDToEdit];
-        }
+    NSString *sketchname = [NSMutableString stringWithFormat:@"%@%@", _name, @"_sketch.png"];
+    NSString *picturename = [NSMutableString stringWithFormat:@"%@%@", _name, @"_picture.png"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *savedSketchLocation = [documentsDirectory stringByAppendingPathComponent:sketchname];
+    NSString *savedPictureLocation = [documentsDirectory stringByAppendingPathComponent:picturename];
+    NSData *sketchData = UIImagePNGRepresentation(_sketch);
+    [sketchData writeToFile:savedSketchLocation atomically:NO];
+    NSData *pictureData = UIImagePNGRepresentation(_picture);
+    [pictureData writeToFile:savedPictureLocation atomically:NO];
+    
+    NSString *queryBasic;
+    NSString *queryGeology;
+    if(self.recordIDToEdit == -1){
+        queryBasic = [NSString stringWithFormat:@"insert into entriesBasic values(null, '%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@', '%@')",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners];
+        queryGeology = [NSString stringWithFormat:@"insert into entriesGeology values(null, '%@', '%@','%@','%@','%@','%@')",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum];
+    }else{
+        queryBasic = [NSString stringWithFormat:@"update entriesBasic set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', picture='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@' where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, self.recordIDToEdit];
+        queryGeology = [NSString stringWithFormat:@"update entriesGeology set outcrop='%@', structuralData='%@',magneticValue1='%@',magneticValue2='%@',magneticType='%@',stopNum='%@' where entriesID=%d",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum, self.recordIDToEdit];
+    }
+    
         
 
-        [self.dbManager executeQuery:query];
+        [self.dbManager executeQuery:queryBasic];
 
         if (self.dbManager.affectedRows != 0) {
             NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
@@ -245,7 +260,6 @@
     }else if ([segue.identifier isEqualToString:@"Sketch"]){
         SketchController *sketchController = segue.destinationViewController;
         sketchController.delegate = self;
-        //Sketch still isn't working
         [sketchController setSketch: _sketch];
     }else if ([segue.identifier isEqualToString:@"Photo"]){
         CameraController *cameraController = segue.destinationViewController;
@@ -263,8 +277,9 @@
     
 }
 
-- (void) sketchControllerSave:(SketchController *)controller didFinishSketch:(UIImage *)item{
+- (void) sketchControllerSave:(SketchController *)controller didFinishSketch:(UIImage*)item{
     _sketch = item;
+    NSLog(@"Passed back sketch");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -325,11 +340,11 @@
 -(void)loadInfoToEdit{
     
     
-    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic where entriesID = %d", self.recordIDToEdit];
-    NSLog(@"Query: %@", query);
+    NSString *queryBasic = [NSString stringWithFormat:@"select * from entriesBasic where entriesID = %d", self.recordIDToEdit];
+    NSLog(@"Query: %@", queryBasic);
     
    
-    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:queryBasic]];
     NSLog(@"results in info edit: %@", results);
     _name = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"name"]];
 
@@ -343,14 +358,28 @@
     _permissions = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"permissions"]];
     _sampleNum = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sampleNum"]];
     _notes = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"notes"]];
-    _picture = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"picture"]];
-    _sketch = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]];
+    NSString *pictureFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"picture"]];
+    _picture = [UIImage imageWithContentsOfFile:pictureFilePath];
+    NSString *sketchFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]];
+    _sketch = [UIImage imageWithContentsOfFile:sketchFilePath];
     
     _entryNameField.text = _name;
     _projectNameField.text = _projectName;
     _dateLabelField.text = _date;
     _sampleNumberField.text = _sampleNum;
     _stopNumField.text = _stopNum;
+    
+    //Not loading geology stuff yet
+    NSString *queryGeology = [NSString stringWithFormat:@"select * from entriesGeology where entriesID = %d", self.recordIDToEdit];
+    NSArray *resultsGeology = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:queryGeology]];
+    _outcrop = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"outcrop"]];
+    _structuralData = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"structuralData"]];
+    _magneticValue1 = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticValue1"]];
+    _magneticValue2 = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticValue2"]];
+    _magneticType = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticType"]];
+    _stopNum = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"stopNum"]];
+    _stopNumField.text = _stopNum;
+    
 }
 
 

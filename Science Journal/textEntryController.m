@@ -72,6 +72,7 @@
 }
 
 - (IBAction)textSaveButton:(id)sender {
+    
     [self.delegate textEntryControllerSave:self didSaveText:_textField.text rowSelected:(int)addEntryRowSelected sectionSelected:(int)addEntrySectionSelected];
 }
 
