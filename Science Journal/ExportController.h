@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UserEntryDatabase.h"
-#import "Entry.h"
 #import <DropboxSDK/DropboxSDK.h>
+#import "DBManager.h"
+#import <MessageUI/MessageUI.h>
 
-@interface ExportController : UIViewController <DBRestClientDelegate>
-@property (strong, nonatomic) UserEntryDatabase *database;
+@interface ExportController : UIViewController <DBRestClientDelegate, MFMailComposeViewControllerDelegate>
 - (IBAction)exportGooglEarth:(id)sender;
 @property (nonatomic, strong) DBRestClient *restClient;
 - (IBAction)syncDropbox:(id)sender;
+@property (nonatomic, strong) DBManager *dbManager;
 
 @end

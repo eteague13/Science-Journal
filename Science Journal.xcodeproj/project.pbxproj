@@ -30,10 +30,6 @@
 		BD3FB96919A278DE002496CE /* ExportController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96819A278DE002496CE /* ExportController.m */; };
 		BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96B19A278F1002496CE /* SettingsController.m */; };
 		BD3FB97019A2C314002496CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3FB96F19A2C314002496CE /* MapKit.framework */; };
-		BD3FB97F19A2D5EA002496CE /* EntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB97E19A2D5EA002496CE /* EntryController.m */; };
-		BD4BFF0619ABC92600242844 /* UserEntryDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0519ABC92600242844 /* UserEntryDatabase.m */; };
-		BD4BFF0919ABC9B300242844 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0819ABC9B300242844 /* Entry.m */; };
-		BD4BFF0C19AFCC9900242844 /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BFF0B19AFCC9900242844 /* MyLocation.m */; };
 		BD4C60A91A78702300BE192F /* entriesdb.sql in Resources */ = {isa = PBXBuildFile; fileRef = BD4C60A81A78702300BE192F /* entriesdb.sql */; };
 		BD5C6E6619B681D100342E4B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C6E6519B681D100342E4B /* CoreLocation.framework */; };
 		BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C6E6819B7848E00342E4B /* SketchController.m */; };
@@ -43,7 +39,6 @@
 		BD76F5CA19B5001D000A1349 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD76F5C919B5001D000A1349 /* MobileCoreServices.framework */; };
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
 		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
-		BD7D734219A3ED1D0034E504 /* SingleEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */; };
 		BD91990C1A573410006E48E1 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD91990B1A573410006E48E1 /* CameraController.m */; };
 		BDA0A73F1A00863100B421FB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA0A73E1A00863100B421FB /* Dropbox.framework */; };
 		BDBEB5451A607F5C00780EC2 /* MagneticDecController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBEB5441A607F5C00780EC2 /* MagneticDecController.m */; };
@@ -97,14 +92,6 @@
 		BD3FB96A19A278F1002496CE /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		BD3FB96B19A278F1002496CE /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		BD3FB96F19A2C314002496CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		BD3FB97D19A2D5EA002496CE /* EntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryController.h; sourceTree = "<group>"; };
-		BD3FB97E19A2D5EA002496CE /* EntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryController.m; sourceTree = "<group>"; };
-		BD4BFF0419ABC92600242844 /* UserEntryDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntryDatabase.h; sourceTree = "<group>"; };
-		BD4BFF0519ABC92600242844 /* UserEntryDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntryDatabase.m; sourceTree = "<group>"; };
-		BD4BFF0719ABC9B300242844 /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entry.h; sourceTree = "<group>"; };
-		BD4BFF0819ABC9B300242844 /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entry.m; sourceTree = "<group>"; };
-		BD4BFF0A19AFCC9900242844 /* MyLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocation.h; sourceTree = "<group>"; };
-		BD4BFF0B19AFCC9900242844 /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocation.m; sourceTree = "<group>"; };
 		BD4C60A81A78702300BE192F /* entriesdb.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = entriesdb.sql; sourceTree = "<group>"; };
 		BD5C6E6519B681D100342E4B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BD5C6E6719B7848E00342E4B /* SketchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SketchController.h; sourceTree = "<group>"; };
@@ -120,8 +107,6 @@
 		BD7D733B19A3E1850034E504 /* EntriesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesController.m; sourceTree = "<group>"; };
 		BD7D733D19A3E1E30034E504 /* EntriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesCell.h; sourceTree = "<group>"; };
 		BD7D733E19A3E1E30034E504 /* EntriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesCell.m; sourceTree = "<group>"; };
-		BD7D734019A3ED1D0034E504 /* SingleEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntryViewController.h; sourceTree = "<group>"; };
-		BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntryViewController.m; sourceTree = "<group>"; };
 		BD91990A1A573410006E48E1 /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
 		BD91990B1A573410006E48E1 /* CameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraController.m; sourceTree = "<group>"; };
 		BDA0A73E1A00863100B421FB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "../../Downloads/dropbox-ios-sync-sdk-3.1-2.1/Dropbox.framework"; sourceTree = "<group>"; };
@@ -234,20 +219,10 @@
 				BD3FB96B19A278F1002496CE /* SettingsController.m */,
 				BD08A1A519A26BE400EE1B97 /* Images.xcassets */,
 				BD08A19119A26BE400EE1B97 /* Supporting Files */,
-				BD3FB97D19A2D5EA002496CE /* EntryController.h */,
-				BD3FB97E19A2D5EA002496CE /* EntryController.m */,
 				BD7D733A19A3E1850034E504 /* EntriesController.h */,
 				BD7D733B19A3E1850034E504 /* EntriesController.m */,
 				BD7D733D19A3E1E30034E504 /* EntriesCell.h */,
 				BD7D733E19A3E1E30034E504 /* EntriesCell.m */,
-				BD7D734019A3ED1D0034E504 /* SingleEntryViewController.h */,
-				BD7D734119A3ED1D0034E504 /* SingleEntryViewController.m */,
-				BD4BFF0419ABC92600242844 /* UserEntryDatabase.h */,
-				BD4BFF0519ABC92600242844 /* UserEntryDatabase.m */,
-				BD4BFF0719ABC9B300242844 /* Entry.h */,
-				BD4BFF0819ABC9B300242844 /* Entry.m */,
-				BD4BFF0A19AFCC9900242844 /* MyLocation.h */,
-				BD4BFF0B19AFCC9900242844 /* MyLocation.m */,
 				BD5C6E6719B7848E00342E4B /* SketchController.h */,
 				BD5C6E6819B7848E00342E4B /* SketchController.m */,
 				BD5FD9CD1A4A07FC003CC565 /* AddEntryController.h */,
@@ -402,19 +377,14 @@
 				BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */,
 				BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */,
 				BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */,
-				BD4BFF0919ABC9B300242844 /* Entry.m in Sources */,
-				BD7D734219A3ED1D0034E504 /* SingleEntryViewController.m in Sources */,
 				BD5FD9D51A4BBA9B003CC565 /* textEntryController.m in Sources */,
 				BDBEB5451A607F5C00780EC2 /* MagneticDecController.m in Sources */,
 				BD08A1A119A26BE400EE1B97 /* MapController.m in Sources */,
 				BD91990C1A573410006E48E1 /* CameraController.m in Sources */,
-				BD3FB97F19A2D5EA002496CE /* EntryController.m in Sources */,
 				BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */,
 				BD3FB96919A278DE002496CE /* ExportController.m in Sources */,
-				BD4BFF0619ABC92600242844 /* UserEntryDatabase.m in Sources */,
 				BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */,
 				BDE248A41A4DEEA500B1F97D /* LocationAndWeatherController.m in Sources */,
-				BD4BFF0C19AFCC9900242844 /* MyLocation.m in Sources */,
 				BD5FD9CF1A4A07FC003CC565 /* AddEntryController.m in Sources */,
 				BD08A19719A26BE400EE1B97 /* main.m in Sources */,
 				BD5FD9D21A4BA2F5003CC565 /* datepickerController.m in Sources */,

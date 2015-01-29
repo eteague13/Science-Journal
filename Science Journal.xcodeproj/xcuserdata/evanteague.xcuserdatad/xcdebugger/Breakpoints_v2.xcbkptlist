@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Science Journal/MapController.m"
-            timestampString = "442358307.662327"
+            timestampString = "444192040.498554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "-mapViewWillStartLoadingMap:"
             landmarkType = "5">
          </BreakpointContent>

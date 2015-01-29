@@ -7,7 +7,7 @@
 //
 
 #import "SketchController.h"
-#import "EntryController.h"
+
 
 
 @interface SketchController ()

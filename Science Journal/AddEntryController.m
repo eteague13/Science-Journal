@@ -7,7 +7,6 @@
 //
 
 #import "AddEntryController.h"
-#import "Entry.h"
 #import "datepickerController.h"
 #import "textEntryController.h"
 #import "LocationAndWeatherController.h"
@@ -132,6 +131,7 @@
     if(self.recordIDToEdit == -1){
         queryBasic = [NSString stringWithFormat:@"insert into entriesBasic values(null, '%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@', '%@')",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners];
         queryGeology = [NSString stringWithFormat:@"insert into entriesGeology values(null, '%@', '%@','%@','%@','%@','%@')",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum];
+        NSLog(@"Stop number in query: %@", _stopNum);
     }else{
         queryBasic = [NSString stringWithFormat:@"update entriesBasic set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', picture='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@' where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, self.recordIDToEdit];
         queryGeology = [NSString stringWithFormat:@"update entriesGeology set outcrop='%@', structuralData='%@',magneticValue1='%@',magneticValue2='%@',magneticType='%@',stopNum='%@' where entriesID=%d",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum, self.recordIDToEdit];
@@ -139,15 +139,26 @@
     
         
 
-        [self.dbManager executeQuery:queryBasic];
+    [self.dbManager executeQuery:queryBasic];
 
-        if (self.dbManager.affectedRows != 0) {
-            NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
-        }
-        else{
-            NSLog(@"Could not execute the query.");
-        }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.dbManager.affectedRows != 0) {
+        NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
+    }
+    else{
+        NSLog(@"Could not execute the query.");
+    }
+    
+    [self.dbManager executeQuery:queryGeology];
+    
+    if (self.dbManager.affectedRows != 0) {
+        NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
+    }
+    else{
+        NSLog(@"Could not execute the query.");
+    }
+    
+    [self.delegate AddEntryControllerDidSave:self];
+    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)datepickerControllerCancel:(datepickerController *) controller {
@@ -164,7 +175,7 @@
 - (void)textEntryControllerCancel:(textEntryController *) controller{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-//Need to figure out how this relates to the SQLite database
+
 - (void)textEntryControllerSave:(textEntryController *)controller didSaveText:(NSString*) text rowSelected:(int)row sectionSelected:(int)section{
     
     if (section == 0){
@@ -177,6 +188,9 @@
                 break;
             case 8:
                 _permissions = text;
+                break;
+            case 10:
+                _partners = text;
                 break;
             default:
                 NSLog(@"Default");
@@ -223,6 +237,7 @@
         textController.delegate = self;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         int rowSelected = (int)indexPath.row;
+        NSLog(@"row selected: %d", rowSelected);
         int sectionSelected = (int)indexPath.section;
         [textController updateRowSelected:rowSelected updateSectionSelected:sectionSelected];
         
@@ -236,6 +251,9 @@
                     break;
                 case 8:
                     [textController setTextValue:_permissions];
+                    break;
+                case 10:
+                    [textController setTextValue:_partners];
                     break;
                 default:
                     NSLog(@"Default");
@@ -340,11 +358,10 @@
 -(void)loadInfoToEdit{
     
     
-    NSString *queryBasic = [NSString stringWithFormat:@"select * from entriesBasic where entriesID = %d", self.recordIDToEdit];
-    NSLog(@"Query: %@", queryBasic);
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where entriesBasic.entriesID = %d", self.recordIDToEdit];
     
    
-    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:queryBasic]];
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     NSLog(@"results in info edit: %@", results);
     _name = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"name"]];
 
@@ -358,6 +375,7 @@
     _permissions = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"permissions"]];
     _sampleNum = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sampleNum"]];
     _notes = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"notes"]];
+    _partners = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"partners"]];
     NSString *pictureFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"picture"]];
     _picture = [UIImage imageWithContentsOfFile:pictureFilePath];
     NSString *sketchFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]];
@@ -369,18 +387,18 @@
     _sampleNumberField.text = _sampleNum;
     _stopNumField.text = _stopNum;
     
-    //Not loading geology stuff yet
-    NSString *queryGeology = [NSString stringWithFormat:@"select * from entriesGeology where entriesID = %d", self.recordIDToEdit];
-    NSArray *resultsGeology = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:queryGeology]];
-    _outcrop = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"outcrop"]];
-    _structuralData = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"structuralData"]];
-    _magneticValue1 = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticValue1"]];
-    _magneticValue2 = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticValue2"]];
-    _magneticType = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticType"]];
-    _stopNum = [[resultsGeology objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"stopNum"]];
+    _outcrop = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"outcrop"]];
+    _structuralData = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"structuralData"]];
+    _magneticValue1 = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticValue1"]];
+    _magneticValue2 = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticValue2"]];
+    _magneticType = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticType"]];
+    _stopNum = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"stopNum"]];
     _stopNumField.text = _stopNum;
     
+    
 }
+
+
 
 
 @end

@@ -17,13 +17,12 @@
 
 @implementation MapController
 @synthesize mapView;
-@synthesize database = _database;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _database = [UserEntryDatabase userEntryDatabase];
     mapView.delegate = self;
     mapView.showsUserLocation = YES;
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
     
     
     
@@ -60,6 +59,24 @@
 
 - (void)mapViewWillStartLoadingMap:(MKMapView *)mapView{
     CLLocationCoordinate2D coordinate;
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
+    
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSString *name, *projectName, *latitude, *longitude;
+    for (id entry in results) {
+        name = [entry objectAtIndex:1];
+        projectName = [entry objectAtIndex:2];
+        latitude = [entry objectAtIndex:5];
+        longitude = [entry objectAtIndex:6];
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+        coordinate.latitude = [latitude doubleValue];
+        coordinate.longitude = [longitude doubleValue];
+        point.coordinate = coordinate;
+        point.title = name;
+        point.subtitle = projectName;
+        [self.mapView addAnnotation:point];
+    }
+    /*
     for (int i = 0; i < _database.entries.count; i++){
         Entry *tempEntry = _database.entries[i];
         MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
@@ -70,6 +87,7 @@
         point.subtitle = tempEntry.projectName;
         [self.mapView addAnnotation:point];
     }
+     */
     
     
 }
@@ -121,17 +139,23 @@
     if ([segue.identifier isEqualToString:@"annotationDetail"])
     {
 
+        NSLog(@"In segue");
+        NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
         
+        NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
         
         UINavigationController *navigationController = segue.destinationViewController;
         AddEntryController *annotationView = [navigationController viewControllers][0];
         annotationView.delegate = self;
         [annotationView setEditEntry:true];
-        for (int i = 0; i < _database.entries.count; i++){
-            Entry *tempEntry = _database.entries[i];
-            if (tempEntry.name == _selectedAnnotationName){
-                annotationView.associatedEntry = tempEntry;
-            }
+        
+        NSString *name, *identifier;
+         for (id entry in results) {
+             name = [entry objectAtIndex:1];
+             identifier = [entry objectAtIndex:0];
+             if ([name isEqualToString:_selectedAnnotationName]){
+                annotationView.recordIDToEdit = [identifier intValue];
+             }
         }
 
         
@@ -144,8 +168,7 @@
 }
 
 
-- (void)AddEntryController:(AddEntryController *)controller didUpdateEntry:(Entry *)entry{
-    [_database updateEntry:entry];
+- (void)AddEntryControllerDidSave:(AddEntryController *)controller{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)zoomCurrentLocation:(id)sender {

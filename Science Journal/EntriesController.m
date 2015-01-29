@@ -8,9 +8,6 @@
 
 #import "EntriesController.h"
 #import "EntriesCell.h"
-#import "SingleEntryViewController.h"
-#import "Entry.h"
-#import "EntryController.h"
 #import "DBManager.h"
 
 
@@ -71,7 +68,7 @@
 {
 
     //Get all the entries from the database and count them
-    NSString *query = @"select * from entriesBasic";
+      NSString *query = @"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID";
     _allEntriesFromDB = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     return _allEntriesFromDB.count;
 
@@ -145,7 +142,9 @@
         NSString *query = [NSString stringWithFormat:@"delete from entriesBasic where entriesID=%d", recordIDToDelete];
 
         [self.dbManager executeQuery:query];
-
+        
+        NSString *queryGeology = [NSString stringWithFormat:@"delete from entriesGeology where entriesID=%d", recordIDToDelete];
+        [self.dbManager executeQuery:queryGeology];
         [tableView reloadData];
     }
 }
@@ -163,7 +162,7 @@
 }
 
 //Delegate method that is called when entry in the AddEntryController is saved
-- (void)AddEntryController:(AddEntryController *)controller didSaveEntry:(Entry *)entry
+- (void)AddEntryControllerDidSave:(AddEntryController *)controller;
 {
     [self loadData];
     [self.tableView reloadData];
@@ -175,7 +174,7 @@
 //Used to refresh the loaded data from the database
 -(void)loadData{
 
-    NSString *query = @"select * from entriesBasic";
+    NSString *query = @"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID";
     
     if (self.allEntriesFromDB != nil) {
         self.allEntriesFromDB = nil;

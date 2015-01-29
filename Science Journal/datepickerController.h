@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Entry.h"
+
 
 @class datepickerController;
 @protocol datepickerControllerDelegate <NSObject>

@@ -28,6 +28,8 @@
             case 8:
                 _textEntryLabel.text = @"Permissions and Access";
                 break;
+            case 10:
+                _textEntryLabel.text = @"Partners";
             default:
                 NSLog(@"Default");
                 break;

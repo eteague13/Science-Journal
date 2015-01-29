@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <DropboxSDK/DropboxSDK.h>
+#import "DBManager.h"
 
 
 

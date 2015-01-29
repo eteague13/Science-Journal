@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UserEntryDatabase.h"
 #import "datepickerController.h"
 #import "LocationAndWeatherController.h"
 #import "SketchController.h"
 #import "CameraController.h"
-#import "Entry.h"
 #import "MagneticDecController.h"
 #import "DBManager.h"
 
@@ -20,7 +18,7 @@
 @class AddEntryController;
 @protocol AddEntryControllerDelegate <NSObject>
 - (void)AddEntryControllerDidCancel:(AddEntryController *) controller;
-- (void)AddEntryController:(AddEntryController *)controller didSaveEntry:(Entry *)entry;
+- (void)AddEntryControllerDidSave:(AddEntryController *) controller;
 
 @end
 
@@ -49,10 +47,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *projectNameField;
 @property (weak, nonatomic) IBOutlet UITextField *sampleNumberField;
 
-@property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *magnet, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType;
+@property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType;
 @property (strong, nonatomic) UIImage *sketch;
 @property (strong, nonatomic) UIImage *picture;
-@property (strong, nonatomic) Entry *associatedEntry;
 
 -(void)setEditEntry:(BOOL)value;
 @property (weak, nonatomic) IBOutlet UITableViewCell *geoMagneticCell;
@@ -60,5 +57,6 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *geoOutcropCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *geoStructCell;
 @property (weak, nonatomic) IBOutlet UITextField *stopNumField;
+
 
 @end

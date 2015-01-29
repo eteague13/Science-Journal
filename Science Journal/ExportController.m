@@ -8,6 +8,7 @@
 
 #import "ExportController.h"
 #import <DropboxSDK/DropboxSDK.h>
+#import "DBManager.h"
 
 @interface ExportController ()
 
@@ -15,7 +16,6 @@
 
 
 @implementation ExportController
-@synthesize database = _database;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -23,14 +23,15 @@
         // Custom initialization
     }
     return self;
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _database = [UserEntryDatabase userEntryDatabase];
     self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
     self.restClient.delegate = self;
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
     // Do any additional setup after loading the view.
 }
 
@@ -52,18 +53,56 @@
 */
 
 - (IBAction)exportGooglEarth:(id)sender {
-    NSDate *today = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd/MM/yyyy 'at' HH:mm"];
-    NSString *dateString = [dateFormat stringFromDate:today];
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
     
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+
+    
+    NSString *identifer, *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType;
+    UIImage *sketch;
+    UIImage *picture;
     NSMutableString *printString = [[NSMutableString alloc] init];
     
     [printString appendFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n\t<Folder>"];
-    
+    [printString appendFormat:@"\n\t<name>All Entries</name>"];
+    for (id entry in results) {
+        identifer = [entry objectAtIndex:0];
+        name = [entry objectAtIndex:1];
+        projectName = [entry objectAtIndex:2];
+        date = [entry objectAtIndex:3];
+        goal = [entry objectAtIndex:4];
+        latitude = [entry objectAtIndex:5];
+        longitude = [entry objectAtIndex:6];
+        weather = [entry objectAtIndex:7];
+        sketch = [entry objectAtIndex:8];
+        picture = [entry objectAtIndex:9];
+        notes = [entry objectAtIndex:10];
+        permissions = [entry objectAtIndex:11];
+        sampleNum = [entry objectAtIndex:12];
+        partners = [entry objectAtIndex:13];
+        //Have to skip one because it also gets the entriesID from entriesGeology DB
+        outcrop = [entry objectAtIndex:15];
+        structuralData = [entry objectAtIndex:16];
+        magneticValue1 = [entry objectAtIndex:17];
+        magneticValue2 = [entry objectAtIndex:18];
+        magneticType = [entry objectAtIndex:19];
+        stopNum = [entry objectAtIndex:20];
+        
+        
+        [printString appendString:@"\n\t<Placemark>"];
+        [printString appendFormat:@"\n\t<name>Entry name: %@</name>", name];
+        [printString appendFormat:@"\n\t\t<description>Date: %@\nProject Name: %@\nGoal: %@\nWeather: \n%@\nMagnetic Declination 1: %@\nMagnetic Declination 2: %@\nMagnetic Type: %@\nPartners %@\nPermissions: %@\nOutcrop Description: %@\nStructural Data: %@\nSample Number: %@\nNotes: %@\nStop Number: %@</description>", date, projectName, goal, weather, magneticValue1, magneticValue2, magneticType, partners, permissions, outcrop, structuralData, sampleNum, notes, stopNum];
+        [printString appendString:@"\n\t\t<Point>"];
+        [printString appendFormat:@"\n\t\t<coordinates>%@, %@, 0</coordinates>", longitude, latitude];
+        [printString appendString:@"\n\t\t</Point>"];
+        [printString appendString:@"\n\t</Placemark>"];
+        
+        
+    }
+    /*
     for (int i = 0; i < _database.entries.count; i++){
         Entry *tempEntry = _database.entries[i];
-        [printString appendFormat:@"\n\t<name>All Entries</name>", tempEntry.name];
+        [printString appendFormat:@"\n\t<name>All Entries</name>"];
         [printString appendString:@"\n\t<Placemark>"];
         [printString appendFormat:@"\n\t<name>Entry name: %@</name>", tempEntry.name];
         [printString appendFormat:@"\n\t\t<description>Date: %@\nProject Name: %@\nGoal: %@\nWeather: \n%@\nMagnetic Declination: %@\nPartners %@\nPermissions: %@\nOutcrop Description: %@\nStructural Data: %@\nSample Number: %@\nNotes: %@</description>", dateString, tempEntry.projectName, tempEntry.goal, tempEntry.weather, tempEntry.magnet, tempEntry.partners, tempEntry.permissions, tempEntry.outcrop, tempEntry.structuralData, tempEntry.sampleNum, tempEntry.notes];
@@ -72,6 +111,7 @@
         [printString appendString:@"\n\t\t</Point>"];
         [printString appendString:@"\n\t</Placemark>"];
     }
+     */
     
     [printString appendString:@"\n\t</Folder>\n</kml>"];
     
@@ -93,6 +133,20 @@
                     encoding:NSUTF8StringEncoding error:&error];
     
     NSLog(@"%@", filePath);
+    
+    //Email the entry
+    //Doesn't work on the simulator, but should on phone
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    // Determine the MIME type
+    NSString *mimeType = @"text/plain";
+    //This one may be the one that works...have to wait and see
+    //NSString *mimeType = @"application/vnd.google-earth.kml+xml";
+    // Add attachment
+    [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
     
 }
 - (IBAction)syncDropbox:(id)sender {
@@ -141,4 +195,29 @@
 loadMetadataFailedWithError:(NSError *)error {
     NSLog(@"Error loading metadata: %@", error);
 }
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 @end
