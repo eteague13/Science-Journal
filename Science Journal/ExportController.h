@@ -11,10 +11,13 @@
 #import "DBManager.h"
 #import <MessageUI/MessageUI.h>
 
-@interface ExportController : UIViewController <DBRestClientDelegate, MFMailComposeViewControllerDelegate>
+@interface ExportController : UIViewController <DBRestClientDelegate, MFMailComposeViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
+    NSMutableArray *pickerData;
+}
 - (IBAction)exportGooglEarth:(id)sender;
-@property (nonatomic, strong) DBRestClient *restClient;
-- (IBAction)syncDropbox:(id)sender;
+//@property (nonatomic, strong) DBRestClient *restClient;
+//- (IBAction)syncDropbox:(id)sender;
 @property (nonatomic, strong) DBManager *dbManager;
+@property (weak, nonatomic) IBOutlet UIPickerView *projectPicker;
 
 @end

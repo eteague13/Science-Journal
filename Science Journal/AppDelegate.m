@@ -21,6 +21,8 @@
                             appSecret:APP_SECRET
                             root:kDBRootAppFolder]; 
     [DBSession setSharedSession:dbSession];
+    
+
     return YES;
 }
 							

@@ -29,9 +29,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-    self.restClient.delegate = self;
+    //self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+    //self.restClient.delegate = self;
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
+    
+    pickerData = [[NSMutableArray alloc] init];
+    NSString *query = [NSString stringWithFormat:@"select projectName from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
+    
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    for (id name in results){
+        NSLog(@"%@", [name objectAtIndex:0]);
+        [pickerData addObject:[name objectAtIndex:0]];
+    }
+    NSLog(@"picker data: %@", pickerData);
+    
+    self.projectPicker.delegate = self;
+    self.projectPicker.dataSource = self;
     // Do any additional setup after loading the view.
 }
 
@@ -149,6 +162,7 @@
     [self presentViewController:mc animated:YES completion:NULL];
     
 }
+/*
 - (IBAction)syncDropbox:(id)sender {
     NSLog(@"IN DROPBOX");
     
@@ -195,6 +209,7 @@
 loadMetadataFailedWithError:(NSError *)error {
     NSLog(@"Error loading metadata: %@", error);
 }
+ */
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
@@ -218,6 +233,31 @@ loadMetadataFailedWithError:(NSError *)error {
     
     // Close the Mail Interface
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+// The number of columns of data
+- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// The number of rows of data
+- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return pickerData.count;
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return pickerData[row];
+}
+
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    //Next need to add the ability to email based on project
+    NSLog(@"row: %ld, component: %ld", (long)row, (long)component);
 }
 
 @end
