@@ -49,7 +49,7 @@
     if ([textArea length] != 0){
         _textField.text = textArea;
     }
-    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     // Do any additional setup after loading the view.
 }
 

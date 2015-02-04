@@ -30,6 +30,7 @@
         _weatherField.text = weatherArea;
     }
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
 }
 
 - (void)didReceiveMemoryWarning {

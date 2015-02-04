@@ -23,6 +23,7 @@
     mapView.delegate = self;
     mapView.showsUserLocation = YES;
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
     
     
@@ -45,6 +46,7 @@
     
     // 3
     [mapView setRegion:viewRegion animated:YES];
+    
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation

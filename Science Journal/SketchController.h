@@ -12,7 +12,7 @@
 - (void)sketchControllerCancel:(SketchController *) controller;
 - (void)sketchControllerSave:(SketchController *)controller didFinishSketch:(UIImage *)item;
 @end
-@interface SketchController : UIViewController {
+@interface SketchController : UIViewController <UIActionSheetDelegate> {
     CGPoint lastPoint;
     CGFloat red;
     CGFloat green;
@@ -33,6 +33,7 @@
 - (IBAction)cancelSketchButton:(id)sender;
 - (void)setSketch:(UIImage*)item;
 @property (nonatomic, weak) id <SketchControllerDelegate> delegate;
+- (IBAction)selectColor:(id)sender;
 
 
 @end

@@ -22,6 +22,7 @@
                             root:kDBRootAppFolder]; 
     [DBSession setSharedSession:dbSession];
     
+    
 
     return YES;
 }

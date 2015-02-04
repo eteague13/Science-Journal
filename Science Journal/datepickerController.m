@@ -26,6 +26,7 @@
         _dateDisplay.text = dateValue;
         NSLog(@"Inside date");
     }
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     NSLog(@"Outside date");
     // Do any additional setup after loading the view.
 }

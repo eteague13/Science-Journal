@@ -62,6 +62,9 @@
         _geoStructCell.hidden = YES;
     }
     
+//self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //self.tableView.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+[self.tableView setSeparatorColor:[UIColor blackColor]];
 
     
 }
@@ -398,7 +401,11 @@
     
 }
 
-
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    
+}
 
 
 @end

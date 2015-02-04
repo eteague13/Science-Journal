@@ -44,6 +44,8 @@
     
     
 
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    [self.tableView setSeparatorColor:[UIColor blackColor]];
     
     NSLog(@"%@", filePath);
     
@@ -85,6 +87,11 @@
     
     NSInteger indexOfEntryName = [self.dbManager.arrColumnNames indexOfObject:@"name"];
     cell.entryNameLabel.text = [NSString stringWithFormat:@"%@", [[self.allEntriesFromDB objectAtIndex:indexPath.row] objectAtIndex:indexOfEntryName]];
+    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //[cell.contentView.layer setBorderColor:[UIColor blackColor].CGColor];
+    //[cell.contentView.layer setBorderWidth:2.0f];
+    UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_arrow.png"]];
+    cell.accessoryView = arrow;
     
     
     return cell;

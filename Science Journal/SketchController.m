@@ -39,6 +39,7 @@
     
     //http://www.raywenderlich.com/18840/how-to-make-a-simple-drawing-app-with-uikit
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,70 +59,8 @@
 }
 */
 
-- (IBAction)pencilSelected:(id)sender{
-    NSLog(@"TEST");
-    UIButton * button = (UIButton*)sender;
-    switch(button.tag)
-    {
-        case 0:
-            red = 0.0/255.0;
-            green = 0.0/255.0;
-            blue = 0.0/255.0;
-            break;
-        case 1:
-            red = 105.0/255.0;
-            green = 105.0/255.0;
-            blue = 105.0/255.0;
-            break;
-        case 2:
-            red = 255.0/255.0;
-            green = 0.0/255.0;
-            blue = 0.0/255.0;
-            break;
-        case 3:
-            red = 0.0/255.0;
-            green = 0.0/255.0;
-            blue = 255.0/255.0;
-            break;
-        case 4:
-            red = 102.0/255.0;
-            green = 204.0/255.0;
-            blue = 0.0/255.0;
-            break;
-        case 5:
-            red = 102.0/255.0;
-            green = 255.0/255.0;
-            blue = 0.0/255.0;
-            break;
-        case 6:
-            red = 51.0/255.0;
-            green = 204.0/255.0;
-            blue = 255.0/255.0;
-            break;
-        case 7:
-            red = 160.0/255.0;
-            green = 82.0/255.0;
-            blue = 45.0/255.0;
-            break;
-        case 8:
-            red = 255.0/255.0;
-            green = 102.0/255.0;
-            blue = 0.0/255.0;
-            break;
-        case 9:
-            red = 255.0/255.0;
-            green = 255.0/255.0;
-            blue = 0.0/255.0;
-            break;
 
-    }
-}
-- (IBAction)eraserSelected:(id)sender {
-    red = 255.0/255.0;
-    green = 255.0/255.0;
-    blue = 255.0/255.0;
-    opacity = 1.0;
-}
+
 
 - (IBAction)saveSelected:(id)sender {
     
@@ -209,5 +148,68 @@
     self.saveImage.image = UIGraphicsGetImageFromCurrentImageContext();
     self.drawImage.image = nil;
     UIGraphicsEndImageContext();
+}
+- (IBAction)selectColor:(id)sender {
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Pick brush:"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Black", @"Grey", @"Red", @"Blue", @"Green", @"Light Blue", @"Brown", @"Yellow", @"Eraser", nil];
+    
+    [actionSheet showInView:self.view];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch(buttonIndex)
+    {
+        case 0: //Black
+            red = 0.0/255.0;
+            green = 0.0/255.0;
+            blue = 0.0/255.0;
+            break;
+        case 1: //Grey
+            red = 105.0/255.0;
+            green = 105.0/255.0;
+            blue = 105.0/255.0;
+            break;
+        case 2: //Red
+            red = 255.0/255.0;
+            green = 0.0/255.0;
+            blue = 0.0/255.0;
+            break;
+        case 3: //Blue
+            red = 0.0/255.0;
+            green = 0.0/255.0;
+            blue = 255.0/255.0;
+            break;
+        case 4: //Green
+            red = 0.0/255.0;
+            green = 255.0/255.0;
+            blue = 0.0/255.0;
+            break;
+        case 5: //Light Blue
+            red = 51.0/255.0;
+            green = 204.0/255.0;
+            blue = 255.0/255.0;
+            break;
+        case 6: //Brown
+            red = 160.0/255.0;
+            green = 82.0/255.0;
+            blue = 45.0/255.0;
+            break;
+        case 7: //Yellow
+            red = 255.0/255.0;
+            green = 255.0/255.0;
+            blue = 0.0/255.0;
+            break;
+        case 8: //Eraser
+            red = 255.0/255.0;
+            green = 255.0/255.0;
+            blue = 255.0/255.0;
+            opacity = 1.0;
+            break;
+    }
+   
 }
 @end
