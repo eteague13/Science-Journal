@@ -13,6 +13,8 @@
 		BD02064B19EC64D2005ACDD0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064A19EC64D2005ACDD0 /* QuartzCore.framework */; };
 		BD02064D19EC64E4005ACDD0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064C19EC64E4005ACDD0 /* libc++.dylib */; };
 		BD02064F19EC64ED005ACDD0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064E19EC64ED005ACDD0 /* libz.dylib */; };
+		BD083A0B1A82A0B500E5864B /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD083A091A82A0B500E5864B /* Dropbox.framework */; };
+		BD083A0C1A82A0B500E5864B /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD083A0A1A82A0B500E5864B /* DropboxSDK.framework */; };
 		BD08A18B19A26BE400EE1B97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18A19A26BE400EE1B97 /* Foundation.framework */; };
 		BD08A18D19A26BE400EE1B97 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18C19A26BE400EE1B97 /* CoreGraphics.framework */; };
 		BD08A18F19A26BE400EE1B97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18E19A26BE400EE1B97 /* UIKit.framework */; };
@@ -31,8 +33,6 @@
 		BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96B19A278F1002496CE /* SettingsController.m */; };
 		BD3FB97019A2C314002496CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3FB96F19A2C314002496CE /* MapKit.framework */; };
 		BD4C60A91A78702300BE192F /* entriesdb.sql in Resources */ = {isa = PBXBuildFile; fileRef = BD4C60A81A78702300BE192F /* entriesdb.sql */; };
-		BD5C43831A81D14000EA0CF2 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C43811A81D02300EA0CF2 /* Dropbox.framework */; };
-		BD5C43841A81D15B00EA0CF2 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8CCC51A44B3BD0013CAB9 /* DropboxSDK.framework */; };
 		BD5C6E6619B681D100342E4B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C6E6519B681D100342E4B /* CoreLocation.framework */; };
 		BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C6E6819B7848E00342E4B /* SketchController.m */; };
 		BD5FD9CF1A4A07FC003CC565 /* AddEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9CE1A4A07FC003CC565 /* AddEntryController.m */; };
@@ -74,6 +74,8 @@
 		BD02064A19EC64D2005ACDD0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BD02064C19EC64E4005ACDD0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		BD02064E19EC64ED005ACDD0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		BD083A091A82A0B500E5864B /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = ../../Desktop/Dropbox.framework; sourceTree = "<group>"; };
+		BD083A0A1A82A0B500E5864B /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = ../../Desktop/DropboxSDK.framework; sourceTree = "<group>"; };
 		BD08A18719A26BE400EE1B97 /* Science Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Science Journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD08A18A19A26BE400EE1B97 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BD08A18C19A26BE400EE1B97 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -141,8 +143,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD5C43841A81D15B00EA0CF2 /* DropboxSDK.framework in Frameworks */,
-				BD5C43831A81D14000EA0CF2 /* Dropbox.framework in Frameworks */,
+				BD083A0B1A82A0B500E5864B /* Dropbox.framework in Frameworks */,
+				BD083A0C1A82A0B500E5864B /* DropboxSDK.framework in Frameworks */,
 				BDC8358A1A674E46000B60BD /* libsqlite3.dylib in Frameworks */,
 				BDFF53BE1A4226C10054B4FA /* MessageUI.framework in Frameworks */,
 				BD02064F19EC64ED005ACDD0 /* libz.dylib in Frameworks */,
@@ -195,6 +197,8 @@
 		BD08A18919A26BE400EE1B97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD083A091A82A0B500E5864B /* Dropbox.framework */,
+				BD083A0A1A82A0B500E5864B /* DropboxSDK.framework */,
 				BD5C43811A81D02300EA0CF2 /* Dropbox.framework */,
 				BDC835891A674E46000B60BD /* libsqlite3.dylib */,
 				BDE8CCC51A44B3BD0013CAB9 /* DropboxSDK.framework */,
@@ -544,6 +548,7 @@
 					"/Users/evanteague/Downloads/dropbox-ios-sync-sdk-3.1-2.1",
 					"/Users/evanteague/Downloads/dropbox-ios-sdk-1.3-3.13",
 					"/Users/evanteague/Downloads/dropbox-ios-sync-sdk-3.1-2.2",
+					/Users/evanteague/Desktop,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Science Journal/Science Journal-Prefix.pch";
@@ -564,6 +569,7 @@
 					"/Users/evanteague/Downloads/dropbox-ios-sync-sdk-3.1-2.1",
 					"/Users/evanteague/Downloads/dropbox-ios-sdk-1.3-3.13",
 					"/Users/evanteague/Downloads/dropbox-ios-sync-sdk-3.1-2.2",
+					/Users/evanteague/Desktop,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Science Journal/Science Journal-Prefix.pch";

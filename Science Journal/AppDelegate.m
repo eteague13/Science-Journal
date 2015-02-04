@@ -7,21 +7,12 @@
 //
 
 #import "AppDelegate.h"
-#import <DropboxSDK/DropboxSDK.h>
 
-#define APP_KEY     @"lnjcjw176x21dgt"
-#define APP_SECRET  @"4ffgvy2jgg9iuzn"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    DBSession *dbSession = [[DBSession alloc]
-                            initWithAppKey:APP_KEY
-                            appSecret:APP_SECRET
-                            root:kDBRootAppFolder]; 
-    [DBSession setSharedSession:dbSession];
-    
     
 
     return YES;
@@ -54,18 +45,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
-  sourceApplication:(NSString *)source annotation:(id)annotation {
-    if ([[DBSession sharedSession] handleOpenURL:url]) {
-        if ([[DBSession sharedSession] isLinked]) {
-            NSLog(@"App linked successfully!");
-            // At this point you can start making API calls
-        }
-        return YES;
-    }
-    // Add whatever other url handling code your app requires here
-    return NO;
-}
+
 
 
 @end

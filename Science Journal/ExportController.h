@@ -7,18 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <DropboxSDK/DropboxSDK.h>
 #import "DBManager.h"
 #import <MessageUI/MessageUI.h>
 
-//@interface ExportController : UIViewController <DBRestClientDelegate, MFMailComposeViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 @interface ExportController : UIViewController <MFMailComposeViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     NSMutableArray *pickerData;
     NSString *selectedProject;
 }
 - (IBAction)exportGooglEarth:(id)sender;
-//@property (nonatomic, strong) DBRestClient *restClient;
-//- (IBAction)syncDropbox:(id)sender;
+
 @property (nonatomic, strong) DBManager *dbManager;
 @property (weak, nonatomic) IBOutlet UIPickerView *projectPicker;
 - (IBAction)emailProject:(id)sender;

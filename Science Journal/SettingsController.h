@@ -7,15 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <DropboxSDK/DropboxSDK.h>
+
 #import "DBManager.h"
 
 
 
-@interface SettingsController : UIViewController <DBRestClientDelegate, UIScrollViewDelegate>
+@interface SettingsController : UIViewController <UIScrollViewDelegate>
 
-@property (nonatomic, strong) DBRestClient *restClient;
-- (IBAction)syncDropbox:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 @property (weak, nonatomic) IBOutlet UISwitch *geoMagDecSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *geoStopNumSwitch;
