@@ -11,7 +11,8 @@
 #import "DBManager.h"
 #import <MessageUI/MessageUI.h>
 
-@interface ExportController : UIViewController <DBRestClientDelegate, MFMailComposeViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
+//@interface ExportController : UIViewController <DBRestClientDelegate, MFMailComposeViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface ExportController : UIViewController <MFMailComposeViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     NSMutableArray *pickerData;
     NSString *selectedProject;
 }

@@ -31,6 +31,8 @@
 		BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96B19A278F1002496CE /* SettingsController.m */; };
 		BD3FB97019A2C314002496CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3FB96F19A2C314002496CE /* MapKit.framework */; };
 		BD4C60A91A78702300BE192F /* entriesdb.sql in Resources */ = {isa = PBXBuildFile; fileRef = BD4C60A81A78702300BE192F /* entriesdb.sql */; };
+		BD5C43831A81D14000EA0CF2 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C43811A81D02300EA0CF2 /* Dropbox.framework */; };
+		BD5C43841A81D15B00EA0CF2 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8CCC51A44B3BD0013CAB9 /* DropboxSDK.framework */; };
 		BD5C6E6619B681D100342E4B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C6E6519B681D100342E4B /* CoreLocation.framework */; };
 		BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C6E6819B7848E00342E4B /* SketchController.m */; };
 		BD5FD9CF1A4A07FC003CC565 /* AddEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9CE1A4A07FC003CC565 /* AddEntryController.m */; };
@@ -40,7 +42,6 @@
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
 		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
 		BD91990C1A573410006E48E1 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD91990B1A573410006E48E1 /* CameraController.m */; };
-		BDA0A73F1A00863100B421FB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA0A73E1A00863100B421FB /* Dropbox.framework */; };
 		BDBEB5451A607F5C00780EC2 /* MagneticDecController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBEB5441A607F5C00780EC2 /* MagneticDecController.m */; };
 		BDC4FEF21A81B2F60057A86D /* green_button.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC4FEF11A81B2F60057A86D /* green_button.png */; };
 		BDC4FEFE1A81B6DA0057A86D /* Sandcropped3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BDC4FEFB1A81B6DA0057A86D /* Sandcropped3.jpg */; };
@@ -52,7 +53,6 @@
 		BDC8358D1A675108000B60BD /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC8358C1A675108000B60BD /* DBManager.m */; };
 		BDD74CB81A64CFC100635CBA /* TablesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD74CB71A64CFC100635CBA /* TablesViewController.m */; };
 		BDE248A41A4DEEA500B1F97D /* LocationAndWeatherController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE248A31A4DEEA500B1F97D /* LocationAndWeatherController.m */; };
-		BDE8CCC61A44B3BD0013CAB9 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE8CCC51A44B3BD0013CAB9 /* DropboxSDK.framework */; };
 		BDFF53BE1A4226C10054B4FA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFF53BD1A4226C10054B4FA /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +99,7 @@
 		BD3FB96B19A278F1002496CE /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		BD3FB96F19A2C314002496CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		BD4C60A81A78702300BE192F /* entriesdb.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = entriesdb.sql; sourceTree = "<group>"; };
+		BD5C43811A81D02300EA0CF2 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "../../Downloads/dropbox-ios-sync-sdk-3.1-2.2/Dropbox.framework"; sourceTree = "<group>"; };
 		BD5C6E6519B681D100342E4B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BD5C6E6719B7848E00342E4B /* SketchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SketchController.h; sourceTree = "<group>"; };
 		BD5C6E6819B7848E00342E4B /* SketchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SketchController.m; sourceTree = "<group>"; };
@@ -140,10 +141,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD5C43841A81D15B00EA0CF2 /* DropboxSDK.framework in Frameworks */,
+				BD5C43831A81D14000EA0CF2 /* Dropbox.framework in Frameworks */,
 				BDC8358A1A674E46000B60BD /* libsqlite3.dylib in Frameworks */,
-				BDE8CCC61A44B3BD0013CAB9 /* DropboxSDK.framework in Frameworks */,
 				BDFF53BE1A4226C10054B4FA /* MessageUI.framework in Frameworks */,
-				BDA0A73F1A00863100B421FB /* Dropbox.framework in Frameworks */,
 				BD02064F19EC64ED005ACDD0 /* libz.dylib in Frameworks */,
 				BD02064D19EC64E4005ACDD0 /* libc++.dylib in Frameworks */,
 				BD02064B19EC64D2005ACDD0 /* QuartzCore.framework in Frameworks */,
@@ -194,6 +195,7 @@
 		BD08A18919A26BE400EE1B97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD5C43811A81D02300EA0CF2 /* Dropbox.framework */,
 				BDC835891A674E46000B60BD /* libsqlite3.dylib */,
 				BDE8CCC51A44B3BD0013CAB9 /* DropboxSDK.framework */,
 				BDFF53BD1A4226C10054B4FA /* MessageUI.framework */,
@@ -541,6 +543,7 @@
 					"$(PROJECT_DIR)",
 					"/Users/evanteague/Downloads/dropbox-ios-sync-sdk-3.1-2.1",
 					"/Users/evanteague/Downloads/dropbox-ios-sdk-1.3-3.13",
+					"/Users/evanteague/Downloads/dropbox-ios-sync-sdk-3.1-2.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Science Journal/Science Journal-Prefix.pch";
@@ -560,6 +563,7 @@
 					"$(PROJECT_DIR)",
 					"/Users/evanteague/Downloads/dropbox-ios-sync-sdk-3.1-2.1",
 					"/Users/evanteague/Downloads/dropbox-ios-sdk-1.3-3.13",
+					"/Users/evanteague/Downloads/dropbox-ios-sync-sdk-3.1-2.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Science Journal/Science Journal-Prefix.pch";
