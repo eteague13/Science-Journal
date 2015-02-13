@@ -129,38 +129,87 @@
     NSData *pictureData = UIImagePNGRepresentation(_picture);
     [pictureData writeToFile:savedPictureLocation atomically:NO];
     
+    if ([_date length] == 0){
+        _date = @"";
+    }
+    if ([_goal length] == 0){
+        _goal = @"";
+    }
+    if ([_latitude length] == 0){
+        _latitude = @"";
+    }
+    if ([_longitude length] == 0){
+        _longitude = @"";
+    }
+    if ([_weather length] == 0){
+        _weather = @"";
+    }
+    if ([_notes length] == 0){
+        _notes = @"";
+    }
+    if ([_permissions length] == 0){
+        _permissions = @"";
+    }
+    if ([_sampleNum length] == 0){
+        _sampleNum = @"";
+    }
+    if ([_partners length] == 0){
+        _partners = @"";
+    }
+    if ([_outcrop length] == 0){
+        _outcrop = @"";
+    }
+    if ([_structuralData length] == 0){
+        _structuralData = @"";
+    }
+    if ([_magneticValue1 length] == 0){
+        _magneticValue1 = @"";
+    }
+    if ([_magneticValue2 length] == 0){
+        _magneticValue2 = @"";
+    }
+    if ([_magneticType length] == 0){
+        _magneticType = @"";
+    }
+    if ([_stopNum length] == 0){
+        _stopNum = @"";
+    }
     NSString *queryBasic;
     NSString *queryGeology;
     if(self.recordIDToEdit == -1){
         queryBasic = [NSString stringWithFormat:@"insert into entriesBasic values(null, '%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@', '%@')",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners];
         queryGeology = [NSString stringWithFormat:@"insert into entriesGeology values(null, '%@', '%@','%@','%@','%@','%@')",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum];
-        NSLog(@"Stop number in query: %@", _stopNum);
     }else{
         queryBasic = [NSString stringWithFormat:@"update entriesBasic set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', picture='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@' where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, self.recordIDToEdit];
         queryGeology = [NSString stringWithFormat:@"update entriesGeology set outcrop='%@', structuralData='%@',magneticValue1='%@',magneticValue2='%@',magneticType='%@',stopNum='%@' where entriesID=%d",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum, self.recordIDToEdit];
     }
     
         
+    if ([_projectName length] == 0){
+        NSLog(@"Empty project name");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Entry Error" message: @"You need to add a Project Name" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }else{
+        [self.dbManager executeQuery:queryBasic];
 
-    [self.dbManager executeQuery:queryBasic];
-
-    if (self.dbManager.affectedRows != 0) {
-        NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
+        if (self.dbManager.affectedRows != 0) {
+            NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
     }
-    else{
-        NSLog(@"Could not execute the query.");
-    }
+        else{
+            NSLog(@"Could not execute the query.");
+        }
     
-    [self.dbManager executeQuery:queryGeology];
+        [self.dbManager executeQuery:queryGeology];
     
-    if (self.dbManager.affectedRows != 0) {
-        NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
-    }
-    else{
-        NSLog(@"Could not execute the query.");
-    }
+        if (self.dbManager.affectedRows != 0) {
+            NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
+        }
+        else{
+            NSLog(@"Could not execute the query.");
+        }
     
-    [self.delegate AddEntryControllerDidSave:self];
+        [self.delegate AddEntryControllerDidSave:self];
+    }
     //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -365,7 +414,7 @@
     
    
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    NSLog(@"results in info edit: %@", results);
+    //NSLog(@"results in info edit: %@", results);
     _name = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"name"]];
 
     _date = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"date"]];
@@ -404,8 +453,12 @@
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
         cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_arrow.png"]];
+    cell.accessoryView = arrow;
+    
     
 }
+
 
 
 @end

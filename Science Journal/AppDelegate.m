@@ -7,12 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "EntriesController.h"
 
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+
+
     
 
     return YES;

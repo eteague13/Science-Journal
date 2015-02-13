@@ -29,6 +29,10 @@
 		BD08A1AF19A26BE400EE1B97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18E19A26BE400EE1B97 /* UIKit.framework */; };
 		BD08A1B719A26BE400EE1B97 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD08A1B519A26BE400EE1B97 /* InfoPlist.strings */; };
 		BD08A1B919A26BE400EE1B97 /* Science_JournalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A1B819A26BE400EE1B97 /* Science_JournalTests.m */; };
+		BD3A30C71A87F18100202981 /* 58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3A30C41A87F18100202981 /* 58x58.png */; };
+		BD3A30C81A87F18100202981 /* 80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3A30C51A87F18100202981 /* 80x80.png */; };
+		BD3A30C91A87F18100202981 /* 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3A30C61A87F18100202981 /* 120x120.png */; };
+		BD3A30CB1A87F21C00202981 /* 180x180.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3A30CA1A87F21C00202981 /* 180x180.png */; };
 		BD3FB96919A278DE002496CE /* ExportController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96819A278DE002496CE /* ExportController.m */; };
 		BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96B19A278F1002496CE /* SettingsController.m */; };
 		BD3FB97019A2C314002496CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3FB96F19A2C314002496CE /* MapKit.framework */; };
@@ -51,7 +55,7 @@
 		BDC4FF041A81BFBC0057A86D /* right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC4FF031A81BFBC0057A86D /* right_arrow.png */; };
 		BDC8358A1A674E46000B60BD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC835891A674E46000B60BD /* libsqlite3.dylib */; };
 		BDC8358D1A675108000B60BD /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC8358C1A675108000B60BD /* DBManager.m */; };
-		BDD74CB81A64CFC100635CBA /* TablesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD74CB71A64CFC100635CBA /* TablesViewController.m */; };
+		BDD74CB81A64CFC100635CBA /* ReferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD74CB71A64CFC100635CBA /* ReferenceViewController.m */; };
 		BDE248A41A4DEEA500B1F97D /* LocationAndWeatherController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE248A31A4DEEA500B1F97D /* LocationAndWeatherController.m */; };
 		BDFF53BE1A4226C10054B4FA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFF53BD1A4226C10054B4FA /* MessageUI.framework */; };
 /* End PBXBuildFile section */
@@ -95,6 +99,10 @@
 		BD08A1B419A26BE400EE1B97 /* Science JournalTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Science JournalTests-Info.plist"; sourceTree = "<group>"; };
 		BD08A1B619A26BE400EE1B97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BD08A1B819A26BE400EE1B97 /* Science_JournalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Science_JournalTests.m; sourceTree = "<group>"; };
+		BD3A30C41A87F18100202981 /* 58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 58x58.png; sourceTree = "<group>"; };
+		BD3A30C51A87F18100202981 /* 80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 80x80.png; sourceTree = "<group>"; };
+		BD3A30C61A87F18100202981 /* 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120x120.png; sourceTree = "<group>"; };
+		BD3A30CA1A87F21C00202981 /* 180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 180x180.png; sourceTree = "<group>"; };
 		BD3FB96719A278DE002496CE /* ExportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportController.h; sourceTree = "<group>"; };
 		BD3FB96819A278DE002496CE /* ExportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BD3FB96A19A278F1002496CE /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
@@ -130,8 +138,8 @@
 		BDC835891A674E46000B60BD /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		BDC8358B1A675108000B60BD /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		BDC8358C1A675108000B60BD /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
-		BDD74CB61A64CFC100635CBA /* TablesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TablesViewController.h; sourceTree = "<group>"; };
-		BDD74CB71A64CFC100635CBA /* TablesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TablesViewController.m; sourceTree = "<group>"; };
+		BDD74CB61A64CFC100635CBA /* ReferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferenceViewController.h; sourceTree = "<group>"; };
+		BDD74CB71A64CFC100635CBA /* ReferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferenceViewController.m; sourceTree = "<group>"; };
 		BDE248A21A4DEEA500B1F97D /* LocationAndWeatherController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAndWeatherController.h; sourceTree = "<group>"; };
 		BDE248A31A4DEEA500B1F97D /* LocationAndWeatherController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAndWeatherController.m; sourceTree = "<group>"; };
 		BDE8CCC51A44B3BD0013CAB9 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "../../Downloads/dropbox-ios-sdk-1.3-3.13/DropboxSDK.framework"; sourceTree = "<group>"; };
@@ -255,8 +263,8 @@
 				BD91990B1A573410006E48E1 /* CameraController.m */,
 				BDBEB5431A607F5C00780EC2 /* MagneticDecController.h */,
 				BDBEB5441A607F5C00780EC2 /* MagneticDecController.m */,
-				BDD74CB61A64CFC100635CBA /* TablesViewController.h */,
-				BDD74CB71A64CFC100635CBA /* TablesViewController.m */,
+				BDD74CB61A64CFC100635CBA /* ReferenceViewController.h */,
+				BDD74CB71A64CFC100635CBA /* ReferenceViewController.m */,
 				BDC8358B1A675108000B60BD /* DBManager.h */,
 				BDC8358C1A675108000B60BD /* DBManager.m */,
 			);
@@ -266,6 +274,10 @@
 		BD08A19119A26BE400EE1B97 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BD3A30CA1A87F21C00202981 /* 180x180.png */,
+				BD3A30C41A87F18100202981 /* 58x58.png */,
+				BD3A30C51A87F18100202981 /* 80x80.png */,
+				BD3A30C61A87F18100202981 /* 120x120.png */,
 				BDC4FF031A81BFBC0057A86D /* right_arrow.png */,
 				BDC4FF011A81B9C30057A86D /* blue_button.png */,
 				BDC4FEFB1A81B6DA0057A86D /* Sandcropped3.jpg */,
@@ -374,13 +386,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD3A30C91A87F18100202981 /* 120x120.png in Resources */,
+				BD3A30C81A87F18100202981 /* 80x80.png in Resources */,
 				BDC4FF021A81B9C30057A86D /* blue_button.png in Resources */,
 				BDC4FEFF1A81B6DA0057A86D /* Sandcropped2.jpg in Resources */,
+				BD3A30CB1A87F21C00202981 /* 180x180.png in Resources */,
 				BD08A1A619A26BE400EE1B97 /* Images.xcassets in Resources */,
 				BDC4FEFE1A81B6DA0057A86D /* Sandcropped3.jpg in Resources */,
 				BDC4FF041A81BFBC0057A86D /* right_arrow.png in Resources */,
 				BDC4FF001A81B6DA0057A86D /* Sandcropped1.jpg in Resources */,
 				BD08A19519A26BE400EE1B97 /* InfoPlist.strings in Resources */,
+				BD3A30C71A87F18100202981 /* 58x58.png in Resources */,
 				BDC4FEF21A81B2F60057A86D /* green_button.png in Resources */,
 				BD08A19E19A26BE400EE1B97 /* Main.storyboard in Resources */,
 				BD4C60A91A78702300BE192F /* entriesdb.sql in Resources */,
@@ -403,7 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDC8358D1A675108000B60BD /* DBManager.m in Sources */,
-				BDD74CB81A64CFC100635CBA /* TablesViewController.m in Sources */,
+				BDD74CB81A64CFC100635CBA /* ReferenceViewController.m in Sources */,
 				BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */,
 				BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */,
 				BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */,

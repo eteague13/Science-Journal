@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Evan Teague. All rights reserved.
 //
 
-#import "TablesViewController.h"
+#import "ReferenceViewController.h"
 
-@interface TablesViewController ()
+@interface ReferenceViewController ()
 
 @end
 
-@implementation TablesViewController
+@implementation ReferenceViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -97,5 +97,14 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_arrow.png"]];
+    cell.accessoryView = arrow;
+    
+    
+}
 
 @end

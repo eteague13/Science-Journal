@@ -27,6 +27,7 @@
 @property (strong, nonatomic) NSMutableArray *allStructuralData;
 @property (strong, nonatomic) NSMutableArray *allSampleNums;
 @property (strong, nonatomic) NSMutableArray *allNotes;
+@property (strong, nonatomic) NSMutableDictionary *sections;
 
 
 @property (nonatomic, strong) DBManager *dbManager;

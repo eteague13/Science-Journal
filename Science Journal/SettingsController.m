@@ -30,7 +30,7 @@
 {
     [super viewDidLoad];
     [_scroller setScrollEnabled:YES];
-    [_scroller setContentSize:CGSizeMake(320, 1300)];
+    [_scroller setContentSize:CGSizeMake(320, 1500)];
     [self.view addSubview:_scroller];
 
     _geoMagDecSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoMagDec"];

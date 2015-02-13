@@ -10,6 +10,7 @@
 
 @interface EntriesCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *entryNameLabel;
+@property (nonatomic) int identifier;
 
 
 @end

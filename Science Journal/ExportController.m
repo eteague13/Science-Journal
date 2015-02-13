@@ -34,14 +34,23 @@
     NSString *query = [NSString stringWithFormat:@"select projectName from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
     
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    for (id name in results){
-        NSLog(@"%@", [name objectAtIndex:0]);
-        [pickerData addObject:[name objectAtIndex:0]];
-    }
-    NSLog(@"picker data: %@", pickerData);
+    if ([results count] != 0){
+        _projectPicker.hidden = NO;
+        for (id name in results){
+            NSLog(@"%@", [name objectAtIndex:0]);
+            if ([pickerData containsObject:[name objectAtIndex:0]]){
+                
+            }else{
+                [pickerData addObject:[name objectAtIndex:0]];
+            }
+        }
+        NSLog(@"picker data: %@", pickerData);
     
-    self.projectPicker.delegate = self;
-    self.projectPicker.dataSource = self;
+        self.projectPicker.delegate = self;
+        self.projectPicker.dataSource = self;
+    }else{
+        _projectPicker.hidden = YES;
+    }
     // Do any additional setup after loading the view.
    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     

@@ -47,7 +47,19 @@
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     [self.tableView setSeparatorColor:[UIColor blackColor]];
     
+    
     NSLog(@"%@", filePath);
+    /*
+    NSString *delete1 = @"delete from entriesBasic";
+    [self.dbManager executeQuery:delete1];
+    NSString *delete2 = @"delete from entriesGeology";
+    [self.dbManager executeQuery:delete2];
+     */
+    
+    [self loadData];
+    
+    
+    
     
 }
 
@@ -63,37 +75,43 @@
 {
     
     // Return the number of sections.
-    return 1;
+    return [[self.sections allKeys] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    //Get all the entries from the database and count them
-      NSString *query = @"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID";
-    _allEntriesFromDB = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    return _allEntriesFromDB.count;
+    NSLog(@"Number of projects: %lu", (unsigned long)[[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count]);
+    return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
 
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //Used to help with sections http://www.icodeblog.com/2010/12/10/implementing-uitableview-sections-from-an-nsarray-of-nsdictionary-objects/
     //Add each entry from the database to the tableview
     static NSString *CellIdentifier = @"EntriesCell";
     EntriesCell *cell = [tableView
                          dequeueReusableCellWithIdentifier:CellIdentifier
                          forIndexPath:indexPath];
     
-    NSInteger indexOfEntryName = [self.dbManager.arrColumnNames indexOfObject:@"name"];
-    cell.entryNameLabel.text = [NSString stringWithFormat:@"%@", [[self.allEntriesFromDB objectAtIndex:indexPath.row] objectAtIndex:indexOfEntryName]];
+   //NSInteger indexOfEntryName = [self.dbManager.arrColumnNames indexOfObject:@"name"];
+    NSString *sectionEntry = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    NSLog(@"inside cellforrowatindexpath: %@", sectionEntry);
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where entriesBasic.entriesID = %d", [sectionEntry intValue]];
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSLog(@"query inside cell: %@", [results objectAtIndex:0]);
+    cell.entryNameLabel.text = [[results objectAtIndex:0] objectAtIndex:1];
+    cell.identifier = [sectionEntry intValue];
+    //cell.entryNameLabel.text = [NSString stringWithFormat:@"%@", [[self.allEntriesFromDB objectAtIndex:indexPath.row] objectAtIndex:indexOfEntryName]];
     cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     //[cell.contentView.layer setBorderColor:[UIColor blackColor].CGColor];
     //[cell.contentView.layer setBorderWidth:2.0f];
     UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_arrow.png"]];
     cell.accessoryView = arrow;
-    
-    
+
+    //NSLog(@"index path: %@", sectionEntry);
     return cell;
 }
 
@@ -118,8 +136,10 @@
         [addEntryController setEditEntry:true];
         
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        EntriesCell *entryName = [self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        NSLog(@"Cell identifier: %d", entryName.identifier);
 
-        self.recordIDToEdit = [[[self.allEntriesFromDB objectAtIndex:myIndexPath.row] objectAtIndex:0] intValue];
+        self.recordIDToEdit = entryName.identifier;
         addEntryController.recordIDToEdit = self.recordIDToEdit;
 
         
@@ -131,7 +151,17 @@
     
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+}
 
+
+/*
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return [[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+}
+ */
 
 -(void)viewDidAppear:(BOOL)animated {
     
@@ -141,10 +171,12 @@
 }
 
 -(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    EntriesCell *entryName = [self.tableView cellForRowAtIndexPath:indexPath];
+    NSLog(@"Record ID to delete: %d", entryName.identifier);
     //Allows the user to swipe to delete
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        int recordIDToDelete = [[[self.allEntriesFromDB objectAtIndex:indexPath.row] objectAtIndex:0] intValue];
+        int recordIDToDelete = entryName.identifier;
+        NSLog(@"Record ID to delete: %d", recordIDToDelete);
 
         NSString *query = [NSString stringWithFormat:@"delete from entriesBasic where entriesID=%d", recordIDToDelete];
 
@@ -152,7 +184,7 @@
         
         NSString *queryGeology = [NSString stringWithFormat:@"delete from entriesGeology where entriesID=%d", recordIDToDelete];
         [self.dbManager executeQuery:queryGeology];
-        [tableView reloadData];
+        [self loadData];
     }
 }
 
@@ -186,10 +218,57 @@
     if (self.allEntriesFromDB != nil) {
         self.allEntriesFromDB = nil;
     }
-    self.allEntriesFromDB = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    self.allEntriesFromDB = results;
     
+    
+    self.sections = [[NSMutableDictionary alloc] init];
+    BOOL found;
+    // Loop through the books and create our keys
+    for (id entry in results)
+    {
+        NSString *projectname = [entry objectAtIndex:2];
+        found = NO;
+        
+        for (NSString *str in [self.sections allKeys])
+        {
+            if ([str isEqualToString:projectname])
+            {
+                found = YES;
+            }
+        }
+        
+        if (!found)
+        {
+            [self.sections setValue:[[NSMutableArray alloc] init] forKey:projectname];
+            
+        }
+    }
+    
+    for (id entry in results){
+        [[self.sections objectForKey:[entry objectAtIndex:2]] addObject:[entry objectAtIndex:0]];
+    }
+    
+    
+    NSLog(@"Sections:%@", self.sections);
+    
+
     [self.tableView reloadData];
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 
 @end
