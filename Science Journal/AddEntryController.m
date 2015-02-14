@@ -118,16 +118,26 @@
         //http://www.appcoda.com/sqlite-database-ios-app-tutorial/
         //NSData *photoData = UIImagePNGRepresentation(_photo);
         //NSData *sketchData = UIImagePNGRepresentation(_sketch);
-    NSString *sketchname = [NSMutableString stringWithFormat:@"%@%@", _name, @"_sketch.png"];
-    NSString *picturename = [NSMutableString stringWithFormat:@"%@%@", _name, @"_picture.png"];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *savedSketchLocation = [documentsDirectory stringByAppendingPathComponent:sketchname];
-    NSString *savedPictureLocation = [documentsDirectory stringByAppendingPathComponent:picturename];
-    NSData *sketchData = UIImagePNGRepresentation(_sketch);
-    [sketchData writeToFile:savedSketchLocation atomically:NO];
-    NSData *pictureData = UIImagePNGRepresentation(_picture);
-    [pictureData writeToFile:savedPictureLocation atomically:NO];
+    NSString *savedSketchLocation;
+    if (_sketch != nil){
+        NSString *sketchname = [NSMutableString stringWithFormat:@"%@%@", _name, @"_sketch.png"];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        savedSketchLocation = [documentsDirectory stringByAppendingPathComponent:sketchname];
+        NSData *sketchData = UIImagePNGRepresentation(_sketch);
+        [sketchData writeToFile:savedSketchLocation atomically:NO];
+    }
+    NSString *savedPictureLocation;
+    if (_picture != nil){
+        NSString *picturename = [NSMutableString stringWithFormat:@"%@%@", _name, @"_picture.png"];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        savedPictureLocation = [documentsDirectory stringByAppendingPathComponent:picturename];
+        NSData *pictureData = UIImagePNGRepresentation(_picture);
+        [pictureData writeToFile:savedPictureLocation atomically:NO];
+    }
+    
+   
     
     if ([_date length] == 0){
         _date = @"";
@@ -229,7 +239,6 @@
 }
 
 - (void)textEntryControllerSave:(textEntryController *)controller didSaveText:(NSString*) text rowSelected:(int)row sectionSelected:(int)section{
-    
     if (section == 0){
         switch (row) {
             case 3:
@@ -261,6 +270,8 @@
         }
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self reloadPreviewStrings];
+
 }
 
 - (void)LocationAndWeatherCancel:(LocationAndWeatherController *) controller {
@@ -272,6 +283,8 @@
     _longitude = longitude;
     _weather = weather;
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self reloadPreviewStrings];
+
     
 }
 
@@ -439,6 +452,10 @@
     _sampleNumberField.text = _sampleNum;
     _stopNumField.text = _stopNum;
     
+    
+    
+    
+    
     _outcrop = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"outcrop"]];
     _structuralData = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"structuralData"]];
     _magneticValue1 = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticValue1"]];
@@ -446,6 +463,8 @@
     _magneticType = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticType"]];
     _stopNum = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"stopNum"]];
     _stopNumField.text = _stopNum;
+    
+    [self reloadPreviewStrings];
     
     
 }
@@ -457,6 +476,55 @@
     cell.accessoryView = arrow;
     
     
+}
+
+-(void)reloadPreviewStrings{
+    if ([_goal length] != 0){
+        if ([_goal length] > 25){
+            _goalLabelField.text = [[_goal substringToIndex:25] stringByAppendingString:@"..."];
+        }else{
+            _goalLabelField.text = _goal;
+        }
+    }
+    if ([_weather length] != 0){
+        _locWeatherField.text = [_weather substringToIndex:5];
+    }
+    if ([_partners length] != 0){
+        if ([_partners length] > 25){
+            _partnersField.text = [[_partners substringToIndex:25] stringByAppendingString:@"..."];
+        }else{
+            _partnersField.text = _partners;
+        }
+    }
+    if ([_permissions length] != 0){
+        if ([_permissions length] > 25){
+            _permissionsField.text = [[_permissions substringToIndex:25] stringByAppendingString:@"..."];
+        }else{
+            _permissionsField.text = _permissions;
+        }
+    }
+    if ([_notes length] != 0){
+        if ([_notes length] > 25){
+            _notesField.text = [[_notes substringToIndex:25] stringByAppendingString:@"..."];
+        }else{
+            _notesField.text = _notes;
+        }
+    }
+    if ([_outcrop length] != 0){
+        if ([_outcrop length] > 25){
+            _outcropField.text = [[_outcrop substringToIndex:25] stringByAppendingString:@"..."];
+        }else{
+            _outcropField.text = _outcrop;
+        }
+    }
+    if ([_structuralData length] != 0){
+        NSLog(@"Struct");
+        if ([_structuralData length] > 25){
+            _structuralField.text = [[_structuralData substringToIndex:25] stringByAppendingString:@"..."];
+        }else{
+            _structuralField.text = _structuralData;
+        }
+    }
 }
 
 

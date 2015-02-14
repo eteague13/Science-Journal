@@ -46,6 +46,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabelField;
 @property (weak, nonatomic) IBOutlet UITextField *projectNameField;
 @property (weak, nonatomic) IBOutlet UITextField *sampleNumberField;
+@property (weak, nonatomic) IBOutlet UILabel *goalLabelField;
+@property (weak, nonatomic) IBOutlet UILabel *locWeatherField;
+@property (weak, nonatomic) IBOutlet UILabel *notesField;
+@property (weak, nonatomic) IBOutlet UILabel *permissionsField;
+
+@property (weak, nonatomic) IBOutlet UILabel *outcropField;
+@property (weak, nonatomic) IBOutlet UILabel *structuralField;
+@property (weak, nonatomic) IBOutlet UILabel *partnersField;
+
 
 @property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType;
 @property (strong, nonatomic) UIImage *sketch;
