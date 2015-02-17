@@ -43,6 +43,8 @@
 - (IBAction)sampleNumFlip:(id)sender;
 - (IBAction)partnersFlip:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UISlider *brushSizeSlider;
+@property (weak, nonatomic) IBOutlet UISlider *brushOpacitySlider;
 
 
 

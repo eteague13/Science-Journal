@@ -7,6 +7,7 @@
 //
 
 #import "SketchController.h"
+#import "SketchSettingsController.h"
 
 
 
@@ -76,10 +77,6 @@
 }
 
 
-- (IBAction)clearSelected:(id)sender {
-    
-    self.saveImage.image = nil;
-}
 
 - (IBAction)cancelSketchButton:(id)sender {
     NSLog(@"Did tap cancel");
@@ -144,60 +141,97 @@
                                                     cancelButtonTitle:@"Cancel"
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:@"Black", @"Grey", @"Red", @"Blue", @"Green", @"Light Blue", @"Brown", @"Yellow", @"Eraser", nil];
-    
+    actionSheet.tag = 1;
     [actionSheet showInView:self.view];
 }
 
+- (IBAction)sketchActions:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Sketch Actions"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Clear Sketch", @"Brush Settings", nil];
+    actionSheet.tag = 2;
+    [actionSheet showInView:self.view];
+    
+}
+
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    switch(buttonIndex)
-    {
-        case 0: //Black
-            red = 0.0/255.0;
-            green = 0.0/255.0;
-            blue = 0.0/255.0;
-            break;
-        case 1: //Grey
-            red = 105.0/255.0;
-            green = 105.0/255.0;
-            blue = 105.0/255.0;
-            break;
-        case 2: //Red
-            red = 255.0/255.0;
-            green = 0.0/255.0;
-            blue = 0.0/255.0;
-            break;
-        case 3: //Blue
-            red = 0.0/255.0;
-            green = 0.0/255.0;
-            blue = 255.0/255.0;
-            break;
-        case 4: //Green
-            red = 0.0/255.0;
-            green = 255.0/255.0;
-            blue = 0.0/255.0;
-            break;
-        case 5: //Light Blue
-            red = 51.0/255.0;
-            green = 204.0/255.0;
-            blue = 255.0/255.0;
-            break;
-        case 6: //Brown
-            red = 160.0/255.0;
-            green = 82.0/255.0;
-            blue = 45.0/255.0;
-            break;
-        case 7: //Yellow
-            red = 255.0/255.0;
-            green = 255.0/255.0;
-            blue = 0.0/255.0;
-            break;
-        case 8: //Eraser
-            red = 255.0/255.0;
-            green = 255.0/255.0;
-            blue = 255.0/255.0;
-            opacity = 1.0;
-            break;
+    if (actionSheet.tag == 1){
+        switch(buttonIndex)
+        {
+            case 0: //Black
+                red = 0.0/255.0;
+                green = 0.0/255.0;
+                blue = 0.0/255.0;
+                break;
+            case 1: //Grey
+                red = 105.0/255.0;
+                green = 105.0/255.0;
+                blue = 105.0/255.0;
+                break;
+            case 2: //Red
+                red = 255.0/255.0;
+                green = 0.0/255.0;
+                blue = 0.0/255.0;
+                break;
+            case 3: //Blue
+                red = 0.0/255.0;
+                green = 0.0/255.0;
+                blue = 255.0/255.0;
+                break;
+            case 4: //Green
+                red = 0.0/255.0;
+                green = 255.0/255.0;
+                blue = 0.0/255.0;
+                break;
+            case 5: //Light Blue
+                red = 51.0/255.0;
+                green = 204.0/255.0;
+                blue = 255.0/255.0;
+                break;
+            case 6: //Brown
+                red = 160.0/255.0;
+                green = 82.0/255.0;
+                blue = 45.0/255.0;
+                break;
+            case 7: //Yellow
+                red = 255.0/255.0;
+                green = 255.0/255.0;
+                blue = 0.0/255.0;
+                break;
+            case 8: //Eraser
+                red = 255.0/255.0;
+                green = 255.0/255.0;
+                blue = 255.0/255.0;
+                opacity = 1.0;
+                break;
+        }
+    }else if (actionSheet.tag == 2){
+        
+        if ((long)buttonIndex == 0){
+            self.saveImage.image = nil;
+        }
+        else if ((long)buttonIndex == 1){
+            [self performSegueWithIdentifier:@"sketchSettings" sender:self];
+        }
+        
     }
    
 }
+
+- (void)sketchSettingsControllerDone:(SketchSettingsController *) controller setSize:(CGFloat)size setOpacity:(CGFloat)op{
+    self->brush = size;
+    self->opacity = op;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"sketchSettings"]) {
+        SketchSettingsController *settings = [segue destinationViewController];
+        settings.delegate = self;
+        settings.brush = self->brush;
+        settings.opacity = self->opacity;
+    }
+}
+
 @end

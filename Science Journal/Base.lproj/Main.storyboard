@@ -497,29 +497,33 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Entry" id="p2n-7e-UEY">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="8FU-r8-iwy">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" style="plain" id="8FU-r8-iwy">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ceu-d2-ZTz">
-                                <rect key="frame" x="39" y="9" width="25" height="25"/>
+                                <rect key="frame" x="1" y="4" width="56" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Cancel button">
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="cancelButton:" destination="meG-co-bD9" eventType="touchUpInside" id="RfZ-yT-bKB"/>
                                 </connections>
                             </button>
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="fy7-rg-iPT">
+                        <barButtonItem key="rightBarButtonItem" title="Done" style="plain" id="fy7-rg-iPT">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="P6d-yG-O6w">
-                                <rect key="frame" x="256" y="9" width="25" height="25"/>
+                                <rect key="frame" x="263" y="5" width="40" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Save button">
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" red="0.034314360780736908" green="0.54179328513102321" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="saveButton:" destination="meG-co-bD9" eventType="touchUpInside" id="YYm-cs-0wl"/>
                                 </connections>
                             </button>
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                         </barButtonItem>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -566,9 +570,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7hh-8H-SIE">
-                                <rect key="frame" x="37" y="39" width="25" height="25"/>
+                                <rect key="frame" x="22" y="34" width="56" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Cancel button">
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -597,9 +602,10 @@
                                 </segments>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nLt-35-rpc">
-                                <rect key="frame" x="243" y="39" width="65" height="25"/>
+                                <rect key="frame" x="243" y="34" width="65" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Save button">
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -635,9 +641,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Nl2-OZ-zk9">
-                                <rect key="frame" x="34" y="52" width="25" height="25"/>
+                                <rect key="frame" x="19" y="47" width="56" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Cancel button">
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -652,9 +659,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yut-Ap-YLA">
-                                <rect key="frame" x="250" y="52" width="65" height="25"/>
+                                <rect key="frame" x="250" y="47" width="65" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Save button">
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -681,9 +689,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IaD-6V-etI">
-                                <rect key="frame" x="31" y="52" width="25" height="25"/>
+                                <rect key="frame" x="16" y="47" width="56" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Cancel button">
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -691,9 +700,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="q3u-fh-SXR">
-                                <rect key="frame" x="251" y="52" width="65" height="25"/>
+                                <rect key="frame" x="251" y="47" width="65" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Save button">
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -743,7 +753,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QbC-1T-Nb3">
                                 <rect key="frame" x="6" y="53" width="81" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Cancel button">
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -751,9 +762,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mF6-Je-gVk">
-                                <rect key="frame" x="269" y="53" width="25" height="25"/>
+                                <rect key="frame" x="260" y="48" width="43" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Save button">
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -832,9 +844,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="men-FU-IzN">
-                                <rect key="frame" x="3" y="50" width="81" height="25"/>
+                                <rect key="frame" x="3" y="45" width="81" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Cancel button">
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -858,9 +871,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uhF-NZ-cw7">
-                                <rect key="frame" x="233" y="50" width="65" height="25"/>
+                                <rect key="frame" x="233" y="45" width="65" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Save button">
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -930,30 +944,21 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p9I-hu-NVy">
-                                <rect key="frame" x="243" y="52" width="65" height="25"/>
+                                <rect key="frame" x="243" y="47" width="65" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Save button">
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="saveSelected:" destination="CmJ-hk-i6Y" eventType="touchUpInside" id="OmL-xe-As2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aPE-nk-Ju3">
-                                <rect key="frame" x="130" y="50" width="60" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                                <state key="normal" title="Clear">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="clearSelected:" destination="CmJ-hk-i6Y" eventType="touchUpInside" id="Vqz-dP-mnh"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Iss-Pk-JKu">
-                                <rect key="frame" x="32" y="52" width="25" height="25"/>
+                                <rect key="frame" x="17" y="47" width="56" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Cancel button">
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -968,7 +973,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="S5V-0O-7cg">
-                                <rect key="frame" x="106" y="483" width="109" height="47"/>
+                                <rect key="frame" x="30" y="501" width="109" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <state key="normal" title="Select Color" backgroundImage="blue_button.png">
@@ -979,6 +984,17 @@
                                     <action selector="selectColor:" destination="CmJ-hk-i6Y" eventType="touchUpInside" id="E71-4g-jSa"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YEc-HZ-d3R">
+                                <rect key="frame" x="206" y="501" width="89" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Actions" backgroundImage="blue_button.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sketchActions:" destination="CmJ-hk-i6Y" eventType="touchUpInside" id="gVp-30-H6K"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -987,11 +1003,94 @@
                     <connections>
                         <outlet property="drawImage" destination="K7U-ki-deV" id="eAa-WU-REx"/>
                         <outlet property="saveImage" destination="ngD-bX-bPU" id="0ef-lC-4H3"/>
+                        <segue destination="hOQ-7h-wbq" kind="modal" identifier="sketchSettings" id="KB1-uI-OyF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pd7-MT-Wtp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3813" y="499"/>
+        </scene>
+        <!--Sketch Settings Controller-->
+        <scene sceneID="dbz-wv-ZFn">
+            <objects>
+                <viewController id="hOQ-7h-wbq" customClass="SketchSettingsController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MPP-Ni-Ib6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" id="E0c-m7-Yuw">
+                                <rect key="frame" x="128" y="80" width="118" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="brushSizeChange:" destination="hOQ-7h-wbq" eventType="valueChanged" id="58c-MG-dlP"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brush Size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9C8-ON-ext">
+                                <rect key="frame" x="12" y="80" width="83" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="dUz-m5-PMK">
+                                <rect key="frame" x="128" y="235" width="118" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="brushOpacityChange:" destination="hOQ-7h-wbq" eventType="valueChanged" id="MyS-sy-ABj"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brush Opacity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z9A-zk-c5b">
+                                <rect key="frame" x="12" y="238" width="110" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nBI-Tg-kRT">
+                                <rect key="frame" x="262" y="238" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wO2-cb-QrB">
+                                <rect key="frame" x="262" y="84" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sketch Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Oyj-9c-RgB">
+                                <rect key="frame" x="100" y="20" width="121" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PbP-Yf-fG3">
+                                <rect key="frame" x="262" y="20" width="37" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.034314360779999997" green="0.54179328510000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="settingsDone:" destination="hOQ-7h-wbq" eventType="touchUpInside" id="ddP-Qb-SAC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="brushOpacityLabel" destination="nBI-Tg-kRT" id="UMe-Fo-OKg"/>
+                        <outlet property="brushOpacitySlider" destination="dUz-m5-PMK" id="jsG-at-QeF"/>
+                        <outlet property="brushSizeLabel" destination="wO2-cb-QrB" id="An0-PI-mm0"/>
+                        <outlet property="brushSizeSlider" destination="E0c-m7-Yuw" id="Gsl-5r-uuo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gZl-DA-991" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4198" y="499"/>
         </scene>
         <!--Export-->
         <scene sceneID="H1a-bS-xeC">
@@ -1362,24 +1461,6 @@
                                             <action selector="partnersFlip:" destination="Pc5-pq-Cql" eventType="valueChanged" id="sla-zT-RNB"/>
                                         </connections>
                                     </switch>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="neN-cc-st2">
-                                        <rect key="frame" x="184" y="665" width="118" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </slider>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sketch Components:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hF5-qU-BTp">
-                                        <rect key="frame" x="8" y="634" width="162" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brush Size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FS9-PE-cpG">
-                                        <rect key="frame" x="20" y="669" width="83" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xIk-Pf-qYC">
                                         <rect key="frame" x="129" y="20" width="63" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1445,14 +1526,12 @@
     </scenes>
     <resources>
         <image name="Add button" width="25" height="25"/>
-        <image name="Cancel button" width="25" height="25"/>
         <image name="Change Map Type" width="25" height="25"/>
         <image name="Charts" width="25" height="25"/>
         <image name="Entries" width="25" height="25"/>
         <image name="Export" width="25" height="25"/>
         <image name="Get Location" width="25" height="25"/>
         <image name="Map" width="25" height="25"/>
-        <image name="Save button" width="25" height="25"/>
         <image name="Settings" width="25" height="25"/>
         <image name="blue_button.png" width="1280" height="680"/>
     </resources>
