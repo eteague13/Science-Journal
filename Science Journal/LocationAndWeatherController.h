@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CoreLocation/CoreLocation.h"
+#import "NoteView.h"
 @class LocationAndWeatherController;
 @protocol LocationAndWeatherControllerDelegate <NSObject>
 - (void)LocationAndWeatherCancel:(LocationAndWeatherController *) controller;
@@ -27,7 +28,9 @@
 @property (nonatomic, weak) id <LocationAndWeatherControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITextField *latitudeField;
 @property (weak, nonatomic) IBOutlet UITextField *longitudeField;
-@property (weak, nonatomic) IBOutlet UITextView *weatherField;
+//@property (weak, nonatomic) IBOutlet UITextView *weatherField;
 -(void)setLat:(NSString*) latitude setLong:(NSString*) longitude setWeather:(NSString*) weather;
+
+@property (nonatomic, retain) NoteView *weatherField;
 
 @end

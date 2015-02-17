@@ -86,4 +86,50 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+-(IBAction)dateFlip:(id)sender{
+    [[NSUserDefaults standardUserDefaults] setBool:_dateSwitch.on forKey:@"SwitchDate"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)goalFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_goalSwitch.on forKey:@"SwitchGoal"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)locationWeatherFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_locationWeatherSwitch.on forKey:@"SwitchLocationWeather"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)sketchFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_sketchSwitch.on forKey:@"SwitchSketch"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)pictureFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_pictureSwitch.on forKey:@"SwitchPicture"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)notesFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_notesSwitch.on forKey:@"SwitchNotes"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)permissionsFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_permissionSwitch.on forKey:@"SwitchPermissions"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)sampleNumFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_sampleSwitch.on forKey:@"SwitchSampleNum"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)partnersFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_partnersSwitch.on forKey:@"SwitchPartners"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
 @end

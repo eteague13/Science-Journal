@@ -31,6 +31,12 @@
     }
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    
+    CGRect frame = CGRectMake(0, 250, 320, 327);
+    self.weatherField = [[NoteView alloc] initWithFrame:frame];
+    [self.view addSubview:_weatherField];
+    _weatherField.delegate = self;
+    [_weatherField setScrollEnabled:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -134,5 +140,19 @@
     latitudeArea = latitude;
     longitudeArea = longitude;
     weatherArea = weather;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_weatherField setNeedsDisplay];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    CGRect frame = CGRectMake(0, 250, 320, 327);
+    _weatherField.frame = frame;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    CGRect frame = CGRectMake(0, 250, 320, 327);
+    _weatherField.frame = frame;
 }
 @end

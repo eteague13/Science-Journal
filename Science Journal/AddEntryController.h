@@ -61,11 +61,20 @@
 @property (strong, nonatomic) UIImage *picture;
 
 -(void)setEditEntry:(BOOL)value;
+@property (weak, nonatomic) IBOutlet UITextField *stopNumField;
 @property (weak, nonatomic) IBOutlet UITableViewCell *geoMagneticCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *geoStopNumCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *geoOutcropCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *geoStructCell;
-@property (weak, nonatomic) IBOutlet UITextField *stopNumField;
+@property (weak, nonatomic) IBOutlet UITableViewCell *dateCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *goalCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *locationWeatherCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *sketchCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *pictureCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *notesCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *permissionsCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *sampleNumCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *partnersCell;
 
 
 @end

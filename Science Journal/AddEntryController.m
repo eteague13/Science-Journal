@@ -62,6 +62,61 @@
         _geoStructCell.hidden = YES;
     }
     
+    bool dateSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchDate"];
+    if (dateSwitch) {
+        _dateCell.hidden = NO;
+    }else{
+        _dateCell.hidden = YES;
+    }
+    bool goalSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGoal"];
+    if (goalSwitch) {
+        _goalCell.hidden = NO;
+    }else{
+        _goalCell.hidden = YES;
+    }
+    bool locationSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchLocationWeather"];
+    if (locationSwitch) {
+        _locationWeatherCell.hidden = NO;
+    }else{
+        _locationWeatherCell.hidden = YES;
+    }
+    bool sketchSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchSketch"];
+    if (sketchSwitch) {
+        _sketchCell.hidden = NO;
+    }else{
+        _sketchCell.hidden = YES;
+    }
+    bool pictureSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchPicture"];
+    if (pictureSwitch) {
+        _pictureCell.hidden = NO;
+    }else{
+        _pictureCell.hidden = YES;
+    }
+    bool notesSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchNotes"];
+    if (notesSwitch) {
+        _notesCell.hidden = NO;
+    }else{
+        _notesCell.hidden = YES;
+    }
+    bool permissionsSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchPermissions"];
+    if (permissionsSwitch) {
+        _permissionsCell.hidden = NO;
+    }else{
+        _permissionsCell.hidden = YES;
+    }
+    bool sampleNumSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchSampleNum"];
+    if (sampleNumSwitch) {
+        _sampleNumCell.hidden = NO;
+    }else{
+        _sampleNumCell.hidden = YES;
+    }
+    bool partnersSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchPartners"];
+    if (partnersSwitch) {
+        _partnersCell.hidden = NO;
+    }else{
+        _partnersCell.hidden = YES;
+    }
+    
 //self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     //self.tableView.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
 [self.tableView setSeparatorColor:[UIColor blackColor]];
@@ -194,8 +249,11 @@
         queryGeology = [NSString stringWithFormat:@"update entriesGeology set outcrop='%@', structuralData='%@',magneticValue1='%@',magneticValue2='%@',magneticType='%@',stopNum='%@' where entriesID=%d",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum, self.recordIDToEdit];
     }
     
-        
-    if ([_projectName length] == 0){
+    if ([_name length] == 0){
+        NSLog(@"No Entry name");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Entry Error" message: @"You need to add an Entry Name" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }else if ([_projectName length] == 0){
         NSLog(@"Empty project name");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Entry Error" message: @"You need to add a Project Name" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -410,6 +468,60 @@
         }
     }else if (cell == _geoStructCell){
         if(_geoStructCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _dateCell){
+        if(_dateCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _goalCell){
+        if(_goalCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _locationWeatherCell){
+        if(_locationWeatherCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _sketchCell){
+        if(_sketchCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _pictureCell){
+        if(_pictureCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _notesCell){
+        if(_notesCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _permissionsCell){
+        if(_permissionsCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _sampleNumCell){
+        if(_sampleNumCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _partnersCell){
+        if(_partnersCell.hidden){
             return 0;
         }else{
             return [super tableView:tableView heightForRowAtIndexPath:indexPath];

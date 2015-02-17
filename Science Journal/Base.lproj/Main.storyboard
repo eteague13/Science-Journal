@@ -525,6 +525,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
+                        <outlet property="dateCell" destination="j72-zV-ZPk" id="nUn-dZ-BIX"/>
                         <outlet property="dateLabelField" destination="EYU-hA-WWc" id="8Cu-yk-vxy"/>
                         <outlet property="entryNameField" destination="ks9-i3-R9i" id="OdQ-0w-3X8"/>
                         <outlet property="entryTitleLabel" destination="p2n-7e-UEY" id="VZN-Bz-G6M"/>
@@ -532,14 +533,22 @@
                         <outlet property="geoOutcropCell" destination="eEd-Rm-Doy" id="SMj-iV-sgc"/>
                         <outlet property="geoStopNumCell" destination="nk9-0v-irz" id="PrU-8c-rKk"/>
                         <outlet property="geoStructCell" destination="qXr-lT-CFV" id="Eyc-qr-unL"/>
+                        <outlet property="goalCell" destination="Jmh-li-ym1" id="wOg-Ah-Zhb"/>
                         <outlet property="goalLabelField" destination="Xys-4q-VDs" id="xTW-oS-hY9"/>
                         <outlet property="locWeatherField" destination="arD-SW-uwx" id="TK8-gn-WZp"/>
+                        <outlet property="locationWeatherCell" destination="jYL-rx-4lH" id="xTS-O1-nIQ"/>
+                        <outlet property="notesCell" destination="jAu-fd-p5p" id="WUF-gL-D0L"/>
                         <outlet property="notesField" destination="M8y-cH-tmA" id="4YU-WX-sRl"/>
                         <outlet property="outcropField" destination="hZg-9r-pPT" id="Bg1-q8-yhf"/>
+                        <outlet property="partnersCell" destination="LaO-Rh-v2n" id="Dh1-MD-CUy"/>
                         <outlet property="partnersField" destination="AbL-TX-lPB" id="YO1-un-nic"/>
+                        <outlet property="permissionsCell" destination="nck-ao-Qbo" id="yKp-TN-eyf"/>
                         <outlet property="permissionsField" destination="AbL-TX-lPB" id="ale-HS-zKj"/>
+                        <outlet property="pictureCell" destination="Pjw-ci-wig" id="EpZ-tc-giB"/>
                         <outlet property="projectNameField" destination="pkL-nh-sDz" id="Q8h-by-VnR"/>
+                        <outlet property="sampleNumCell" destination="elW-Ma-akj" id="tQz-kK-fDk"/>
                         <outlet property="sampleNumberField" destination="P62-hr-EQa" id="w7m-eo-N7k"/>
+                        <outlet property="sketchCell" destination="wFv-1D-h8r" id="Msb-Zn-Znx"/>
                         <outlet property="stopNumField" destination="xnO-Dl-IP7" id="Jsu-yw-9eR"/>
                         <outlet property="structuralField" destination="yWr-C6-zTG" id="xJN-mU-55H"/>
                     </connections>
@@ -635,12 +644,6 @@
                                     <action selector="textCancelButton:" destination="eM9-rg-xld" eventType="touchUpInside" id="rxK-7E-Mvq"/>
                                 </connections>
                             </button>
-                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="btL-f4-ON9">
-                                <rect key="frame" x="0.0" y="82" width="320" height="486"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AtN-zm-xtv">
                                 <rect key="frame" x="0.0" y="20" width="320" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -663,7 +666,6 @@
                     </view>
                     <connections>
                         <outlet property="textEntryLabel" destination="AtN-zm-xtv" id="j0d-Fe-Ttn"/>
-                        <outlet property="textField" destination="btL-f4-ON9" id="IrK-xi-3Is"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wxd-8F-rIi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -795,12 +797,6 @@
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ZRe-Vc-dcI">
-                                <rect key="frame" x="0.0" y="250" width="320" height="306"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DB0-j9-iPT">
                                 <rect key="frame" x="128" y="221" width="99" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -821,7 +817,6 @@
                     <connections>
                         <outlet property="latitudeField" destination="EsE-RO-dS0" id="2kZ-Ug-ewB"/>
                         <outlet property="longitudeField" destination="xFa-Ys-uzs" id="NX8-z8-ccK"/>
-                        <outlet property="weatherField" destination="ZRe-Vc-dcI" id="Ly2-q8-xdJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Ue-Oe-bgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1255,10 +1250,6 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="rjq-uf-6GQ">
-                                        <rect key="frame" x="241" y="60" width="51" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2E7-tn-QUw">
                                         <rect key="frame" x="32" y="104" width="36" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1269,6 +1260,9 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="0eb-Fp-Kw6">
                                         <rect key="frame" x="241" y="99" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="goalFlip:" destination="Pc5-pq-Cql" eventType="valueChanged" id="67l-6S-qk5"/>
+                                        </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location and Weather" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fuA-TE-aG1">
                                         <rect key="frame" x="32" y="143" width="168" height="21"/>
@@ -1280,6 +1274,9 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="gNw-dK-ud4">
                                         <rect key="frame" x="241" y="138" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="locationWeatherFlip:" destination="Pc5-pq-Cql" eventType="valueChanged" id="ZYc-BT-G5k"/>
+                                        </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sketch" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y3O-iV-6hl">
                                         <rect key="frame" x="32" y="182" width="54" height="21"/>
@@ -1291,6 +1288,9 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="LIO-7d-YNy">
                                         <rect key="frame" x="241" y="177" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="sketchFlip:" destination="Pc5-pq-Cql" eventType="valueChanged" id="BbU-zl-Jwc"/>
+                                        </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="66q-33-87Y">
                                         <rect key="frame" x="32" y="221" width="54" height="21"/>
@@ -1302,6 +1302,9 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="gVK-Lp-RVX">
                                         <rect key="frame" x="241" y="216" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="pictureFlip:" destination="Pc5-pq-Cql" eventType="valueChanged" id="fQw-yw-XmQ"/>
+                                        </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Eru-Di-KG9">
                                         <rect key="frame" x="32" y="260" width="46" height="21"/>
@@ -1320,10 +1323,16 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="4c2-Vg-KaF">
                                         <rect key="frame" x="241" y="294" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="permissionsFlip:" destination="Pc5-pq-Cql" eventType="valueChanged" id="sWR-zV-pTA"/>
+                                        </connections>
                                     </switch>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="NmQ-b0-ENh">
                                         <rect key="frame" x="241" y="255" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="notesFlip:" destination="Pc5-pq-Cql" eventType="valueChanged" id="iAj-hR-8eb"/>
+                                        </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UiA-u4-VUZ">
                                         <rect key="frame" x="31" y="338" width="125" height="21"/>
@@ -1335,6 +1344,9 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="tNE-XB-2kX">
                                         <rect key="frame" x="240" y="333" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="sampleNumFlip:" destination="Pc5-pq-Cql" eventType="valueChanged" id="Gge-tX-mAk"/>
+                                        </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partners" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d33-O5-10t">
                                         <rect key="frame" x="31" y="377" width="65" height="21"/>
@@ -1346,6 +1358,9 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="bcj-A8-cus">
                                         <rect key="frame" x="240" y="372" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="partnersFlip:" destination="Pc5-pq-Cql" eventType="valueChanged" id="sla-zT-RNB"/>
+                                        </connections>
                                     </switch>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="neN-cc-st2">
                                         <rect key="frame" x="184" y="665" width="118" height="31"/>
@@ -1372,6 +1387,13 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="rjq-uf-6GQ">
+                                        <rect key="frame" x="241" y="60" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="dateFlip:" destination="Pc5-pq-Cql" eventType="valueChanged" id="O6u-0t-xDg"/>
+                                        </connections>
+                                    </switch>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -1381,11 +1403,20 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
+                        <outlet property="dateSwitch" destination="rjq-uf-6GQ" id="WZM-QW-BpU"/>
                         <outlet property="geoMagDecSwitch" destination="BU5-up-6WM" id="Bjy-ih-gF3"/>
                         <outlet property="geoOutcropSwitch" destination="8TT-4B-2c8" id="yoo-wi-1am"/>
                         <outlet property="geoStopNumSwitch" destination="TL6-72-sKI" id="4Co-JI-qpD"/>
                         <outlet property="geoStructDataSwitch" destination="psa-Xr-Idh" id="wcE-lX-7Uh"/>
+                        <outlet property="goalSwitch" destination="0eb-Fp-Kw6" id="pxK-HP-rdj"/>
+                        <outlet property="locationWeatherSwitch" destination="gNw-dK-ud4" id="bpt-oU-Tu9"/>
+                        <outlet property="notesSwitch" destination="NmQ-b0-ENh" id="8J7-b0-Yd7"/>
+                        <outlet property="partnersSwitch" destination="bcj-A8-cus" id="w4c-1C-tG3"/>
+                        <outlet property="permissionSwitch" destination="4c2-Vg-KaF" id="WjV-fL-UQQ"/>
+                        <outlet property="pictureSwitch" destination="gVK-Lp-RVX" id="cDd-gK-Zy9"/>
+                        <outlet property="sampleSwitch" destination="tNE-XB-2kX" id="Tld-1j-0Jt"/>
                         <outlet property="scroller" destination="1PY-mg-o92" id="A3F-fn-r2M"/>
+                        <outlet property="sketchSwitch" destination="LIO-7d-YNy" id="yzC-dw-qrK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rd0-t5-usg" userLabel="First Responder" sceneMemberID="firstResponder"/>

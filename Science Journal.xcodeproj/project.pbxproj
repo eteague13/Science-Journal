@@ -42,6 +42,7 @@
 		BD5FD9CF1A4A07FC003CC565 /* AddEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9CE1A4A07FC003CC565 /* AddEntryController.m */; };
 		BD5FD9D21A4BA2F5003CC565 /* datepickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9D11A4BA2F5003CC565 /* datepickerController.m */; };
 		BD5FD9D51A4BBA9B003CC565 /* textEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9D41A4BBA9B003CC565 /* textEntryController.m */; };
+		BD6EE1B51A92BF0700D06474 /* NoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6EE1B41A92BF0700D06474 /* NoteView.m */; };
 		BD76F5CA19B5001D000A1349 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD76F5C919B5001D000A1349 /* MobileCoreServices.framework */; };
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
 		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
@@ -119,6 +120,8 @@
 		BD5FD9D11A4BA2F5003CC565 /* datepickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = datepickerController.m; sourceTree = "<group>"; };
 		BD5FD9D31A4BBA9B003CC565 /* textEntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = textEntryController.h; sourceTree = "<group>"; };
 		BD5FD9D41A4BBA9B003CC565 /* textEntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = textEntryController.m; sourceTree = "<group>"; };
+		BD6EE1B31A92BF0700D06474 /* NoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteView.h; sourceTree = "<group>"; };
+		BD6EE1B41A92BF0700D06474 /* NoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteView.m; sourceTree = "<group>"; };
 		BD76F5C919B5001D000A1349 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		BD7D733A19A3E1850034E504 /* EntriesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesController.h; sourceTree = "<group>"; };
 		BD7D733B19A3E1850034E504 /* EntriesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesController.m; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 				BDD74CB71A64CFC100635CBA /* ReferenceViewController.m */,
 				BDC8358B1A675108000B60BD /* DBManager.h */,
 				BDC8358C1A675108000B60BD /* DBManager.m */,
+				BD6EE1B31A92BF0700D06474 /* NoteView.h */,
+				BD6EE1B41A92BF0700D06474 /* NoteView.m */,
 			);
 			path = "Science Journal";
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 				BD3FB96919A278DE002496CE /* ExportController.m in Sources */,
 				BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */,
 				BDE248A41A4DEEA500B1F97D /* LocationAndWeatherController.m in Sources */,
+				BD6EE1B51A92BF0700D06474 /* NoteView.m in Sources */,
 				BD5FD9CF1A4A07FC003CC565 /* AddEntryController.m in Sources */,
 				BD08A19719A26BE400EE1B97 /* main.m in Sources */,
 				BD5FD9D21A4BA2F5003CC565 /* datepickerController.m in Sources */,

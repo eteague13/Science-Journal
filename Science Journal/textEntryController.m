@@ -46,10 +46,17 @@
         }
     }
     NSLog(@"Row: %d", addEntryRowSelected);
+    
     if ([textArea length] != 0){
-        _textField.text = textArea;
+        _note.text = textArea;
     }
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    
+    CGRect frame = CGRectMake(0, 94, 320, 474);
+    self.note = [[NoteView alloc] initWithFrame:frame];
+    [self.view addSubview:_note];
+    _note.delegate = self;
+    [_note setScrollEnabled:YES];
     // Do any additional setup after loading the view.
 }
 
@@ -75,7 +82,7 @@
 
 - (IBAction)textSaveButton:(id)sender {
     
-    [self.delegate textEntryControllerSave:self didSaveText:_textField.text rowSelected:(int)addEntryRowSelected sectionSelected:(int)addEntrySectionSelected];
+    [self.delegate textEntryControllerSave:self didSaveText:_note.text rowSelected:(int)addEntryRowSelected sectionSelected:(int)addEntrySectionSelected];
 }
 
 - (void)updateRowSelected:(int)row updateSectionSelected:(int)section {
@@ -100,4 +107,19 @@
 - (void)setTextValue:(NSString*)text{
     textArea = text;
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_note setNeedsDisplay];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    CGRect frame = CGRectMake(0, 94, 320, 474);
+    _note.frame = frame;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    CGRect frame = CGRectMake(0, 94, 320, 474);
+    _note.frame = frame;
+}
+
 @end

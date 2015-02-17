@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NoteView.h"
 
 @class textEntryController;
 @protocol textEntryControllerDelegate <NSObject>
@@ -29,5 +30,7 @@
 - (void)updateRowSelected:(int)row updateSectionSelected:(int)section;
 @property (weak, nonatomic) IBOutlet UITextView *textField;
 - (void)setTextValue:(NSString*)text;
+
+@property (nonatomic, retain) NoteView *note;
 
 @end
