@@ -32,10 +32,7 @@
         _entryTitleLabel.title = @"Edit Entry";
     }
     
-    
-    
-    
-    
+    //Adjusts which components are on based on the Settings
     bool geoMagDecSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoMagDec"];
     if (geoMagDecSwitch) {
         _geoMagneticCell.hidden = NO;
@@ -117,8 +114,7 @@
         _partnersCell.hidden = YES;
     }
     
-//self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    //self.tableView.backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
 [self.tableView setSeparatorColor:[UIColor blackColor]];
 
     
@@ -147,32 +143,8 @@
     _stopNum = _stopNumField.text;
     _date = _dateLabelField.text;
     _sampleNum = _sampleNumberField.text;
-    /*
-        NSMutableString *printString = [NSMutableString stringWithFormat:@"Entry name: %@; Date: %@; Project Name: %@; Goal: %@; Latitude: %@; Longitude: %@; Weather: %@; Magnetic Field: %@; Partners: %@; Permissions: %@; Outcrop: %@; Structural: %@; Sample Number: %@; Notes: %@; Stop Number: %@", _name, _date, _projectName, _goal, _latitude, _longitude, _weather, _magnet, _partners, _permissions, _outcrop, _structuralData, _sampleNum, _notes, _stopNum];
-        
-        
-        NSError *error;
-        
-        
-        NSString *documentsDirectory = [NSHomeDirectory()
-                                        stringByAppendingPathComponent:@"Documents"];
-        NSString *fileName = [NSMutableString stringWithFormat:@"%@%@", _name, @".txt"];
-        NSString *filePath = [documentsDirectory
-                              stringByAppendingPathComponent:fileName];
-        
-        NSLog(@"string to write:%@", printString);
-        
-        [printString writeToFile:filePath atomically:YES
-                        encoding:NSUTF8StringEncoding error:&error];
-        
-        NSLog(@"%@", filePath);
-        
-        */
-        // Prepare the query string.
-        //It's not working because it can't store photo and sketch
-        //http://www.appcoda.com/sqlite-database-ios-app-tutorial/
-        //NSData *photoData = UIImagePNGRepresentation(_photo);
-        //NSData *sketchData = UIImagePNGRepresentation(_sketch);
+    
+    //Determine if there is a sketch
     NSString *savedSketchLocation;
     if (_sketch != nil){
         NSString *sketchname = [NSMutableString stringWithFormat:@"%@%@", _name, @"_sketch.png"];
@@ -182,6 +154,7 @@
         NSData *sketchData = UIImagePNGRepresentation(_sketch);
         [sketchData writeToFile:savedSketchLocation atomically:NO];
     }
+    //Determine if there is a picture
     NSString *savedPictureLocation;
     if (_picture != nil){
         NSString *picturename = [NSMutableString stringWithFormat:@"%@%@", _name, @"_picture.png"];
@@ -278,7 +251,6 @@
     
         [self.delegate AddEntryControllerDidSave:self];
     }
-    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)datepickerControllerCancel:(datepickerController *) controller {
@@ -534,12 +506,11 @@
 }
 -(void)loadInfoToEdit{
     
-    
+    //Loads the info if the user is editing an entry
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where entriesBasic.entriesID = %d", self.recordIDToEdit];
     
    
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    //NSLog(@"results in info edit: %@", results);
     _name = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"name"]];
 
     _date = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"date"]];
@@ -583,13 +554,19 @@
 
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_arrow.png"]];
-    cell.accessoryView = arrow;
     
+    //Do not add an accessory arrow in certain conditions 
+    if ([cell.reuseIdentifier isEqualToString:@"geoStopNumCell"] || [cell.reuseIdentifier isEqualToString:@"sampleNumCell"]){
+        
+    }else{
+        cell.accessoryView = arrow;
+    }
     
 }
 
+//Loads the preview strings on the Edit Entry page
 -(void)reloadPreviewStrings{
     if ([_goal length] != 0){
         if ([_goal length] > 25){

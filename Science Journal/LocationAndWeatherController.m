@@ -87,8 +87,7 @@
         _latitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
         _longitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
         
-        NSString *currentLocationURL = @"http://api.openweathermap.org/data/2.5/weather?lat=39.7&lon=-122.4";
-        //NSString *currentLocationURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitudeValue, longitudeValue];
+        NSString *currentLocationURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitudeValue, longitudeValue];
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:currentLocationURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             jsonWeather = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -98,7 +97,7 @@
         _weatherField.text = @"";
         for (id key in jsonWeather){
             
-            //NSLog(@"Key: %@ , Value: %@",key, [jsonWeather objectForKey:key]);
+
             if ([key isEqualToString:@"main"]){
                 NSString *humidity = [NSString stringWithFormat:@"Humidity: %@%%",[[jsonWeather objectForKey:key] objectForKey: @"humidity"]];
                 _weatherField.text = [_weatherField.text stringByAppendingString:humidity];
@@ -107,9 +106,6 @@
                 NSString *pressure = [NSString stringWithFormat:@"Pressue: %@ hPa", [[jsonWeather objectForKey:key] objectForKey: @"pressure"]];
                 _weatherField.text = [_weatherField.text stringByAppendingString:pressure];
                 _weatherField.text = [_weatherField.text stringByAppendingString:@"\n"];
-                //float tempKelvin = [[[jsonWeather objectForKey:key] objectForKey: @"temp"] floatValue];
-                //float tempCelcius = tempKelvin - 273.15;
-                //NSLog(@"Temperature: %f C", tempCelcius);
                 
                 float tempKelvin = [[[jsonWeather objectForKey:key] objectForKey: @"temp"] floatValue];
                 float tempCelcius = tempKelvin - 273.15;

@@ -25,5 +25,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *value2;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *magDecType;
 @property (nonatomic, weak) id <MagneticDecControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UILabel *strikeORTrendLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dipORPlungeLabel;
+- (IBAction)segmentedControlClicked:(id)sender;
 -(void)setVal1:(NSString*) val1 setVal2:(NSString*) val2 setType:(NSString*) typ;
 @end

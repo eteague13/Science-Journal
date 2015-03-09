@@ -30,27 +30,8 @@
     [super viewDidLoad];
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
     
-    pickerData = [[NSMutableArray alloc] init];
-    NSString *query = [NSString stringWithFormat:@"select projectName from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
-    
-    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    if ([results count] != 0){
-        _projectPicker.hidden = NO;
-        for (id name in results){
-            NSLog(@"%@", [name objectAtIndex:0]);
-            if ([pickerData containsObject:[name objectAtIndex:0]]){
-                
-            }else{
-                [pickerData addObject:[name objectAtIndex:0]];
-            }
-        }
-        NSLog(@"picker data: %@", pickerData);
-    
-        self.projectPicker.delegate = self;
-        self.projectPicker.dataSource = self;
-    }else{
-        _projectPicker.hidden = YES;
-    }
+    //Set the picker projects
+    [self setPickerProjects];
     // Do any additional setup after loading the view.
    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
@@ -74,11 +55,11 @@
 */
 
 - (IBAction)exportGooglEarth:(id)sender {
+    //Create the .kml files
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
     
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
 
-    
     NSString *identifer, *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType;
     UIImage *sketch;
     UIImage *picture;
@@ -120,35 +101,18 @@
         
         
     }
-    /*
-    for (int i = 0; i < _database.entries.count; i++){
-        Entry *tempEntry = _database.entries[i];
-        [printString appendFormat:@"\n\t<name>All Entries</name>"];
-        [printString appendString:@"\n\t<Placemark>"];
-        [printString appendFormat:@"\n\t<name>Entry name: %@</name>", tempEntry.name];
-        [printString appendFormat:@"\n\t\t<description>Date: %@\nProject Name: %@\nGoal: %@\nWeather: \n%@\nMagnetic Declination: %@\nPartners %@\nPermissions: %@\nOutcrop Description: %@\nStructural Data: %@\nSample Number: %@\nNotes: %@</description>", dateString, tempEntry.projectName, tempEntry.goal, tempEntry.weather, tempEntry.magnet, tempEntry.partners, tempEntry.permissions, tempEntry.outcrop, tempEntry.structuralData, tempEntry.sampleNum, tempEntry.notes];
-        [printString appendString:@"\n\t\t<Point>"];
-        [printString appendFormat:@"\n\t\t<coordinates>%@, %@, 0</coordinates>", tempEntry.longitude, tempEntry.latitude];
-        [printString appendString:@"\n\t\t</Point>"];
-        [printString appendString:@"\n\t</Placemark>"];
-    }
-     */
+
     
     [printString appendString:@"\n\t</Folder>\n</kml>"];
     
-    NSLog(@"string to write:%@", printString);
     
-    
+    //Write the information to a .kml file
     NSError *error;
-    
-    
     NSString *documentsDirectory = [NSHomeDirectory()
                                     stringByAppendingPathComponent:@"Documents"];
     NSString *fileName = [NSMutableString stringWithFormat:@"All Entries"];
     NSString *filePath = [documentsDirectory
                           stringByAppendingPathComponent:fileName];
-    
-    NSLog(@"string to write:%@", printString);
     
     [printString writeToFile:filePath atomically:YES
                     encoding:NSUTF8StringEncoding error:&error];
@@ -174,6 +138,7 @@
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
+    //Mail results
     switch (result)
     {
         case MFMailComposeResultCancelled:
@@ -192,7 +157,6 @@
             break;
     }
     
-    // Close the Mail Interface
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -217,7 +181,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    //Next need to add the ability to email based on project
+    //Gets the selected project
     NSLog(@"row: %ld, component: %ld", (long)row, (long)component);
     selectedProject = [pickerData objectAtIndex:row];
     
@@ -225,6 +189,7 @@
 }
 
 - (IBAction)emailProject:(id)sender {
+    //Creates the .kml file for just the selected project
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where projectName = '%@'", selectedProject];
     
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
@@ -270,28 +235,12 @@
         
         
     }
-    /*
-     for (int i = 0; i < _database.entries.count; i++){
-     Entry *tempEntry = _database.entries[i];
-     [printString appendFormat:@"\n\t<name>All Entries</name>"];
-     [printString appendString:@"\n\t<Placemark>"];
-     [printString appendFormat:@"\n\t<name>Entry name: %@</name>", tempEntry.name];
-     [printString appendFormat:@"\n\t\t<description>Date: %@\nProject Name: %@\nGoal: %@\nWeather: \n%@\nMagnetic Declination: %@\nPartners %@\nPermissions: %@\nOutcrop Description: %@\nStructural Data: %@\nSample Number: %@\nNotes: %@</description>", dateString, tempEntry.projectName, tempEntry.goal, tempEntry.weather, tempEntry.magnet, tempEntry.partners, tempEntry.permissions, tempEntry.outcrop, tempEntry.structuralData, tempEntry.sampleNum, tempEntry.notes];
-     [printString appendString:@"\n\t\t<Point>"];
-     [printString appendFormat:@"\n\t\t<coordinates>%@, %@, 0</coordinates>", tempEntry.longitude, tempEntry.latitude];
-     [printString appendString:@"\n\t\t</Point>"];
-     [printString appendString:@"\n\t</Placemark>"];
-     }
-     */
+
     
     [printString appendString:@"\n\t</Folder>\n</kml>"];
     
-    NSLog(@"string to write:%@", printString);
-    
-    
+    //Write the .kml file
     NSError *error;
-    
-    
     NSString *documentsDirectory = [NSHomeDirectory()
                                     stringByAppendingPathComponent:@"Documents"];
     NSString *fileName = [NSMutableString stringWithFormat:@"Project %@ Entries.kml", selectedProject];
@@ -321,5 +270,32 @@
 
     NSLog(@"%@", results);
     
+}
+
+-(void)setPickerProjects{
+    
+    
+    pickerData = [[NSMutableArray alloc] init];
+    NSString *query = [NSString stringWithFormat:@"select projectName from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
+    
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    //Cycles through all of the entries and creates an array of all of the projects
+    if ([results count] != 0){
+        _projectPicker.hidden = NO;
+        for (id name in results){
+            NSLog(@"%@", [name objectAtIndex:0]);
+            if ([pickerData containsObject:[name objectAtIndex:0]]){
+                
+            }else{
+                [pickerData addObject:[name objectAtIndex:0]];
+            }
+        }
+        NSLog(@"picker data: %@", pickerData);
+        
+        self.projectPicker.delegate = self;
+        self.projectPicker.dataSource = self;
+    }else{
+        _projectPicker.hidden = YES;
+    }
 }
 @end

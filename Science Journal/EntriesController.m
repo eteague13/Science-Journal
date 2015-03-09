@@ -80,7 +80,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
+    //Sorts it based on the project
     NSLog(@"Number of projects: %lu", (unsigned long)[[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count]);
     return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
 
@@ -96,7 +96,6 @@
                          dequeueReusableCellWithIdentifier:CellIdentifier
                          forIndexPath:indexPath];
     
-   //NSInteger indexOfEntryName = [self.dbManager.arrColumnNames indexOfObject:@"name"];
     NSString *sectionEntry = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     NSLog(@"inside cellforrowatindexpath: %@", sectionEntry);
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where entriesBasic.entriesID = %d", [sectionEntry intValue]];
@@ -104,14 +103,9 @@
     NSLog(@"query inside cell: %@", [results objectAtIndex:0]);
     cell.entryNameLabel.text = [[results objectAtIndex:0] objectAtIndex:1];
     cell.identifier = [sectionEntry intValue];
-    //cell.entryNameLabel.text = [NSString stringWithFormat:@"%@", [[self.allEntriesFromDB objectAtIndex:indexPath.row] objectAtIndex:indexOfEntryName]];
     cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    //[cell.contentView.layer setBorderColor:[UIColor blackColor].CGColor];
-    //[cell.contentView.layer setBorderWidth:2.0f];
     UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_arrow.png"]];
     cell.accessoryView = arrow;
-
-    //NSLog(@"index path: %@", sectionEntry);
     return cell;
 }
 
@@ -224,7 +218,7 @@
     
     self.sections = [[NSMutableDictionary alloc] init];
     BOOL found;
-    // Loop through the books and create our keys
+    // Loop through the entries and creates a dictionary of key: projects, values: entries
     for (id entry in results)
     {
         NSString *projectname = [entry objectAtIndex:2];

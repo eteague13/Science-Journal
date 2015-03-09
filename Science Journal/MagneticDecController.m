@@ -23,15 +23,12 @@
         _value2.text = value2;
     }
     if ([type length] != 0){
-        if ([type isEqual: @"Strike"]){
+        if ([type isEqual: @"Strike/Dip"]){
             [_magDecType setSelectedSegmentIndex:0];
-        }else if ([type isEqual: @"Dip"]){
-            [_magDecType setSelectedSegmentIndex:1];
         }else if ([type isEqual: @"Trend/Plunge"]){
-            [_magDecType setSelectedSegmentIndex:2];
+            [_magDecType setSelectedSegmentIndex:1];
         }
     }
-    // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
 }
 
@@ -56,13 +53,21 @@
 
 - (IBAction)magDecSave:(id)sender {
     if ((long)_magDecType.selectedSegmentIndex == 0){
-        [self.delegate magDecControllerSave:(MagneticDecController *)self value1:(NSString*)_value1.text value2:(NSString*)_value2.text type:(NSString*)@"Strike"];
+        [self.delegate magDecControllerSave:(MagneticDecController *)self value1:(NSString*)_value1.text value2:(NSString*)_value2.text type:(NSString*)@"Strike/Dip"];
     }else if ((long)_magDecType.selectedSegmentIndex == 1){
-        [self.delegate magDecControllerSave:(MagneticDecController *)self value1:(NSString*)_value1.text value2:(NSString*)_value2.text type:(NSString*)@"Dip"];
-    }else if ((long)_magDecType.selectedSegmentIndex == 2) {
         [self.delegate magDecControllerSave:(MagneticDecController *)self value1:(NSString*)_value1.text value2:(NSString*)_value2.text type:(NSString*)@"Trend/Plunge"];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)segmentedControlClicked:(id)sender {
+    if ((long)_magDecType.selectedSegmentIndex == 0){
+        _strikeORTrendLabel.text = @"Strike:";
+        _dipORPlungeLabel.text = @"Dip:";
+    }else if ((long)_magDecType.selectedSegmentIndex == 1){
+        _strikeORTrendLabel.text = @"Trend:";
+        _dipORPlungeLabel.text = @"Plunge:";
+    }
 }
 
 -(void)setVal1:(NSString*) val1 setVal2:(NSString*) val2 setType:(NSString*) typ{

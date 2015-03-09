@@ -33,10 +33,12 @@
     [_scroller setContentSize:CGSizeMake(320, 1500)];
     [self.view addSubview:_scroller];
 
+    /*
     _geoMagDecSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoMagDec"];
     _geoOutcropSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoOutcrop"];
     _geoStopNumSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStopNum"];
     _geoStructDataSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStructData"];
+     */
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
    
     
@@ -64,7 +66,7 @@
 
 
 
-
+//All of the methods that deal with the component settings
 - (IBAction)geoMagDecFlip:(id)sender {
     [[NSUserDefaults standardUserDefaults] setBool:_geoMagDecSwitch.on forKey:@"SwitchGeoMagDec"];
     [[NSUserDefaults standardUserDefaults] synchronize];

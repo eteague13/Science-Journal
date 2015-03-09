@@ -21,14 +21,10 @@
     [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm"];
     NSString *strDate = [dateFormatter stringFromDate:_datePicker.date];
     _dateDisplay.text = strDate;
-    NSLog(@"%@", dateValue);
     if ([dateValue length] != 0 ){
         _dateDisplay.text = dateValue;
-        NSLog(@"Inside date");
     }
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    NSLog(@"Outside date");
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,7 +54,6 @@
 
 - (IBAction)dateCancel:(id)sender {
     [self.delegate datepickerControllerCancel:self];
-    NSLog(@"CANCEL");
 }
 
 - (IBAction)dateSave:(id)sender {
@@ -66,7 +61,6 @@
 }
 
 -(void)setDateValue:(NSString *)date{
-    NSLog(@"Setting date value: %@", date);
     dateValue = date;
 }
 @end

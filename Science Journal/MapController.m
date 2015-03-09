@@ -36,16 +36,13 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    // 1
-    CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = 38.008203;
-    zoomLocation.longitude= -78.522963;
-    
-    // 2
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
-    
-    // 3
-    [mapView setRegion:viewRegion animated:YES];
+
+//Sets the initial map view to the user's current location
+    MKUserLocation *userLocation = mapView.userLocation;
+    MKCoordinateRegion region =
+    MKCoordinateRegionMakeWithDistance (
+                                        userLocation.location.coordinate, 20000, 20000);
+    [mapView setRegion:region animated:YES];
     
 }
 
@@ -60,6 +57,7 @@
 }
 
 - (void)mapViewWillStartLoadingMap:(MKMapView *)mapView{
+    //Queries the database and places each entry on the map
     CLLocationCoordinate2D coordinate;
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
     
@@ -75,27 +73,16 @@
         coordinate.longitude = [longitude doubleValue];
         point.coordinate = coordinate;
         point.title = name;
-        point.subtitle = projectName;
+        point.subtitle = [NSString stringWithFormat:@"Entry #: %@", [entry objectAtIndex:0]];
         [self.mapView addAnnotation:point];
     }
-    /*
-    for (int i = 0; i < _database.entries.count; i++){
-        Entry *tempEntry = _database.entries[i];
-        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-        coordinate.latitude = [tempEntry.latitude doubleValue];
-        coordinate.longitude = [tempEntry.longitude doubleValue];
-        point.coordinate = coordinate;
-        point.title = tempEntry.name;
-        point.subtitle = tempEntry.projectName;
-        [self.mapView addAnnotation:point];
-    }
-     */
     
     
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     
+    //Creates annotations for each pin
     static NSString *identifier = @"MyLocation";
     if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
         
@@ -112,11 +99,6 @@
         
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
-        
-        // Create a UIButton object to add on the
-        //UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        //[rightButton setTitle:annotation.title forState:UIControlStateNormal];
-        //[annotationView setRightCalloutAccessoryView:rightButton];
         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         
         return annotationView;
@@ -126,10 +108,12 @@
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    //When a user clicks on an annotation, it performs a segue call to open up the Edit Entry controller
     MKPointAnnotation *location = (MKPointAnnotation*)view.annotation;
-    
-    NSLog(@"CLICKED");
-    _selectedAnnotationName = view.annotation.title;
+
+    //Gets the entry # from the selected annotation
+    NSString *tempString = [view.annotation.subtitle substringFromIndex:9];
+    _selectedAnnotationIdentifier = tempString;
     [self performSegueWithIdentifier:@"annotationDetail" sender:self];
    
     
@@ -141,24 +125,16 @@
     if ([segue.identifier isEqualToString:@"annotationDetail"])
     {
 
-        NSLog(@"In segue");
         NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
         
         NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-        
+        //Get the selected entry data and load it in the Edit Entry controller
         UINavigationController *navigationController = segue.destinationViewController;
         AddEntryController *annotationView = [navigationController viewControllers][0];
         annotationView.delegate = self;
         [annotationView setEditEntry:true];
+        annotationView.recordIDToEdit = [_selectedAnnotationIdentifier intValue];
         
-        NSString *name, *identifier;
-         for (id entry in results) {
-             name = [entry objectAtIndex:1];
-             identifier = [entry objectAtIndex:0];
-             if ([name isEqualToString:_selectedAnnotationName]){
-                annotationView.recordIDToEdit = [identifier intValue];
-             }
-        }
 
         
     }
@@ -174,6 +150,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)zoomCurrentLocation:(id)sender {
+    //"Get location" button that moves the map to where the user is
     MKUserLocation *userLocation = mapView.userLocation;
     MKCoordinateRegion region =
     MKCoordinateRegionMakeWithDistance (
@@ -182,6 +159,7 @@
 }
 
 - (IBAction)changeMapType:(id)sender {
+    //Changes the maptype
     if (mapView.mapType == MKMapTypeStandard)
         mapView.mapType = MKMapTypeSatellite;
     else

@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"Section: %d", addEntrySectionSelected);
+    //Write the correct title
     if (addEntrySectionSelected == 0){
         switch (addEntryRowSelected) {
             case 3:
@@ -57,7 +58,7 @@
     [self.view addSubview:_note];
     _note.delegate = self;
     [_note setScrollEnabled:YES];
-    // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,19 +91,7 @@
     addEntrySectionSelected = section;
 }
 
--(IBAction)textFieldReturn:(id)sender
-{
-    [sender resignFirstResponder];
-}
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    if ([text isEqualToString:@"\n"])
-    {
-        [textView resignFirstResponder];
-    }
-    return YES;
-}
 
 - (void)setTextValue:(NSString*)text{
     textArea = text;
