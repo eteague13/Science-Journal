@@ -53,6 +53,7 @@
     }
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
+    //Draws the text view
     CGRect frame = CGRectMake(0, 94, 320, 474);
     self.note = [[NoteView alloc] initWithFrame:frame];
     [self.view addSubview:_note];
@@ -77,7 +78,6 @@
 */
 
 - (IBAction)textCancelButton:(id)sender {
-    NSLog(@"%@", _textEntryLabel.text);
     [self.delegate textEntryControllerCancel:self];
 }
 

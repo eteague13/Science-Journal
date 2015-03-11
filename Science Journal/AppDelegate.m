@@ -15,6 +15,46 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    
+    NSDictionary *appDefaults = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGeoMagDec"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    NSDictionary *appDefaults2 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGeoStopNum"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults2];
+    NSDictionary *appDefaults3 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGeoOutcrop"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults3];
+    NSDictionary *appDefaults4 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGeoStructData"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults4];
+    NSDictionary *appDefaults5 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchDate"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults5];
+    NSDictionary *appDefaults6 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGoal"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults6];
+    NSDictionary *appDefaults7 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchLocationWeather"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults7];
+    NSDictionary *appDefaults8 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchNotes"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults8];
+    NSDictionary *appDefaults9 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchPicture"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults9];
+    NSDictionary *appDefaults10 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchPermissions"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults10];
+    NSDictionary *appDefaults11 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchSampleNum"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults11];
+    NSDictionary *appDefaults12 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchPartners"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults12];
+    NSDictionary *appDefaults13 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGeoMagDec"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults13];
 
 
     

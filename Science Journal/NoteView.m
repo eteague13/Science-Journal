@@ -18,8 +18,10 @@
         self.font = [UIFont fontWithName:@"Helvetica" size:14];
     }
     return self;
+    
+    
 }
-
+//Solution from http://stackoverflow.com/questions/5375350/uitextview-ruled-line-background-but-wrong-line-height
 - (void)drawRect:(CGRect)rect {
     
     CGContextRef context = UIGraphicsGetCurrentContext();

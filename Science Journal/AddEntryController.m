@@ -138,6 +138,7 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
 }
 
 - (IBAction)saveButton:(id)sender {
+    //Gets the values from the textfields
     _name = _entryNameField.text;
     _projectName = _projectNameField.text;
     _stopNum = _stopNumField.text;
@@ -146,6 +147,7 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
     
     //Determine if there is a sketch
     NSString *savedSketchLocation;
+    NSLog(@"Sketch 2: %@", _sketch);
     if (_sketch != nil){
         NSString *sketchname = [NSMutableString stringWithFormat:@"%@%@", _name, @"_sketch.png"];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -166,7 +168,7 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
     }
     
    
-    
+    //If any fields are empty, it adds an empty string
     if ([_date length] == 0){
         _date = @"";
     }
@@ -214,14 +216,16 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
     }
     NSString *queryBasic;
     NSString *queryGeology;
+    //If this is adding a new entry
     if(self.recordIDToEdit == -1){
         queryBasic = [NSString stringWithFormat:@"insert into entriesBasic values(null, '%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@', '%@')",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners];
         queryGeology = [NSString stringWithFormat:@"insert into entriesGeology values(null, '%@', '%@','%@','%@','%@','%@')",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum];
+    //If this is updating an existing entry
     }else{
         queryBasic = [NSString stringWithFormat:@"update entriesBasic set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', picture='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@' where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, self.recordIDToEdit];
         queryGeology = [NSString stringWithFormat:@"update entriesGeology set outcrop='%@', structuralData='%@',magneticValue1='%@',magneticValue2='%@',magneticType='%@',stopNum='%@' where entriesID=%d",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum, self.recordIDToEdit];
     }
-    
+    //Each entry has to have an entry name and project. If it does, then it performs the query
     if ([_name length] == 0){
         NSLog(@"No Entry name");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Entry Error" message: @"You need to add an Entry Name" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -269,6 +273,7 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
 }
 
 - (void)textEntryControllerSave:(textEntryController *)controller didSaveText:(NSString*) text rowSelected:(int)row sectionSelected:(int)section{
+    //Updates the correct field based on what was entered in the TextEntryController
     if (section == 0){
         switch (row) {
             case 3:
@@ -309,6 +314,7 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
     
 }
 - (void)LocationAndWeatherSave:(LocationAndWeatherController *)controller lat:(NSString*) lat longitude:(NSString*)longitude weather:(NSString*) weather{
+    //Saves the weather information
     _latitude = lat;
     _longitude = longitude;
     _weather = weather;
@@ -322,6 +328,7 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    //The various segues
     if ([segue.identifier isEqualToString:@"AddDate"]) {
         datepickerController* dateController = segue.destinationViewController;
         dateController.delegate = self;
@@ -332,7 +339,6 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
         textController.delegate = self;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         int rowSelected = (int)indexPath.row;
-        NSLog(@"row selected: %d", rowSelected);
         int sectionSelected = (int)indexPath.section;
         [textController updateRowSelected:rowSelected updateSectionSelected:sectionSelected];
         
@@ -391,8 +397,8 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
 }
 
 - (void) sketchControllerSave:(SketchController *)controller didFinishSketch:(UIImage*)item{
+    NSLog(@"Sketch: %@", item);
     _sketch = item;
-    NSLog(@"Passed back sketch");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -419,6 +425,7 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //Adjusts the height of each cell based on if the user has enabled the component setting
     UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     if (cell == _geoMagneticCell){
         if(_geoMagneticCell.hidden){
@@ -511,6 +518,8 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
     
    
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
+    //Basic information
     _name = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"name"]];
 
     _date = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"date"]];
@@ -538,7 +547,7 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
     
     
     
-    
+    //Geology information
     _outcrop = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"outcrop"]];
     _structuralData = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"structuralData"]];
     _magneticValue1 = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticValue1"]];

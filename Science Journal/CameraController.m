@@ -82,6 +82,5 @@
 
 - (void) setPhoto:(UIImage*) item{
     photo = item;
-    NSLog(@"image in camera controller: %@", photo);
 }
 @end

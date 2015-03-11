@@ -4,7 +4,7 @@
 //
 //  Created by Evan Teague on 1/14/15.
 //  Copyright (c) 2015 Evan Teague. All rights reserved.
-//
+//  Solution obtained from http://www.appcoda.com/sqlite-database-ios-app-tutorial/
 
 #import "DBManager.h"
 
@@ -132,7 +132,7 @@
             }
         }
         else {
-            // In the database cannot be opened then show the error message on the debugger.
+            // If the database cannot be opened then show the error message on the debugger.
             NSLog(@"%s", sqlite3_errmsg(sqlite3Database));
         }
         

@@ -4,7 +4,7 @@
 //
 //  Created by Evan Teague on 8/19/14.
 //  Copyright (c) 2014 Evan Teague. All rights reserved.
-//
+//  Used to help with sections http://www.icodeblog.com/2010/12/10/implementing-uitableview-sections-from-an-nsarray-of-nsdictionary-objects/
 
 #import "EntriesController.h"
 #import "EntriesCell.h"
@@ -54,7 +54,7 @@
     [self.dbManager executeQuery:delete1];
     NSString *delete2 = @"delete from entriesGeology";
     [self.dbManager executeQuery:delete2];
-     */
+    */
     
     [self loadData];
     
@@ -81,7 +81,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //Sorts it based on the project
-    NSLog(@"Number of projects: %lu", (unsigned long)[[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count]);
     return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
 
 }
@@ -89,7 +88,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //Used to help with sections http://www.icodeblog.com/2010/12/10/implementing-uitableview-sections-from-an-nsarray-of-nsdictionary-objects/
+    
     //Add each entry from the database to the tableview
     static NSString *CellIdentifier = @"EntriesCell";
     EntriesCell *cell = [tableView
@@ -97,10 +96,8 @@
                          forIndexPath:indexPath];
     
     NSString *sectionEntry = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-    NSLog(@"inside cellforrowatindexpath: %@", sectionEntry);
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where entriesBasic.entriesID = %d", [sectionEntry intValue]];
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    NSLog(@"query inside cell: %@", [results objectAtIndex:0]);
     cell.entryNameLabel.text = [[results objectAtIndex:0] objectAtIndex:1];
     cell.identifier = [sectionEntry intValue];
     cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
@@ -129,9 +126,8 @@
         addEntryController.delegate = self;
         [addEntryController setEditEntry:true];
         
-        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        //NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         EntriesCell *entryName = [self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
-        NSLog(@"Cell identifier: %d", entryName.identifier);
 
         self.recordIDToEdit = entryName.identifier;
         addEntryController.recordIDToEdit = self.recordIDToEdit;
@@ -171,7 +167,14 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         int recordIDToDelete = entryName.identifier;
         NSLog(@"Record ID to delete: %d", recordIDToDelete);
-
+        
+        NSString *deletePictureSketchQuery = [NSString stringWithFormat:@"select * from entriesBasic where entriesID=%d", recordIDToDelete];
+        NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:deletePictureSketchQuery]];
+        NSString *pictureFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"picture"]];
+        NSString *sketchFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]];
+        [[NSFileManager defaultManager] removeItemAtPath: pictureFilePath error: nil];
+        [[NSFileManager defaultManager] removeItemAtPath: sketchFilePath error: nil];
+        
         NSString *query = [NSString stringWithFormat:@"delete from entriesBasic where entriesID=%d", recordIDToDelete];
 
         [self.dbManager executeQuery:query];
@@ -243,8 +246,6 @@
         [[self.sections objectForKey:[entry objectAtIndex:2]] addObject:[entry objectAtIndex:0]];
     }
     
-    
-    NSLog(@"Sections:%@", self.sections);
     
 
     [self.tableView reloadData];

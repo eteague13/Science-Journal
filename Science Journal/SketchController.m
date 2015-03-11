@@ -4,7 +4,7 @@
 //
 //  Created by Evan Teague on 9/3/14.
 //  Copyright (c) 2014 Evan Teague. All rights reserved.
-//
+//  Solution obtained from http://www.raywenderlich.com/18840/how-to-make-a-simple-drawing-app-with-uikit
 
 #import "SketchController.h"
 #import "SketchSettingsController.h"
@@ -30,6 +30,7 @@
 
 - (void)viewDidLoad
 {
+    
     red = 0.0/255.0;
     green = 0.0/255.0;
     blue = 0.0/255.0;
@@ -38,9 +39,6 @@
     [super viewDidLoad];
     _drawImage.image = sketch;
     
-    //http://www.raywenderlich.com/18840/how-to-make-a-simple-drawing-app-with-uikit
-    // Do any additional setup after loading the view.
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,33 +63,36 @@
 
 - (IBAction)saveSelected:(id)sender {
     
+    //Saves the image and passes it back
     UIGraphicsBeginImageContextWithOptions(self.saveImage.bounds.size, NO,0.0);
     [self.saveImage.image drawInRect:CGRectMake(0, 0, self.saveImage.frame.size.width, self.saveImage.frame.size.height)];
     UIImage *SaveImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
-
+    NSLog(@"Sketch 1: %@", SaveImage);
     [self.delegate sketchControllerSave:self didFinishSketch:SaveImage];
     
-    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
 
 - (IBAction)cancelSketchButton:(id)sender {
-    NSLog(@"Did tap cancel");
+    //Cancels the sketch and closes the window
     [self.delegate sketchControllerCancel:self];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)setSketch:(UIImage*)item{
+    //sets the sketch when editing
     sketch = item;
 }
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    //Checks if the user began drawing
     mouseSwiped = NO;
     UITouch *touch = [touches anyObject];
     lastPoint = [touch locationInView:self.view];
 }
 -(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    //Tracks the movement of the user drawing
     mouseSwiped = YES;
     UITouch *touch = [touches anyObject];
     CGPoint currentPoint = [touch locationInView:self.view];
@@ -135,7 +136,7 @@
     UIGraphicsEndImageContext();
 }
 - (IBAction)selectColor:(id)sender {
-    
+    //Brush color selector
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Pick brush:"
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
@@ -146,6 +147,7 @@
 }
 
 - (IBAction)sketchActions:(id)sender {
+    //User actions selector
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Sketch Actions"
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
@@ -157,6 +159,7 @@
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    //Sets the colors based on what the user selects
     if (actionSheet.tag == 1){
         switch(buttonIndex)
         {
@@ -221,11 +224,13 @@
 }
 
 - (void)sketchSettingsControllerDone:(SketchSettingsController *) controller setSize:(CGFloat)size setOpacity:(CGFloat)op{
+    //Passes back the brush and opacity
     self->brush = size;
     self->opacity = op;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    //Opens up the brush and opacity settings
     if ([segue.identifier isEqualToString:@"sketchSettings"]) {
         SketchSettingsController *settings = [segue destinationViewController];
         settings.delegate = self;

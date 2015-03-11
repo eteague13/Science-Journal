@@ -59,6 +59,7 @@
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
     
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSLog(@"Results: %@", results);
 
     NSString *identifer, *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType;
     UIImage *sketch;
@@ -119,19 +120,24 @@
     
     NSLog(@"%@", filePath);
     
-    //Email the entry
-    //Doesn't work on the simulator, but should on phone
-    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-    mc.mailComposeDelegate = self;
-    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-    // Determine the MIME type
-    NSString *mimeType = @"text/plain";
-    //This one may be the one that works...have to wait and see
-    //NSString *mimeType = @"application/vnd.google-earth.kml+xml";
-    // Add attachment
-    [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
-    // Present mail view controller on screen
-    [self presentViewController:mc animated:YES completion:NULL];
+    if ([results count] > 0){
+        //Email the entry
+            //Doesn't work on the simulator, but should on phone
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        mc.mailComposeDelegate = self;
+        NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+        // Determine the MIME type
+        NSString *mimeType = @"text/plain";
+        //This one may be the one that works...have to wait and see
+        //NSString *mimeType = @"application/vnd.google-earth.kml+xml";
+        // Add attachment
+        [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
+        // Present mail view controller on screen
+        [self presentViewController:mc animated:YES completion:NULL];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Export Error" message: @"No entries to export" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
     
 }
 
@@ -190,6 +196,8 @@
 
 - (IBAction)emailProject:(id)sender {
     //Creates the .kml file for just the selected project
+    
+   
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where projectName = '%@'", selectedProject];
     
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
@@ -254,21 +262,26 @@
     
     NSLog(@"%@", filePath);
     
-    //Email the entry
-    //Doesn't work on the simulator, but should on phone
-    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-    mc.mailComposeDelegate = self;
-    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-    // Determine the MIME type
-    NSString *mimeType = @"text/plain";
-    //This one may be the one that works...have to wait and see
-    //NSString *mimeType = @"application/vnd.google-earth.kml+xml";
-    // Add attachment
-    [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
-    // Present mail view controller on screen
-    [self presentViewController:mc animated:YES completion:NULL];
+    if ([selectedProject length] == 0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Export Error" message: @"No project selected" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }else{
+        //Email the entry
+        //Doesn't work on the simulator, but should on phone
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        mc.mailComposeDelegate = self;
+        NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+        // Determine the MIME type
+        NSString *mimeType = @"text/plain";
+        //This one may be the one that works...have to wait and see
+        //NSString *mimeType = @"application/vnd.google-earth.kml+xml";
+        // Add attachment
+        [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
+        // Present mail view controller on screen
+        [self presentViewController:mc animated:YES completion:NULL];
 
-    NSLog(@"%@", results);
+        NSLog(@"%@", results);
+    }
     
 }
 
@@ -283,7 +296,6 @@
     if ([results count] != 0){
         _projectPicker.hidden = NO;
         for (id name in results){
-            NSLog(@"%@", [name objectAtIndex:0]);
             if ([pickerData containsObject:[name objectAtIndex:0]]){
                 
             }else{
