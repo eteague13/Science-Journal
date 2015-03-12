@@ -13,8 +13,6 @@
 		BD02064B19EC64D2005ACDD0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064A19EC64D2005ACDD0 /* QuartzCore.framework */; };
 		BD02064D19EC64E4005ACDD0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064C19EC64E4005ACDD0 /* libc++.dylib */; };
 		BD02064F19EC64ED005ACDD0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BD02064E19EC64ED005ACDD0 /* libz.dylib */; };
-		BD083A0B1A82A0B500E5864B /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD083A091A82A0B500E5864B /* Dropbox.framework */; };
-		BD083A0C1A82A0B500E5864B /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD083A0A1A82A0B500E5864B /* DropboxSDK.framework */; };
 		BD08A18B19A26BE400EE1B97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18A19A26BE400EE1B97 /* Foundation.framework */; };
 		BD08A18D19A26BE400EE1B97 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18C19A26BE400EE1B97 /* CoreGraphics.framework */; };
 		BD08A18F19A26BE400EE1B97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18E19A26BE400EE1B97 /* UIKit.framework */; };
@@ -48,6 +46,7 @@
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
 		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
 		BD91990C1A573410006E48E1 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD91990B1A573410006E48E1 /* CameraController.m */; };
+		BDB313AE1AB0E5ED00018254 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB313AD1AB0E5ED00018254 /* DropboxSDK.framework */; };
 		BDBEB5451A607F5C00780EC2 /* MagneticDecController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBEB5441A607F5C00780EC2 /* MagneticDecController.m */; };
 		BDC4FEF21A81B2F60057A86D /* green_button.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC4FEF11A81B2F60057A86D /* green_button.png */; };
 		BDC4FEFE1A81B6DA0057A86D /* Sandcropped3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BDC4FEFB1A81B6DA0057A86D /* Sandcropped3.jpg */; };
@@ -133,6 +132,7 @@
 		BD91990A1A573410006E48E1 /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
 		BD91990B1A573410006E48E1 /* CameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraController.m; sourceTree = "<group>"; };
 		BDA0A73E1A00863100B421FB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "../../Downloads/dropbox-ios-sync-sdk-3.1-2.1/Dropbox.framework"; sourceTree = "<group>"; };
+		BDB313AD1AB0E5ED00018254 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		BDBEB5431A607F5C00780EC2 /* MagneticDecController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagneticDecController.h; sourceTree = "<group>"; };
 		BDBEB5441A607F5C00780EC2 /* MagneticDecController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagneticDecController.m; sourceTree = "<group>"; };
 		BDC4FEF11A81B2F60057A86D /* green_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_button.png; sourceTree = "<group>"; };
@@ -157,11 +157,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD083A0B1A82A0B500E5864B /* Dropbox.framework in Frameworks */,
-				BD083A0C1A82A0B500E5864B /* DropboxSDK.framework in Frameworks */,
 				BDC8358A1A674E46000B60BD /* libsqlite3.dylib in Frameworks */,
 				BDFF53BE1A4226C10054B4FA /* MessageUI.framework in Frameworks */,
 				BD02064F19EC64ED005ACDD0 /* libz.dylib in Frameworks */,
+				BDB313AE1AB0E5ED00018254 /* DropboxSDK.framework in Frameworks */,
 				BD02064D19EC64E4005ACDD0 /* libc++.dylib in Frameworks */,
 				BD02064B19EC64D2005ACDD0 /* QuartzCore.framework in Frameworks */,
 				BD02064919EC64C9005ACDD0 /* SystemConfiguration.framework in Frameworks */,
@@ -192,6 +191,7 @@
 		BD08A17E19A26BE300EE1B97 = {
 			isa = PBXGroup;
 			children = (
+				BDB313AD1AB0E5ED00018254 /* DropboxSDK.framework */,
 				BD08A19019A26BE400EE1B97 /* Science Journal */,
 				BD08A18819A26BE400EE1B97 /* Products */,
 				BD08A1B219A26BE400EE1B97 /* Science JournalTests */,

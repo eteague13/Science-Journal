@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "EntriesController.h"
+#import <DropboxSDK/DropboxSDK.h>
 
 
 @implementation AppDelegate
@@ -53,11 +54,15 @@
                                  dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchPartners"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults12];
     NSDictionary *appDefaults13 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGeoMagDec"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchSketch"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults13];
 
-
     
+    DBSession *dbSession = [[DBSession alloc]
+                            initWithAppKey:@"2xraywobhwdkb94"
+                            appSecret:@"p38tbm8288tnc3p"
+                            root:kDBRootAppFolder];
+    [DBSession setSharedSession:dbSession];
 
     return YES;
 }
@@ -88,6 +93,20 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+  sourceApplication:(NSString *)source annotation:(id)annotation {
+    if ([[DBSession sharedSession] handleOpenURL:url]) {
+        if ([[DBSession sharedSession] isLinked]) {
+            NSLog(@"App linked successfully!");
+            // At this point you can start making API calls
+        }
+        return YES;
+    }
+    // Add whatever other url handling code your app requires here
+    return NO;
+}
+
 
 
 

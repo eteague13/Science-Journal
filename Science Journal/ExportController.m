@@ -32,6 +32,9 @@
     
     //Set the picker projects
     [self setPickerProjects];
+    
+    self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+    self.restClient.delegate = self;
     // Do any additional setup after loading the view.
    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
@@ -309,5 +312,44 @@
     }else{
         _projectPicker.hidden = YES;
     }
+}
+- (IBAction)syncDropbox:(id)sender {
+    NSLog(@"HERE");
+    NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:localDir error:nil];
+    
+    for (int i = 0; i < [files count]; i++){
+         NSLog(@"HERE");
+        if ([[files objectAtIndex:i] rangeOfString:@".png"].location != NSNotFound){
+            localPath = [localDir stringByAppendingPathComponent:[files objectAtIndex:i]];
+            filename = [files objectAtIndex:i];
+            NSLog(@"%@", filename);
+            [self.restClient loadMetadata:[NSString stringWithFormat:@"/%@", [files objectAtIndex:i]]];
+        }
+    }
+}
+
+- (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath
+              from:(NSString *)srcPath metadata:(DBMetadata *)metadata {
+    NSLog(@"File uploaded successfully to path: %@, %@", metadata.path, metadata.rev);
+}
+
+- (void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error {
+    NSLog(@"File upload failed with error: %@", error);
+}
+
+- (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
+    NSLog(@"in loaded metadata: %@", metadata.filename);
+    [self uploadFile:metadata];
+    
+}
+
+- (void)restClient:(DBRestClient *)client
+loadMetadataFailedWithError:(NSError *)error {
+    [self uploadFile:nil];
+}
+
+-(void)uploadFile: (DBMetadata*)meta {
+    [self.restClient uploadFile:filename toPath:@"/" withParentRev:meta.rev fromPath:localPath];
 }
 @end

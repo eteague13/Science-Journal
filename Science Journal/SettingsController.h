@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 
 #import "DBManager.h"
+#import <DropboxSDK/DropboxSDK.h>
 
 
 
-@interface SettingsController : UIViewController <UIScrollViewDelegate>
+@interface SettingsController : UIViewController <UIScrollViewDelegate, DBRestClientDelegate> {
+    NSString *fileRevision;
+    NSString *localPath;
+    NSString *filename;
+}
 
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
@@ -42,6 +47,11 @@
 - (IBAction)permissionsFlip:(id)sender;
 - (IBAction)sampleNumFlip:(id)sender;
 - (IBAction)partnersFlip:(id)sender;
+- (IBAction)linkDropbox:(id)sender;
+- (IBAction)unlinkDropbox:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *dropboxStatusLabel;
+
+@property (nonatomic, strong) DBRestClient *restClient;
 
 
 
