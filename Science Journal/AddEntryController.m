@@ -116,6 +116,7 @@
     
 self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
 [self.tableView setSeparatorColor:[UIColor blackColor]];
+[self.tableView setSeparatorInset:UIEdgeInsetsZero];
 
     
 }

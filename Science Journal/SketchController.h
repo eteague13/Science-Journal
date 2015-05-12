@@ -28,13 +28,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *saveImage;
 @property (weak, nonatomic) IBOutlet UIImageView *drawImage;
 - (IBAction)pencilSelected:(id)sender;
-- (IBAction)eraserSelected:(id)sender;
 - (IBAction)saveSelected:(id)sender;
 - (IBAction)cancelSketchButton:(id)sender;
 - (void)setSketch:(UIImage*)item;
 @property (nonatomic, weak) id <SketchControllerDelegate> delegate;
 - (IBAction)selectColor:(id)sender;
 - (IBAction)sketchActions:(id)sender;
+- (IBAction)eraserSelected:(id)sender;
 
 
 @end

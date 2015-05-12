@@ -141,7 +141,7 @@
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Black", @"Grey", @"Red", @"Blue", @"Green", @"Light Blue", @"Brown", @"Yellow", @"Eraser", nil];
+                                                    otherButtonTitles:@"Black", @"Grey", @"Red", @"Blue", @"Green", @"Light Blue", @"Brown", @"Yellow", nil];
     actionSheet.tag = 1;
     [actionSheet showInView:self.view];
 }
@@ -156,6 +156,13 @@
     actionSheet.tag = 2;
     [actionSheet showInView:self.view];
     
+}
+
+- (IBAction)eraserSelected:(id)sender {
+    red = 255.0/255.0;
+    green = 255.0/255.0;
+    blue = 255.0/255.0;
+    opacity = 1.0;
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -202,12 +209,6 @@
                 red = 255.0/255.0;
                 green = 255.0/255.0;
                 blue = 0.0/255.0;
-                break;
-            case 8: //Eraser
-                red = 255.0/255.0;
-                green = 255.0/255.0;
-                blue = 255.0/255.0;
-                opacity = 1.0;
                 break;
         }
     }else if (actionSheet.tag == 2){
