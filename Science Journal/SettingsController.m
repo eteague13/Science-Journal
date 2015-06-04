@@ -39,7 +39,7 @@
     _geoStopNumSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStopNum"];
     _geoStructDataSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStructData"];
      */
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
    
     [self checkIfDropboxLinked];
     
@@ -147,6 +147,11 @@
         _dropboxStatusLabel.text = @"Unlinked!";
         
     }
+}
+
+- (IBAction)dataSheetFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_dataSheetSwitch.on forKey:@"SwitchDataSheet"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 //Need to figure out how to set the linked/unlinked status button correctly
 -(void)checkIfDropboxLinked{

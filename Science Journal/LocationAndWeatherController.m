@@ -30,7 +30,7 @@
         _weatherField.text = weatherArea;
     }
 
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
     //Draws the text view
     CGRect frame = CGRectMake(0, 250, 320, 327);
@@ -38,6 +38,8 @@
     [self.view addSubview:_weatherField];
     _weatherField.delegate = self;
     [_weatherField setScrollEnabled:YES];
+    _latitudeField.delegate = self;
+    _longitudeField.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -187,5 +189,16 @@
 - (void)textViewDidEndEditing:(UITextView *)textView {
     CGRect frame = CGRectMake(0, 250, 320, 327);
     _weatherField.frame = frame;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

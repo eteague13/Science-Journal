@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddReferenceController.h"
+#import "DBManager.h"
+#import "EntriesCell.h"
+#import "ViewReferenceController.h"
 
-@interface ReferenceViewController : UITableViewController
+
+@interface ReferenceViewController : UITableViewController <AddReferenceControllerDelegate, ViewReferenceControllerDelegate> {
+    
+}
+
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSArray *allReferencesFromDB;
+@property (strong, nonatomic) IBOutlet UITableView *referenceTable;
+    
 
 @end

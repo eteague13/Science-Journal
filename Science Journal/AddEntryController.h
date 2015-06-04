@@ -13,6 +13,7 @@
 #import "CameraController.h"
 #import "MagneticDecController.h"
 #import "DBManager.h"
+#import "DataSheetController.h"
 
 
 @class AddEntryController;
@@ -22,7 +23,7 @@
 
 @end
 
-@interface AddEntryController : UITableViewController <datepickerControllerDelegate, LocationAndWeatherControllerDelegate, SketchControllerDelegate, CameraControllerDelegate, MagneticDecControllerDelegate> {
+@interface AddEntryController : UITableViewController <datepickerControllerDelegate, LocationAndWeatherControllerDelegate, SketchControllerDelegate, CameraControllerDelegate, MagneticDecControllerDelegate, DataSheetControllerDelegate> {
     BOOL isEditEntry;
     
 }
@@ -56,7 +57,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *partnersField;
 
 
-@property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType;
+@property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType, *dataSheet;
 @property (strong, nonatomic) UIImage *sketch;
 @property (strong, nonatomic) UIImage *picture;
 
@@ -75,6 +76,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *permissionsCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *sampleNumCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *partnersCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *dataSheetCell;
 
 
 @end

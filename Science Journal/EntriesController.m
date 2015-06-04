@@ -44,7 +44,7 @@
     
     
 
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     [self.tableView setSeparatorColor:[UIColor blackColor]];
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     
@@ -99,9 +99,10 @@
     NSString *sectionEntry = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where entriesBasic.entriesID = %d", [sectionEntry intValue]];
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSLog(@"Item: %@", results);
     cell.entryNameLabel.text = [[results objectAtIndex:0] objectAtIndex:1];
     cell.identifier = [sectionEntry intValue];
-    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_arrow.png"]];
     cell.accessoryView = arrow;
     return cell;

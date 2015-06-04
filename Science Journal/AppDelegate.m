@@ -56,7 +56,10 @@
     NSDictionary *appDefaults13 = [NSDictionary
                                  dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchSketch"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults13];
-
+    NSDictionary *appDefaults14 = [NSDictionary
+                                   dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchDataSheet"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults14];
+    
     
     DBSession *dbSession = [[DBSession alloc]
                             initWithAppKey:@"2xraywobhwdkb94"

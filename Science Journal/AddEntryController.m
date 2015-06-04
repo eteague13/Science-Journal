@@ -113,11 +113,22 @@
     }else{
         _partnersCell.hidden = YES;
     }
+    bool dataSheetSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchDataSheet"];
+    if (dataSheetSwitch) {
+        _dataSheetCell.hidden = NO;
+    }else{
+        _dataSheetCell.hidden = YES;
+    }
     
-self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+//self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
 [self.tableView setSeparatorColor:[UIColor blackColor]];
 [self.tableView setSeparatorInset:UIEdgeInsetsZero];
 
+    _entryNameField.delegate = self;
+    _projectNameField.delegate = self;
+    _sampleNumberField.delegate = self;
+    _stopNumField.delegate = self;
+    
     
 }
 
@@ -215,15 +226,24 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
     if ([_stopNum length] == 0){
         _stopNum = @"";
     }
+    if ([_dataSheet length] == 0){
+        _dataSheet = @"";
+    }
     NSString *queryBasic;
     NSString *queryGeology;
     //If this is adding a new entry
     if(self.recordIDToEdit == -1){
-        queryBasic = [NSString stringWithFormat:@"insert into entriesBasic values(null, '%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@', '%@')",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners];
+        /*
+       
+        NSLog(@"Dictionary Test: %@", testDictionary);
+         */
+    
+        //NSData *tempData = [NSKeyedArchiver archivedDataWithRootObject:_dataSheet];
+        queryBasic = [NSString stringWithFormat:@"insert into entriesBasic values(null, '%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@', '%@', '%@')",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, _dataSheet];
         queryGeology = [NSString stringWithFormat:@"insert into entriesGeology values(null, '%@', '%@','%@','%@','%@','%@')",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum];
     //If this is updating an existing entry
     }else{
-        queryBasic = [NSString stringWithFormat:@"update entriesBasic set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', picture='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@' where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, self.recordIDToEdit];
+        queryBasic = [NSString stringWithFormat:@"update entriesBasic set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', picture='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@', dataSheet='%@' where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, _dataSheet, self.recordIDToEdit];
         queryGeology = [NSString stringWithFormat:@"update entriesGeology set outcrop='%@', structuralData='%@',magneticValue1='%@',magneticValue2='%@',magneticType='%@',stopNum='%@' where entriesID=%d",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum, self.recordIDToEdit];
     }
     //Each entry has to have an entry name and project. If it does, then it performs the query
@@ -236,6 +256,7 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Entry Error" message: @"You need to add a Project Name" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }else{
+        
         [self.dbManager executeQuery:queryBasic];
 
         if (self.dbManager.affectedRows != 0) {
@@ -325,6 +346,21 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
     
 }
 
+- (void)dataSheetControllerCancel:(DataSheetController *) controller{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)dataSheetControllerSave:(DataSheetController *)controller didSaveArray:(NSMutableDictionary*) array{
+    
+    for (id key in array){
+        NSLog(@"Key: %@, Value: %@", key, [array objectForKey:key]);
+    }
+    NSError *error;
+    NSData *tempData = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonDataSheet = [[NSString alloc] initWithData:tempData encoding:NSUTF8StringEncoding];
+    self.dataSheet = jsonDataSheet;
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -389,6 +425,12 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
         MagneticDecController *magnetController = segue.destinationViewController;
         magnetController.delegate = self;
         [magnetController setVal1:_magneticValue1 setVal2:_magneticValue2 setType:_magneticType];
+    }else if ([segue.identifier isEqualToString:@"DataSheet"]){
+        DataSheetController *dataSheetController = segue.destinationViewController;
+        dataSheetController.delegate = self;
+        NSLog(@"Data segue: %@", _dataSheet);
+        [dataSheetController setSheetData:_dataSheet];
+        
     }
 }
 
@@ -506,6 +548,12 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
         }else{
             return [super tableView:tableView heightForRowAtIndexPath:indexPath];
         }
+    }else if (cell == _dataSheetCell){
+        if(_dataSheetCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
     
     }else{
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
@@ -538,7 +586,7 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
     _picture = [UIImage imageWithContentsOfFile:pictureFilePath];
     NSString *sketchFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]];
     _sketch = [UIImage imageWithContentsOfFile:sketchFilePath];
-    
+    _dataSheet = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"dataSheet"]];
     _entryNameField.text = _name;
     _projectNameField.text = _projectName;
     _dateLabelField.text = _date;
@@ -564,7 +612,7 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
 
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_arrow.png"]];
     
     //Do not add an accessory arrow in certain conditions 
@@ -626,6 +674,16 @@ self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@
     }
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 
 @end

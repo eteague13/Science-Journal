@@ -20,7 +20,7 @@
     _brushSizeSlider.value = _brush;
     _brushOpacityLabel.text = [NSString stringWithFormat:@"%.1f", self.opacity];
     _brushOpacitySlider.value = _opacity;
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     // Do any additional setup after loading the view.
 }
 

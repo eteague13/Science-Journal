@@ -51,7 +51,7 @@
     if ([textArea length] != 0){
         _note.text = textArea;
     }
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
     //Draws the text view
     CGRect frame = CGRectMake(0, 94, 320, 474);

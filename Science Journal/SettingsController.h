@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *permissionSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *sampleSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *partnersSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *dataSheetSwitch;
 - (IBAction)geoMagDecFlip:(id)sender;
 - (IBAction)geoStopNumFlip:(id)sender;
 - (IBAction)geoOutcropFlip:(id)sender;
@@ -49,6 +50,7 @@
 - (IBAction)partnersFlip:(id)sender;
 - (IBAction)linkDropbox:(id)sender;
 - (IBAction)unlinkDropbox:(id)sender;
+- (IBAction)dataSheetFlip:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *dropboxStatusLabel;
 
 @property (nonatomic, strong) DBRestClient *restClient;

@@ -29,7 +29,10 @@
             [_magDecType setSelectedSegmentIndex:1];
         }
     }
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    
+    _value1.delegate = self;
+    _value2.delegate = self;
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,5 +77,16 @@
     value1 = val1;
     value2 = val2;
     self->type = typ;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

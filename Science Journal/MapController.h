@@ -13,7 +13,7 @@
 
 @interface MapController : UIViewController <MKMapViewDelegate, AddEntryControllerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property(weak, nonatomic) NSString *selectedAnnotationIdentifier;
+@property (weak, nonatomic) NSString *selectedAnnotationIdentifier;
 - (IBAction)zoomCurrentLocation:(id)sender;
 - (IBAction)changeMapType:(id)sender;
 

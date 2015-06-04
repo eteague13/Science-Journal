@@ -23,7 +23,7 @@
     mapView.delegate = self;
     mapView.showsUserLocation = YES;
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
     
     
@@ -39,10 +39,11 @@
 
 //Sets the initial map view to the user's current location
     MKUserLocation *userLocation = mapView.userLocation;
-    MKCoordinateRegion region =
+    //MKCoordinateRegion region =
     MKCoordinateRegionMakeWithDistance (
-                                        userLocation.location.coordinate, 20000, 20000);
-    [mapView setRegion:region animated:YES];
+                                        userLocation.location.coordinate, 200, 200);
+    //[mapView setRegion:region animated:YES];
+    [mapView setCenterCoordinate:mapView.userLocation.location.coordinate];
     
 }
 
@@ -154,7 +155,7 @@
     MKUserLocation *userLocation = mapView.userLocation;
     MKCoordinateRegion region =
     MKCoordinateRegionMakeWithDistance (
-                                        userLocation.location.coordinate, 20000, 20000);
+                                        userLocation.location.coordinate, 200, 200);
     [mapView setRegion:region animated:NO];
 }
 

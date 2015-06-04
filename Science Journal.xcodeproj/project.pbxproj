@@ -19,7 +19,6 @@
 		BD08A19519A26BE400EE1B97 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD08A19319A26BE400EE1B97 /* InfoPlist.strings */; };
 		BD08A19719A26BE400EE1B97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A19619A26BE400EE1B97 /* main.m */; };
 		BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A19A19A26BE400EE1B97 /* AppDelegate.m */; };
-		BD08A19E19A26BE400EE1B97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD08A19C19A26BE400EE1B97 /* Main.storyboard */; };
 		BD08A1A119A26BE400EE1B97 /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A1A019A26BE400EE1B97 /* MapController.m */; };
 		BD08A1A619A26BE400EE1B97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD08A1A519A26BE400EE1B97 /* Images.xcassets */; };
 		BD08A1AD19A26BE400EE1B97 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A1AC19A26BE400EE1B97 /* XCTest.framework */; };
@@ -27,6 +26,7 @@
 		BD08A1AF19A26BE400EE1B97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18E19A26BE400EE1B97 /* UIKit.framework */; };
 		BD08A1B719A26BE400EE1B97 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD08A1B519A26BE400EE1B97 /* InfoPlist.strings */; };
 		BD08A1B919A26BE400EE1B97 /* Science_JournalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A1B819A26BE400EE1B97 /* Science_JournalTests.m */; };
+		BD3125461B17A834000F9C48 /* DataSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3125451B17A834000F9C48 /* DataSheetController.m */; };
 		BD3A30C71A87F18100202981 /* 58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3A30C41A87F18100202981 /* 58x58.png */; };
 		BD3A30C81A87F18100202981 /* 80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3A30C51A87F18100202981 /* 80x80.png */; };
 		BD3A30C91A87F18100202981 /* 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3A30C61A87F18100202981 /* 120x120.png */; };
@@ -34,13 +34,16 @@
 		BD3FB96919A278DE002496CE /* ExportController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96819A278DE002496CE /* ExportController.m */; };
 		BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96B19A278F1002496CE /* SettingsController.m */; };
 		BD3FB97019A2C314002496CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3FB96F19A2C314002496CE /* MapKit.framework */; };
-		BD4C60A91A78702300BE192F /* entriesdb.sql in Resources */ = {isa = PBXBuildFile; fileRef = BD4C60A81A78702300BE192F /* entriesdb.sql */; };
 		BD5C6E6619B681D100342E4B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C6E6519B681D100342E4B /* CoreLocation.framework */; };
 		BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C6E6819B7848E00342E4B /* SketchController.m */; };
 		BD5FD9CF1A4A07FC003CC565 /* AddEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9CE1A4A07FC003CC565 /* AddEntryController.m */; };
 		BD5FD9D21A4BA2F5003CC565 /* datepickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9D11A4BA2F5003CC565 /* datepickerController.m */; };
 		BD5FD9D51A4BBA9B003CC565 /* textEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9D41A4BBA9B003CC565 /* textEntryController.m */; };
 		BD6EE1B51A92BF0700D06474 /* NoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6EE1B41A92BF0700D06474 /* NoteView.m */; };
+		BD6FD83A1B1B943100C46DEA /* entriesdb.sql in Resources */ = {isa = PBXBuildFile; fileRef = BD6FD8391B1B943100C46DEA /* entriesdb.sql */; };
+		BD6FD83D1B1CA79B00C46DEA /* AddReferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6FD83C1B1CA79B00C46DEA /* AddReferenceController.m */; };
+		BD6FD8441B1CD97B00C46DEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD6FD8431B1CD97B00C46DEA /* Main.storyboard */; };
+		BD6FD8471B1D2AE400C46DEA /* ViewReferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6FD8461B1D2AE400C46DEA /* ViewReferenceController.m */; };
 		BD73D2021A93E69900866D54 /* SketchSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD73D2011A93E69900866D54 /* SketchSettingsController.m */; };
 		BD76F5CA19B5001D000A1349 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD76F5C919B5001D000A1349 /* MobileCoreServices.framework */; };
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
@@ -58,6 +61,8 @@
 		BDC8358D1A675108000B60BD /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC8358C1A675108000B60BD /* DBManager.m */; };
 		BDD74CB81A64CFC100635CBA /* ReferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD74CB71A64CFC100635CBA /* ReferenceViewController.m */; };
 		BDE248A41A4DEEA500B1F97D /* LocationAndWeatherController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE248A31A4DEEA500B1F97D /* LocationAndWeatherController.m */; };
+		BDF325B71B1E25610003F217 /* referencesdb.sql in Resources */ = {isa = PBXBuildFile; fileRef = BDF325B61B1E25610003F217 /* referencesdb.sql */; };
+		BDF325B91B1E2B5E0003F217 /* Sand4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BDF325B81B1E2B5E0003F217 /* Sand4.jpg */; };
 		BDFF53BE1A4226C10054B4FA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFF53BD1A4226C10054B4FA /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,7 +86,7 @@
 		BD02064E19EC64ED005ACDD0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BD083A091A82A0B500E5864B /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = ../../Desktop/Dropbox.framework; sourceTree = "<group>"; };
 		BD083A0A1A82A0B500E5864B /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = ../../Desktop/DropboxSDK.framework; sourceTree = "<group>"; };
-		BD08A18719A26BE400EE1B97 /* Science Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Science Journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD08A18719A26BE400EE1B97 /* FieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD08A18A19A26BE400EE1B97 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BD08A18C19A26BE400EE1B97 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		BD08A18E19A26BE400EE1B97 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -91,7 +96,6 @@
 		BD08A19819A26BE400EE1B97 /* Science Journal-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Science Journal-Prefix.pch"; sourceTree = "<group>"; };
 		BD08A19919A26BE400EE1B97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BD08A19A19A26BE400EE1B97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		BD08A19D19A26BE400EE1B97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BD08A19F19A26BE400EE1B97 /* MapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
 		BD08A1A019A26BE400EE1B97 /* MapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
 		BD08A1A519A26BE400EE1B97 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 		BD08A1B419A26BE400EE1B97 /* Science JournalTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Science JournalTests-Info.plist"; sourceTree = "<group>"; };
 		BD08A1B619A26BE400EE1B97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BD08A1B819A26BE400EE1B97 /* Science_JournalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Science_JournalTests.m; sourceTree = "<group>"; };
+		BD3125441B17A834000F9C48 /* DataSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSheetController.h; sourceTree = "<group>"; };
+		BD3125451B17A834000F9C48 /* DataSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSheetController.m; sourceTree = "<group>"; };
 		BD3A30C41A87F18100202981 /* 58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 58x58.png; sourceTree = "<group>"; };
 		BD3A30C51A87F18100202981 /* 80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 80x80.png; sourceTree = "<group>"; };
 		BD3A30C61A87F18100202981 /* 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120x120.png; sourceTree = "<group>"; };
@@ -109,7 +115,6 @@
 		BD3FB96A19A278F1002496CE /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		BD3FB96B19A278F1002496CE /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		BD3FB96F19A2C314002496CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		BD4C60A81A78702300BE192F /* entriesdb.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = entriesdb.sql; sourceTree = "<group>"; };
 		BD5C43811A81D02300EA0CF2 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "../../Downloads/dropbox-ios-sync-sdk-3.1-2.2/Dropbox.framework"; sourceTree = "<group>"; };
 		BD5C6E6519B681D100342E4B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BD5C6E6719B7848E00342E4B /* SketchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SketchController.h; sourceTree = "<group>"; };
@@ -122,6 +127,12 @@
 		BD5FD9D41A4BBA9B003CC565 /* textEntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = textEntryController.m; sourceTree = "<group>"; };
 		BD6EE1B31A92BF0700D06474 /* NoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteView.h; sourceTree = "<group>"; };
 		BD6EE1B41A92BF0700D06474 /* NoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteView.m; sourceTree = "<group>"; };
+		BD6FD8391B1B943100C46DEA /* entriesdb.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = entriesdb.sql; sourceTree = "<group>"; };
+		BD6FD83B1B1CA79B00C46DEA /* AddReferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReferenceController.h; sourceTree = "<group>"; };
+		BD6FD83C1B1CA79B00C46DEA /* AddReferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReferenceController.m; sourceTree = "<group>"; };
+		BD6FD8431B1CD97B00C46DEA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		BD6FD8451B1D2AE400C46DEA /* ViewReferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewReferenceController.h; sourceTree = "<group>"; };
+		BD6FD8461B1D2AE400C46DEA /* ViewReferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewReferenceController.m; sourceTree = "<group>"; };
 		BD73D2001A93E69900866D54 /* SketchSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SketchSettingsController.h; sourceTree = "<group>"; };
 		BD73D2011A93E69900866D54 /* SketchSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SketchSettingsController.m; sourceTree = "<group>"; };
 		BD76F5C919B5001D000A1349 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -149,6 +160,8 @@
 		BDE248A21A4DEEA500B1F97D /* LocationAndWeatherController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAndWeatherController.h; sourceTree = "<group>"; };
 		BDE248A31A4DEEA500B1F97D /* LocationAndWeatherController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAndWeatherController.m; sourceTree = "<group>"; };
 		BDE8CCC51A44B3BD0013CAB9 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "../../Downloads/dropbox-ios-sdk-1.3-3.13/DropboxSDK.framework"; sourceTree = "<group>"; };
+		BDF325B61B1E25610003F217 /* referencesdb.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = referencesdb.sql; sourceTree = "<group>"; };
+		BDF325B81B1E2B5E0003F217 /* Sand4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sand4.jpg; sourceTree = "<group>"; };
 		BDFF53BD1A4226C10054B4FA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -202,7 +215,7 @@
 		BD08A18819A26BE400EE1B97 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BD08A18719A26BE400EE1B97 /* Science Journal.app */,
+				BD08A18719A26BE400EE1B97 /* FieldBook.app */,
 				BD08A1AB19A26BE400EE1B97 /* Science JournalTests.xctest */,
 			);
 			name = Products;
@@ -239,10 +252,11 @@
 		BD08A19019A26BE400EE1B97 /* Science Journal */ = {
 			isa = PBXGroup;
 			children = (
-				BD4C60A81A78702300BE192F /* entriesdb.sql */,
+				BDF325B61B1E25610003F217 /* referencesdb.sql */,
+				BD6FD8431B1CD97B00C46DEA /* Main.storyboard */,
+				BD6FD8391B1B943100C46DEA /* entriesdb.sql */,
 				BD08A19919A26BE400EE1B97 /* AppDelegate.h */,
 				BD08A19A19A26BE400EE1B97 /* AppDelegate.m */,
-				BD08A19C19A26BE400EE1B97 /* Main.storyboard */,
 				BD08A19F19A26BE400EE1B97 /* MapController.h */,
 				BD08A1A019A26BE400EE1B97 /* MapController.m */,
 				BD3FB96719A278DE002496CE /* ExportController.h */,
@@ -277,6 +291,12 @@
 				BD6EE1B41A92BF0700D06474 /* NoteView.m */,
 				BD73D2001A93E69900866D54 /* SketchSettingsController.h */,
 				BD73D2011A93E69900866D54 /* SketchSettingsController.m */,
+				BD3125441B17A834000F9C48 /* DataSheetController.h */,
+				BD3125451B17A834000F9C48 /* DataSheetController.m */,
+				BD6FD83B1B1CA79B00C46DEA /* AddReferenceController.h */,
+				BD6FD83C1B1CA79B00C46DEA /* AddReferenceController.m */,
+				BD6FD8451B1D2AE400C46DEA /* ViewReferenceController.h */,
+				BD6FD8461B1D2AE400C46DEA /* ViewReferenceController.m */,
 			);
 			path = "Science Journal";
 			sourceTree = "<group>";
@@ -284,6 +304,7 @@
 		BD08A19119A26BE400EE1B97 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BDF325B81B1E2B5E0003F217 /* Sand4.jpg */,
 				BD3A30CA1A87F21C00202981 /* 180x180.png */,
 				BD3A30C41A87F18100202981 /* 58x58.png */,
 				BD3A30C51A87F18100202981 /* 80x80.png */,
@@ -337,7 +358,7 @@
 			);
 			name = "Science Journal";
 			productName = "Science Journal";
-			productReference = BD08A18719A26BE400EE1B97 /* Science Journal.app */;
+			productReference = BD08A18719A26BE400EE1B97 /* FieldBook.app */;
 			productType = "com.apple.product-type.application";
 		};
 		BD08A1AA19A26BE400EE1B97 /* Science JournalTests */ = {
@@ -367,6 +388,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "___FULLUSERNAME___";
 				TargetAttributes = {
+					BD08A18619A26BE300EE1B97 = {
+						DevelopmentTeam = ZUC4X63UDS;
+					};
 					BD08A1AA19A26BE400EE1B97 = {
 						TestTargetID = BD08A18619A26BE300EE1B97;
 					};
@@ -398,18 +422,20 @@
 			files = (
 				BD3A30C91A87F18100202981 /* 120x120.png in Resources */,
 				BD3A30C81A87F18100202981 /* 80x80.png in Resources */,
+				BDF325B91B1E2B5E0003F217 /* Sand4.jpg in Resources */,
 				BDC4FF021A81B9C30057A86D /* blue_button.png in Resources */,
+				BDF325B71B1E25610003F217 /* referencesdb.sql in Resources */,
 				BDC4FEFF1A81B6DA0057A86D /* Sandcropped2.jpg in Resources */,
 				BD3A30CB1A87F21C00202981 /* 180x180.png in Resources */,
+				BD6FD8441B1CD97B00C46DEA /* Main.storyboard in Resources */,
 				BD08A1A619A26BE400EE1B97 /* Images.xcassets in Resources */,
 				BDC4FEFE1A81B6DA0057A86D /* Sandcropped3.jpg in Resources */,
 				BDC4FF041A81BFBC0057A86D /* right_arrow.png in Resources */,
 				BDC4FF001A81B6DA0057A86D /* Sandcropped1.jpg in Resources */,
 				BD08A19519A26BE400EE1B97 /* InfoPlist.strings in Resources */,
 				BD3A30C71A87F18100202981 /* 58x58.png in Resources */,
+				BD6FD83A1B1B943100C46DEA /* entriesdb.sql in Resources */,
 				BDC4FEF21A81B2F60057A86D /* green_button.png in Resources */,
-				BD08A19E19A26BE400EE1B97 /* Main.storyboard in Resources */,
-				BD4C60A91A78702300BE192F /* entriesdb.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,14 +461,17 @@
 				BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */,
 				BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */,
 				BD5FD9D51A4BBA9B003CC565 /* textEntryController.m in Sources */,
+				BD3125461B17A834000F9C48 /* DataSheetController.m in Sources */,
 				BDBEB5451A607F5C00780EC2 /* MagneticDecController.m in Sources */,
 				BD08A1A119A26BE400EE1B97 /* MapController.m in Sources */,
 				BD91990C1A573410006E48E1 /* CameraController.m in Sources */,
+				BD6FD83D1B1CA79B00C46DEA /* AddReferenceController.m in Sources */,
 				BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */,
 				BD3FB96919A278DE002496CE /* ExportController.m in Sources */,
 				BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */,
 				BDE248A41A4DEEA500B1F97D /* LocationAndWeatherController.m in Sources */,
 				BD6EE1B51A92BF0700D06474 /* NoteView.m in Sources */,
+				BD6FD8471B1D2AE400C46DEA /* ViewReferenceController.m in Sources */,
 				BD5FD9CF1A4A07FC003CC565 /* AddEntryController.m in Sources */,
 				BD08A19719A26BE400EE1B97 /* main.m in Sources */,
 				BD5FD9D21A4BA2F5003CC565 /* datepickerController.m in Sources */,
@@ -474,14 +503,6 @@
 				BD08A19419A26BE400EE1B97 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		BD08A19C19A26BE400EE1B97 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BD08A19D19A26BE400EE1B97 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		BD08A1B519A26BE400EE1B97 /* InfoPlist.strings */ = {
@@ -571,6 +592,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -582,7 +605,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Science Journal/Science Journal-Prefix.pch";
 				INFOPLIST_FILE = "Science Journal/Science Journal-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FieldBook;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -593,6 +617,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -604,7 +630,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Science Journal/Science Journal-Prefix.pch";
 				INFOPLIST_FILE = "Science Journal/Science Journal-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FieldBook;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

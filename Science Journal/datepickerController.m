@@ -24,7 +24,8 @@
     if ([dateValue length] != 0 ){
         _dateDisplay.text = dateValue;
     }
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    _dateDisplay.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,5 +63,16 @@
 
 -(void)setDateValue:(NSString *)date{
     dateValue = date;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 @end
