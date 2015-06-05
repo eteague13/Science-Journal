@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BD08A18619A26BE300EE1B97"
-               BuildableName = "Science Journal.app"
+               BuildableName = "FieldBook.app"
                BlueprintName = "Science Journal"
                ReferencedContainer = "container:Science Journal.xcodeproj">
             </BuildableReference>
@@ -48,7 +48,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BD08A18619A26BE300EE1B97"
-            BuildableName = "Science Journal.app"
+            BuildableName = "FieldBook.app"
             BlueprintName = "Science Journal"
             ReferencedContainer = "container:Science Journal.xcodeproj">
          </BuildableReference>
@@ -63,11 +63,12 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BD08A18619A26BE300EE1B97"
-            BuildableName = "Science Journal.app"
+            BuildableName = "FieldBook.app"
             BlueprintName = "Science Journal"
             ReferencedContainer = "container:Science Journal.xcodeproj">
          </BuildableReference>
@@ -81,11 +82,12 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BD08A18619A26BE300EE1B97"
-            BuildableName = "Science Journal.app"
+            BuildableName = "FieldBook.app"
             BlueprintName = "Science Journal"
             ReferencedContainer = "container:Science Journal.xcodeproj">
          </BuildableReference>

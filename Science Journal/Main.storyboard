@@ -1385,7 +1385,7 @@
                         <color key="sectionIndexTrackingBackgroundColor" white="0.85000002379999995" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ReferenceCell" editingAccessoryType="detailButton" id="sai-Bs-Fyt" customClass="EntriesCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sai-Bs-Fyt" id="T5y-Yi-cSO">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1917,7 +1917,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="14h-1l-Sad"/>
-        <segue reference="tgU-8H-KQR"/>
+        <segue reference="5RH-z1-vRQ"/>
         <segue reference="VXA-wr-KCQ"/>
     </inferredMetricsTieBreakers>
 </document>

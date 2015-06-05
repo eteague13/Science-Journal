@@ -18,6 +18,7 @@
 - (IBAction)changeMapType:(id)sender;
 
 @property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) CLLocationManager *locManager;
 
 
 @end

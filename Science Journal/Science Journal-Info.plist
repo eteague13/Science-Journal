@@ -35,10 +35,10 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescriptio</key>
-	<string>Can use location</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Use GPS when app is open.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow location?</string>
+	<string>Use GPS when app is open.</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

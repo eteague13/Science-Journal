@@ -23,6 +23,19 @@
     mapView.delegate = self;
     mapView.showsUserLocation = YES;
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
+    _locManager = [[CLLocationManager alloc] init];
+    if ([_locManager respondsToSelector:
+         @selector(requestWhenInUseAuthorization)]) {
+        [_locManager requestWhenInUseAuthorization];
+    }
+    CLLocationCoordinate2D centerCoordinate;
+    centerCoordinate.latitude = 38.9047;
+    centerCoordinate.longitude = -77.0164;
+    
+    MKCoordinateRegion region =
+    MKCoordinateRegionMakeWithDistance (
+                                        centerCoordinate, 20000, 20000);
+    [self.mapView setRegion:region animated:YES];
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
     
@@ -36,50 +49,27 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-
-//Sets the initial map view to the user's current location
-    MKUserLocation *userLocation = mapView.userLocation;
-    //MKCoordinateRegion region =
-    MKCoordinateRegionMakeWithDistance (
-                                        userLocation.location.coordinate, 200, 200);
-    //[mapView setRegion:region animated:YES];
-    [mapView setCenterCoordinate:mapView.userLocation.location.coordinate];
+   
+    //Reloads all of the annotations
+   [self.mapView addAnnotations:[self updateAnnotations]];
     
 }
 
+
+/*
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    /*
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
-    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-     */
-    mapView.centerCoordinate = userLocation.location.coordinate;
+    //self.mapView.centerCoordinate = userLocation.location.coordinate;
+    MKCoordinateRegion region =
+    MKCoordinateRegionMakeWithDistance (
+                                        userLocation.location.coordinate, 200, 200);
+    [self.mapView setRegion:region animated:YES];
  
 }
+*/
 
-- (void)mapViewWillStartLoadingMap:(MKMapView *)mapView{
-    //Queries the database and places each entry on the map
-    CLLocationCoordinate2D coordinate;
-    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
-    
-    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    NSString *name, *projectName, *latitude, *longitude;
-    for (id entry in results) {
-        name = [entry objectAtIndex:1];
-        projectName = [entry objectAtIndex:2];
-        latitude = [entry objectAtIndex:5];
-        longitude = [entry objectAtIndex:6];
-        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-        coordinate.latitude = [latitude doubleValue];
-        coordinate.longitude = [longitude doubleValue];
-        point.coordinate = coordinate;
-        point.title = name;
-        point.subtitle = [NSString stringWithFormat:@"Entry #: %@", [entry objectAtIndex:0]];
-        [self.mapView addAnnotation:point];
-    }
-    
-    
-}
+
+
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     
@@ -156,7 +146,7 @@
     MKCoordinateRegion region =
     MKCoordinateRegionMakeWithDistance (
                                         userLocation.location.coordinate, 200, 200);
-    [mapView setRegion:region animated:NO];
+    [mapView setRegion:region animated:YES];
 }
 
 - (IBAction)changeMapType:(id)sender {
@@ -167,5 +157,28 @@
         mapView.mapType = MKMapTypeStandard;
 }
 
+-(NSMutableArray *)updateAnnotations{
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    CLLocationCoordinate2D coordinate;
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
+    
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSString *name, *projectName, *latitude, *longitude;
+    NSMutableArray *allAnnotations = [[NSMutableArray alloc] init];
+    for (id entry in results) {
+        name = [entry objectAtIndex:1];
+        projectName = [entry objectAtIndex:2];
+        latitude = [entry objectAtIndex:5];
+        longitude = [entry objectAtIndex:6];
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+        coordinate.latitude = [latitude doubleValue];
+        coordinate.longitude = [longitude doubleValue];
+        point.coordinate = coordinate;
+        point.title = name;
+        point.subtitle = [NSString stringWithFormat:@"Entry #: %@", [entry objectAtIndex:0]];
+        [allAnnotations addObject: point];
+    }
+    return allAnnotations;
+}
 
 @end
