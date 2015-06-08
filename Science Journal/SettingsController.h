@@ -21,10 +21,8 @@
 
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
-@property (weak, nonatomic) IBOutlet UISwitch *geoMagDecSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *geoStopNumSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *geoOutcropSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *geoStructDataSwitch;
+
+
 @property (weak, nonatomic) IBOutlet UISwitch *dateSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *goalSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *locationWeatherSwitch;
@@ -35,10 +33,15 @@
 @property (weak, nonatomic) IBOutlet UISwitch *sampleSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *partnersSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *dataSheetSwitch;
-- (IBAction)geoMagDecFlip:(id)sender;
-- (IBAction)geoStopNumFlip:(id)sender;
-- (IBAction)geoOutcropFlip:(id)sender;
-- (IBAction)geoStructDataFlip:(id)sender;
+@property (weak, nonatomic) IBOutlet UISwitch *strikeDipSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *stopNumSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *outcropSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *structuralDataSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *trendPlungeSwitch;
+
+- (IBAction)stopNumFlip:(id)sender;
+- (IBAction)outcropFlip:(id)sender;
+- (IBAction)structDataFlip:(id)sender;
 - (IBAction)dateFlip:(id)sender;
 - (IBAction)goalFlip:(id)sender;
 - (IBAction)locationWeatherFlip:(id)sender;
@@ -51,6 +54,9 @@
 - (IBAction)linkDropbox:(id)sender;
 - (IBAction)unlinkDropbox:(id)sender;
 - (IBAction)dataSheetFlip:(id)sender;
+- (IBAction)strikeDipFlip:(id)sender;
+- (IBAction)trendPlungeFlip:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UILabel *dropboxStatusLabel;
 
 @property (nonatomic, strong) DBRestClient *restClient;

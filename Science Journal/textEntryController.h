@@ -27,7 +27,7 @@
 - (IBAction)textCancelButton:(id)sender;
 - (IBAction)textSaveButton:(id)sender;
 
-- (void)updateRowSelected:(int)row updateSectionSelected:(int)section;
+- (void)updateRowSelected:(int)row;
 @property (weak, nonatomic) IBOutlet UITextView *textField;
 - (void)setTextValue:(NSString*)text;
 

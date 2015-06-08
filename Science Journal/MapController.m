@@ -116,7 +116,7 @@
     if ([segue.identifier isEqualToString:@"annotationDetail"])
     {
 
-        NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
+        NSString *query = [NSString stringWithFormat:@"select * from entriesBasic"];
         
         NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
         //Get the selected entry data and load it in the Edit Entry controller
@@ -160,7 +160,7 @@
 -(NSMutableArray *)updateAnnotations{
     [self.mapView removeAnnotations:self.mapView.annotations];
     CLLocationCoordinate2D coordinate;
-    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic"];
     
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     NSString *name, *projectName, *latitude, *longitude;

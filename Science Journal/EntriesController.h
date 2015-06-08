@@ -10,7 +10,6 @@
 #import "AddEntryController.h"
 
 @interface EntriesController : UITableViewController <AddEntryControllerDelegate>{
-    //UserEntryDatabase *database;
 }
 
 @property (strong, nonatomic) NSMutableDictionary *sections;
@@ -18,7 +17,9 @@
 
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic) int recordIDToEdit;
--(void)loadData;
+
 @property (nonatomic, strong) NSArray *allEntriesFromDB;
 
+@property (nonatomic, strong) NSString *projectNameList;
+-(void)setProjectName:(NSString *)projectNameList;
 @end

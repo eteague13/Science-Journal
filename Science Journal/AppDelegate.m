@@ -18,16 +18,16 @@
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     
     NSDictionary *appDefaults = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGeoMagDec"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchStrikeDip"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     NSDictionary *appDefaults2 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGeoStopNum"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchStopNum"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults2];
     NSDictionary *appDefaults3 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGeoOutcrop"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchOutcrop"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults3];
     NSDictionary *appDefaults4 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGeoStructData"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchStructData"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults4];
     NSDictionary *appDefaults5 = [NSDictionary
                                  dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchDate"];
@@ -59,6 +59,10 @@
     NSDictionary *appDefaults14 = [NSDictionary
                                    dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchDataSheet"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults14];
+    
+    NSDictionary *appDefaults15 = [NSDictionary
+                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchTrendPlunge"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     
     
     DBSession *dbSession = [[DBSession alloc]

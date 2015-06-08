@@ -33,18 +33,15 @@
     [_scroller setContentSize:CGSizeMake(320, 1500)];
     [self.view addSubview:_scroller];
 
-    /*
-    _geoMagDecSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoMagDec"];
-    _geoOutcropSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoOutcrop"];
-    _geoStopNumSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStopNum"];
-    _geoStructDataSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStructData"];
-     */
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
    
     [self checkIfDropboxLinked];
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self checkIfDropboxLinked];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -67,25 +64,20 @@
 
 
 
-//All of the methods that deal with the component settings
-- (IBAction)geoMagDecFlip:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setBool:_geoMagDecSwitch.on forKey:@"SwitchGeoMagDec"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-}
 
-- (IBAction)geoStopNumFlip:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setBool:_geoStopNumSwitch.on forKey:@"SwitchGeoStopNum"];
+
+- (IBAction)stopNumFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_stopNumSwitch.on forKey:@"SwitchStopNum"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (IBAction)geoOutcropFlip:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setBool:_geoOutcropSwitch.on forKey:@"SwitchGeoOutcrop"];
+- (IBAction)outcropFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_outcropSwitch.on forKey:@"SwitchOutcrop"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (IBAction)geoStructDataFlip:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setBool:_geoStructDataSwitch.on forKey:@"SwitchGeoStructData"];
+- (IBAction)structDataFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_structuralDataSwitch.on forKey:@"SwitchStructData"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -151,6 +143,16 @@
 
 - (IBAction)dataSheetFlip:(id)sender {
     [[NSUserDefaults standardUserDefaults] setBool:_dataSheetSwitch.on forKey:@"SwitchDataSheet"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)strikeDipFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_strikeDipSwitch.on forKey:@"SwitchStrikeDip"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)trendPlungeFlip:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:_trendPlungeSwitch.on forKey:@"SwitchTrendPlunge"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 //Need to figure out how to set the linked/unlinked status button correctly

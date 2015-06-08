@@ -11,7 +11,6 @@
 #import "textEntryController.h"
 #import "LocationAndWeatherController.h"
 #import "SettingsController.h"
-#import "MagneticDecController.h"
 #import "SketchController.h"
 
 @interface AddEntryController ()
@@ -25,38 +24,64 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
     NSLog(@"adding num: %d", self.recordIDToEdit);
+    self.projectNameField.text = projectNameList;
+    _projectName = projectNameList;
+    
     if (self.recordIDToEdit != -1) {
         [self loadInfoToEdit];
-    }
-    if (isEditEntry){
         _entryTitleLabel.title = @"Edit Entry";
+    }else{
+        _date = @"";
+        _goal = @"";
+        _latitude = @"";
+        _longitude = @"";
+        _weather = @"";
+        _notes = @"";
+        _permissions = @"";
+        _sampleNum = @"";
+        _partners = @"";
+        _outcrop = @"";
+        _structuralData = @"";
+        _strike = @"";
+        _dip = @"";
+        _trend = @"";
+        _plunge = @"";
+        _stopNum = @"";
+        _dataSheet = @"";
     }
     
     //Adjusts which components are on based on the Settings
-    bool geoMagDecSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoMagDec"];
-    if (geoMagDecSwitch) {
-        _geoMagneticCell.hidden = NO;
-    }else{
-        _geoMagneticCell.hidden = YES;
-    }
     
-    bool geoOutcropSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoOutcrop"];
-    if (geoOutcropSwitch) {
-        _geoOutcropCell.hidden = NO;
+    
+    bool outcropSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchOutcrop"];
+    if (outcropSwitch) {
+        _outcropCell.hidden = NO;
     }else{
-        _geoOutcropCell.hidden = YES;
+        _outcropCell.hidden = YES;
     }
-    bool geoStopNumSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStopNum"];
-    if (geoStopNumSwitch) {
-        _geoStopNumCell.hidden = NO;
+    bool stopNumSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchStopNum"];
+    if (stopNumSwitch) {
+        _stopNumCell.hidden = NO;
     }else{
-        _geoStopNumCell.hidden = YES;
+        _stopNumCell.hidden = YES;
     }
-    bool geoStructSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGeoStructData"];
-    if (geoStructSwitch) {
-        _geoStructCell.hidden = NO;
+    bool structSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchStructData"];
+    if (structSwitch) {
+        _structuralDataCell.hidden = NO;
     }else{
-        _geoStructCell.hidden = YES;
+        _structuralDataCell.hidden = YES;
+    }
+    bool strikeDipSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchStrikeDip"];
+    if (strikeDipSwitch) {
+        _strikeDipCell.hidden = NO;
+    }else{
+        _strikeDipCell.hidden = YES;
+    }
+    bool trendPlungeSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchTrendPlunge"];
+    if (trendPlungeSwitch) {
+        _trendPlungeCell.hidden = NO;
+    }else{
+        _trendPlungeCell.hidden = YES;
     }
     
     bool dateSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchDate"];
@@ -121,14 +146,15 @@
     }
     
 //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-[self.tableView setSeparatorColor:[UIColor blackColor]];
-[self.tableView setSeparatorInset:UIEdgeInsetsZero];
+//[self.tableView setSeparatorColor:[UIColor blackColor]];
+//[self.tableView setSeparatorInset:UIEdgeInsetsZero];
 
+    /*
     _entryNameField.delegate = self;
     _projectNameField.delegate = self;
     _sampleNumberField.delegate = self;
     _stopNumField.delegate = self;
-    
+    */
     
 }
 
@@ -151,10 +177,10 @@
 
 - (IBAction)saveButton:(id)sender {
     //Gets the values from the textfields
+    NSLog(@"Testing save values: %@", _date);
     _name = _entryNameField.text;
     _projectName = _projectNameField.text;
     _stopNum = _stopNumField.text;
-    _date = _dateLabelField.text;
     _sampleNum = _sampleNumberField.text;
     
     //Determine if there is a sketch
@@ -180,71 +206,15 @@
     }
     
    
-    //If any fields are empty, it adds an empty string
-    if ([_date length] == 0){
-        _date = @"";
-    }
-    if ([_goal length] == 0){
-        _goal = @"";
-    }
-    if ([_latitude length] == 0){
-        _latitude = @"";
-    }
-    if ([_longitude length] == 0){
-        _longitude = @"";
-    }
-    if ([_weather length] == 0){
-        _weather = @"";
-    }
-    if ([_notes length] == 0){
-        _notes = @"";
-    }
-    if ([_permissions length] == 0){
-        _permissions = @"";
-    }
-    if ([_sampleNum length] == 0){
-        _sampleNum = @"";
-    }
-    if ([_partners length] == 0){
-        _partners = @"";
-    }
-    if ([_outcrop length] == 0){
-        _outcrop = @"";
-    }
-    if ([_structuralData length] == 0){
-        _structuralData = @"";
-    }
-    if ([_magneticValue1 length] == 0){
-        _magneticValue1 = @"";
-    }
-    if ([_magneticValue2 length] == 0){
-        _magneticValue2 = @"";
-    }
-    if ([_magneticType length] == 0){
-        _magneticType = @"";
-    }
-    if ([_stopNum length] == 0){
-        _stopNum = @"";
-    }
-    if ([_dataSheet length] == 0){
-        _dataSheet = @"";
-    }
+    
     NSString *queryBasic;
-    NSString *queryGeology;
+    
     //If this is adding a new entry
     if(self.recordIDToEdit == -1){
-        /*
-       
-        NSLog(@"Dictionary Test: %@", testDictionary);
-         */
-    
-        //NSData *tempData = [NSKeyedArchiver archivedDataWithRootObject:_dataSheet];
-        queryBasic = [NSString stringWithFormat:@"insert into entriesBasic values(null, '%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@', '%@', '%@')",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, _dataSheet];
-        queryGeology = [NSString stringWithFormat:@"insert into entriesGeology values(null, '%@', '%@','%@','%@','%@','%@')",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum];
+        queryBasic = [NSString stringWithFormat:@"insert into entriesBasic values(null, '%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, _dataSheet, _outcrop, _structuralData, _strike, _dip, _trend, _plunge, _stopNum];
     //If this is updating an existing entry
     }else{
-        queryBasic = [NSString stringWithFormat:@"update entriesBasic set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', picture='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@', dataSheet='%@' where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, _dataSheet, self.recordIDToEdit];
-        queryGeology = [NSString stringWithFormat:@"update entriesGeology set outcrop='%@', structuralData='%@',magneticValue1='%@',magneticValue2='%@',magneticType='%@',stopNum='%@' where entriesID=%d",_outcrop, _structuralData, _magneticValue1, _magneticValue2, _magneticType, _stopNum, self.recordIDToEdit];
+        queryBasic = [NSString stringWithFormat:@"update entriesBasic set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', picture='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@', dataSheet='%@', outcrop='%@', structuralData='%@', strike='%@', dip='%@', trend='%@', plunge='%@', stopNum='%@', where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, _dataSheet, _outcrop, _structuralData, _strike, _dip, _trend, _plunge, _stopNum, self.recordIDToEdit];
     }
     //Each entry has to have an entry name and project. If it does, then it performs the query
     if ([_name length] == 0){
@@ -266,14 +236,6 @@
             NSLog(@"Could not execute the query.");
         }
     
-        [self.dbManager executeQuery:queryGeology];
-    
-        if (self.dbManager.affectedRows != 0) {
-            NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
-        }
-        else{
-            NSLog(@"Could not execute the query.");
-        }
     
         [self.delegate AddEntryControllerDidSave:self];
     }
@@ -285,7 +247,9 @@
 - (void)datepickerControllerSave:(datepickerController *)controller didSaveDate:(NSString*) date{
     _dateLabelField.text = date;
     _date = date;
+    NSLog(@"Date saved?%@", _date);
     [self.tableView reloadData];
+    [self checkEntryContents];
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
@@ -298,7 +262,7 @@
     //Updates the correct field based on what was entered in the TextEntryController
     if (section == 0){
         switch (row) {
-            case 3:
+            case 4:
                 _goal = text;
                 break;
             case 7:
@@ -326,8 +290,8 @@
                 break;
         }
     }
+    [self checkEntryContents];
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self reloadPreviewStrings];
 
 }
 
@@ -340,8 +304,8 @@
     _latitude = lat;
     _longitude = longitude;
     _weather = weather;
+    [self checkEntryContents];
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self reloadPreviewStrings];
 
     
 }
@@ -358,6 +322,7 @@
     NSData *tempData = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:&error];
     NSString *jsonDataSheet = [[NSString alloc] initWithData:tempData encoding:NSUTF8StringEncoding];
     self.dataSheet = jsonDataSheet;
+    [self checkEntryContents];
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
@@ -377,37 +342,29 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         int rowSelected = (int)indexPath.row;
         int sectionSelected = (int)indexPath.section;
-        [textController updateRowSelected:rowSelected updateSectionSelected:sectionSelected];
+        [textController updateRowSelected:rowSelected];
         
-        if (sectionSelected == 0){
-            switch (rowSelected) {
-                case 3:
-                    [textController setTextValue:_goal];
-                    break;
-                case 7:
-                    [textController setTextValue:_notes];
-                    break;
-                case 8:
-                    [textController setTextValue:_permissions];
-                    break;
-                case 10:
-                    [textController setTextValue:_partners];
-                    break;
-                default:
-                    NSLog(@"Default");
-                    break;
-            }
-        }else if (sectionSelected == 1){
-            switch (rowSelected) {
-                case 2:
-                    [textController setTextValue:_outcrop];
-                    break;
-                case 3:
-                    [textController setTextValue:_structuralData];
-                    break;
-                default:
-                    break;
-            }
+        switch (rowSelected) {
+            case 3:
+                [textController setTextValue:_goal];
+                break;
+            case 7:
+                [textController setTextValue:_notes];
+                break;
+            case 8:
+                [textController setTextValue:_permissions];
+                break;
+            case 10:
+                [textController setTextValue:_partners];
+                break;
+            case 14:
+                [textController setTextValue:_outcrop];
+                break;
+            case 15:
+                [textController setTextValue:_structuralData];
+                break;
+            default:
+                break;
         }
     }else if ([segue.identifier isEqualToString:@"LocationAndWeather"]){
         LocationAndWeatherController* locationController = segue.destinationViewController;
@@ -421,17 +378,20 @@
         CameraController *cameraController = segue.destinationViewController;
         cameraController.delegate = self;
         [cameraController setPhoto:_picture];
-    }else if ([segue.identifier isEqualToString:@"Magnet"]){
-        MagneticDecController *magnetController = segue.destinationViewController;
-        magnetController.delegate = self;
-        [magnetController setVal1:_magneticValue1 setVal2:_magneticValue2 setType:_magneticType];
     }else if ([segue.identifier isEqualToString:@"DataSheet"]){
         DataSheetController *dataSheetController = segue.destinationViewController;
         dataSheetController.delegate = self;
-        NSLog(@"Data segue: %@", _dataSheet);
         [dataSheetController setSheetData:_dataSheet];
-        
+    }else if ([segue.identifier isEqualToString:@"StrikeDipSegue"]) {
+        StrikeDipController *strikeDip = segue.destinationViewController;
+        strikeDip.delegate = self;
+        [strikeDip setStrike:_strike setDip:_dip];
+    }else if ([segue.identifier isEqualToString:@"TrendPlungeSegue"]) {
+        TrendPlungeController *trendPlunge = segue.destinationViewController;
+        trendPlunge.delegate = self;
+        [trendPlunge setTrend:_trend setPlunge:_plunge];
     }
+        
 }
 
 -(void)setEditEntry:(BOOL)value{
@@ -442,6 +402,7 @@
 - (void) sketchControllerSave:(SketchController *)controller didFinishSketch:(UIImage*)item{
     NSLog(@"Sketch: %@", item);
     _sketch = item;
+    [self checkEntryContents];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -454,42 +415,41 @@
 }
 - (void)cameraControllerSave:(CameraController *)controller didSavePhoto:(UIImage*) photo{
     _picture = photo;
+    [self checkEntryContents];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-- (void)magDecControllerCancel:(MagneticDecController *) controller{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-- (void)magDecControllerSave:(MagneticDecController *)controller value1:(NSString*)v1 value2:(NSString*)v2 type:(NSString*)type{
-    _magneticValue1 = v1;
-    _magneticValue2 = v2;
-    _magneticType = type;
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Adjusts the height of each cell based on if the user has enabled the component setting
     UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    if (cell == _geoMagneticCell){
-        if(_geoMagneticCell.hidden){
+    if (cell == _strikeDipCell){
+        if(_strikeDipCell.hidden){
             return 0;
         }else{
             return [super tableView:tableView heightForRowAtIndexPath:indexPath];
         }
-    }else if (cell == _geoOutcropCell){
-        if(_geoOutcropCell.hidden){
+    }else if (cell == _trendPlungeCell){
+        if(_trendPlungeCell.hidden){
             return 0;
         }else{
             return [super tableView:tableView heightForRowAtIndexPath:indexPath];
         }
-    }else if (cell == _geoStopNumCell){
-        if(_geoStopNumCell.hidden){
+    }else if (cell == _outcropCell){
+        if(_outcropCell.hidden){
             return 0;
         }else{
             return [super tableView:tableView heightForRowAtIndexPath:indexPath];
         }
-    }else if (cell == _geoStructCell){
-        if(_geoStructCell.hidden){
+    }else if (cell == _stopNumCell){
+        if(_stopNumCell.hidden){
+            return 0;
+        }else{
+            return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        }
+    }else if (cell == _structuralDataCell){
+        if(_structuralDataCell.hidden){
             return 0;
         }else{
             return [super tableView:tableView heightForRowAtIndexPath:indexPath];
@@ -563,7 +523,7 @@
 -(void)loadInfoToEdit{
     
     //Loads the info if the user is editing an entry
-    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where entriesBasic.entriesID = %d", self.recordIDToEdit];
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic where entriesBasic.entriesID = %d", self.recordIDToEdit];
     
    
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
@@ -593,86 +553,158 @@
     _sampleNumberField.text = _sampleNum;
     _stopNumField.text = _stopNum;
     
-    
-    
-    
-    //Geology information
     _outcrop = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"outcrop"]];
     _structuralData = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"structuralData"]];
-    _magneticValue1 = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticValue1"]];
-    _magneticValue2 = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticValue2"]];
-    _magneticType = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"magneticType"]];
+    _strike = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"strike"]];
+    _dip = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"dip"]];
+    _trend = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"trend"]];
+    _plunge = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"plunge"]];
     _stopNum = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"stopNum"]];
     _stopNumField.text = _stopNum;
     
-    [self reloadPreviewStrings];
-    
+    [self checkEntryContents];
     
 }
 
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_arrow.png"]];
     
     //Do not add an accessory arrow in certain conditions 
-    if ([cell.reuseIdentifier isEqualToString:@"geoStopNumCell"] || [cell.reuseIdentifier isEqualToString:@"sampleNumCell"]){
+    if ([cell.reuseIdentifier isEqualToString:@"stopNumCell"] || [cell.reuseIdentifier isEqualToString:@"sampleNumCell"]){
         
     }else{
         cell.accessoryView = arrow;
     }
+     */
     
 }
 
-//Loads the preview strings on the Edit Entry page
--(void)reloadPreviewStrings{
-    if ([_goal length] != 0){
-        if ([_goal length] > 25){
-            _goalLabelField.text = [[_goal substringToIndex:25] stringByAppendingString:@"..."];
-        }else{
-            _goalLabelField.text = _goal;
-        }
+-(void)checkEntryContents{
+    UIImage *fieldFilled = [UIImage imageNamed:@"checkmark-100.png"];
+    UIImage *fieldEmpty = [UIImage imageNamed:@"close-100.png"];
+    if ([_date length] > 0){
+        NSLog(@"Filled");
+        [_dateContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_dateContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_dateContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_dateContentsLabel setEnabled:NO];
     }
-    if ([_weather length] != 0){
-        _locWeatherField.text = [_weather substringToIndex:5];
+    if ([_goal length] > 0){
+        NSLog(@"Filled");
+        [_goalContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_goalContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_goalContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_goalContentsLabel setEnabled:NO];
     }
-    if ([_partners length] != 0){
-        if ([_partners length] > 25){
-            _partnersField.text = [[_partners substringToIndex:25] stringByAppendingString:@"..."];
-        }else{
-            _partnersField.text = _partners;
-        }
+    if ([_latitude length] > 0 || [_longitude length] > 0 || [_weather length] > 0){
+        NSLog(@"Filled");
+        [_locationContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_locationContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_locationContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_locationContentsLabel setEnabled:NO];
     }
-    if ([_permissions length] != 0){
-        if ([_permissions length] > 25){
-            _permissionsField.text = [[_permissions substringToIndex:25] stringByAppendingString:@"..."];
-        }else{
-            _permissionsField.text = _permissions;
-        }
+    if (_sketch != nil ){
+        NSLog(@"Filled");
+        [_sketchContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_sketchContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_sketchContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_sketchContentsLabel setEnabled:NO];
     }
-    if ([_notes length] != 0){
-        if ([_notes length] > 25){
-            _notesField.text = [[_notes substringToIndex:25] stringByAppendingString:@"..."];
-        }else{
-            _notesField.text = _notes;
-        }
+    if (_picture != nil ){
+        NSLog(@"Filled");
+        [_pictureContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_pictureContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_pictureContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_pictureContentsLabel setEnabled:NO];
     }
-    if ([_outcrop length] != 0){
-        if ([_outcrop length] > 25){
-            _outcropField.text = [[_outcrop substringToIndex:25] stringByAppendingString:@"..."];
-        }else{
-            _outcropField.text = _outcrop;
-        }
+    if ([_notes length] > 0){
+        NSLog(@"Filled");
+        [_notesContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_notesContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_notesContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_notesContentsLabel setEnabled:NO];
     }
-    if ([_structuralData length] != 0){
-        NSLog(@"Struct");
-        if ([_structuralData length] > 25){
-            _structuralField.text = [[_structuralData substringToIndex:25] stringByAppendingString:@"..."];
-        }else{
-            _structuralField.text = _structuralData;
-        }
+    if ([_permissions length] > 0){
+        NSLog(@"Filled");
+        [_permissionsContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_permissionsContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_permissionsContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_permissionsContentsLabel setEnabled:NO];
+    }
+    if ([_partners length] > 0){
+        NSLog(@"Filled");
+        [_partnersContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_partnersContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_partnersContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_partnersContentsLabel setEnabled:NO];
+    }
+    if ([_dataSheet length] > 0){
+        NSLog(@"Filled");
+        [_dataSheetContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_dataSheetContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_dataSheetContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_dataSheetContentsLabel setEnabled:NO];
+    }
+    if ([_outcrop length] > 0){
+        NSLog(@"Filled");
+        [_outcropContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_outcropContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_outcropContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_outcropContentsLabel setEnabled:NO];
+    }
+    if ([_structuralData length] > 0){
+        NSLog(@"Filled");
+        [_structuralContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_structuralContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_structuralContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_structuralContentsLabel setEnabled:NO];
+    }
+    if ([_strike length] > 0 || [_dip length] > 0){
+        NSLog(@"Filled");
+        [_strikeDipContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_strikeDipContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_strikeDipContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_strikeDipContentsLabel setEnabled:NO];
+    }
+    if ([_trend length] > 0 || [_plunge length] > 0){
+        NSLog(@"Filled");
+        [_trendPlungeContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
+        [_trendPlungeContentsLabel setEnabled:NO];
+    }else{
+        NSLog(@"Empty");
+        [_trendPlungeContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
+        [_trendPlungeContentsLabel setEnabled:NO];
     }
 }
+
+
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
@@ -683,6 +715,29 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+-(void)setProjectNameList:(NSString *) pnl
+{
+    projectNameList = pnl;
+}
+
+- (void)strikeDipCancel:(StrikeDipController *) controller{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)strikeDipSave:(StrikeDipController *)controller strike:(NSString *)st dip:(NSString *)dp{
+    _strike = st;
+    _dip = dp;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)trendPlungeCancel:(TrendPlungeController *) controller{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)trendPlungeSave:(TrendPlungeController *)controller trend:(NSString *)tr plunge:(NSString *)pl{
+    _trend = tr;
+    _plunge = pl;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

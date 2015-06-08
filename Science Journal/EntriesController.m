@@ -45,19 +45,17 @@
     
 
     //self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    [self.tableView setSeparatorColor:[UIColor blackColor]];
-    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    //[self.tableView setSeparatorColor:[UIColor blackColor]];
+    //[self.tableView setSeparatorInset:UIEdgeInsetsZero];
     
     
     NSLog(@"%@", filePath);
+    
     /*
     NSString *delete1 = @"delete from entriesBasic";
     [self.dbManager executeQuery:delete1];
-    NSString *delete2 = @"delete from entriesGeology";
-    [self.dbManager executeQuery:delete2];
     */
     
-    [self loadData];
     
     
     
@@ -72,17 +70,20 @@
 
 #pragma mark - Table view data source
 
+/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
     // Return the number of sections.
     return [[self.sections allKeys] count];
 }
+ */
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //Sorts it based on the project
-    return [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic where projectName='%@'", _projectNameList];
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    return [results count];
 
 }
 
@@ -96,15 +97,15 @@
                          dequeueReusableCellWithIdentifier:CellIdentifier
                          forIndexPath:indexPath];
     
-    NSString *sectionEntry = [[self.sections valueForKey:[[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where entriesBasic.entriesID = %d", [sectionEntry intValue]];
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic where projectName='%@'", _projectNameList];
+    NSLog(@"QUERY: %@", query);
+    //NSString *query = [NSString stringWithFormat:@"select * from entriesBasic"];
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     NSLog(@"Item: %@", results);
-    cell.entryNameLabel.text = [[results objectAtIndex:0] objectAtIndex:1];
-    cell.identifier = [sectionEntry intValue];
-    //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_arrow.png"]];
-    cell.accessoryView = arrow;
+    NSString *entryName = [[results objectAtIndex:indexPath.row] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"name"]];
+    NSString *entryID = [[results objectAtIndex:indexPath.row] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"entriesID"]];
+    cell.entryNameLabel.text = entryName;
+    cell.identifier = [entryID intValue];
     return cell;
 }
 
@@ -119,35 +120,35 @@
         AddEntryController *addEntryController = [navigationController viewControllers][0];
         addEntryController.delegate = self;
         addEntryController.recordIDToEdit = -1;
-        NSLog(@"In add segue");
+        [addEntryController setProjectNameList:self.projectNameList];
     }
+    
     else if ([segue.identifier isEqualToString:@"EditEntry"])
     {
         UINavigationController *navigationController = segue.destinationViewController;
         AddEntryController *addEntryController = [navigationController viewControllers][0];
         addEntryController.delegate = self;
         [addEntryController setEditEntry:true];
-        
-        //NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
-        EntriesCell *entryName = [self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
-
-        self.recordIDToEdit = entryName.identifier;
         addEntryController.recordIDToEdit = self.recordIDToEdit;
+        self.recordIDToEdit = [self.tableView indexPathForSelectedRow].row + 1;
+        EntriesCell *entryToEdit = [self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        addEntryController.recordIDToEdit = entryToEdit.identifier;
+        
+     
 
         
     }
-     
-
-    
     
     
 }
 
+
+/*
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return [[[self.sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
 }
-
+*/
 
 /*
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
@@ -181,9 +182,7 @@
 
         [self.dbManager executeQuery:query];
         
-        NSString *queryGeology = [NSString stringWithFormat:@"delete from entriesGeology where entriesID=%d", recordIDToDelete];
-        [self.dbManager executeQuery:queryGeology];
-        [self loadData];
+        [self.tableView reloadData];
     }
 }
 
@@ -202,57 +201,17 @@
 //Delegate method that is called when entry in the AddEntryController is saved
 - (void)AddEntryControllerDidSave:(AddEntryController *)controller;
 {
-    [self loadData];
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Entry Saved" message: @"" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    
     [self.tableView reloadData];
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 
 
-//Used to refresh the loaded data from the database
--(void)loadData{
-
-    NSString *query = @"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID";
-    
-    if (self.allEntriesFromDB != nil) {
-        self.allEntriesFromDB = nil;
-    }
-    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    self.allEntriesFromDB = results;
-    
-    
-    self.sections = [[NSMutableDictionary alloc] init];
-    BOOL found;
-    // Loop through the entries and creates a dictionary of key: projects, values: entries
-    for (id entry in results)
-    {
-        NSString *projectname = [entry objectAtIndex:2];
-        found = NO;
-        
-        for (NSString *str in [self.sections allKeys])
-        {
-            if ([str isEqualToString:projectname])
-            {
-                found = YES;
-            }
-        }
-        
-        if (!found)
-        {
-            [self.sections setValue:[[NSMutableArray alloc] init] forKey:projectname];
-            
-        }
-    }
-    
-    for (id entry in results){
-        [[self.sections objectForKey:[entry objectAtIndex:2]] addObject:[entry objectAtIndex:0]];
-    }
-    
-    
-
-    [self.tableView reloadData];
-}
-
+/*
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -266,6 +225,11 @@
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
+}
+ */
+
+-(void)setProjectName:(NSString *)projectNameList {
+    self.projectNameList = projectNameList;
 }
 
 @end

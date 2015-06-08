@@ -59,12 +59,12 @@
 
 - (IBAction)exportGooglEarth:(id)sender {
     //Create the .kml files
-    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic"];
     
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     NSLog(@"Results: %@", results);
 
-    NSString *identifer, *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType;
+    NSString *identifer, *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *notes, *permissions, *sampleNum, *partners, *dataSheet, *outcrop, *structuralData, *strike, *dip, *trend, *plunge, *stopNum;
     UIImage *sketch;
     UIImage *picture;
     NSMutableString *printString = [[NSMutableString alloc] init];
@@ -86,23 +86,24 @@
         permissions = [entry objectAtIndex:11];
         sampleNum = [entry objectAtIndex:12];
         partners = [entry objectAtIndex:13];
-        //Have to skip one because it also gets the entriesID from entriesGeology DB
+        dataSheet = [entry objectAtIndex:14];
         outcrop = [entry objectAtIndex:15];
         structuralData = [entry objectAtIndex:16];
-        magneticValue1 = [entry objectAtIndex:17];
-        magneticValue2 = [entry objectAtIndex:18];
-        magneticType = [entry objectAtIndex:19];
-        stopNum = [entry objectAtIndex:20];
+        strike = [entry objectAtIndex:17];
+        dip = [entry objectAtIndex:18];
+        trend = [entry objectAtIndex:19];
+        plunge = [entry objectAtIndex:20];
+        stopNum = [entry objectAtIndex:21];
         
-        
+        /*Need to fix for updated strike/dip...
         [printString appendString:@"\n\t<Placemark>"];
-        [printString appendFormat:@"\n\t<name>Entry name: %@</name>", name];
+        [printString appendFormat:@"\n\t<name>%@</name>", name];
         [printString appendFormat:@"\n\t\t<description>Date: %@\nProject Name: %@\nGoal: %@\nWeather: \n%@\nMagnetic Declination 1: %@\nMagnetic Declination 2: %@\nMagnetic Type: %@\nPartners %@\nPermissions: %@\nOutcrop Description: %@\nStructural Data: %@\nSample Number: %@\nNotes: %@\nStop Number: %@</description>", date, projectName, goal, weather, magneticValue1, magneticValue2, magneticType, partners, permissions, outcrop, structuralData, sampleNum, notes, stopNum];
         [printString appendString:@"\n\t\t<Point>"];
         [printString appendFormat:@"\n\t\t<coordinates>%@, %@, 0</coordinates>", longitude, latitude];
         [printString appendString:@"\n\t\t</Point>"];
         [printString appendString:@"\n\t</Placemark>"];
-        
+        */
         
     }
 
@@ -200,7 +201,7 @@
 - (IBAction)emailProject:(id)sender {
     //Creates the .kml file for just the selected project
     
-   
+   //NEED TO EDIT TO TAKE OUT GEOLOGY STUFF
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where projectName = '%@'", selectedProject];
     
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
