@@ -16,29 +16,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"Section: %d", addEntrySectionSelected);
     //Write the correct title
-    switch (addEntryRowSelected) {
-        case 4:
-            _textEntryLabel.text = @"Goal";
-            break;
-        case 7:
-            _textEntryLabel.text = @"Notes";
-            break;
-        case 8:
-            _textEntryLabel.text = @"Permissions and Access";
-            break;
-        case 10:
-            _textEntryLabel.text = @"Partners";
-        case 14:
-            _textEntryLabel.text = @"Outcrop Description";
-            break;
-        case 15:
-            _textEntryLabel.text = @"Structural Data";
-        default:
-            break;
-        
+    
+    if ([cellSelected isEqualToString:@"GoalID"]){
+        _textEntryLabel.text = @"Goal";
+    }else if ([cellSelected isEqualToString:@"NotesID"]){
+        _textEntryLabel.text = @"Notes";
+    }else if ([cellSelected isEqualToString:@"PermissionsID"]){
+        _textEntryLabel.text = @"Permissions and Access";
+    }else if ([cellSelected isEqualToString:@"PartnersID"]){
+        _textEntryLabel.text = @"Partners";
+    }else if ([cellSelected isEqualToString:@"OutcropID"]){
+        _textEntryLabel.text = @"Outcrop Description";
+    }else if ([cellSelected isEqualToString:@"StructuralDataID"]){
+        _textEntryLabel.text = @"Structural Data";
     }
+    
     
     
     
@@ -76,11 +69,11 @@
 
 - (IBAction)textSaveButton:(id)sender {
     
-    [self.delegate textEntryControllerSave:self didSaveText:_note.text rowSelected:(int)addEntryRowSelected sectionSelected:(int)addEntrySectionSelected];
+    [self.delegate textEntryControllerSave:self didSaveText:_note.text cellSelected:cellSelected];
 }
 
-- (void)updateRowSelected:(int)row {
-    addEntryRowSelected = row;
+- (void)updateCellSelected:(NSString *)cellID {
+    cellSelected = cellID;
 }
 
 

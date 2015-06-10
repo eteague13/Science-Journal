@@ -15,18 +15,28 @@
 - (void)referenceCancel:(AddReferenceController *) controller;
 
 @end
-@interface AddReferenceController : UIViewController <UITextFieldDelegate>{
+@interface AddReferenceController : UIViewController <UITextFieldDelegate, UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
     int photoOrText;
     UIImageView *imageView;
 }
-@property (nonatomic, retain) NoteView *note;
-@property (nonatomic, weak) id <AddReferenceControllerDelegate> delegate;
--(void)setPhotoOrText: (int) val;
+
+//IBOutlets
+
+//IBActions
 - (IBAction)cancelAddReference:(id)sender;
 - (IBAction)saveReference:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *refImageButton;
 - (IBAction)addRefImage:(id)sender;
+
+//Variables
+@property (nonatomic, retain) NoteView *note;
+@property (nonatomic, weak) id <AddReferenceControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIButton *refImageButton;
 @property (weak, nonatomic) IBOutlet UITextField *referenceNameField;
+
+//Methods
+-(void)setPhotoOrText: (int) val;
+
+
 
 
 @end

@@ -20,32 +20,40 @@
     [super viewDidLoad];
     locationManager = [[CLLocationManager alloc] init];
     [locationManager requestWhenInUseAuthorization];
-    if ([latitudeArea length] != 0){
-        _latitudeField.text = latitudeArea;
-    }
-    if ([longitudeArea length] != 0){
-        _longitudeField.text = longitudeArea;
-    }
-    if ([weatherArea length] != 0){
-        _weatherField.text = weatherArea;
-    }
+    
 
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
     //Draws the text view
     CGRect frame = CGRectMake(0, 250, 320, 327);
     self.weatherField = [[NoteView alloc] initWithFrame:frame];
-    [self.view addSubview:_weatherField];
+    
     _weatherField.delegate = self;
     [_weatherField setScrollEnabled:YES];
     _latitudeField.delegate = self;
     _longitudeField.delegate = self;
+    
+    if ([latitudeArea length] != 0){
+        _latitudeField.text = latitudeArea;
+        NSLog(@"HERE1??");
+    }
+    if ([longitudeArea length] != 0){
+        _longitudeField.text = longitudeArea;
+        NSLog(@"HERE2??");
+    }
+    if ([weatherArea length] != 0){
+        _weatherField.text = weatherArea;
+        NSLog(@"HERE3??");
+    }
+    
+    [self.view addSubview:_weatherField];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation
@@ -111,7 +119,7 @@
     
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
     
-    int errorCode = httpResponse.statusCode;
+    int errorCode = (int)httpResponse.statusCode;
     
     NSString *fileMIMEType = [[httpResponse MIMEType] lowercaseString];
     
@@ -175,6 +183,7 @@
     latitudeArea = latitude;
     longitudeArea = longitude;
     weatherArea = weather;
+    NSLog(@"in Weather: %@%@%@", latitudeArea, longitudeArea, weatherArea);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

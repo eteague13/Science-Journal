@@ -12,17 +12,30 @@
 - (void)sketchSettingsControllerDone:(SketchSettingsController *) controller setSize:(CGFloat)size setOpacity:(CGFloat)op;
 
 @end
+
 @interface SketchSettingsController : UIViewController
-- (IBAction)settingsDone:(id)sender;
+
+//IBOutlets
 @property (weak, nonatomic) IBOutlet UISlider *brushSizeSlider;
-@property (nonatomic, weak) id <SketchSettingsControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *brushSizeLabel;
 @property (weak, nonatomic) IBOutlet UISlider *brushOpacitySlider;
 @property (weak, nonatomic) IBOutlet UILabel *brushOpacityLabel;
 
+//IBActions
+- (IBAction)settingsDone:(id)sender;
+- (IBAction)brushSizeChange:(id)sender;
+
+//Variables
+@property (nonatomic, weak) id <SketchSettingsControllerDelegate> delegate;
 @property CGFloat brush;
 @property CGFloat opacity;
-- (IBAction)brushSizeChange:(id)sender;
+
+//Methods
+
+
+
+
+
 
 
     

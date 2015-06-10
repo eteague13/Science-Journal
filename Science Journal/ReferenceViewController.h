@@ -17,9 +17,18 @@
     
 }
 
+//IBOutlets
+@property (strong, nonatomic) IBOutlet UITableView *referenceTable;
+
+//IBActions
+
+//Variables
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSArray *allReferencesFromDB;
-@property (strong, nonatomic) IBOutlet UITableView *referenceTable;
+
+//Methods
+
+
     
 
 @end

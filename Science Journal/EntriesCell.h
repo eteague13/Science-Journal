@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface EntriesCell : UITableViewCell
+
+//IBOutlets
 @property (strong, nonatomic) IBOutlet UILabel *entryNameLabel;
+
+//IBActions
+
+//Variables
 @property (nonatomic) int identifier;
 
+//Methods
 
 @end

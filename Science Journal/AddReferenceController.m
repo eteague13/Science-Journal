@@ -56,7 +56,7 @@
     
     NSString *savedPictureLocation;
     if (imageView != nil && photoOrText == 0){
-        NSString *picturename = [NSMutableString stringWithFormat:@"%@%@", _referenceNameField.text, @"_picture.png"];
+        NSString *picturename = [NSMutableString stringWithFormat:@"%@%@", _referenceNameField.text, @"_resource.png"];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         savedPictureLocation = [documentsDirectory stringByAppendingPathComponent:picturename];

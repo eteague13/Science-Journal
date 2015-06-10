@@ -28,15 +28,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //Initialize the database connection
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
     
     //Set the picker projects
     [self setPickerProjects];
     
+    //Initializes the Dropbox client connection
     self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
     self.restClient.delegate = self;
-    // Do any additional setup after loading the view.
-   //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
 }
 
@@ -57,13 +59,11 @@
 }
 */
 
+//Export all entries to Google Earth
 - (IBAction)exportGooglEarth:(id)sender {
-    //Create the .kml files
+    //Queries the database
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic"];
-    
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    NSLog(@"Results: %@", results);
-
     NSString *identifer, *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *notes, *permissions, *sampleNum, *partners, *dataSheet, *outcrop, *structuralData, *strike, *dip, *trend, *plunge, *stopNum;
     UIImage *sketch;
     UIImage *picture;
@@ -95,15 +95,60 @@
         plunge = [entry objectAtIndex:20];
         stopNum = [entry objectAtIndex:21];
         
-        /*Need to fix for updated strike/dip...
         [printString appendString:@"\n\t<Placemark>"];
         [printString appendFormat:@"\n\t<name>%@</name>", name];
-        [printString appendFormat:@"\n\t\t<description>Date: %@\nProject Name: %@\nGoal: %@\nWeather: \n%@\nMagnetic Declination 1: %@\nMagnetic Declination 2: %@\nMagnetic Type: %@\nPartners %@\nPermissions: %@\nOutcrop Description: %@\nStructural Data: %@\nSample Number: %@\nNotes: %@\nStop Number: %@</description>", date, projectName, goal, weather, magneticValue1, magneticValue2, magneticType, partners, permissions, outcrop, structuralData, sampleNum, notes, stopNum];
+        [printString appendFormat:@"\n\t\t<description>Project Name: %@\n", projectName];
+        if ([date length] > 0){
+            [printString appendFormat:@"Date: %@\n", date];
+        }
+        if ([goal length] > 0){
+            [printString appendFormat:@"Goal: %@\n", goal];
+        }
+        if ([weather length] > 0){
+            [printString appendFormat:@"Weather: %@\n", weather];
+        }
+        if ([notes length] > 0){
+            [printString appendFormat:@"Notes: %@\n", notes];
+        }
+        if ([permissions length] > 0){
+            [printString appendFormat:@"Permissions: %@\n", permissions];
+        }
+        if ([sampleNum length] > 0){
+            [printString appendFormat:@"Sample Number: %@\n", sampleNum];
+        }
+        if ([partners length] > 0){
+            [printString appendFormat:@"Partners: %@\n", partners];
+        }
+        if ([dataSheet length] > 0){
+            [printString appendFormat:@"Datasheet: %@\n", dataSheet];
+        }
+        if ([outcrop length] > 0){
+            [printString appendFormat:@"Outcrop Description: %@\n", outcrop];
+        }
+        if ([structuralData length] > 0){
+            [printString appendFormat:@"Structural Data: %@\n", structuralData];
+        }
+        if ([strike length] > 0){
+            [printString appendFormat:@"Strike: %@\n", strike];
+        }
+        if ([dip length] > 0){
+            [printString appendFormat:@"Dip: %@\n", dip];
+        }
+        if ([trend length] > 0){
+            [printString appendFormat:@"Trend: %@\n", trend];
+        }
+        if ([plunge length] > 0){
+            [printString appendFormat:@"Plunge: %@\n", plunge];
+        }
+        if ([stopNum length] > 0){
+            [printString appendFormat:@"StopNum: %@\n", stopNum];
+        }
+        [printString appendFormat:@"</description>"];
         [printString appendString:@"\n\t\t<Point>"];
         [printString appendFormat:@"\n\t\t<coordinates>%@, %@, 0</coordinates>", longitude, latitude];
         [printString appendString:@"\n\t\t</Point>"];
         [printString appendString:@"\n\t</Placemark>"];
-        */
+        
         
     }
 
@@ -111,29 +156,30 @@
     [printString appendString:@"\n\t</Folder>\n</kml>"];
     
     
-    //Write the information to a .kml file
-    NSError *error;
-    NSString *documentsDirectory = [NSHomeDirectory()
-                                    stringByAppendingPathComponent:@"Documents"];
-    NSString *fileName = [NSMutableString stringWithFormat:@"All Entries"];
-    NSString *filePath = [documentsDirectory
-                          stringByAppendingPathComponent:fileName];
     
-    [printString writeToFile:filePath atomically:YES
-                    encoding:NSUTF8StringEncoding error:&error];
-    
-    NSLog(@"%@", filePath);
     
     if ([results count] > 0){
+        //Write the information to a .kml file
+        NSError *error;
+        NSString *documentsDirectory = [NSHomeDirectory()
+                                        stringByAppendingPathComponent:@"Documents"];
+        NSString *fileName = [NSMutableString stringWithFormat:@"All Entries.kml"];
+        NSString *filePath = [documentsDirectory
+                              stringByAppendingPathComponent:fileName];
+        
+        [printString writeToFile:filePath atomically:YES
+                        encoding:NSUTF8StringEncoding error:&error];
+        
+        NSLog(@"%@", filePath);
         //Email the entry
             //Doesn't work on the simulator, but should on phone
         MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
         mc.mailComposeDelegate = self;
         NSData *fileData = [NSData dataWithContentsOfFile:filePath];
         // Determine the MIME type
-        NSString *mimeType = @"text/plain";
+        //NSString *mimeType = @"text/plain";
         //This one may be the one that works...have to wait and see
-        //NSString *mimeType = @"application/vnd.google-earth.kml+xml";
+        NSString *mimeType = @"application/vnd.google-earth.kml+xml";
         // Add attachment
         [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
         // Present mail view controller on screen
@@ -171,14 +217,23 @@
 }
 
 // The number of columns of data
+/*
 - (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
 }
-
+ */
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+/*
 // The number of rows of data
 - (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
+    return (int)pickerData.count;
+}
+ */
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     return pickerData.count;
 }
 
@@ -201,12 +256,12 @@
 - (IBAction)emailProject:(id)sender {
     //Creates the .kml file for just the selected project
     
-   //NEED TO EDIT TO TAKE OUT GEOLOGY STUFF
-    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID where projectName = '%@'", selectedProject];
+    
+    NSString *query = [NSString stringWithFormat:@"select * from entriesBasic where projectName = '%@'", selectedProject];
     
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
-    NSString *identifer, *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *magneticValue1, *magneticValue2, *magneticType;
+    NSString *identifer, *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *notes, *permissions, *sampleNum, *partners, *dataSheet, *outcrop, *structuralData, *strike, *dip, *trend, *plunge, *stopNum;
     UIImage *sketch;
     UIImage *picture;
     NSMutableString *printString = [[NSMutableString alloc] init];
@@ -228,18 +283,19 @@
         permissions = [entry objectAtIndex:11];
         sampleNum = [entry objectAtIndex:12];
         partners = [entry objectAtIndex:13];
-        //Have to skip one because it also gets the entriesID from entriesGeology DB
+        dataSheet = [entry objectAtIndex:14];
         outcrop = [entry objectAtIndex:15];
         structuralData = [entry objectAtIndex:16];
-        magneticValue1 = [entry objectAtIndex:17];
-        magneticValue2 = [entry objectAtIndex:18];
-        magneticType = [entry objectAtIndex:19];
-        stopNum = [entry objectAtIndex:20];
+        strike = [entry objectAtIndex:17];
+        dip = [entry objectAtIndex:18];
+        trend = [entry objectAtIndex:19];
+        plunge = [entry objectAtIndex:20];
+        stopNum = [entry objectAtIndex:21];
         
         
         [printString appendString:@"\n\t<Placemark>"];
-        [printString appendFormat:@"\n\t<name>Entry name: %@</name>", name];
-        [printString appendFormat:@"\n\t\t<description>Date: %@\nProject Name: %@\nGoal: %@\nWeather: \n%@\nMagnetic Declination 1: %@\nMagnetic Declination 2: %@\nMagnetic Type: %@\nPartners %@\nPermissions: %@\nOutcrop Description: %@\nStructural Data: %@\nSample Number: %@\nNotes: %@\nStop Number: %@</description>", date, projectName, goal, weather, magneticValue1, magneticValue2, magneticType, partners, permissions, outcrop, structuralData, sampleNum, notes, stopNum];
+        [printString appendFormat:@"\n\t<name>%@</name>", name];
+        [printString appendFormat:@"\n\t\t<description>Project Name: %@\nDate: %@\nGoal: %@\nWeather: \n%@\nNotes: %@\nPermissions: %@\nSample Number: %@\nPartners %@\nDatasheet: %@\nOutcrop Description: %@\nStructural Data: %@\nStrike: %@\nDip: %@\nTrend: %@\nPlunge: %@\nStop Number: %@</description>", projectName, date, goal, weather, notes, permissions, sampleNum, partners, dataSheet, outcrop, structuralData, strike, dip, trend, plunge, stopNum];
         [printString appendString:@"\n\t\t<Point>"];
         [printString appendFormat:@"\n\t\t<coordinates>%@, %@, 0</coordinates>", longitude, latitude];
         [printString appendString:@"\n\t\t</Point>"];
@@ -251,34 +307,37 @@
     
     [printString appendString:@"\n\t</Folder>\n</kml>"];
     
-    //Write the .kml file
-    NSError *error;
-    NSString *documentsDirectory = [NSHomeDirectory()
-                                    stringByAppendingPathComponent:@"Documents"];
-    NSString *fileName = [NSMutableString stringWithFormat:@"Project %@ Entries.kml", selectedProject];
-    NSString *filePath = [documentsDirectory
-                          stringByAppendingPathComponent:fileName];
     
-    NSLog(@"string to write:%@", printString);
-    
-    [printString writeToFile:filePath atomically:YES
-                    encoding:NSUTF8StringEncoding error:&error];
-    
-    NSLog(@"%@", filePath);
     
     if ([selectedProject length] == 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Export Error" message: @"No project selected" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }else{
+        
+        //Write the .kml file
+        NSError *error;
+        NSString *documentsDirectory = [NSHomeDirectory()
+                                        stringByAppendingPathComponent:@"Documents"];
+        NSString *fileName = [NSMutableString stringWithFormat:@"Project %@ Entries.kml", selectedProject];
+        NSString *filePath = [documentsDirectory
+                              stringByAppendingPathComponent:fileName];
+        
+        NSLog(@"string to write:%@", printString);
+        
+        [printString writeToFile:filePath atomically:YES
+                        encoding:NSUTF8StringEncoding error:&error];
+        
+        NSLog(@"%@", filePath);
         //Email the entry
         //Doesn't work on the simulator, but should on phone
         MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
         mc.mailComposeDelegate = self;
         NSData *fileData = [NSData dataWithContentsOfFile:filePath];
         // Determine the MIME type
-        NSString *mimeType = @"text/plain";
+        //NSString *mimeType = @"text/plain";
+        //NSString *mimeType = @"application/vnd.google-earth.kmz";
         //This one may be the one that works...have to wait and see
-        //NSString *mimeType = @"application/vnd.google-earth.kml+xml";
+        NSString *mimeType = @"application/vnd.google-earth.kml+xml";
         // Add attachment
         [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
         // Present mail view controller on screen
@@ -293,7 +352,7 @@
     
     
     pickerData = [[NSMutableArray alloc] init];
-    NSString *query = [NSString stringWithFormat:@"select projectName from entriesBasic inner join entriesGeology on entriesBasic.entriesID = entriesGeology.entriesID"];
+    NSString *query = @"select projectName from projects";
     
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     //Cycles through all of the entries and creates an array of all of the projects

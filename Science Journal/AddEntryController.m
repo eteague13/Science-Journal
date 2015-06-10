@@ -8,7 +8,7 @@
 
 #import "AddEntryController.h"
 #import "datepickerController.h"
-#import "textEntryController.h"
+
 #import "LocationAndWeatherController.h"
 #import "SettingsController.h"
 #import "SketchController.h"
@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //Initialize the database connection
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
     NSLog(@"adding num: %d", self.recordIDToEdit);
     self.projectNameField.text = projectNameList;
@@ -212,9 +212,11 @@
     //If this is adding a new entry
     if(self.recordIDToEdit == -1){
         queryBasic = [NSString stringWithFormat:@"insert into entriesBasic values(null, '%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@','%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, _dataSheet, _outcrop, _structuralData, _strike, _dip, _trend, _plunge, _stopNum];
+        NSLog(@"Query in adding new entry %@", queryBasic);
     //If this is updating an existing entry
     }else{
-        queryBasic = [NSString stringWithFormat:@"update entriesBasic set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', picture='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@', dataSheet='%@', outcrop='%@', structuralData='%@', strike='%@', dip='%@', trend='%@', plunge='%@', stopNum='%@', where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, _dataSheet, _outcrop, _structuralData, _strike, _dip, _trend, _plunge, _stopNum, self.recordIDToEdit];
+        queryBasic = [NSString stringWithFormat:@"update entriesBasic set name='%@', projectName='%@', date='%@',goal='%@', latitude='%@', longitude='%@',weather='%@', sketch='%@', picture='%@',notes='%@',permissions='%@', sampleNum='%@', partners='%@', dataSheet='%@', outcrop='%@', structuralData='%@', strike='%@', dip='%@', trend='%@', plunge='%@', stopNum='%@' where entriesID=%d",_name,_projectName, _date, _goal, _latitude, _longitude, _weather, savedSketchLocation, savedPictureLocation, _notes, _permissions, _sampleNum, _partners, _dataSheet, _outcrop, _structuralData, _strike, _dip, _trend, _plunge, _stopNum, self.recordIDToEdit];
+        NSLog(@"Query in editing entry %@", queryBasic);
     }
     //Each entry has to have an entry name and project. If it does, then it performs the query
     if ([_name length] == 0){
@@ -258,38 +260,24 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)textEntryControllerSave:(textEntryController *)controller didSaveText:(NSString*) text rowSelected:(int)row sectionSelected:(int)section{
+- (void)textEntryControllerSave:(textEntryController *)controller didSaveText:(NSString*) text cellSelected:(NSString *)cellID{
     //Updates the correct field based on what was entered in the TextEntryController
-    if (section == 0){
-        switch (row) {
-            case 4:
-                _goal = text;
-                break;
-            case 7:
-                _notes = text;
-                break;
-            case 8:
-                _permissions = text;
-                break;
-            case 10:
-                _partners = text;
-                break;
-            default:
-                NSLog(@"Default");
-                break;
-        }
-    }else if (section == 1){
-        switch (row) {
-            case 2:
-                _outcrop = text;
-                break;
-            case 3:
-                _structuralData = text;
-                break;
-            default:
-                break;
-        }
+    
+    NSLog(@"Text item passed back: %@. Cell selected: %@", text, cellID);
+    if ([cellID isEqualToString:@"GoalID"]){
+        _goal = text;
+    }else if ([cellID isEqualToString:@"NotesID"]){
+        _notes = text;
+    }else if ([cellID isEqualToString:@"PermissionsID"]){
+        _permissions = text;
+    }else if ([cellID isEqualToString:@"PartnersID"]){
+        _partners = text;
+    }else if ([cellID isEqualToString:@"OutcropID"]){
+        _outcrop = text;
+    }else if ([cellID isEqualToString:@"StructuralDataID"]){
+        _structuralData = text;
     }
+        
     [self checkEntryContents];
     [self dismissViewControllerAnimated:YES completion:nil];
 
@@ -304,6 +292,7 @@
     _latitude = lat;
     _longitude = longitude;
     _weather = weather;
+    NSLog(@"printing weather stuff: %@%@%@", _latitude, _longitude, _weather);
     [self checkEntryContents];
     [self dismissViewControllerAnimated:YES completion:nil];
 
@@ -340,31 +329,20 @@
         textEntryController* textController = segue.destinationViewController;
         textController.delegate = self;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        int rowSelected = (int)indexPath.row;
-        int sectionSelected = (int)indexPath.section;
-        [textController updateRowSelected:rowSelected];
-        
-        switch (rowSelected) {
-            case 3:
-                [textController setTextValue:_goal];
-                break;
-            case 7:
-                [textController setTextValue:_notes];
-                break;
-            case 8:
-                [textController setTextValue:_permissions];
-                break;
-            case 10:
-                [textController setTextValue:_partners];
-                break;
-            case 14:
-                [textController setTextValue:_outcrop];
-                break;
-            case 15:
-                [textController setTextValue:_structuralData];
-                break;
-            default:
-                break;
+        EntriesCell *entryName = (EntriesCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        [textController updateCellSelected:entryName.reuseIdentifier];
+        if ([entryName.reuseIdentifier isEqualToString:@"GoalID"]){
+            [textController setTextValue:_goal];
+        }else if ([entryName.reuseIdentifier isEqualToString:@"NotesID"]){
+            [textController setTextValue:_notes];
+        }else if ([entryName.reuseIdentifier isEqualToString:@"PermissionsID"]){
+            [textController setTextValue:_permissions];
+        }else if ([entryName.reuseIdentifier isEqualToString:@"PartnersID"]){
+            [textController setTextValue:_partners];
+        }else if ([entryName.reuseIdentifier isEqualToString:@"OutcropID"]){
+            [textController setTextValue:_outcrop];
+        }else if ([entryName.reuseIdentifier isEqualToString:@"StructuralDataID"]){
+            [textController setTextValue:_structuralData];
         }
     }else if ([segue.identifier isEqualToString:@"LocationAndWeather"]){
         LocationAndWeatherController* locationController = segue.destinationViewController;
@@ -586,119 +564,93 @@
     UIImage *fieldFilled = [UIImage imageNamed:@"checkmark-100.png"];
     UIImage *fieldEmpty = [UIImage imageNamed:@"close-100.png"];
     if ([_date length] > 0){
-        NSLog(@"Filled");
         [_dateContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_dateContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_dateContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_dateContentsLabel setEnabled:NO];
     }
     if ([_goal length] > 0){
-        NSLog(@"Filled");
         [_goalContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_goalContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_goalContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_goalContentsLabel setEnabled:NO];
     }
     if ([_latitude length] > 0 || [_longitude length] > 0 || [_weather length] > 0){
-        NSLog(@"Filled");
         [_locationContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_locationContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_locationContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_locationContentsLabel setEnabled:NO];
     }
     if (_sketch != nil ){
-        NSLog(@"Filled");
         [_sketchContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_sketchContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_sketchContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_sketchContentsLabel setEnabled:NO];
     }
     if (_picture != nil ){
-        NSLog(@"Filled");
         [_pictureContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_pictureContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_pictureContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_pictureContentsLabel setEnabled:NO];
     }
     if ([_notes length] > 0){
-        NSLog(@"Filled");
         [_notesContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_notesContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_notesContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_notesContentsLabel setEnabled:NO];
     }
     if ([_permissions length] > 0){
-        NSLog(@"Filled");
         [_permissionsContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_permissionsContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_permissionsContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_permissionsContentsLabel setEnabled:NO];
     }
     if ([_partners length] > 0){
-        NSLog(@"Filled");
         [_partnersContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_partnersContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_partnersContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_partnersContentsLabel setEnabled:NO];
     }
     if ([_dataSheet length] > 0){
-        NSLog(@"Filled");
         [_dataSheetContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_dataSheetContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_dataSheetContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_dataSheetContentsLabel setEnabled:NO];
     }
     if ([_outcrop length] > 0){
-        NSLog(@"Filled");
         [_outcropContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_outcropContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_outcropContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_outcropContentsLabel setEnabled:NO];
     }
     if ([_structuralData length] > 0){
-        NSLog(@"Filled");
         [_structuralContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_structuralContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_structuralContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_structuralContentsLabel setEnabled:NO];
     }
     if ([_strike length] > 0 || [_dip length] > 0){
-        NSLog(@"Filled");
         [_strikeDipContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_strikeDipContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_strikeDipContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_strikeDipContentsLabel setEnabled:NO];
     }
     if ([_trend length] > 0 || [_plunge length] > 0){
-        NSLog(@"Filled");
         [_trendPlungeContentsLabel setImage:fieldFilled forState:UIControlStateNormal];
         [_trendPlungeContentsLabel setEnabled:NO];
     }else{
-        NSLog(@"Empty");
         [_trendPlungeContentsLabel setImage:fieldEmpty forState:UIControlStateNormal];
         [_trendPlungeContentsLabel setEnabled:NO];
     }

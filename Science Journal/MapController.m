@@ -13,29 +13,32 @@
 @interface MapController ()
 
 @end
-#define METERS_PER_MILE 1609.344
+
 
 @implementation MapController
 @synthesize mapView;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //Initialize the database connection
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
     mapView.delegate = self;
     mapView.showsUserLocation = YES;
-    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
+    
+    //Asks the user to allow location features when the app is in use
     _locManager = [[CLLocationManager alloc] init];
     if ([_locManager respondsToSelector:
          @selector(requestWhenInUseAuthorization)]) {
         [_locManager requestWhenInUseAuthorization];
     }
+    
+    //Sets the initial Map window on Washington, D.C...figured it was a good starting point
     CLLocationCoordinate2D centerCoordinate;
     centerCoordinate.latitude = 38.9047;
     centerCoordinate.longitude = -77.0164;
-    
-    MKCoordinateRegion region =
-    MKCoordinateRegionMakeWithDistance (
-                                        centerCoordinate, 20000, 20000);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (centerCoordinate, 20000, 20000);
     [self.mapView setRegion:region animated:YES];
+    
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
     
@@ -54,21 +57,6 @@
    [self.mapView addAnnotations:[self updateAnnotations]];
     
 }
-
-
-/*
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    //self.mapView.centerCoordinate = userLocation.location.coordinate;
-    MKCoordinateRegion region =
-    MKCoordinateRegionMakeWithDistance (
-                                        userLocation.location.coordinate, 200, 200);
-    [self.mapView setRegion:region animated:YES];
- 
-}
-*/
-
-
 
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
@@ -100,63 +88,42 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     //When a user clicks on an annotation, it performs a segue call to open up the Edit Entry controller
-    MKPointAnnotation *location = (MKPointAnnotation*)view.annotation;
-
     //Gets the entry # from the selected annotation
     NSString *tempString = [view.annotation.subtitle substringFromIndex:9];
     _selectedAnnotationIdentifier = tempString;
     [self performSegueWithIdentifier:@"annotationDetail" sender:self];
    
-    
-    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"annotationDetail"])
     {
-
-        NSString *query = [NSString stringWithFormat:@"select * from entriesBasic"];
-        
-        NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
         //Get the selected entry data and load it in the Edit Entry controller
         UINavigationController *navigationController = segue.destinationViewController;
         AddEntryController *annotationView = [navigationController viewControllers][0];
         annotationView.delegate = self;
         [annotationView setEditEntry:true];
         annotationView.recordIDToEdit = [_selectedAnnotationIdentifier intValue];
-        
-
-        
     }
 }
 
-- (void)AddEntryControllerDidCancel:(AddEntryController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-- (void)AddEntryControllerDidSave:(AddEntryController *)controller{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+//"Get location" button that moves the map to where the user is
 - (IBAction)zoomCurrentLocation:(id)sender {
-    //"Get location" button that moves the map to where the user is
     MKUserLocation *userLocation = mapView.userLocation;
-    MKCoordinateRegion region =
-    MKCoordinateRegionMakeWithDistance (
-                                        userLocation.location.coordinate, 200, 200);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (userLocation.location.coordinate, 200, 200);
     [mapView setRegion:region animated:YES];
 }
 
+//Changes the maptype
 - (IBAction)changeMapType:(id)sender {
-    //Changes the maptype
     if (mapView.mapType == MKMapTypeStandard)
         mapView.mapType = MKMapTypeSatellite;
     else
         mapView.mapType = MKMapTypeStandard;
 }
 
+//Creates an array of annotations to be loaded onto the map
 -(NSMutableArray *)updateAnnotations{
     [self.mapView removeAnnotations:self.mapView.annotations];
     CLLocationCoordinate2D coordinate;
@@ -179,6 +146,16 @@
         [allAnnotations addObject: point];
     }
     return allAnnotations;
+}
+
+//Delegate methods
+- (void)AddEntryControllerDidCancel:(AddEntryController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)AddEntryControllerDidSave:(AddEntryController *)controller{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

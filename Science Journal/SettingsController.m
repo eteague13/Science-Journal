@@ -37,10 +37,28 @@
    
     [self checkIfDropboxLinked];
     
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [self checkIfDropboxLinked];
+    _dateSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchDate"];
+    _goalSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGoal"];
+    _locationWeatherSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchLocationWeather"];
+    _sketchSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchSketch"];
+    _pictureSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchPicture"];
+    _notesSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchNotes"];
+    _permissionSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchPermissions"];
+    _sampleSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchSampleNum"];
+    _partnersSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchPartners"];
+    _dataSheetSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchDataSheet"];
+    _strikeDipSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchStrikeDip"];
+    _stopNumSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchStopNum"];
+    _outcropSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchOutcrop"];
+    _structuralDataSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchStructData"];
+    _trendPlungeSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchTrendPlunge"];
+    _stopNumSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchStopNum"];
+    _pictureSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchPicture"];
 }
 - (void)didReceiveMemoryWarning
 {

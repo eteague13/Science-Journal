@@ -15,8 +15,10 @@
 #import "DataSheetController.h"
 #import "StrikeDipController.h"
 #import "TrendPlungeController.h"
+#import "EntriesCell.h"
+#import "textEntryController.h"
 
-
+//Delegate
 @class AddEntryController;
 @protocol AddEntryControllerDelegate <NSObject>
 - (void)AddEntryControllerDidCancel:(AddEntryController *) controller;
@@ -24,28 +26,13 @@
 
 @end
 
-@interface AddEntryController : UITableViewController <datepickerControllerDelegate, LocationAndWeatherControllerDelegate, SketchControllerDelegate, CameraControllerDelegate, DataSheetControllerDelegate, StrikeDipControllerDelegate, TrendPlungeControllerDelegate> {
+@interface AddEntryController : UITableViewController <datepickerControllerDelegate, LocationAndWeatherControllerDelegate, SketchControllerDelegate, CameraControllerDelegate, DataSheetControllerDelegate, StrikeDipControllerDelegate, TrendPlungeControllerDelegate, textEntryControllerDelegate> {
     BOOL isEditEntry;
     NSString *projectNameList;
     
 }
-
-@property (nonatomic, strong) DBManager *dbManager;
-@property (nonatomic, strong) NSArray *associatedEntryArray;
-@property (nonatomic) int recordIDToEdit;
--(void)loadInfoToEdit;
--(void)setProjectNameList:(NSString *) pnl;
-
-
-
-
-@property (nonatomic, weak) id <AddEntryControllerDelegate> delegate;
-
-- (IBAction)cancelButton:(id)sender;
-- (IBAction)saveButton:(id)sender;
-
+//IBOutlets
 @property (weak, nonatomic) IBOutlet UINavigationItem *entryTitleLabel;
-
 @property (weak, nonatomic) IBOutlet UITextField *entryNameField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabelField;
 @property (weak, nonatomic) IBOutlet UITextField *projectNameField;
@@ -54,24 +41,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *locWeatherField;
 @property (weak, nonatomic) IBOutlet UILabel *notesField;
 @property (weak, nonatomic) IBOutlet UILabel *permissionsField;
-
 @property (weak, nonatomic) IBOutlet UILabel *outcropField;
 @property (weak, nonatomic) IBOutlet UILabel *structuralField;
 @property (weak, nonatomic) IBOutlet UILabel *partnersField;
-
-
-@property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *dataSheet, *strike, *dip, *trend, *plunge;
-@property (strong, nonatomic) UIImage *sketch;
-@property (strong, nonatomic) UIImage *picture;
-
--(void)setEditEntry:(BOOL)value;
 @property (weak, nonatomic) IBOutlet UITextField *stopNumField;
 @property (weak, nonatomic) IBOutlet UITableViewCell *strikeDipCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *stopNumCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *outcropCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *structuralDataCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *trendPlungeCell;
-
 @property (weak, nonatomic) IBOutlet UITableViewCell *dateCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *goalCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *locationWeatherCell;
@@ -95,6 +73,39 @@
 @property (weak, nonatomic) IBOutlet UIButton *outcropContentsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *structuralContentsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *trendPlungeContentsLabel;
+
+//IBActions
+- (IBAction)cancelButton:(id)sender;
+- (IBAction)saveButton:(id)sender;
+
+//Variables
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSArray *associatedEntryArray;
+@property (nonatomic) int recordIDToEdit;
+@property (nonatomic, weak) id <AddEntryControllerDelegate> delegate;
+@property (strong, nonatomic) NSString *name, *date, *projectName, *goal, *latitude, *longitude, *weather, *partners, *permissions, *outcrop, *structuralData, *sampleNum, *notes, *stopNum, *dataSheet, *strike, *dip, *trend, *plunge;
+@property (strong, nonatomic) UIImage *sketch;
+@property (strong, nonatomic) UIImage *picture;
+
+//Methods
+-(void)loadInfoToEdit;
+-(void)setProjectNameList:(NSString *) pnl;
+-(void)setEditEntry:(BOOL)value;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @end

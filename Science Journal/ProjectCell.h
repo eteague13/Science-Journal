@@ -10,7 +10,15 @@
 
 @interface ProjectCell : UITableViewCell
 
-@property (nonatomic) int identifier;
+//IBOutlets
 @property (weak, nonatomic) IBOutlet UILabel *projectLabel;
+//IBActions
+
+//Variables
+@property (nonatomic) int identifier;
+
+//Methods
+
+
 
 @end

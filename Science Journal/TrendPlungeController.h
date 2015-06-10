@@ -16,11 +16,19 @@
 
 @interface TrendPlungeController : UIViewController
 
-- (IBAction)cancelTrendPlunge:(id)sender;
-- (IBAction)saveTrendPlunge:(id)sender;
+//IBOutlets
 @property (weak, nonatomic) IBOutlet UITextField *trendField;
 @property (weak, nonatomic) IBOutlet UITextField *plungeField;
+
+//IBActions
+- (IBAction)cancelTrendPlunge:(id)sender;
+- (IBAction)saveTrendPlunge:(id)sender;
+
+//Variables
 @property (nonatomic, weak) id <TrendPlungeControllerDelegate> delegate;
 @property (nonatomic, strong) NSString *trend, *plunge;
+
+//Methods
 -(void)setTrend:(NSString*)trend setPlunge:(NSString *)plunge;
+
 @end

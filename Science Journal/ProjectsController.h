@@ -12,11 +12,22 @@
 #import "EntriesController.h"
 #import "AddProjectController.h"
 
-@interface ProjectsController : UITableViewController <AddProjectControllerDelegate>
+@interface ProjectsController : UITableViewController <AddProjectControllerDelegate, UIGestureRecognizerDelegate>{
+    NSString *oldProjectName;
+    int oldProjectID;
+}
 
+//IBOutlets
 
+//IBActions
+
+//Variables
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *allProjectsFromDB;
+@property (nonatomic, strong) ProjectCell *projectCellToDelete;
+@property (nonatomic) int projectIDToEdit;
+
+//Methods
 
 
 @end

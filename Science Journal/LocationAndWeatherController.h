@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "CoreLocation/CoreLocation.h"
 #import "NoteView.h"
+
+//Delegate
 @class LocationAndWeatherController;
 @protocol LocationAndWeatherControllerDelegate <NSObject>
 - (void)LocationAndWeatherCancel:(LocationAndWeatherController *) controller;
 - (void)LocationAndWeatherSave:(LocationAndWeatherController *)controller lat:(NSString*) lat longitude:(NSString*)longitude weather:(NSString*) weather;
 @end
-@interface LocationAndWeatherController : UIViewController <CLLocationManagerDelegate> {
+
+@interface LocationAndWeatherController : UIViewController <CLLocationManagerDelegate, UITextFieldDelegate, UITextViewDelegate> {
     float latitudeValue;
     float longitudeValue;
     NSDictionary *jsonWeather;
@@ -22,15 +25,24 @@
     NSString *longitudeArea;
     NSString *weatherArea;
 }
+
+//IBOutlets
+@property (weak, nonatomic) IBOutlet UITextField *latitudeField;
+@property (weak, nonatomic) IBOutlet UITextField *longitudeField;
+
+//IBActions
 - (IBAction)locCancelButton:(id)sender;
 - (IBAction)locSaveButton:(id)sender;
 - (IBAction)updateLocWeather:(id)sender;
+
+//Variables
 @property (nonatomic, weak) id <LocationAndWeatherControllerDelegate> delegate;
-@property (weak, nonatomic) IBOutlet UITextField *latitudeField;
-@property (weak, nonatomic) IBOutlet UITextField *longitudeField;
-//@property (weak, nonatomic) IBOutlet UITextView *weatherField;
+@property (nonatomic, retain) NoteView *weatherField;
+
+//Methods
 -(void)setLat:(NSString*) latitude setLong:(NSString*) longitude setWeather:(NSString*) weather;
 
-@property (nonatomic, retain) NoteView *weatherField;
+
+
 
 @end

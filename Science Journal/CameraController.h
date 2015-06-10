@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+
+//Delegate
 @class CameraController;
 @protocol CameraControllerDelegate <NSObject>
 - (void)cameraControllerCancel:(CameraController *) controller;
@@ -14,15 +16,24 @@
 @end
 
 
-@interface CameraController : UIViewController{
+@interface CameraController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
     UIImage * photo;
 }
+//IBOutlets
+@property (weak, nonatomic) IBOutlet UIImageView *photoDisplay;
+
+//IBActions
 - (IBAction)cancelCameraButton:(id)sender;
 - (IBAction)saveCameraButton:(id)sender;
 - (IBAction)useCameraRoll:(id)sender;
 - (IBAction)useCamera:(id)sender;
-- (void) setPhoto:(UIImage*) item;
-@property (weak, nonatomic) IBOutlet UIImageView *photoDisplay;
 
+//Variables
 @property (nonatomic, weak) id <CameraControllerDelegate> delegate;
+
+//Methods
+- (void) setPhoto:(UIImage*) item;
+
+
+
 @end

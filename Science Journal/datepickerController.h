@@ -8,21 +8,29 @@
 
 #import <UIKit/UIKit.h>
 
-
+//Delegate
 @class datepickerController;
 @protocol datepickerControllerDelegate <NSObject>
 - (void)datepickerControllerCancel:(datepickerController *) controller;
 - (void)datepickerControllerSave:(datepickerController *)controller didSaveDate:(NSString*) date;
 @end
-@interface datepickerController : UIViewController {
+
+@interface datepickerController : UIViewController <UITextFieldDelegate> {
     NSString * dateValue;
 }
 
-@property (nonatomic, weak) id <datepickerControllerDelegate> delegate;
-
+//IBOutlets
 @property (weak, nonatomic) IBOutlet UITextField *dateDisplay;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+
+//IBActions
 - (IBAction)dateCancel:(id)sender;
 - (IBAction)dateSave:(id)sender;
+//Variables
+@property (nonatomic, weak) id <datepickerControllerDelegate> delegate;
+
+//Methods
 - (void)setDateValue:(NSString*)date;
+
+
 @end

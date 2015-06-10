@@ -35,7 +35,7 @@
 {
     [super viewDidLoad];
     
-    //Create the link to the SQLite database
+    //Initialize the database connection
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
     NSString *documentsDirectory = [NSHomeDirectory()
                                     stringByAppendingPathComponent:@"Documents"];
@@ -130,8 +130,8 @@
         addEntryController.delegate = self;
         [addEntryController setEditEntry:true];
         addEntryController.recordIDToEdit = self.recordIDToEdit;
-        self.recordIDToEdit = [self.tableView indexPathForSelectedRow].row + 1;
-        EntriesCell *entryToEdit = [self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        self.recordIDToEdit = (int)[self.tableView indexPathForSelectedRow].row + 1;
+        EntriesCell *entryToEdit = (EntriesCell *)[self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
         addEntryController.recordIDToEdit = entryToEdit.identifier;
         
      
@@ -164,7 +164,7 @@
 }
 
 -(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    EntriesCell *entryName = [self.tableView cellForRowAtIndexPath:indexPath];
+    EntriesCell *entryName = (EntriesCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     NSLog(@"Record ID to delete: %d", entryName.identifier);
     //Allows the user to swipe to delete
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -231,5 +231,7 @@
 -(void)setProjectName:(NSString *)projectNameList {
     self.projectNameList = projectNameList;
 }
+
+
 
 @end

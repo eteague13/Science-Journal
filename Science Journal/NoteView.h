@@ -10,4 +10,12 @@
 
 @interface NoteView : UITextView <UITextViewDelegate>
 
+//IBOutlets
+
+//IBActions
+
+//Variables
+
+//Methods
+
 @end

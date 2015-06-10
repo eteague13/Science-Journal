@@ -12,22 +12,29 @@
 - (void)dataSheetControllerCancel:(DataSheetController *) controller;
 - (void)dataSheetControllerSave:(DataSheetController *)controller didSaveArray:(NSMutableDictionary*) array;
 @end
-@interface DataSheetController : UIViewController <UIScrollViewDelegate> {
+@interface DataSheetController : UIViewController <UIScrollViewDelegate, UITextFieldDelegate> {
     int numColumns;
     int numRows;
 }
 
-
-@property (nonatomic, weak) id <DataSheetControllerDelegate> delegate;
+//IBOutlets
 @property (weak, nonatomic) IBOutlet UITextField *dataColumnsField;
 @property (weak, nonatomic) IBOutlet UITextField *dataRowsField;
-- (IBAction)makeTable:(id)sender;
 @property (weak, nonatomic) IBOutlet UIScrollView *dataSheetScroll;
 @property (weak, nonatomic) IBOutlet UIButton *makeTableButton;
 @property (weak, nonatomic) IBOutlet UILabel *rowsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *columnsLabel;
+
+//IBActions
+- (IBAction)makeTable:(id)sender;
+
+//Variables
 @property (nonatomic, strong) NSMutableDictionary *dataArray;
+@property (nonatomic, weak) id <DataSheetControllerDelegate> delegate;
+
+//Methods
 -(void) setSheetData:(NSString*) dictionary;
 -(void)drawTableWithRow;
 -(void)loadDataArray;
+
 @end

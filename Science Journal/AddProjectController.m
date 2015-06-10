@@ -18,12 +18,38 @@
 }
 */
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    _projectAddField.text = oldProjectName;
+    
+    //Initialize the database connection
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
+    // Do any additional setup after loading the view.
+}
+
 - (IBAction)cancelAddProject:(id)sender {
     [self.delegate addProjectCancel:self];
 }
 
 - (IBAction)addProject:(id)sender {
-    [self.delegate addProjectSave:self textToSave: _projectAddField.text];
+    NSString *query = @"select projectName from projects";
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSString *tempProjectName = _projectAddField.text;
+    
+    BOOL projectExists = NO;
+    for (id key in results){
+        if ([[key objectAtIndex:0] isEqualToString:tempProjectName]){
+            projectExists = YES;
+            break;
+        }
+    }
+    if (projectExists){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Project already exists" message: @"Enter a different project title or cancel" delegate: self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }else{
+        [self.delegate addProjectSave:self textToSave: _projectAddField.text addOrEdit:addOrEdit];
+    }
+
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -35,5 +61,10 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+-(void)setAddOrEdit:(int)val setOldProjectName:(NSString *) pn{
+    addOrEdit = val;
+    oldProjectName = pn;
 }
 @end

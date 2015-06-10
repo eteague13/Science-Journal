@@ -20,28 +20,29 @@
 
     //self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    
+    //Initialize the database connection
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"referencesdb.sql"];
-    NSString *documentsDirectory = [NSHomeDirectory()
-                                    stringByAppendingPathComponent:@"Documents"];
+
+    NSString *addFirstReferenceExistence = @"select * from allReferences where referenceID=1";
+    NSArray *results = [self.dbManager loadDataFromDB:addFirstReferenceExistence];
+    if ([results count] == 0){
+        NSString *addReferenceQuery = [NSString stringWithFormat:@"insert into allReferences values(null, '%@', '%d', '%@')",@"", 0, @"About References"];
+        
+        NSLog(@"In the references load");
+        [self.dbManager loadDataFromDB:addReferenceQuery];
+    }
     
     
-    NSString *filePath = documentsDirectory;
-    
-    NSString *aboutExample = [filePath stringByAppendingString:@"/Users/evanteague/Pictures/test poop.jpg"];
-    NSString *addReferenceQuery = [NSString stringWithFormat:@"insert into allReferences values(null, '%@', '%d', '%s')",aboutExample, 0, "About References"];
     /*
     NSString *delete1 = @"delete from allReferences";
     [self.dbManager executeQuery:delete1];
     */
     
-    NSLog(@"In the references load");
-    [self.dbManager loadDataFromDB:addReferenceQuery];
+    
+    
      
     
-     NSString *query = [NSString stringWithFormat:@"select * from allReferences"];
-    _allReferencesFromDB = [self.dbManager loadDataFromDB:query];
-    NSLog(@"%lu", (unsigned long)[_allReferencesFromDB count]);
+    [self reloadData];
     
     [self.tableView setSeparatorColor:[UIColor blackColor]];
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
@@ -51,6 +52,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [self reloadData];
 }
 
 /*
@@ -73,7 +78,7 @@
     EntriesCell *cell = [tableView
                          dequeueReusableCellWithIdentifier:CellIdentifier
                          forIndexPath:indexPath];
-    int tempIndexPath = indexPath.row + 1;
+    int tempIndexPath = (int)indexPath.row + 1;
     NSString *query = [NSString stringWithFormat:@"select * from allReferences where allReferences.referenceID = %i",tempIndexPath];
     NSLog(@"Query in index path: %@", query);
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
@@ -102,7 +107,7 @@
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    EntriesCell *referenceName = [self.tableView cellForRowAtIndexPath:indexPath];
+    EntriesCell *referenceName = (EntriesCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     NSLog(@"Record ID to delete: %d", referenceName.identifier);
     //Allows the user to swipe to delete
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -159,7 +164,7 @@
         NSLog(@"Trying to pass into view");
         ViewReferenceController *viewReference = segue.destinationViewController;
         viewReference.delegate = self;
-        EntriesCell *referenceSelected = [self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        EntriesCell *referenceSelected = (EntriesCell *)[self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
         NSString *query = [NSString stringWithFormat:@"select * from allReferences where allReferences.referenceID = %i",referenceSelected.identifier];
         NSLog(@"Query in view: %@", query);
         NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
@@ -195,7 +200,6 @@
     NSString *addReferenceQuery = [NSString stringWithFormat:@"insert into allReferences values(null, '%@', '%d', '%@')", contents, val, nm];
     NSLog(@"%@", addReferenceQuery);
     [self.dbManager executeQuery:addReferenceQuery];
-    
     if (self.dbManager.affectedRows != 0) {
         NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
     }
@@ -215,6 +219,17 @@
     NSString *query = [NSString stringWithFormat:@"select * from allReferences"];
     _allReferencesFromDB = [self.dbManager loadDataFromDB:query];
     [_referenceTable reloadData];
+}
+
+
+-(void)viewReferenceSave:(ViewReferenceController *)controller setContents:(NSString *)contents setImageOrText:(int)val setName:(NSString *)nm setID:(int)iden {
+    
+    NSString *editReferenceQuery = [NSString stringWithFormat:@"update allReferences set contents='%@', name='%@' where referenceID=%d", contents, nm, iden];
+    [self.dbManager executeQuery:editReferenceQuery];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Reference Saved" message: @"" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    
 }
 
 

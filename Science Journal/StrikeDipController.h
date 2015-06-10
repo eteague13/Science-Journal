@@ -15,12 +15,20 @@
 @end
 
 @interface StrikeDipController : UIViewController
-- (IBAction)cancelStrikeDip:(id)sender;
-- (IBAction)saveStrikeDip:(id)sender;
+
+//IBOutlets
 @property (weak, nonatomic) IBOutlet UITextField *strikeField;
 @property (weak, nonatomic) IBOutlet UITextField *dipField;
 
+//IBActions
+- (IBAction)cancelStrikeDip:(id)sender;
+- (IBAction)saveStrikeDip:(id)sender;
+
+//Variables
 @property (nonatomic, weak) id <StrikeDipControllerDelegate> delegate;
 @property (nonatomic, strong) NSString *strike, *dip;
+
+//Methods
 -(void)setStrike:(NSString*)strike setDip:(NSString *)dip;
+
 @end

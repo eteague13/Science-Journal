@@ -12,7 +12,7 @@
 
 
 @implementation AppDelegate
-
+//Initializes all of the switches in the Settings tab
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
@@ -62,9 +62,10 @@
     
     NSDictionary *appDefaults15 = [NSDictionary
                                  dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchTrendPlunge"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults15];
     
     
+    //Creates the Dropbox session
     DBSession *dbSession = [[DBSession alloc]
                             initWithAppKey:@"2xraywobhwdkb94"
                             appSecret:@"p38tbm8288tnc3p"
@@ -101,6 +102,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+//Creates the link with Dropbox
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
   sourceApplication:(NSString *)source annotation:(id)annotation {
     if ([[DBSession sharedSession] handleOpenURL:url]) {

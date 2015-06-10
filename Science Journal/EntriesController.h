@@ -9,17 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "AddEntryController.h"
 
-@interface EntriesController : UITableViewController <AddEntryControllerDelegate>{
-}
+@interface EntriesController : UITableViewController <AddEntryControllerDelegate>
 
+//IBOutlets
+
+//IBActions
+
+//Variables
 @property (strong, nonatomic) NSMutableDictionary *sections;
-
-
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic) int recordIDToEdit;
-
 @property (nonatomic, strong) NSArray *allEntriesFromDB;
-
 @property (nonatomic, strong) NSString *projectNameList;
+
+//Methods
 -(void)setProjectName:(NSString *)projectNameList;
+
 @end

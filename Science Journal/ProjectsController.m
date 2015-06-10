@@ -23,7 +23,8 @@
     NSString *filePath = documentsDirectory;
     NSLog(@"%@", filePath);
     
-     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
+    //Initialize the database connection
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -33,10 +34,13 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    /*
+    
     NSString *delete1 = @"delete from projects";
     [self.dbManager executeQuery:delete1];
-     */
+     NSString *delete2 = @"delete from entriesBasic";
+     [self.dbManager executeQuery:delete2];
+     
+    
     
     [self loadData];
     
@@ -117,16 +121,17 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"AddProject"]) {
-        NSLog(@"TRYing to segue in add project");
         AddProjectController *addProject = segue.destinationViewController;
         addProject.delegate = self;
-        
+        [addProject setAddOrEdit:0 setOldProjectName:@""];
     }else if ([segue.identifier isEqualToString:@"ViewEntries"]){
-        UINavigationController *navigationController = segue.destinationViewController;
         EntriesController *entriesListController = segue.destinationViewController;
-        ProjectCell *projectToEdit = [self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
-        NSLog(@"Trying to segue: %@", projectToEdit.projectLabel.text);
+        ProjectCell *projectToEdit = (ProjectCell *)[self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
         [entriesListController setProjectName:projectToEdit.projectLabel.text];
+    }else if ([segue.identifier isEqualToString:@"EditProjectName"]){
+        AddProjectController *addProject = segue.destinationViewController;
+        addProject.delegate = self;
+        [addProject setAddOrEdit:1 setOldProjectName:oldProjectName];
     }
 }
 
@@ -134,10 +139,29 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
-- (void)addProjectSave:(AddProjectController *)controller textToSave:(NSString *)pn{
-    NSString *query = [NSString stringWithFormat:@"insert into projects values(null, '%@')", pn];
-    [self.dbManager executeQuery:query];
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (void)addProjectSave:(AddProjectController *)controller textToSave:(NSString *)pn addOrEdit:(int)val{
+    if (val == 0){
+        NSString *query = [NSString stringWithFormat:@"insert into projects values(null, '%@')", pn];
+        [self.dbManager executeQuery:query];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else {
+        
+        NSString *query = [NSString stringWithFormat:@"update projects set projectName='%@' where projectName='%@'", pn, oldProjectName];
+        [self.dbManager executeQuery:query];
+        
+        NSString *allProjectEntries = [NSString stringWithFormat:@"select * from entriesBasic where projectName='%@'", oldProjectName];
+        NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:allProjectEntries]];
+        for (id entry in results){
+            int tempID = [[entry objectAtIndex:0] intValue];
+            NSLog(@"tempID: %d", tempID);
+            NSString *updateEntryQuery = [NSString stringWithFormat:@"update entriesBasic set projectName='%@' where entriesID=%d", pn, tempID];
+            [self.dbManager executeQuery:updateEntryQuery];
+        }
+        
+        
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
     
 }
 
@@ -151,10 +175,70 @@
             [_allProjectsFromDB addObject:projectNm];
         }
     }
-    NSLog(@"%@", _allProjectsFromDB);
     [self.tableView reloadData];
 }
 
+
+-(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    _projectCellToDelete = (ProjectCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    //Allows the user to swipe to delete
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Edit or Delete the Project" message: @"Deleting this project will also delete all associated entries" delegate: self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", @"Edit Name", nil];
+        [alert show];
+        
+        
+    }
+    
+    
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"Button index: %ld", (long)buttonIndex);
+    if(buttonIndex != [alertView cancelButtonIndex] && buttonIndex != 2)
+    {
+        
+        NSString *getAllEntriesQuery = [NSString stringWithFormat:@"select * from entriesBasic where projectName='%@'", _projectCellToDelete.projectLabel.text];
+        //NSLog(@"Query: %@", getAllEntriesQuery);
+        NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:getAllEntriesQuery]];
+        //NSLog(@"Entries%@", results);
+        for (id key in results) {
+            NSLog(@"Key: %@", key);
+            int entryIDToDelete = [[key objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"entriesID"]] intValue];
+            NSString *deletePictureSketchQuery = [NSString stringWithFormat:@"select * from entriesBasic where entriesID=%d", entryIDToDelete];
+            NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:deletePictureSketchQuery]];
+            NSString *pictureFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"picture"]];
+            NSString *sketchFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]];
+            [[NSFileManager defaultManager] removeItemAtPath: pictureFilePath error: nil];
+            [[NSFileManager defaultManager] removeItemAtPath: sketchFilePath error: nil];
+            
+            
+        }
+        
+        NSString *query = [NSString stringWithFormat:@"delete from entriesBasic where projectName='%@'", _projectCellToDelete.projectLabel.text];
+        
+        [self.dbManager executeQuery:query];
+        
+        NSString *deleteProjectQuery = [NSString stringWithFormat:@"delete from projects where projectName='%@'", _projectCellToDelete.projectLabel.text];
+        
+        [self.dbManager executeQuery:deleteProjectQuery];
+        
+        [self loadData];
+    }else if (buttonIndex == 2){
+        
+        oldProjectName =_projectCellToDelete.projectLabel.text;
+        //NSString *query = [NSString stringWithFormat:@"select * from projects where projectName='%@'", _projectCellToDelete.projectLabel.text];
+        //[self.dbManager executeQuery:query];
+        [self performSegueWithIdentifier:@"EditProjectName" sender:self];
+    }
+         
+    
+}
+
+-(NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"Edit";
+}
 
 
 @end

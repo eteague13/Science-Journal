@@ -10,6 +10,14 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+//IBOutlets
+
+//IBActions
+
+//Variables
 @property (strong, nonatomic) UIWindow *window;
+
+//Methods
+
 
 @end

@@ -19,10 +19,8 @@
     NSString *filename;
 }
 
-
+//IBOutlets
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
-
-
 @property (weak, nonatomic) IBOutlet UISwitch *dateSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *goalSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *locationWeatherSwitch;
@@ -38,7 +36,9 @@
 @property (weak, nonatomic) IBOutlet UISwitch *outcropSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *structuralDataSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *trendPlungeSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *dropboxStatusLabel;
 
+//IBActions
 - (IBAction)stopNumFlip:(id)sender;
 - (IBAction)outcropFlip:(id)sender;
 - (IBAction)structDataFlip:(id)sender;
@@ -57,12 +57,10 @@
 - (IBAction)strikeDipFlip:(id)sender;
 - (IBAction)trendPlungeFlip:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UILabel *dropboxStatusLabel;
-
+//Variables
 @property (nonatomic, strong) DBRestClient *restClient;
 
-
-
+//Methods
 
 
 @end

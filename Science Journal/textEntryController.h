@@ -9,28 +9,34 @@
 #import <UIKit/UIKit.h>
 #import "NoteView.h"
 
+//Delegate
 @class textEntryController;
 @protocol textEntryControllerDelegate <NSObject>
 - (void)textEntryControllerCancel:(textEntryController *) controller;
-- (void)textEntryControllerSave:(textEntryController *)controller didSaveText:(NSString*) text rowSelected:(int)row sectionSelected:(int)section;
+- (void)textEntryControllerSave:(textEntryController *)controller didSaveText:(NSString*)text cellSelected:(NSString *)cellID;
 @end
-@interface textEntryController : UIViewController{
-    int addEntryRowSelected;
+
+@interface textEntryController : UIViewController<UITextViewDelegate>{
+    NSString *cellSelected;
     NSString *textArea;
-    int addEntrySectionSelected;
     
 }
-
-@property (nonatomic, weak) id <textEntryControllerDelegate> delegate;
+//IBOutlets
 @property (weak, nonatomic) IBOutlet UILabel *textEntryLabel;
+@property (weak, nonatomic) IBOutlet UITextView *textField;
 
+//IBActions
 - (IBAction)textCancelButton:(id)sender;
 - (IBAction)textSaveButton:(id)sender;
 
-- (void)updateRowSelected:(int)row;
-@property (weak, nonatomic) IBOutlet UITextView *textField;
+//Variables
+@property (nonatomic, weak) id <textEntryControllerDelegate> delegate;
+@property (nonatomic, retain) NoteView *note;
+
+//Methods
+- (void)updateCellSelected:(NSString*)cellID;
 - (void)setTextValue:(NSString*)text;
 
-@property (nonatomic, retain) NoteView *note;
+
 
 @end

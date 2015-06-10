@@ -19,14 +19,21 @@
     NSString *localPath;
     NSString *filename;
 }
-- (IBAction)exportGooglEarth:(id)sender;
 
-@property (nonatomic, strong) DBManager *dbManager;
+//IBOutlets
 @property (weak, nonatomic) IBOutlet UIPickerView *projectPicker;
-- (IBAction)emailProject:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *exportAllButton;
 @property (weak, nonatomic) IBOutlet UIButton *exportProjectButton;
+
+//IBActions
+- (IBAction)exportGooglEarth:(id)sender;
+- (IBAction)emailProject:(id)sender;
 - (IBAction)syncDropbox:(id)sender;
+
+//Variables
+@property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) DBRestClient *restClient;
+
+//Methods
 
 @end
