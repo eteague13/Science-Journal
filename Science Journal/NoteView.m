@@ -14,8 +14,8 @@
     
     self = [super initWithFrame:frame];
     if (self) {
-        //self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped2.jpg"]];
-        self.backgroundColor = [UIColor yellowColor];
+        
+        self.backgroundColor = [UIColor colorWithRed:217.0/255.0f green:217.0/255.0f blue:217.0/255.0f alpha:0.2f];
         self.font = [UIFont fontWithName:@"Helvetica" size:14];
     }
     return self;

@@ -56,7 +56,12 @@
     [self.dbManager executeQuery:delete1];
     */
     
+    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addEntrySegue)];
+    UIBarButtonItem *settingsItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings-25.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(viewProjectSettings)];
     
+    NSArray *rightButtonItems = @[addItem, settingsItem];
+    self.navigationItem.rightBarButtonItems = rightButtonItems;
+
     
     
     
@@ -79,6 +84,15 @@
 }
  */
 
+-(void)addEntrySegue{
+     NSLog(@"Adding entry");
+    [self performSegueWithIdentifier:@"AddEntry" sender:self];
+}
+-(void)viewProjectSettings{
+    NSLog(@"Viewing project");
+    [self performSegueWithIdentifier:@"ProjectSettings" sender:self];
+    
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSString *query = [NSString stringWithFormat:@"select * from entriesBasic where projectName='%@'", _projectNameList];
@@ -134,8 +148,12 @@
         EntriesCell *entryToEdit = (EntriesCell *)[self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
         addEntryController.recordIDToEdit = entryToEdit.identifier;
         
-     
-
+    }else if ([segue.identifier isEqualToString:@"ProjectSettings"]){
+        UINavigationController *navigationController = segue.destinationViewController;
+        SettingsController *settingsController = [navigationController viewControllers][0];
+        settingsController.delegate = self;
+        [settingsController setProjectSettingsName:self.projectNameList];
+        NSLog(@"In segue");
         
     }
     
@@ -230,6 +248,14 @@
 
 -(void)setProjectName:(NSString *)projectNameList {
     self.projectNameList = projectNameList;
+}
+
+
+-(void)settingsControllerUpdate:(SettingsController *)controller settingsArray:(NSArray *)settings{
+    NSLog(@"Settings: %@", settings);
+    NSString *query = [NSString stringWithFormat:@"update projectSettings set date='%@', goal='%@', locationWeather='%@', sketch='%@', picture='%@', notes='%@', permissions='%@', sampleNum='%@', partners='%@', strikeDip='%@', stopNum='%@', outcrop='%@', structuralData='%@', dataSheet='%@', trendPlunge='%@' where projectName='%@'", settings[0], settings[1], settings[2], settings[3], settings[4], settings[5], settings[6], settings[7], settings[8], settings[9], settings[10], settings[11], settings[12], settings[13], settings[14], self.projectNameList];
+    [self.dbManager executeQuery:query];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

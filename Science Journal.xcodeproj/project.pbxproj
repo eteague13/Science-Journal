@@ -26,6 +26,11 @@
 		BD08A1AF19A26BE400EE1B97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD08A18E19A26BE400EE1B97 /* UIKit.framework */; };
 		BD08A1B719A26BE400EE1B97 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD08A1B519A26BE400EE1B97 /* InfoPlist.strings */; };
 		BD08A1B919A26BE400EE1B97 /* Science_JournalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BD08A1B819A26BE400EE1B97 /* Science_JournalTests.m */; };
+		BD0E997D1B2F3B5D00EE0439 /* settings-100.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0E997C1B2F3B5D00EE0439 /* settings-100.png */; };
+		BD0E997F1B2F3DB100EE0439 /* settings-25.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0E997E1B2F3DB100EE0439 /* settings-25.png */; };
+		BD0E99821B2F67B400EE0439 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD0E99801B2F672300EE0439 /* DropboxSDK.framework */; };
+		BD0E99841B2F703100EE0439 /* entriesdb.sql in Resources */ = {isa = PBXBuildFile; fileRef = BD0E99831B2F703100EE0439 /* entriesdb.sql */; };
+		BD0E99871B2F75C300EE0439 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0E99861B2F75C300EE0439 /* SettingsController.m */; };
 		BD19191F1B28C6AA00BE9214 /* About-Adding-Resources-Final.png in Resources */ = {isa = PBXBuildFile; fileRef = BD19191E1B28C6AA00BE9214 /* About-Adding-Resources-Final.png */; };
 		BD3125461B17A834000F9C48 /* DataSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3125451B17A834000F9C48 /* DataSheetController.m */; };
 		BD3A30C71A87F18100202981 /* 58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3A30C41A87F18100202981 /* 58x58.png */; };
@@ -37,11 +42,9 @@
 		BD3AD0931B260E95007DF4FB /* AddProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3AD0921B260E95007DF4FB /* AddProjectController.m */; };
 		BD3AD0981B2623F2007DF4FB /* close-100.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3AD0961B2623F2007DF4FB /* close-100.png */; };
 		BD3AD0991B2623F2007DF4FB /* checkmark-100.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3AD0971B2623F2007DF4FB /* checkmark-100.png */; };
-		BD3AD09B1B264DEF007DF4FB /* entriesdb.sql in Resources */ = {isa = PBXBuildFile; fileRef = BD3AD09A1B264DEF007DF4FB /* entriesdb.sql */; };
 		BD3AD09E1B265CB3007DF4FB /* StrikeDipController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3AD09D1B265CB3007DF4FB /* StrikeDipController.m */; };
 		BD3AD0A11B265CC1007DF4FB /* TrendPlungeController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3AD0A01B265CC1007DF4FB /* TrendPlungeController.m */; };
 		BD3FB96919A278DE002496CE /* ExportController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96819A278DE002496CE /* ExportController.m */; };
-		BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96B19A278F1002496CE /* SettingsController.m */; };
 		BD3FB97019A2C314002496CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3FB96F19A2C314002496CE /* MapKit.framework */; };
 		BD5C6E6619B681D100342E4B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C6E6519B681D100342E4B /* CoreLocation.framework */; };
 		BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C6E6819B7848E00342E4B /* SketchController.m */; };
@@ -57,7 +60,6 @@
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
 		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
 		BD91990C1A573410006E48E1 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD91990B1A573410006E48E1 /* CameraController.m */; };
-		BDB313AE1AB0E5ED00018254 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB313AD1AB0E5ED00018254 /* DropboxSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		BDC4FEF21A81B2F60057A86D /* green_button.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC4FEF11A81B2F60057A86D /* green_button.png */; };
 		BDC4FEFE1A81B6DA0057A86D /* Sandcropped3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BDC4FEFB1A81B6DA0057A86D /* Sandcropped3.jpg */; };
 		BDC4FEFF1A81B6DA0057A86D /* Sandcropped2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BDC4FEFC1A81B6DA0057A86D /* Sandcropped2.jpg */; };
@@ -111,6 +113,12 @@
 		BD08A1B419A26BE400EE1B97 /* Science JournalTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Science JournalTests-Info.plist"; sourceTree = "<group>"; };
 		BD08A1B619A26BE400EE1B97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BD08A1B819A26BE400EE1B97 /* Science_JournalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Science_JournalTests.m; sourceTree = "<group>"; };
+		BD0E997C1B2F3B5D00EE0439 /* settings-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-100.png"; sourceTree = "<group>"; };
+		BD0E997E1B2F3DB100EE0439 /* settings-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-25.png"; sourceTree = "<group>"; };
+		BD0E99801B2F672300EE0439 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "Science Journal/DropboxSDK.framework"; sourceTree = "<group>"; };
+		BD0E99831B2F703100EE0439 /* entriesdb.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = entriesdb.sql; sourceTree = "<group>"; };
+		BD0E99851B2F75C300EE0439 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		BD0E99861B2F75C300EE0439 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		BD19191E1B28C6AA00BE9214 /* About-Adding-Resources-Final.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "About-Adding-Resources-Final.png"; sourceTree = "<group>"; };
 		BD3125441B17A834000F9C48 /* DataSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSheetController.h; sourceTree = "<group>"; };
 		BD3125451B17A834000F9C48 /* DataSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSheetController.m; sourceTree = "<group>"; };
@@ -126,15 +134,12 @@
 		BD3AD0921B260E95007DF4FB /* AddProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddProjectController.m; sourceTree = "<group>"; };
 		BD3AD0961B2623F2007DF4FB /* close-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close-100.png"; sourceTree = "<group>"; };
 		BD3AD0971B2623F2007DF4FB /* checkmark-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark-100.png"; sourceTree = "<group>"; };
-		BD3AD09A1B264DEF007DF4FB /* entriesdb.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = entriesdb.sql; sourceTree = "<group>"; };
 		BD3AD09C1B265CB3007DF4FB /* StrikeDipController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrikeDipController.h; sourceTree = "<group>"; };
 		BD3AD09D1B265CB3007DF4FB /* StrikeDipController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrikeDipController.m; sourceTree = "<group>"; };
 		BD3AD09F1B265CC1007DF4FB /* TrendPlungeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendPlungeController.h; sourceTree = "<group>"; };
 		BD3AD0A01B265CC1007DF4FB /* TrendPlungeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendPlungeController.m; sourceTree = "<group>"; };
 		BD3FB96719A278DE002496CE /* ExportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportController.h; sourceTree = "<group>"; };
 		BD3FB96819A278DE002496CE /* ExportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		BD3FB96A19A278F1002496CE /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
-		BD3FB96B19A278F1002496CE /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		BD3FB96F19A2C314002496CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		BD5C43811A81D02300EA0CF2 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "../../Downloads/dropbox-ios-sync-sdk-3.1-2.2/Dropbox.framework"; sourceTree = "<group>"; };
 		BD5C6E6519B681D100342E4B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -163,7 +168,6 @@
 		BD91990A1A573410006E48E1 /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
 		BD91990B1A573410006E48E1 /* CameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraController.m; sourceTree = "<group>"; };
 		BDA0A73E1A00863100B421FB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "../../Downloads/dropbox-ios-sync-sdk-3.1-2.1/Dropbox.framework"; sourceTree = "<group>"; };
-		BDB313AD1AB0E5ED00018254 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		BDC4FEF11A81B2F60057A86D /* green_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_button.png; sourceTree = "<group>"; };
 		BDC4FEFB1A81B6DA0057A86D /* Sandcropped3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sandcropped3.jpg; sourceTree = "<group>"; };
 		BDC4FEFC1A81B6DA0057A86D /* Sandcropped2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sandcropped2.jpg; sourceTree = "<group>"; };
@@ -191,8 +195,8 @@
 				BDC8358A1A674E46000B60BD /* libsqlite3.dylib in Frameworks */,
 				BDFF53BE1A4226C10054B4FA /* MessageUI.framework in Frameworks */,
 				BD02064F19EC64ED005ACDD0 /* libz.dylib in Frameworks */,
-				BDB313AE1AB0E5ED00018254 /* DropboxSDK.framework in Frameworks */,
 				BD02064D19EC64E4005ACDD0 /* libc++.dylib in Frameworks */,
+				BD0E99821B2F67B400EE0439 /* DropboxSDK.framework in Frameworks */,
 				BD02064B19EC64D2005ACDD0 /* QuartzCore.framework in Frameworks */,
 				BD02064919EC64C9005ACDD0 /* SystemConfiguration.framework in Frameworks */,
 				BD02064719EC64BB005ACDD0 /* Security.framework in Frameworks */,
@@ -222,7 +226,7 @@
 		BD08A17E19A26BE300EE1B97 = {
 			isa = PBXGroup;
 			children = (
-				BDB313AD1AB0E5ED00018254 /* DropboxSDK.framework */,
+				BD0E99801B2F672300EE0439 /* DropboxSDK.framework */,
 				BD08A19019A26BE400EE1B97 /* Science Journal */,
 				BD08A18819A26BE400EE1B97 /* Products */,
 				BD08A1B219A26BE400EE1B97 /* Science JournalTests */,
@@ -270,7 +274,7 @@
 		BD08A19019A26BE400EE1B97 /* Science Journal */ = {
 			isa = PBXGroup;
 			children = (
-				BD3AD09A1B264DEF007DF4FB /* entriesdb.sql */,
+				BD0E99831B2F703100EE0439 /* entriesdb.sql */,
 				BDF325B61B1E25610003F217 /* referencesdb.sql */,
 				BD6FD8431B1CD97B00C46DEA /* Main.storyboard */,
 				BD08A19919A26BE400EE1B97 /* AppDelegate.h */,
@@ -279,8 +283,6 @@
 				BD08A1A019A26BE400EE1B97 /* MapController.m */,
 				BD3FB96719A278DE002496CE /* ExportController.h */,
 				BD3FB96819A278DE002496CE /* ExportController.m */,
-				BD3FB96A19A278F1002496CE /* SettingsController.h */,
-				BD3FB96B19A278F1002496CE /* SettingsController.m */,
 				BD08A1A519A26BE400EE1B97 /* Images.xcassets */,
 				BD08A19119A26BE400EE1B97 /* Supporting Files */,
 				BD7D733A19A3E1850034E504 /* EntriesController.h */,
@@ -323,6 +325,8 @@
 				BD3AD09D1B265CB3007DF4FB /* StrikeDipController.m */,
 				BD3AD09F1B265CC1007DF4FB /* TrendPlungeController.h */,
 				BD3AD0A01B265CC1007DF4FB /* TrendPlungeController.m */,
+				BD0E99851B2F75C300EE0439 /* SettingsController.h */,
+				BD0E99861B2F75C300EE0439 /* SettingsController.m */,
 			);
 			path = "Science Journal";
 			sourceTree = "<group>";
@@ -330,6 +334,8 @@
 		BD08A19119A26BE400EE1B97 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BD0E997E1B2F3DB100EE0439 /* settings-25.png */,
+				BD0E997C1B2F3B5D00EE0439 /* settings-100.png */,
 				BD19191E1B28C6AA00BE9214 /* About-Adding-Resources-Final.png */,
 				BD3AD0961B2623F2007DF4FB /* close-100.png */,
 				BD3AD0971B2623F2007DF4FB /* checkmark-100.png */,
@@ -450,21 +456,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD3A30C91A87F18100202981 /* 120x120.png in Resources */,
-				BD3AD09B1B264DEF007DF4FB /* entriesdb.sql in Resources */,
 				BD3A30C81A87F18100202981 /* 80x80.png in Resources */,
 				BD19191F1B28C6AA00BE9214 /* About-Adding-Resources-Final.png in Resources */,
 				BDF325B91B1E2B5E0003F217 /* Sand4.jpg in Resources */,
+				BD0E99841B2F703100EE0439 /* entriesdb.sql in Resources */,
 				BDC4FF021A81B9C30057A86D /* blue_button.png in Resources */,
 				BDF325B71B1E25610003F217 /* referencesdb.sql in Resources */,
 				BDC4FEFF1A81B6DA0057A86D /* Sandcropped2.jpg in Resources */,
 				BD3A30CB1A87F21C00202981 /* 180x180.png in Resources */,
 				BD6FD8441B1CD97B00C46DEA /* Main.storyboard in Resources */,
+				BD0E997D1B2F3B5D00EE0439 /* settings-100.png in Resources */,
 				BD08A1A619A26BE400EE1B97 /* Images.xcassets in Resources */,
 				BD3AD0991B2623F2007DF4FB /* checkmark-100.png in Resources */,
 				BD3AD0981B2623F2007DF4FB /* close-100.png in Resources */,
 				BDC4FEFE1A81B6DA0057A86D /* Sandcropped3.jpg in Resources */,
 				BDC4FF041A81BFBC0057A86D /* right_arrow.png in Resources */,
 				BDC4FF001A81B6DA0057A86D /* Sandcropped1.jpg in Resources */,
+				BD0E997F1B2F3DB100EE0439 /* settings-25.png in Resources */,
 				BD08A19519A26BE400EE1B97 /* InfoPlist.strings in Resources */,
 				BD3A30C71A87F18100202981 /* 58x58.png in Resources */,
 				BDC4FEF21A81B2F60057A86D /* green_button.png in Resources */,
@@ -489,7 +497,6 @@
 				BD73D2021A93E69900866D54 /* SketchSettingsController.m in Sources */,
 				BDC8358D1A675108000B60BD /* DBManager.m in Sources */,
 				BDD74CB81A64CFC100635CBA /* ReferenceViewController.m in Sources */,
-				BD3FB96C19A278F1002496CE /* SettingsController.m in Sources */,
 				BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */,
 				BD3AD0931B260E95007DF4FB /* AddProjectController.m in Sources */,
 				BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */,
@@ -509,6 +516,7 @@
 				BD3AD09E1B265CB3007DF4FB /* StrikeDipController.m in Sources */,
 				BD6FD8471B1D2AE400C46DEA /* ViewReferenceController.m in Sources */,
 				BD5FD9CF1A4A07FC003CC565 /* AddEntryController.m in Sources */,
+				BD0E99871B2F75C300EE0439 /* SettingsController.m in Sources */,
 				BD08A19719A26BE400EE1B97 /* main.m in Sources */,
 				BD5FD9D21A4BA2F5003CC565 /* datepickerController.m in Sources */,
 			);
@@ -634,6 +642,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/Users/evanteague/Desktop,
+					"$(PROJECT_DIR)/Science",
+					Journal,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Science Journal/Science Journal-Prefix.pch";
@@ -656,6 +666,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/Users/evanteague/Desktop,
+					"$(PROJECT_DIR)/Science",
+					Journal,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Science Journal/Science Journal-Prefix.pch";

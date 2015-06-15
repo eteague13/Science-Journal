@@ -18,22 +18,22 @@
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     
     NSDictionary *appDefaults = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchStrikeDip"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchStrikeDip"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     NSDictionary *appDefaults2 = [NSDictionary
                                  dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchStopNum"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults2];
     NSDictionary *appDefaults3 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchOutcrop"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchOutcrop"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults3];
     NSDictionary *appDefaults4 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchStructData"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchStructData"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults4];
     NSDictionary *appDefaults5 = [NSDictionary
                                  dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchDate"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults5];
     NSDictionary *appDefaults6 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchGoal"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchGoal"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults6];
     NSDictionary *appDefaults7 = [NSDictionary
                                  dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchLocationWeather"];
@@ -45,13 +45,13 @@
                                  dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchPicture"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults9];
     NSDictionary *appDefaults10 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchPermissions"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchPermissions"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults10];
     NSDictionary *appDefaults11 = [NSDictionary
                                  dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchSampleNum"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults11];
     NSDictionary *appDefaults12 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchPartners"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchPartners"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults12];
     NSDictionary *appDefaults13 = [NSDictionary
                                  dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchSketch"];
@@ -61,7 +61,7 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults14];
     
     NSDictionary *appDefaults15 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchTrendPlunge"];
+                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchTrendPlunge"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults15];
     
     
@@ -72,6 +72,20 @@
                             root:kDBRootAppFolder];
     [DBSession setSharedSession:dbSession];
 
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:157.0/255.0 green:245.0/255.0 blue:140.0/255.0 alpha:1.0]];
+    
+    
+    
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:0.8];
+    shadow.shadowOffset = CGSizeMake(0, 1);
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
+                                                           shadow, NSShadowAttributeName,
+                                                           [UIFont fontWithName:@"AmericanTypewriter-Bold" size:17.0], NSFontAttributeName, nil]];
+    
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:157.0/255.0 green:245.0/255.0 blue:140.0/255.0 alpha:1.0]];
+    
     return YES;
 }
 							

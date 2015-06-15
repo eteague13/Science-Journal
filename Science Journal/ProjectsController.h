@@ -11,10 +11,15 @@
 #import "ProjectCell.h"
 #import "EntriesController.h"
 #import "AddProjectController.h"
+#import "ExportController.h"
+#import <DropboxSDK/DropboxSDK.h>
 
-@interface ProjectsController : UITableViewController <AddProjectControllerDelegate, UIGestureRecognizerDelegate>{
+@interface ProjectsController : UITableViewController <AddProjectControllerDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, DBRestClientDelegate>{
     NSString *oldProjectName;
     int oldProjectID;
+    NSString *fileRevision;
+    NSString *localPath;
+    NSString *filename;
 }
 
 //IBOutlets
@@ -26,7 +31,12 @@
 @property (nonatomic, strong) NSMutableArray *allProjectsFromDB;
 @property (nonatomic, strong) ProjectCell *projectCellToDelete;
 @property (nonatomic) int projectIDToEdit;
-
+@property (nonatomic, strong) NSMutableArray *selectedProjectsToExport;
+@property (nonatomic, strong) UIBarButtonItem *cancelExport;
+@property (nonatomic, strong) UIBarButtonItem *exportItem;
+@property (nonatomic, strong) UIBarButtonItem *addItem;
+@property (nonatomic, strong) UIBarButtonItem *finishedSelection;
+@property (nonatomic, strong) DBRestClient *restClient;
 //Methods
 
 

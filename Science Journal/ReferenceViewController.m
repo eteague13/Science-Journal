@@ -18,8 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    //self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     //Initialize the database connection
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"referencesdb.sql"];
 
@@ -44,8 +42,6 @@
     
     [self reloadData];
     
-    [self.tableView setSeparatorColor:[UIColor blackColor]];
-    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     
 }
 
@@ -54,9 +50,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [self reloadData];
-}
+
 
 /*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -86,9 +80,7 @@
     NSLog(@"Problem?: %@", [[results objectAtIndex:0] objectAtIndex:3]);
     cell.entryNameLabel.text = [[results objectAtIndex:0] objectAtIndex:3];
     cell.identifier = tempIndexPath;
-    //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"right_arrow.png"]];
-    cell.accessoryView = arrow;
+
     NSLog(@"Index path: %i", (int)indexPath.row);
      
     
@@ -229,6 +221,8 @@
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Reference Saved" message: @"" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
+    
+    [self reloadData];
     
 }
 

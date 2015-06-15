@@ -40,6 +40,10 @@
     _drawImage.image = sketch;
     
 }
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning
 {

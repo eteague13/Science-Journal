@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AddEntryController.h"
+#import "SettingsController.h"
 
-@interface EntriesController : UITableViewController <AddEntryControllerDelegate>
+@interface EntriesController : UITableViewController <AddEntryControllerDelegate, SettingsControllerDelegate>
 
 //IBOutlets
 

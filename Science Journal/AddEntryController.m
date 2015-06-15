@@ -52,94 +52,100 @@
     
     //Adjusts which components are on based on the Settings
     
-    
-    bool outcropSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchOutcrop"];
-    if (outcropSwitch) {
+    NSString *settingsQuery = [NSString stringWithFormat:@"select * from projectSettings where projectName='%@'", _projectName];
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:settingsQuery]];
+    NSLog(@"results: %@", results);
+    int outcropSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"outcrop"]] intValue];
+     NSLog(@"results1: %d", outcropSwitch);
+    if (outcropSwitch == 1) {
+        NSLog(@"True");
         _outcropCell.hidden = NO;
     }else{
         _outcropCell.hidden = YES;
+        NSLog(@"false");
     }
-    bool stopNumSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchStopNum"];
-    if (stopNumSwitch) {
+    int stopNumSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"stopNum"]] intValue];
+    NSLog(@"results2: %d", stopNumSwitch);
+    if (stopNumSwitch == 1) {
         _stopNumCell.hidden = NO;
     }else{
         _stopNumCell.hidden = YES;
     }
-    bool structSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchStructData"];
-    if (structSwitch) {
+    int structSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"structuralData"]] intValue];
+    if (structSwitch == 1) {
         _structuralDataCell.hidden = NO;
     }else{
         _structuralDataCell.hidden = YES;
     }
-    bool strikeDipSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchStrikeDip"];
-    if (strikeDipSwitch) {
+    int strikeDipSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"strikeDip"]] intValue];
+    if (strikeDipSwitch == 1) {
         _strikeDipCell.hidden = NO;
     }else{
         _strikeDipCell.hidden = YES;
     }
-    bool trendPlungeSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchTrendPlunge"];
-    if (trendPlungeSwitch) {
+    int trendPlungeSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"trendPlunge"]] intValue];
+    if (trendPlungeSwitch == 1) {
         _trendPlungeCell.hidden = NO;
     }else{
         _trendPlungeCell.hidden = YES;
     }
     
-    bool dateSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchDate"];
-    if (dateSwitch) {
+    int dateSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"date"]] intValue];
+    if (dateSwitch == 1) {
         _dateCell.hidden = NO;
     }else{
         _dateCell.hidden = YES;
     }
-    bool goalSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchGoal"];
-    if (goalSwitch) {
+    int goalSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"goal"]] intValue];
+    if (goalSwitch == 1) {
         _goalCell.hidden = NO;
     }else{
         _goalCell.hidden = YES;
     }
-    bool locationSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchLocationWeather"];
-    if (locationSwitch) {
+    int locationSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"locationWeather"]] intValue];
+    if (locationSwitch == 1) {
         _locationWeatherCell.hidden = NO;
     }else{
         _locationWeatherCell.hidden = YES;
     }
-    bool sketchSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchSketch"];
-    if (sketchSwitch) {
+    int sketchSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]]intValue];
+    if (sketchSwitch == 1) {
         _sketchCell.hidden = NO;
     }else{
         _sketchCell.hidden = YES;
     }
-    bool pictureSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchPicture"];
-    if (pictureSwitch) {
+    int pictureSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"picture"]] intValue];
+    if (pictureSwitch == 1) {
         _pictureCell.hidden = NO;
     }else{
         _pictureCell.hidden = YES;
     }
-    bool notesSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchNotes"];
-    if (notesSwitch) {
+    int notesSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"notes"]] intValue];
+    if (notesSwitch == 1) {
         _notesCell.hidden = NO;
     }else{
         _notesCell.hidden = YES;
     }
-    bool permissionsSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchPermissions"];
-    if (permissionsSwitch) {
+    int permissionsSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"permissions"]] intValue];
+    if (permissionsSwitch == 1) {
         _permissionsCell.hidden = NO;
     }else{
         _permissionsCell.hidden = YES;
     }
-    bool sampleNumSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchSampleNum"];
-    if (sampleNumSwitch) {
+    int sampleNumSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sampleNum"]] intValue];
+    if (sampleNumSwitch == 1) {
         _sampleNumCell.hidden = NO;
     }else{
         _sampleNumCell.hidden = YES;
     }
-    bool partnersSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchPartners"];
-    if (partnersSwitch) {
+    int partnersSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"partners"]] intValue];
+    if (partnersSwitch == 1) {
         _partnersCell.hidden = NO;
     }else{
         _partnersCell.hidden = YES;
     }
-    bool dataSheetSwitch = [[NSUserDefaults standardUserDefaults] boolForKey:@"SwitchDataSheet"];
-    if (dataSheetSwitch) {
+    int dataSheetSwitch = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"dataSheet"]] intValue];
+    if (dataSheetSwitch == 1) {
         _dataSheetCell.hidden = NO;
     }else{
         _dataSheetCell.hidden = YES;
@@ -156,7 +162,10 @@
     _stopNumField.delegate = self;
     */
     
+    [self checkEntryContents];
+    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

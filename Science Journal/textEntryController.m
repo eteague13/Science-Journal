@@ -4,7 +4,7 @@
 //
 //  Created by Evan Teague on 12/24/14.
 //  Copyright (c) 2014 Evan Teague. All rights reserved.
-//
+//http://www.appcoda.com/customize-navigation-status-bar-ios-7/
 
 #import "textEntryController.h"
 
@@ -19,17 +19,18 @@
     //Write the correct title
     
     if ([cellSelected isEqualToString:@"GoalID"]){
-        _textEntryLabel.text = @"Goal";
+        _textEntryLabel.title = @"Goal";
+        
     }else if ([cellSelected isEqualToString:@"NotesID"]){
-        _textEntryLabel.text = @"Notes";
+        _textEntryLabel.title = @"Notes";
     }else if ([cellSelected isEqualToString:@"PermissionsID"]){
-        _textEntryLabel.text = @"Permissions and Access";
+        _textEntryLabel.title = @"Permissions & Access";
     }else if ([cellSelected isEqualToString:@"PartnersID"]){
-        _textEntryLabel.text = @"Partners";
+        _textEntryLabel.title = @"Partners";
     }else if ([cellSelected isEqualToString:@"OutcropID"]){
-        _textEntryLabel.text = @"Outcrop Description";
+        _textEntryLabel.title = @"Outcrop Description";
     }else if ([cellSelected isEqualToString:@"StructuralDataID"]){
-        _textEntryLabel.text = @"Structural Data";
+        _textEntryLabel.title = @"Structural Data";
     }
     
     
@@ -46,6 +47,12 @@
     _note.delegate = self;
     [_note setScrollEnabled:YES];
     [self.view addSubview:_note];
+    
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
