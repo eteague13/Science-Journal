@@ -33,11 +33,14 @@
     
     
     
+    
 }
+/*
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
+ */
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -72,19 +72,20 @@
                             root:kDBRootAppFolder];
     [DBSession setSharedSession:dbSession];
 
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:157.0/255.0 green:245.0/255.0 blue:140.0/255.0 alpha:1.0]];
+    //Michael-Change the right 1/2 of the = sign. Copy and paste
+    UIColor *backgroundColor = [UIColor colorWithRed:157.0/255.0 green:245.0/255.0 blue:140.0/255.0 alpha:1.0];
     
     
-    
+    [[UINavigationBar appearance] setBarTintColor:backgroundColor];
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:0.8];
     shadow.shadowOffset = CGSizeMake(0, 1);
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
                                                            shadow, NSShadowAttributeName,
-                                                           [UIFont fontWithName:@"AmericanTypewriter-Bold" size:17.0], NSFontAttributeName, nil]];
+                                                           [UIFont fontWithName:@"Helvetica" size:17.0], NSFontAttributeName, nil]];
     
-    [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:157.0/255.0 green:245.0/255.0 blue:140.0/255.0 alpha:1.0]];
+    [[UITabBar appearance] setBarTintColor:backgroundColor];
     
     return YES;
 }

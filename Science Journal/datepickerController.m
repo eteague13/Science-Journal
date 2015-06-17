@@ -28,10 +28,12 @@
     _dateDisplay.delegate = self;
 }
 
+/*
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
+ */
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

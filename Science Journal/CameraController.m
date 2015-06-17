@@ -17,14 +17,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _photoDisplay.image = photo;
+    _photoDisplay.contentMode = UIViewContentModeScaleAspectFit;
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     // Do any additional setup after loading the view.
 }
-
+/*
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
+ */
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

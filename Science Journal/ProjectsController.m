@@ -81,27 +81,32 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Export Error" message: @"No project selected" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }else{
-        NSString *documentsDirectory = [NSHomeDirectory()
-                                        stringByAppendingPathComponent:@"Documents"];
-        NSString *fileName = [NSMutableString stringWithFormat:@"Selected Projects.kml"];
-        NSString *filePath = [documentsDirectory
-                              stringByAppendingPathComponent:fileName];
-
-        NSLog(@"%@", filePath);
-        //Email the entry
-        //Doesn't work on the simulator, but should on phone
         MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
         mc.mailComposeDelegate = self;
-        NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-        // Determine the MIME type
-        //NSString *mimeType = @"text/plain";
-        //NSString *mimeType = @"application/vnd.google-earth.kmz";
-        //This one may be the one that works...have to wait and see
         NSString *mimeType = @"application/vnd.google-earth.kml+xml";
-        // Add attachment
-        [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
-        // Present mail view controller on screen
-        [self presentViewController:mc animated:YES completion:NULL];
+        for (id project in _selectedProjectsToExport){
+            ProjectCell *cell = project;
+            NSString *projectNm = cell.projectLabel.text;
+            NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+            NSString *fileName = [NSMutableString stringWithFormat:@"%@.kml", projectNm];
+            NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+
+            NSLog(@"%@", filePath);
+            //Email the entry
+            //Doesn't work on the simulator, but should on phone
+            
+            NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+            // Determine the MIME type
+            //NSString *mimeType = @"text/plain";
+            //NSString *mimeType = @"application/vnd.google-earth.kmz";
+            //This one may be the one that works...have to wait and see
+            
+            // Add attachment
+            [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
+        
+            // Present mail view controller on screen
+            [self presentViewController:mc animated:YES completion:NULL];
+        }
         
     }
     
@@ -278,8 +283,9 @@
     _projectCellToDelete = (ProjectCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     //Allows the user to swipe to delete
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Edit or Delete the Project" message: @"Deleting this project will also delete all associated entries" delegate: self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", @"Edit Name", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Delete or rename the Project" message: @"" delegate: self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", @"Edit Name", nil];
         [alert show];
+        [alert setTag:1];
         
         
     }
@@ -288,49 +294,57 @@
     
 }
 
+-(void)doubleCheckCancel{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Are you sure you want to delete?" message: @"Deleting this project will also delete all associated entries" delegate: self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
+    [alert show];
+    [alert setTag:2];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"Button index: %ld", (long)buttonIndex);
-    if(buttonIndex != [alertView cancelButtonIndex] && buttonIndex != 2)
-    {
+    if (alertView.tag == 1){
+        if(buttonIndex != [alertView cancelButtonIndex] && buttonIndex != 2)
+        {
+            [self doubleCheckCancel];
         
-        NSString *getAllEntriesQuery = [NSString stringWithFormat:@"select * from entriesBasic where projectName='%@'", _projectCellToDelete.projectLabel.text];
-        //NSLog(@"Query: %@", getAllEntriesQuery);
-        NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:getAllEntriesQuery]];
-        //NSLog(@"Entries%@", results);
-        for (id key in results) {
-            NSLog(@"Key: %@", key);
-            int entryIDToDelete = [[key objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"entriesID"]] intValue];
-            NSString *deletePictureSketchQuery = [NSString stringWithFormat:@"select * from entriesBasic where entriesID=%d", entryIDToDelete];
-            NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:deletePictureSketchQuery]];
-            NSString *pictureFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"picture"]];
-            NSString *sketchFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]];
-            [[NSFileManager defaultManager] removeItemAtPath: pictureFilePath error: nil];
-            [[NSFileManager defaultManager] removeItemAtPath: sketchFilePath error: nil];
-            
-            
+        }else if (buttonIndex == 2){
+        
+            oldProjectName =_projectCellToDelete.projectLabel.text;
+            //NSString *query = [NSString stringWithFormat:@"select * from projects where projectName='%@'",    _projectCellToDelete.projectLabel.text];
+            //[self.dbManager executeQuery:query];
+            [self performSegueWithIdentifier:@"EditProjectName" sender:self];
         }
+        }else if (alertView.tag == 2){
+            NSString *getAllEntriesQuery = [NSString stringWithFormat:@"select * from entriesBasic where projectName='%@'", _projectCellToDelete.projectLabel.text];
+            //NSLog(@"Query: %@", getAllEntriesQuery);
+            NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:getAllEntriesQuery]];
+            //NSLog(@"Entries%@", results);
+            for (id key in results) {
+                NSLog(@"Key: %@", key);
+                int entryIDToDelete = [[key objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"entriesID"]] intValue];
+                NSString *deletePictureSketchQuery = [NSString stringWithFormat:@"select * from entriesBasic where entriesID=%d", entryIDToDelete];
+                NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:deletePictureSketchQuery]];
+                NSString *pictureFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames     indexOfObject:@"picture"]];
+                NSString *sketchFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]];
+                [[NSFileManager defaultManager] removeItemAtPath: pictureFilePath error: nil];
+                [[NSFileManager defaultManager] removeItemAtPath: sketchFilePath error: nil];
+            }
         
-        NSString *query = [NSString stringWithFormat:@"delete from entriesBasic where projectName='%@'", _projectCellToDelete.projectLabel.text];
+            NSString *query = [NSString stringWithFormat:@"delete from entriesBasic where projectName='%@'", _projectCellToDelete.projectLabel.text];
         
-        [self.dbManager executeQuery:query];
+            [self.dbManager executeQuery:query];
+            
+            NSString *deleteProjectQuery = [NSString stringWithFormat:@"delete from projects where projectName='%@'", _projectCellToDelete.projectLabel.text];
         
-        NSString *deleteProjectQuery = [NSString stringWithFormat:@"delete from projects where projectName='%@'", _projectCellToDelete.projectLabel.text];
+            [self.dbManager executeQuery:deleteProjectQuery];
+            
+            NSString *deleteProjectSettingsQuery = [NSString stringWithFormat:@"delete from projectSettings where projectName='%@'", _projectCellToDelete.projectLabel.text];
+            [self.dbManager executeQuery:deleteProjectSettingsQuery];
         
-        [self.dbManager executeQuery:deleteProjectQuery];
-        
-        NSString *deleteProjectSettingsQuery = [NSString stringWithFormat:@"delete from projectSettings where projectName='%@'", _projectCellToDelete.projectLabel.text];
-        [self.dbManager executeQuery:deleteProjectSettingsQuery];
-        
-        [self loadData];
-    }else if (buttonIndex == 2){
-        
-        oldProjectName =_projectCellToDelete.projectLabel.text;
-        //NSString *query = [NSString stringWithFormat:@"select * from projects where projectName='%@'", _projectCellToDelete.projectLabel.text];
-        //[self.dbManager executeQuery:query];
-        [self performSegueWithIdentifier:@"EditProjectName" sender:self];
-    }
-         
+            [self loadData];
+        }
+    
     
 }
 
@@ -362,7 +376,6 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     //Sets the colors based on what the user selects
-    ExportController *exporter = [[ExportController alloc] init];
     if (actionSheet.tag == 1){
         switch(buttonIndex)
         {
@@ -385,8 +398,9 @@
 
 -(void)exportAllProjects {
     ExportController *exporter = [[ExportController alloc] init];
-    NSString *query = @"select * from projects";
+    NSString *query = @"select projectName from projects";
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    [exporter exportSelectedProjects:results];
     if ([results count] > 0){
         NSString *documentsDirectory = [NSHomeDirectory()
                                         stringByAppendingPathComponent:@"Documents"];

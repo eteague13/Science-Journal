@@ -34,9 +34,10 @@
     
     //Sets the initial Map window on Washington, D.C...figured it was a good starting point
     CLLocationCoordinate2D centerCoordinate;
-    centerCoordinate.latitude = 38.9047;
-    centerCoordinate.longitude = -77.0164;
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (centerCoordinate, 20000, 20000);
+    centerCoordinate.latitude = 39.50;
+    centerCoordinate.longitude = -98.35;
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (centerCoordinate, 5000000, 5000000);
+    
     [self.mapView setRegion:region animated:YES];
     
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
@@ -118,7 +119,7 @@
 //Changes the maptype
 - (IBAction)changeMapType:(id)sender {
     if (mapView.mapType == MKMapTypeStandard)
-        mapView.mapType = MKMapTypeSatellite;
+        mapView.mapType = MKMapTypeHybrid;
     else
         mapView.mapType = MKMapTypeStandard;
 }

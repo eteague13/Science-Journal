@@ -15,11 +15,12 @@
 @implementation LocationAndWeatherController{
     CLLocationManager *locationManager;
 }
-
+/*
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
+ */
 
 - (void)viewDidLoad {
     [super viewDidLoad];

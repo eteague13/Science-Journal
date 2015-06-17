@@ -14,7 +14,7 @@
 - (void)trendPlungeSave:(TrendPlungeController *)controller trend:(NSString *)tr plunge:(NSString *)pl;
 @end
 
-@interface TrendPlungeController : UIViewController
+@interface TrendPlungeController : UIViewController <UITextFieldDelegate>
 
 //IBOutlets
 @property (weak, nonatomic) IBOutlet UITextField *trendField;

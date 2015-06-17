@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     // Do any additional setup after loading the view.
     if (photoOrText == 0) {
@@ -51,6 +52,11 @@
     }
     
     _referenceNameField.delegate = self;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

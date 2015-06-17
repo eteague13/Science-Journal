@@ -14,7 +14,7 @@
 - (void)strikeDipSave:(StrikeDipController *)controller strike:(NSString *)st dip:(NSString *)dp;
 @end
 
-@interface StrikeDipController : UIViewController
+@interface StrikeDipController : UIViewController <UITextFieldDelegate>
 
 //IBOutlets
 @property (weak, nonatomic) IBOutlet UITextField *strikeField;

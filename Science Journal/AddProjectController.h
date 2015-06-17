@@ -16,7 +16,7 @@
 @end
 
 
-@interface AddProjectController : UIViewController {
+@interface AddProjectController : UIViewController<UITextFieldDelegate> {
     int addOrEdit;
     NSString *oldProjectName;
 }

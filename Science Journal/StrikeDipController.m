@@ -18,13 +18,16 @@
     [super viewDidLoad];
     _strikeField.text = _strike;
     _dipField.text = _dip;
+    _strikeField.delegate = self;
+    _dipField.delegate = self;
     // Do any additional setup after loading the view.
 }
-
+/*
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
+ */
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -52,5 +55,16 @@
 -(void)setStrike:(NSString*)strike setDip:(NSString *)dip{
     self.strike = strike;
     self.dip = dip;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

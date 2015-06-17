@@ -60,6 +60,7 @@
 		BD7D733C19A3E1850034E504 /* EntriesController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733B19A3E1850034E504 /* EntriesController.m */; };
 		BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7D733E19A3E1E30034E504 /* EntriesCell.m */; };
 		BD91990C1A573410006E48E1 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD91990B1A573410006E48E1 /* CameraController.m */; };
+		BDC3B25E1B307DA30022D86A /* AppSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC3B25D1B307DA30022D86A /* AppSettingsController.m */; };
 		BDC4FEF21A81B2F60057A86D /* green_button.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC4FEF11A81B2F60057A86D /* green_button.png */; };
 		BDC4FEFE1A81B6DA0057A86D /* Sandcropped3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BDC4FEFB1A81B6DA0057A86D /* Sandcropped3.jpg */; };
 		BDC4FEFF1A81B6DA0057A86D /* Sandcropped2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BDC4FEFC1A81B6DA0057A86D /* Sandcropped2.jpg */; };
@@ -168,6 +169,8 @@
 		BD91990A1A573410006E48E1 /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
 		BD91990B1A573410006E48E1 /* CameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraController.m; sourceTree = "<group>"; };
 		BDA0A73E1A00863100B421FB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "../../Downloads/dropbox-ios-sync-sdk-3.1-2.1/Dropbox.framework"; sourceTree = "<group>"; };
+		BDC3B25C1B307DA30022D86A /* AppSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettingsController.h; sourceTree = "<group>"; };
+		BDC3B25D1B307DA30022D86A /* AppSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettingsController.m; sourceTree = "<group>"; };
 		BDC4FEF11A81B2F60057A86D /* green_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_button.png; sourceTree = "<group>"; };
 		BDC4FEFB1A81B6DA0057A86D /* Sandcropped3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sandcropped3.jpg; sourceTree = "<group>"; };
 		BDC4FEFC1A81B6DA0057A86D /* Sandcropped2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sandcropped2.jpg; sourceTree = "<group>"; };
@@ -327,6 +330,8 @@
 				BD3AD0A01B265CC1007DF4FB /* TrendPlungeController.m */,
 				BD0E99851B2F75C300EE0439 /* SettingsController.h */,
 				BD0E99861B2F75C300EE0439 /* SettingsController.m */,
+				BDC3B25C1B307DA30022D86A /* AppSettingsController.h */,
+				BDC3B25D1B307DA30022D86A /* AppSettingsController.m */,
 			);
 			path = "Science Journal";
 			sourceTree = "<group>";
@@ -500,6 +505,7 @@
 				BD08A19B19A26BE400EE1B97 /* AppDelegate.m in Sources */,
 				BD3AD0931B260E95007DF4FB /* AddProjectController.m in Sources */,
 				BD7D733F19A3E1E30034E504 /* EntriesCell.m in Sources */,
+				BDC3B25E1B307DA30022D86A /* AppSettingsController.m in Sources */,
 				BD5FD9D51A4BBA9B003CC565 /* textEntryController.m in Sources */,
 				BD3AD0901B224662007DF4FB /* ProjectCell.m in Sources */,
 				BD3125461B17A834000F9C48 /* DataSheetController.m in Sources */,

@@ -18,14 +18,17 @@
     [super viewDidLoad];
     _trendField.text = _trend;
     _plungeField.text = _plunge;
+    _trendField.delegate = self;
+    _plungeField.delegate = self;
     // Do any additional setup after loading the view.
 }
 
-
+/*
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
+ */
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -52,5 +55,16 @@
 -(void)setTrend:(NSString*)trend setPlunge:(NSString *)plunge{
     self.trend = trend;
     self.plunge = plunge;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

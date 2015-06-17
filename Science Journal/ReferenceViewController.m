@@ -24,7 +24,7 @@
     NSString *addFirstReferenceExistence = @"select * from allReferences where referenceID=1";
     NSArray *results = [self.dbManager loadDataFromDB:addFirstReferenceExistence];
     if ([results count] == 0){
-        NSString *addReferenceQuery = [NSString stringWithFormat:@"insert into allReferences values(null, '%@', '%d', '%@')",@"", 0, @"About References"];
+        NSString *addReferenceQuery = [NSString stringWithFormat:@"insert into allReferences values(null, '%@', '%d', '%@')",@"", 0, @"About Resources"];
         
         NSLog(@"In the references load");
         [self.dbManager loadDataFromDB:addReferenceQuery];
@@ -202,6 +202,7 @@
     [self reloadData];
     
 }
+
 - (void)referenceCancel:(AddReferenceController *) controller{
     [self dismissViewControllerAnimated:YES completion:nil];
     

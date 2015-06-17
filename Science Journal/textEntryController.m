@@ -49,11 +49,12 @@
     [self.view addSubview:_note];
     
 }
-
+/*
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
+ */
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

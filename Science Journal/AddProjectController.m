@@ -21,10 +21,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _projectAddField.text = oldProjectName;
+    _projectAddField.delegate = self;
     
     //Initialize the database connection
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
     // Do any additional setup after loading the view.
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [_projectAddField becomeFirstResponder];
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 - (IBAction)cancelAddProject:(id)sender {

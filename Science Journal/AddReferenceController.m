@@ -38,6 +38,11 @@
     _referenceNameField.delegate = self;
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -51,6 +56,7 @@
 - (IBAction)cancelAddReference:(id)sender {
     [self.delegate referenceCancel:self];
 }
+
 
 - (IBAction)saveReference:(id)sender {
     

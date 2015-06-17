@@ -330,12 +330,14 @@
 {
     //The various segues
     if ([segue.identifier isEqualToString:@"AddDate"]) {
-        datepickerController* dateController = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        datepickerController* dateController = [navigationController viewControllers][0];
         dateController.delegate = self;
         [dateController setDateValue:_date];
         
     }else if ([segue.identifier isEqualToString:@"TextEntry"]) {
-        textEntryController* textController = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        textEntryController* textController = [navigationController viewControllers][0];
         textController.delegate = self;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         EntriesCell *entryName = (EntriesCell *)[self.tableView cellForRowAtIndexPath:indexPath];
@@ -354,27 +356,33 @@
             [textController setTextValue:_structuralData];
         }
     }else if ([segue.identifier isEqualToString:@"LocationAndWeather"]){
-        LocationAndWeatherController* locationController = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        LocationAndWeatherController* locationController = [navigationController viewControllers][0];
         locationController.delegate = self;
         [locationController setLat:_latitude setLong:_longitude setWeather:_weather];
     }else if ([segue.identifier isEqualToString:@"Sketch"]){
+       // UINavigationController *navigationController = segue.destinationViewController;
         SketchController *sketchController = segue.destinationViewController;
         sketchController.delegate = self;
         [sketchController setSketch: _sketch];
     }else if ([segue.identifier isEqualToString:@"Photo"]){
-        CameraController *cameraController = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        CameraController *cameraController = [navigationController viewControllers][0];
         cameraController.delegate = self;
         [cameraController setPhoto:_picture];
     }else if ([segue.identifier isEqualToString:@"DataSheet"]){
-        DataSheetController *dataSheetController = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        DataSheetController *dataSheetController = [navigationController viewControllers][0];
         dataSheetController.delegate = self;
         [dataSheetController setSheetData:_dataSheet];
     }else if ([segue.identifier isEqualToString:@"StrikeDipSegue"]) {
-        StrikeDipController *strikeDip = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        StrikeDipController *strikeDip = [navigationController viewControllers][0];
         strikeDip.delegate = self;
         [strikeDip setStrike:_strike setDip:_dip];
     }else if ([segue.identifier isEqualToString:@"TrendPlungeSegue"]) {
-        TrendPlungeController *trendPlunge = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        TrendPlungeController *trendPlunge = [navigationController viewControllers][0];
         trendPlunge.delegate = self;
         [trendPlunge setTrend:_trend setPlunge:_plunge];
     }
