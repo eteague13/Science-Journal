@@ -26,7 +26,7 @@
 
 @end
 
-@interface AddEntryController : UITableViewController <datepickerControllerDelegate, LocationAndWeatherControllerDelegate, SketchControllerDelegate, CameraControllerDelegate, DataSheetControllerDelegate, StrikeDipControllerDelegate, TrendPlungeControllerDelegate, textEntryControllerDelegate> {
+@interface AddEntryController : UITableViewController <datepickerControllerDelegate, LocationAndWeatherControllerDelegate, SketchControllerDelegate, CameraControllerDelegate, DataSheetControllerDelegate, StrikeDipControllerDelegate, TrendPlungeControllerDelegate, textEntryControllerDelegate, UITextFieldDelegate> {
     BOOL isEditEntry;
     NSString *projectNameList;
     

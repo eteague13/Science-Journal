@@ -42,8 +42,6 @@
     
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
-    
-    
 }
 
 - (void)didReceiveMemoryWarning

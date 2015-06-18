@@ -16,7 +16,7 @@
     if (self) {
         
         self.backgroundColor = [UIColor colorWithRed:217.0/255.0f green:217.0/255.0f blue:217.0/255.0f alpha:0.2f];
-        self.font = [UIFont fontWithName:@"Helvetica" size:14];
+        self.font = [UIFont fontWithName:@"Helvetica" size:15];
     }
     return self;
     

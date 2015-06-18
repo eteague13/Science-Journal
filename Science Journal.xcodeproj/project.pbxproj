@@ -46,6 +46,7 @@
 		BD3AD0A11B265CC1007DF4FB /* TrendPlungeController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3AD0A01B265CC1007DF4FB /* TrendPlungeController.m */; };
 		BD3FB96919A278DE002496CE /* ExportController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB96819A278DE002496CE /* ExportController.m */; };
 		BD3FB97019A2C314002496CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3FB96F19A2C314002496CE /* MapKit.framework */; };
+		BD4CFAC81B3362E200ADF6C8 /* Launch-Image-640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4CFAC71B3362E200ADF6C8 /* Launch-Image-640x960.png */; };
 		BD5C6E6619B681D100342E4B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5C6E6519B681D100342E4B /* CoreLocation.framework */; };
 		BD5C6E6919B7848E00342E4B /* SketchController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C6E6819B7848E00342E4B /* SketchController.m */; };
 		BD5FD9CF1A4A07FC003CC565 /* AddEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5FD9CE1A4A07FC003CC565 /* AddEntryController.m */; };
@@ -142,6 +143,7 @@
 		BD3FB96719A278DE002496CE /* ExportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportController.h; sourceTree = "<group>"; };
 		BD3FB96819A278DE002496CE /* ExportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BD3FB96F19A2C314002496CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		BD4CFAC71B3362E200ADF6C8 /* Launch-Image-640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Launch-Image-640x960.png"; sourceTree = "<group>"; };
 		BD5C43811A81D02300EA0CF2 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "../../Downloads/dropbox-ios-sync-sdk-3.1-2.2/Dropbox.framework"; sourceTree = "<group>"; };
 		BD5C6E6519B681D100342E4B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BD5C6E6719B7848E00342E4B /* SketchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SketchController.h; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 		BD08A19119A26BE400EE1B97 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BD4CFAC71B3362E200ADF6C8 /* Launch-Image-640x960.png */,
 				BD0E997E1B2F3DB100EE0439 /* settings-25.png */,
 				BD0E997C1B2F3B5D00EE0439 /* settings-100.png */,
 				BD19191E1B28C6AA00BE9214 /* About-Adding-Resources-Final.png */,
@@ -466,6 +469,7 @@
 				BDF325B91B1E2B5E0003F217 /* Sand4.jpg in Resources */,
 				BD0E99841B2F703100EE0439 /* entriesdb.sql in Resources */,
 				BDC4FF021A81B9C30057A86D /* blue_button.png in Resources */,
+				BD4CFAC81B3362E200ADF6C8 /* Launch-Image-640x960.png in Resources */,
 				BDF325B71B1E25610003F217 /* referencesdb.sql in Resources */,
 				BDC4FEFF1A81B6DA0057A86D /* Sandcropped2.jpg in Resources */,
 				BD3A30CB1A87F21C00202981 /* 180x180.png in Resources */,

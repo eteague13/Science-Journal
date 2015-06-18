@@ -102,7 +102,7 @@
     EntriesCell *referenceName = (EntriesCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     NSLog(@"Record ID to delete: %d", referenceName.identifier);
     //Allows the user to swipe to delete
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+    if (editingStyle == UITableViewCellEditingStyleDelete && referenceName.identifier != 1) {
         int recordIDToDelete = referenceName.identifier;
         NSLog(@"Record ID to delete: %d", recordIDToDelete);
         
@@ -120,6 +120,10 @@
         [self.dbManager executeQuery:query];
         
         [self reloadData];
+    }
+    else if (referenceName.identifier == 1){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Error" message: @"Cannot delete the template (What if you forget what this is for?)" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }
 }
 
@@ -145,11 +149,13 @@
     // Pass the selected object to the new view controller.
     
     if ([segue.identifier isEqualToString:@"addRefText"]) {
-        AddReferenceController *addReference = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        AddReferenceController *addReference = [navigationController viewControllers][0];
         addReference.delegate = self;
         [addReference setPhotoOrText:1];
     }else if ([segue.identifier isEqualToString:@"addReferencePhoto"]) {
-        AddReferenceController *addReference = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        AddReferenceController *addReference = [navigationController viewControllers][0];
         addReference.delegate = self;
         [addReference setPhotoOrText:0];
     }else if ([segue.identifier isEqualToString:@"viewReferenceCell"]){

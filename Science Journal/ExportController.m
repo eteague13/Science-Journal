@@ -187,12 +187,13 @@
     
     
     NSLog(@"In Export Selected Projects");
-    
+    NSLog(@"All Projects 2: %@", projects);
     for (id project in projects) {
         NSMutableString *printString = [[NSMutableString alloc] init];
         [printString appendFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n\t<Folder>"];
-        ProjectCell *cell = project;
-        NSString *projectNm = cell.projectLabel.text;
+        //ProjectCell *cell = project;
+        //NSString *projectNm = cell.projectLabel.text;
+        NSString *projectNm = project;
         NSLog(@"Project name: %@", projectNm);
         NSString *query = [NSString stringWithFormat:@"select * from entriesBasic where projectName = '%@'", projectNm];
         NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];

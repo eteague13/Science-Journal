@@ -73,19 +73,41 @@
     [DBSession setSharedSession:dbSession];
 
     //Michael-Change the right 1/2 of the = sign. Copy and paste
-    UIColor *backgroundColor = [UIColor colorWithRed:157.0/255.0 green:245.0/255.0 blue:140.0/255.0 alpha:1.0];
-    
+    //UIColor *backgroundColor = [UIColor colorWithRed:157.0/255.0 green:245.0/255.0 blue:140.0/255.0 alpha:1.0];
+    UIColor *backgroundColor = [UIColor colorWithRed:77.0f/255.0f green:175.0f/255.0f blue:77.0f/255.0f alpha:1.0];
     
     [[UINavigationBar appearance] setBarTintColor:backgroundColor];
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:0.8];
     shadow.shadowOffset = CGSizeMake(0, 1);
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
-                                                           shadow, NSShadowAttributeName,
+                                                           [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                           nil, NSShadowAttributeName,
                                                            [UIFont fontWithName:@"Helvetica" size:17.0], NSFontAttributeName, nil]];
     
+    
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UIButton appearance] setTintColor:[UIColor whiteColor]];
+    [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
+
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setBarTintColor:backgroundColor];
+    
+    [[UILabel appearance] setFont:[UIFont fontWithName:@"Helvetica" size:15.0]];
+    
+    [[UITextField appearance] setFont:[UIFont fontWithName:@"Helvetica" size:15.0]];
+    
+    /*
+    UITabBarItem *item = [self.tabBar.items objectAtIndex:1];
+    item.image = [[UIImage imageNamed:@"unselected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.tabBar.tintColor
+    item.selectedImage = [UIImage imageNamed:@"selected.png"];
+    */
+    
+
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     
     return YES;
 }

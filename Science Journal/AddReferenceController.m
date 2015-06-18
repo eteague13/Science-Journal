@@ -26,7 +26,7 @@
         
     //If Text
     }else{
-        CGRect frame = CGRectMake(0, 100, 320, 470);
+        CGRect frame = CGRectMake(0, 150, 320, 470);
         self.note = [[NoteView alloc] initWithFrame:frame];
         [self.view addSubview:_note];
         _note.delegate = self;
@@ -36,12 +36,10 @@
     }
     
     _referenceNameField.delegate = self;
+    _referenceNameField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

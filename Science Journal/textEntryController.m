@@ -39,7 +39,7 @@
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
     //Draws the text view
-    CGRect frame = CGRectMake(0, 94, 320, 474);
+    CGRect frame = CGRectMake(0, 30, 320, 500);
     self.note = [[NoteView alloc] initWithFrame:frame];
     if ([textArea length] != 0){
         _note.text = textArea;

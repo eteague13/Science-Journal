@@ -85,8 +85,9 @@
         mc.mailComposeDelegate = self;
         NSString *mimeType = @"application/vnd.google-earth.kml+xml";
         for (id project in _selectedProjectsToExport){
-            ProjectCell *cell = project;
-            NSString *projectNm = cell.projectLabel.text;
+            //ProjectCell *cell = project;
+            //NSString *projectNm = cell.projectLabel.text;
+            NSString *projectNm = project;
             NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
             NSString *fileName = [NSMutableString stringWithFormat:@"%@.kml", projectNm];
             NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
@@ -154,12 +155,13 @@
     if (self.tableView.isEditing)
     {
         ProjectCell *projectToEdit = (ProjectCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-        if ([self.selectedProjectsToExport containsObject:projectToEdit])
+        NSString *projectToExport = projectToEdit.projectLabel.text;
+        if ([self.selectedProjectsToExport containsObject:projectToExport])
         {
         }
         else
         {
-            [self.selectedProjectsToExport addObject:projectToEdit];
+            [self.selectedProjectsToExport addObject:projectToExport];
         }
 
         
@@ -171,9 +173,10 @@
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.tableView.isEditing) {
         ProjectCell *projectToEdit = (ProjectCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-        if ([self.selectedProjectsToExport containsObject:projectToEdit])
+        NSString *projectToExport = projectToEdit.projectLabel.text;
+        if ([self.selectedProjectsToExport containsObject:projectToExport])
         {
-            [self.selectedProjectsToExport removeObject:projectToEdit];
+            [self.selectedProjectsToExport removeObject:projectToExport];
         }
 
     }
@@ -315,7 +318,8 @@
             //[self.dbManager executeQuery:query];
             [self performSegueWithIdentifier:@"EditProjectName" sender:self];
         }
-        }else if (alertView.tag == 2){
+    }else if (alertView.tag == 2){
+        if (buttonIndex == 1) {
             NSString *getAllEntriesQuery = [NSString stringWithFormat:@"select * from entriesBasic where projectName='%@'", _projectCellToDelete.projectLabel.text];
             //NSLog(@"Query: %@", getAllEntriesQuery);
             NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:getAllEntriesQuery]];
@@ -329,6 +333,7 @@
                 NSString *sketchFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]];
                 [[NSFileManager defaultManager] removeItemAtPath: pictureFilePath error: nil];
                 [[NSFileManager defaultManager] removeItemAtPath: sketchFilePath error: nil];
+
             }
         
             NSString *query = [NSString stringWithFormat:@"delete from entriesBasic where projectName='%@'", _projectCellToDelete.projectLabel.text];
@@ -341,9 +346,15 @@
             
             NSString *deleteProjectSettingsQuery = [NSString stringWithFormat:@"delete from projectSettings where projectName='%@'", _projectCellToDelete.projectLabel.text];
             [self.dbManager executeQuery:deleteProjectSettingsQuery];
+            
+            NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+            NSString *fileName = [NSMutableString stringWithFormat:@"%@.kml", _projectCellToDelete.projectLabel.text];
+            NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+            [[NSFileManager defaultManager] removeItemAtPath: filePath error: nil];
         
             [self loadData];
         }
+    }
     
     
 }
@@ -362,7 +373,7 @@
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Export All projects", @"Export Selected Projects", @"Sync Dropbox", nil];
+                                                    otherButtonTitles:@"Mail All projects", @"Mail Selected Projects", @"Sync All Projects to Dropbox", nil];
     actionSheet.tag = 1;
     [actionSheet showInView:self.view];
 }
@@ -398,37 +409,43 @@
 
 -(void)exportAllProjects {
     ExportController *exporter = [[ExportController alloc] init];
-    NSString *query = @"select projectName from projects";
-    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    NSString *projectQuery = @"select projectName from projects";
+    NSArray *allProjects = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:projectQuery]];
+    //Need to convert the array to mutablearray
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    for (id key in allProjects){
+        [results addObject:[key objectAtIndex:0]];
+    }
     [exporter exportSelectedProjects:results];
     if ([results count] > 0){
-        NSString *documentsDirectory = [NSHomeDirectory()
-                                        stringByAppendingPathComponent:@"Documents"];
-        NSString *fileName = [NSMutableString stringWithFormat:@"All Entries.kml"];
-        NSString *filePath = [documentsDirectory
-                              stringByAppendingPathComponent:fileName];
-        
-        
-        NSLog(@"%@", filePath);
-        //Email the entry
-        //Doesn't work on the simulator, but should on phone
         MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
         mc.mailComposeDelegate = self;
-        NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-        // Determine the MIME type
-        //NSString *mimeType = @"text/plain";
-        //This one may be the one that works...have to wait and see
-        NSString *mimeType = @"application/vnd.google-earth.kml+xml";
-        // Add attachment
-        [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
-        // Present mail view controller on screen
-        [self presentViewController:mc animated:YES completion:NULL];
+        for (id project in results){
+            //NSLog(@"Individual project: %@", project);
+            NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+            NSString *fileName = [NSMutableString stringWithFormat:@"%@.kml", project];
+            NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+        
+            NSLog(@"%@", filePath);
+            //Email the entry
+            //Doesn't work on the simulator, but should on phone
+            
+            NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+            // Determine the MIME type
+            //NSString *mimeType = @"text/plain";
+            //This one may be the one that works...have to wait and see
+            NSString *mimeType = @"application/vnd.google-earth.kml+xml";
+            // Add attachment
+            [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
+            // Present mail view controller on screen
+            [self presentViewController:mc animated:YES completion:NULL];
+        }
+    
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Export Error" message: @"No entries to export" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
     
-    [exporter exportAllProjects];
 }
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
@@ -457,18 +474,27 @@
 
 - (void) syncDropbox {
 
-     NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-     NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:localDir error:nil];
-     
+    ExportController *exporter = [[ExportController alloc] init];
+    NSString *projectQuery = @"select projectName from projects";
+    NSArray *allProjects = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:projectQuery]];
+    //Need to convert the array to mutablearray
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    for (id key in allProjects){
+        [results addObject:[key objectAtIndex:0]];
+    }
+    [exporter exportSelectedProjects:results];
+    
+    NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:localDir error:nil];
      for (int i = 0; i < [files count]; i++){
-         if ([[files objectAtIndex:i] rangeOfString:@".png"].location != NSNotFound){
+         if ([[files objectAtIndex:i] rangeOfString:@".png"].location != NSNotFound || [[files objectAtIndex:i] rangeOfString:@".kml"].location != NSNotFound){
              localPath = [localDir stringByAppendingPathComponent:[files objectAtIndex:i]];
              filename = [files objectAtIndex:i];
-             NSLog(@"File is a pic: %@", localPath);
+             NSLog(@"File is a pic or kml: %@", localPath);
              [self.restClient loadMetadata:[NSString stringWithFormat:@"/%@", localPath]];
      
          }else{
-             NSLog(@"File: %@ isn't a pic", [files objectAtIndex:i]);
+             NSLog(@"File: %@ isn't a pic or kml", [files objectAtIndex:i]);
          }
      }
 }

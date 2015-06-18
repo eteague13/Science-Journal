@@ -22,6 +22,7 @@
     [super viewDidLoad];
     _projectAddField.text = oldProjectName;
     _projectAddField.delegate = self;
+    _projectAddField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
     
     //Initialize the database connection
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];

@@ -155,12 +155,16 @@
 //[self.tableView setSeparatorColor:[UIColor blackColor]];
 //[self.tableView setSeparatorInset:UIEdgeInsetsZero];
 
-    /*
+    
     _entryNameField.delegate = self;
     _projectNameField.delegate = self;
     _sampleNumberField.delegate = self;
     _stopNumField.delegate = self;
-    */
+    
+    _entryNameField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+    _projectNameField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+    _sampleNumberField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+    _stopNumField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
     
     [self checkEntryContents];
     
@@ -170,13 +174,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
+/*
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         [self.entryNameField becomeFirstResponder];
     }
 }
+ */
 
 - (IBAction)cancelButton:(id)sender {
     [self.delegate AddEntryControllerDidCancel:self];
@@ -674,11 +679,12 @@
 }
 
 
-
+/*
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     return YES;
 }
+ */
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -708,6 +714,8 @@
     _plunge = pl;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 
 
 @end
