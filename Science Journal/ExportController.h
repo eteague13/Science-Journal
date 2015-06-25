@@ -11,9 +11,15 @@
 #import <MessageUI/MessageUI.h>
 #import <DropboxSDK/DropboxSDK.h>
 #import "ProjectCell.h"
+#import <CoreText/CoreText.h>
+#import <Foundation/Foundation.h>
+
 
 @interface ExportController : UIViewController <MFMailComposeViewControllerDelegate> {
     NSString *selectedProject;
+    int numRows;
+    int numColumns;
+    
 }
 
 //IBOutlets
@@ -23,9 +29,14 @@
 
 //Variables
 @property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSMutableDictionary *dataArray;
 
 //Methods
 -(void) exportSelectedProjects:(NSMutableArray *) projects;
 -(void) exportAllProjects;
+-(void) drawImage:(UIImage*)image inRect:(CGRect)rect;
+-(void) exportAllToPDF;
+
+
 
 @end

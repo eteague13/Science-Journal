@@ -10,13 +10,7 @@
 
 @implementation AddProjectController
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,28 +18,31 @@
     _projectAddField.delegate = self;
     _projectAddField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
     
+    if (addOrEdit == 1){
+        _projectLabel.title=@"Edit Project Name";
+    }else{
+        _projectLabel.title=@"Add Project Name";
+    }
     //Initialize the database connection
-    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
-    // Do any additional setup after loading the view.
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FieldBookdb.sql"];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [_projectAddField becomeFirstResponder];
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
 
+//If the user selects cancel
 - (IBAction)cancelAddProject:(id)sender {
     [self.delegate addProjectCancel:self];
 }
 
+//If the user adds a project
 - (IBAction)addProject:(id)sender {
     NSString *query = @"select projectName from projects";
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     NSString *tempProjectName = _projectAddField.text;
     
+    //Has to max sure that the project doesn't already exist
     BOOL projectExists = NO;
     for (id key in results){
         if ([[key objectAtIndex:0] isEqualToString:tempProjectName]){
@@ -62,17 +59,7 @@
 
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
+//Sets if the user is adding or editing a project
 -(void)setAddOrEdit:(int)val setOldProjectName:(NSString *) pn{
     addOrEdit = val;
     oldProjectName = pn;

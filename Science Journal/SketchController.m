@@ -30,74 +30,52 @@
 
 - (void)viewDidLoad
 {
-    
+    [super viewDidLoad];
     red = 0.0/255.0;
     green = 0.0/255.0;
     blue = 0.0/255.0;
     brush = 10.0;
     opacity = 1.0;
-    [super viewDidLoad];
     _drawImage.image = sketch;
     
 }
-/*
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
-*/
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-
-
+//Saves the image and passes it back
 - (IBAction)saveSelected:(id)sender {
-    
-    //Saves the image and passes it back
     UIGraphicsBeginImageContextWithOptions(self.saveImage.bounds.size, NO,0.0);
     [self.saveImage.image drawInRect:CGRectMake(0, 0, self.saveImage.frame.size.width, self.saveImage.frame.size.height)];
     UIImage *SaveImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-
-    NSLog(@"Sketch 1: %@", SaveImage);
     [self.delegate sketchControllerSave:self didFinishSketch:SaveImage];
     
 }
 
 
-
+//Cancels the sketch and closes the window
 - (IBAction)cancelSketchButton:(id)sender {
-    //Cancels the sketch and closes the window
     [self.delegate sketchControllerCancel:self];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+//sets the sketch when editing
 - (void)setSketch:(UIImage*)item{
-    //sets the sketch when editing
     sketch = item;
 }
+
+//Checks if the user began drawing
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    //Checks if the user began drawing
     mouseSwiped = NO;
     UITouch *touch = [touches anyObject];
     lastPoint = [touch locationInView:self.view];
 }
+//Tracks the movement of the user drawing
 -(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    //Tracks the movement of the user drawing
     mouseSwiped = YES;
     UITouch *touch = [touches anyObject];
     CGPoint currentPoint = [touch locationInView:self.view];
@@ -118,6 +96,8 @@
     
     lastPoint = currentPoint;
 }
+
+//Tracks when the user is done drawing
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     if(!mouseSwiped) {
         UIGraphicsBeginImageContext(self.view.frame.size);
@@ -140,8 +120,9 @@
     self.drawImage.image = nil;
     UIGraphicsEndImageContext();
 }
+
+//Brush color selector
 - (IBAction)selectColor:(id)sender {
-    //Brush color selector
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Pick brush:"
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
@@ -151,8 +132,8 @@
     [actionSheet showInView:self.view];
 }
 
+//User actions selector
 - (IBAction)sketchActions:(id)sender {
-    //User actions selector
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Sketch Actions"
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
@@ -163,6 +144,7 @@
     
 }
 
+//Sets the brush color to eraser
 - (IBAction)eraserSelected:(id)sender {
     red = 255.0/255.0;
     green = 255.0/255.0;
@@ -170,8 +152,8 @@
     opacity = 1.0;
 }
 
+//Sets the colors based on what the user selects
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    //Sets the colors based on what the user selects
     if (actionSheet.tag == 1){
         switch(buttonIndex)
         {
@@ -228,13 +210,13 @@
     }
    
 }
-
+//Passes back the brush and opacity
 - (void)sketchSettingsControllerDone:(SketchSettingsController *) controller setSize:(CGFloat)size setOpacity:(CGFloat)op{
-    //Passes back the brush and opacity
     self->brush = size;
     self->opacity = op;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     //Opens up the brush and opacity settings
     if ([segue.identifier isEqualToString:@"sketchSettings"]) {

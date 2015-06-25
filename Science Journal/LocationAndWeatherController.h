@@ -38,6 +38,7 @@
 //Variables
 @property (nonatomic, weak) id <LocationAndWeatherControllerDelegate> delegate;
 @property (nonatomic, retain) NoteView *weatherField;
+@property (nonatomic, strong) CLLocationManager *locManager;
 
 //Methods
 -(void)setLat:(NSString*) latitude setLong:(NSString*) longitude setWeather:(NSString*) weather;

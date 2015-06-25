@@ -9,61 +9,17 @@
 #import "AppDelegate.h"
 #import "EntriesController.h"
 #import <DropboxSDK/DropboxSDK.h>
-
+static int version = 0.951;
 
 @implementation AppDelegate
 //Initializes all of the switches in the Settings tab
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    //Styles the navigation bar
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    
-    NSDictionary *appDefaults = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchStrikeDip"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
-    NSDictionary *appDefaults2 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchStopNum"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults2];
-    NSDictionary *appDefaults3 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchOutcrop"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults3];
-    NSDictionary *appDefaults4 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchStructData"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults4];
-    NSDictionary *appDefaults5 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchDate"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults5];
-    NSDictionary *appDefaults6 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchGoal"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults6];
-    NSDictionary *appDefaults7 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchLocationWeather"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults7];
-    NSDictionary *appDefaults8 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchNotes"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults8];
-    NSDictionary *appDefaults9 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchPicture"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults9];
-    NSDictionary *appDefaults10 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchPermissions"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults10];
-    NSDictionary *appDefaults11 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchSampleNum"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults11];
-    NSDictionary *appDefaults12 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchPartners"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults12];
-    NSDictionary *appDefaults13 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchSketch"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults13];
-    NSDictionary *appDefaults14 = [NSDictionary
-                                   dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"SwitchDataSheet"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults14];
-    
-    NSDictionary *appDefaults15 = [NSDictionary
-                                 dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"SwitchTrendPlunge"];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults15];
-    
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
     
     //Creates the Dropbox session
     DBSession *dbSession = [[DBSession alloc]
@@ -71,43 +27,46 @@
                             appSecret:@"p38tbm8288tnc3p"
                             root:kDBRootAppFolder];
     [DBSession setSharedSession:dbSession];
-
-    //Michael-Change the right 1/2 of the = sign. Copy and paste
-    //UIColor *backgroundColor = [UIColor colorWithRed:157.0/255.0 green:245.0/255.0 blue:140.0/255.0 alpha:1.0];
+    
+    //Green color through the app
     UIColor *backgroundColor = [UIColor colorWithRed:77.0f/255.0f green:175.0f/255.0f blue:77.0f/255.0f alpha:1.0];
     
+    //Styles the Navigation bar
     [[UINavigationBar appearance] setBarTintColor:backgroundColor];
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:0.8];
     shadow.shadowOffset = CGSizeMake(0, 1);
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                           [UIColor blackColor], NSForegroundColorAttributeName,
                                                            nil, NSShadowAttributeName,
                                                            [UIFont fontWithName:@"Helvetica" size:17.0], NSFontAttributeName, nil]];
-    
-    
-    
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UIButton appearance] setTintColor:[UIColor whiteColor]];
-    [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
 
+    //Styles the Tab bar
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setBarTintColor:backgroundColor];
-    
-    [[UILabel appearance] setFont:[UIFont fontWithName:@"Helvetica" size:15.0]];
-    
-    [[UITextField appearance] setFont:[UIFont fontWithName:@"Helvetica" size:15.0]];
-    
-    /*
-    UITabBarItem *item = [self.tabBar.items objectAtIndex:1];
-    item.image = [[UIImage imageNamed:@"unselected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.tabBar.tintColor
-    item.selectedImage = [UIImage imageNamed:@"selected.png"];
-    */
-    
-
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    
+    //Styles the UILabels and Texfields
+    [[UILabel appearance] setFont:[UIFont fontWithName:@"Helvetica" size:15.0]];
+    [[UITextField appearance] setFont:[UIFont fontWithName:@"Helvetica" size:15.0]];
+    
+    //Upgrades the database on new app versions
+    //Remember to change the static version number
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FieldBookdb.sql"];
+    NSString *versionQuery = @"select database_ver from metadata";
+    NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:versionQuery]];
+    if ([results count] == 0){
+        NSString *query = [NSString stringWithFormat:@"insert into metadata values(%d)", version];
+        [self.dbManager executeQuery:query];
+    }else{
+        int appVersion = [[[results objectAtIndex:0] objectAtIndex:0] intValue];
+        if (version > appVersion){
+            //Do stuff
+            NSString *updateVersion = [NSString stringWithFormat:@"update metadata set database_ver=%d", version];
+            [self.dbManager executeQuery:updateVersion];
+        }
+    }
     
     return YES;
 }
@@ -145,11 +104,9 @@
     if ([[DBSession sharedSession] handleOpenURL:url]) {
         if ([[DBSession sharedSession] isLinked]) {
             NSLog(@"App linked successfully!");
-            // At this point you can start making API calls
         }
         return YES;
     }
-    // Add whatever other url handling code your app requires here
     return NO;
 }
 

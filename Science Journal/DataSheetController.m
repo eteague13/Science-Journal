@@ -11,16 +11,15 @@
 @interface DataSheetController ()
 
 @end
-//Next step is to be able to add the datasheet back in
 @implementation DataSheetController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     [_dataSheetScroll setScrollEnabled:YES];
     [_dataSheetScroll setContentSize:CGSizeMake(320, 570)];
     _dataSheetScroll.pagingEnabled = YES;
     [self.view addSubview:_dataSheetScroll];
+    //If there is already a datasheet to load
     if (numRows > 0) {
         _dataRowsField.text = [@(numRows) stringValue];
         _dataColumnsField.text = [@(numColumns) stringValue];
@@ -29,28 +28,21 @@
     _dataColumnsField.delegate = self;
     _dataRowsField.delegate = self;
     
-    
-    
-    
-    
-    
 }
-/*
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
- */
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//If the user selects cancel
 - (IBAction)cancelDataSheet:(id)sender {
     [self.delegate dataSheetControllerCancel:self];
 }
+
+//If the user saves the datasheet
 - (IBAction)saveDataSheet:(id)sender {
-    
     
     NSMutableDictionary *dataToSave = [[NSMutableDictionary alloc] init];
     for (id key in _dataArray){
@@ -58,17 +50,14 @@
         NSString *temp = tempTextField.text;
         [dataToSave setObject:temp forKey:key];
     }
-    
-    for (id key in dataToSave){
-        NSLog(@"Key: %@, Value: %@", key, [dataToSave objectForKey:key]);
-    }
-    
      
     [self.delegate dataSheetControllerSave:self didSaveArray:dataToSave];
     
 }
 
+//Creates the datasheet
 - (void) createDataArray{
+    //Have to remove any existing textfields
     for (id tf in _dataSheetScroll.subviews){
         if ([tf isKindOfClass:[UITextField class]]){
             [tf removeFromSuperview];
@@ -80,7 +69,7 @@
     int celly = 250;
     int cellwidth = 50;
     int cellheight = 30;
-    NSLog(@"Number of rows: %i", numRows);
+    //Creates the table with custom cell sizes
     for (int i = 0; i < numRows; i++){
         for (int j = 0; j < numColumns; j++){
             if (j == 0) {
@@ -113,16 +102,8 @@
     [self drawTableWithRow];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+//Action when the user selects the make table button
 - (IBAction)makeTable:(id)sender {
     numColumns = [_dataColumnsField.text intValue];
     numRows = [_dataRowsField.text intValue];
@@ -131,19 +112,18 @@
     
 }
 
+//Re-adds the text entry fields
 - (void) redrawDataSheet {
     [_dataSheetScroll addSubview:_dataColumnsField];
     [_dataSheetScroll addSubview:_dataRowsField];
     
 }
-
+//If the user is editing an existing datasheet, this finds the high row and column
 - (void) setSheetData:(NSString*) dictionary {
     NSError *error;
     NSData *data = [dictionary dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableDictionary *editableDataSheet = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
     _dataArray = editableDataSheet;
-    NSLog(@"Keys %@", [_dataArray allKeys]);
-    NSLog(@"Values %@", [_dataArray allValues]);
     int highColumn = 0;
     int highRow = 0;
     for (id key in [_dataArray allKeys]){
@@ -157,16 +137,13 @@
         }
     }
     
-    //NSLog(@"Editing data %@", dictionary);
-    NSLog(@"Row: %i", highRow);
-    NSLog(@"Column: %i", highColumn);
     numRows = highRow + 1;
     numColumns = highColumn + 1;
     
 }
 
+//If the table is larger than the screen, it redraws the scrollview
 -(void)drawTableWithRow {
-    //[self createDataArray];
     int newRowsSize = 0;
     int newColsSize = 0;
     if (numRows > 10 && numColumns > 5){
@@ -186,13 +163,12 @@
     [self.view setNeedsDisplay];
 }
 
+//If the user is editing the datasheet, this loads the existing data
 -(void)loadDataArray{
     int cellx = 10;
     int celly = 250;
     int cellwidth = 50;
     int cellheight = 30;
-    NSLog(@"Number of rows in load: %i", numRows);
-    NSLog(@"values in load: %@", [_dataArray allValues]);
     for (int i = 0; i < numRows; i++){
         for (int j = 0; j < numColumns; j++){
             if (j == 0) {
@@ -225,15 +201,6 @@
     [self drawTableWithRow];
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
 
 @end

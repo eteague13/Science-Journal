@@ -21,9 +21,8 @@
     NSString *textArea;
     
 }
-//@property (weak, nonatomic) IBOutlet UINavigationItem *textEntryLabel;
+
 //IBOutlets
-//@property (weak, nonatomic) IBOutlet UILabel *textEntryLabel;
 @property (weak, nonatomic) IBOutlet UITextView *textField;
 @property (weak, nonatomic) IBOutlet UINavigationItem *textEntryLabel;
 

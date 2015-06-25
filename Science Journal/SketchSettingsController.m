@@ -20,40 +20,26 @@
     _brushSizeSlider.value = _brush;
     _brushOpacityLabel.text = [NSString stringWithFormat:@"%.1f", self.opacity];
     _brushOpacitySlider.value = _opacity;
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    // Do any additional setup after loading the view.
 }
 
-/*
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
- */
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+//If the user is done changing the brush settings
 - (IBAction)settingsDone:(id)sender {
     [self.delegate sketchSettingsControllerDone:self setSize:self.brush setOpacity:self.opacity];
 }
+//Action if the user changes the brush size
 - (IBAction)brushSizeChange:(id)sender {
     self.brush = self.brushSizeSlider.value;
     self.brushSizeLabel.text = [NSString stringWithFormat:@"%.1f", self.brush];
 }
 
-
+//Action if the user changes the brush opacity
 - (IBAction)brushOpacityChange:(id)sender {
     
     self.opacity = self.brushOpacitySlider.value;

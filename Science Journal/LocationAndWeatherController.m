@@ -12,23 +12,16 @@
 
 @end
 
-@implementation LocationAndWeatherController{
-    CLLocationManager *locationManager;
-}
-/*
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
- */
+@implementation LocationAndWeatherController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    locationManager = [[CLLocationManager alloc] init];
-    [locationManager requestWhenInUseAuthorization];
-    
-
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
+    //
+    _locManager = [[CLLocationManager alloc] init];
+    if ([_locManager respondsToSelector:
+         @selector(requestWhenInUseAuthorization)]) {
+        [_locManager requestWhenInUseAuthorization];
+    }
     
     //Draws the text view
     CGRect frame = CGRectMake(0, 250, 320, 327);
@@ -39,19 +32,17 @@
     _latitudeField.delegate = self;
     _longitudeField.delegate = self;
     
+    //Sets the editable text
     if ([latitudeArea length] != 0){
         _latitudeField.text = latitudeArea;
-        NSLog(@"HERE1??");
     }
     if ([longitudeArea length] != 0){
         _longitudeField.text = longitudeArea;
-        NSLog(@"HERE2??");
     }
     if ([weatherArea length] != 0){
         _weatherField.text = weatherArea;
-        NSLog(@"HERE3??");
     }
-    
+    //Adds the weather textview to the controller
     [self.view addSubview:_weatherField];
 }
 
@@ -61,65 +52,55 @@
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+//If the user selects cancel
 - (IBAction)locCancelButton:(id)sender {
     [self.delegate LocationAndWeatherCancel:self];
 }
 
+//If the user saves the data
 - (IBAction)locSaveButton:(id)sender {
     [self.delegate LocationAndWeatherSave:self lat:(NSString*) _latitudeField.text longitude:(NSString*)_longitudeField.text weather:(NSString*) _weatherField.text];
 }
 
+//Action called when the user presses the get location and weather button
 - (IBAction)updateLocWeather:(id)sender {
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [locationManager requestWhenInUseAuthorization];
-    [locationManager startUpdatingLocation];
+    _locManager.delegate = self;
+    _locManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [_locManager requestWhenInUseAuthorization];
+    [_locManager startUpdatingLocation];
     
+    //Uses a RESTful API to get the weather data
     NSString *currentLocationURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitudeValue, longitudeValue];
     NSURL *myURL = [NSURL URLWithString:currentLocationURL];
-    
     NSURLRequest *myRequest = [NSURLRequest requestWithURL:myURL];
-    
     NSURLConnection *myConnection = [NSURLConnection connectionWithRequest:myRequest delegate:self];
 }
 
+//Delegate method for CLLocationManager
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"didFailWithError: %@", error);
     NSLog(@"Get somewhere outside!");
 }
 
+//Delegate method for CLLocationManager that updates the current location
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    //NSLog(@"didUpdateToLocation: %@", newLocation);
     CLLocation *currentLocation = newLocation;
     
     if (currentLocation != nil) {
         latitudeValue = currentLocation.coordinate.latitude;
         longitudeValue = currentLocation.coordinate.longitude;
-        NSLog(@"Latitude: %f", latitudeValue);
         _latitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
         _longitudeField.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
         
-        [locationManager stopUpdatingLocation];
-        
-        
-        
-        
+        [_locManager stopUpdatingLocation];
         
     }
 }
 
+//Delegate method that deals with getting the weather data from the RESTful API json response
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
     
     
@@ -129,10 +110,12 @@
     
     NSString *fileMIMEType = [[httpResponse MIMEType] lowercaseString];
     
+    //Internal testing code
     NSLog(@"response is %d, %@", errorCode, fileMIMEType);
     
 }
 
+//What happens when the data is received from the weather URL
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     jsonWeather = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     
@@ -166,6 +149,8 @@
     
 }
 
+
+//Delegate method for the URL connection
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     
     
@@ -177,20 +162,19 @@
     
 }
 
+//Delegate method for the URL connection
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 
-    
     NSLog(@"Succeeded!");
-    
-    
 }
 
+//Passes the information to the editable entrypage
 -(void)setLat:(NSString*) latitude setLong:(NSString*) longitude setWeather:(NSString*) weather{
     latitudeArea = latitude;
     longitudeArea = longitude;
     weatherArea = weather;
-    NSLog(@"in Weather: %@%@%@", latitudeArea, longitudeArea, weatherArea);
 }
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [_weatherField setNeedsDisplay];
@@ -206,14 +190,5 @@
     _weatherField.frame = frame;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
 @end

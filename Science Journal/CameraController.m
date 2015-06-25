@@ -18,61 +18,46 @@
     [super viewDidLoad];
     _photoDisplay.image = photo;
     _photoDisplay.contentMode = UIViewContentModeScaleAspectFit;
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    // Do any additional setup after loading the view.
 }
-/*
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
- */
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+//If the user selects cancel
 - (IBAction)cancelCameraButton:(id)sender {
     [self.delegate cameraControllerCancel:self];
 }
 
+//If the user saves the picture
 - (IBAction)saveCameraButton:(id)sender {
     
     [self.delegate cameraControllerSave:self didSavePhoto:_photoDisplay.image];
 }
 
 
-
+//If the user selects to pick an image from the camera roll
 - (IBAction)useCameraRoll:(id)sender {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    NSLog(@"using photo");
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
+//If the user selects to take a picture using the camera
 - (IBAction)useCamera:(id)sender {
     
      UIImagePickerController *picker = [[UIImagePickerController alloc] init];
      picker.delegate = self;
      picker.allowsEditing = YES;
-     //picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
      picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
      [self presentViewController:picker animated:YES completion:NULL];
     
 }
+//Presents the image picker
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
@@ -82,11 +67,13 @@
     
 }
 
+//If the user selects cancel on the image picker
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
+//Passes the photo
 - (void) setPhoto:(UIImage*) item{
     photo = item;
 }

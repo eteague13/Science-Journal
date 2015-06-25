@@ -16,13 +16,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FieldBookdb.sql"];
+
+    [self loadSettings];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+//Saves the settings
+- (IBAction)saveSettings:(id)sender {
+    NSArray *settings = @[[NSNumber numberWithBool:_dateSwitch.isOn],[NSNumber numberWithBool:_goalSwitch.isOn], [NSNumber numberWithBool:_locationSwitch.isOn], [NSNumber numberWithBool:_dateSwitch.isOn], [NSNumber numberWithBool:_dateSwitch.isOn], [NSNumber numberWithBool:_notesSwitch.isOn], [NSNumber numberWithBool:_permissionsSwitch.isOn], [NSNumber numberWithBool:_sampleNumSwitch.isOn], [NSNumber numberWithBool:_partnersSwitch.isOn], [NSNumber numberWithBool:_strikeDipSwitch.isOn], [NSNumber numberWithBool:_stopNumSwitch.isOn], [NSNumber numberWithBool:_outcropSwitch.isOn], [NSNumber numberWithBool:_structuralSwitch.isOn], [NSNumber numberWithBool:_datasheetSwitch.isOn], [NSNumber numberWithBool:_trendPlungeSwitch.isOn]];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    [self.delegate settingsControllerUpdate:self settingsArray:settings];
+}
+
+//Sets the project name to be able to get the associated settings
+-(void)setProjectSettingsName:(NSString*)pn {
+    projectName = pn;
+}
+
+//Loads the existing settings
+-(void)loadSettings{
     NSString *settingsQuery = [NSString stringWithFormat:@"select * from projectSettings where projectName='%@'", projectName];
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:settingsQuery]];
     _dateSwitch.on = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"date"]] intValue];
@@ -40,79 +58,5 @@
     _structuralSwitch.on = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"structuralData"]] intValue];
     _datasheetSwitch.on = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"dataSheet"]] intValue];
     _trendPlungeSwitch.on = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"trendPlunge"]] intValue];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
-
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-- (IBAction)saveSettings:(id)sender {
-    NSArray *settings = @[[NSNumber numberWithBool:_dateSwitch.isOn],[NSNumber numberWithBool:_goalSwitch.isOn], [NSNumber numberWithBool:_locationSwitch.isOn], [NSNumber numberWithBool:_dateSwitch.isOn], [NSNumber numberWithBool:_dateSwitch.isOn], [NSNumber numberWithBool:_notesSwitch.isOn], [NSNumber numberWithBool:_permissionsSwitch.isOn], [NSNumber numberWithBool:_sampleNumSwitch.isOn], [NSNumber numberWithBool:_partnersSwitch.isOn], [NSNumber numberWithBool:_strikeDipSwitch.isOn], [NSNumber numberWithBool:_stopNumSwitch.isOn], [NSNumber numberWithBool:_outcropSwitch.isOn], [NSNumber numberWithBool:_structuralSwitch.isOn], [NSNumber numberWithBool:_datasheetSwitch.isOn], [NSNumber numberWithBool:_trendPlungeSwitch.isOn]];
-    NSLog(@"Here in save settings");
-    
-    [self.delegate settingsControllerUpdate:self settingsArray:settings];
-}
-
--(void)setProjectSettingsName:(NSString*)pn {
-    projectName = pn;
 }
 @end

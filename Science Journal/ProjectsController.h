@@ -13,6 +13,8 @@
 #import "AddProjectController.h"
 #import "ExportController.h"
 #import <DropboxSDK/DropboxSDK.h>
+#import <QuartzCore/QuartzCore.h>
+
 
 @interface ProjectsController : UITableViewController <AddProjectControllerDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, DBRestClientDelegate>{
     NSString *oldProjectName;
@@ -37,7 +39,10 @@
 @property (nonatomic, strong) UIBarButtonItem *addItem;
 @property (nonatomic, strong) UIBarButtonItem *finishedSelection;
 @property (nonatomic, strong) DBRestClient *restClient;
+@property (nonatomic, strong) NSArray *metadataContents;
 //Methods
+
+
 
 
 @end

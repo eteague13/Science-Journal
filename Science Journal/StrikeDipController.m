@@ -20,51 +20,29 @@
     _dipField.text = _dip;
     _strikeField.delegate = self;
     _dipField.delegate = self;
-    // Do any additional setup after loading the view.
 }
-/*
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
- */
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+//If the user selects cancel
 - (IBAction)cancelStrikeDip:(id)sender {
     [self.delegate strikeDipCancel:self];
 }
 
+//If the user saves the info
 - (IBAction)saveStrikeDip:(id)sender {
     [self.delegate strikeDipSave:self strike:_strikeField.text dip:_dipField.text];
 }
 
+//Passes the existing info
 -(void)setStrike:(NSString*)strike setDip:(NSString *)dip{
     self.strike = strike;
     self.dip = dip;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
 @end

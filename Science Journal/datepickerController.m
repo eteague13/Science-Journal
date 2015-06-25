@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //Adds an action to the datepicker
     [_datePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm"];
@@ -24,22 +25,17 @@
     if ([dateValue length] != 0 ){
         _dateDisplay.text = dateValue;
     }
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     _dateDisplay.delegate = self;
 }
 
-/*
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
- */
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+//If the datepicker is changed, it saves the result
 - (void)datePickerChanged:(UIDatePicker *)datePicker
 {
     
@@ -50,36 +46,19 @@
     _dateDisplay.text = strDate;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+//If the user selects cancel
 - (IBAction)dateCancel:(id)sender {
     [self.delegate datepickerControllerCancel:self];
 }
 
+//If the user selects save
 - (IBAction)dateSave:(id)sender {
     [self.delegate datepickerControllerSave:self didSaveDate:(NSString *)_dateDisplay.text];
 }
 
+//Sets the date value when editing
 -(void)setDateValue:(NSString *)date{
     dateValue = date;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
 @end

@@ -16,12 +16,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    // Do any additional setup after loading the view.
+
     //If photo
     if (photoOrText == 0) {
         CGRect frame = CGRectMake(0, 100, 320, 370);
         imageView = [[UIImageView alloc] initWithFrame:frame];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.view addSubview:imageView];
         
     //If Text
@@ -37,6 +37,7 @@
     
     _referenceNameField.delegate = self;
     _referenceNameField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+   
 }
 
 
@@ -46,18 +47,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Passes the value of if the user is editing a photo or text
 - (void)setPhotoOrText:(int)val {
     photoOrText = val;
     
 }
 
+//If the user selects cancel
 - (IBAction)cancelAddReference:(id)sender {
     [self.delegate referenceCancel:self];
 }
 
-
+//If the user saves the reference
 - (IBAction)saveReference:(id)sender {
-    
+    //Has to save the picture to the app's documents directory
     NSString *savedPictureLocation;
     if (imageView != nil && photoOrText == 0){
         NSString *picturename = [NSMutableString stringWithFormat:@"%@%@", _referenceNameField.text, @"_resource.png"];
@@ -73,25 +76,17 @@
     
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+//Allows the user to select an image from an image picker
 - (IBAction)addRefImage:(id)sender {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    NSLog(@"using photo");
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
+//Delegate method for the image picker
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
@@ -102,19 +97,11 @@
     
 }
 
+//Delegate method for the image picker when a user selects cancel
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
 @end

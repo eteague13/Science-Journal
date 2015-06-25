@@ -23,35 +23,22 @@
     // Do any additional setup after loading the view.
 }
 
-/*
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
- */
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+//If the user selects cancel
 - (IBAction)cancelTrendPlunge:(id)sender {
     [self.delegate trendPlungeCancel:self];
 }
-
+//If the user saves the info
 - (IBAction)saveTrendPlunge:(id)sender {
     [self.delegate trendPlungeSave:self trend:_trendField.text plunge:_plungeField.text];
 }
-
+//Passes the existing info
 -(void)setTrend:(NSString*)trend setPlunge:(NSString *)plunge{
     self.trend = trend;
     self.plunge = plunge;

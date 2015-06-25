@@ -21,7 +21,7 @@
 {
     [super viewDidLoad];
     //Initialize the database connection
-    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FieldBookdb.sql"];
     mapView.delegate = self;
     mapView.showsUserLocation = YES;
     
@@ -37,10 +37,8 @@
     centerCoordinate.latitude = 39.50;
     centerCoordinate.longitude = -98.35;
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (centerCoordinate, 5000000, 5000000);
-    
     [self.mapView setRegion:region animated:YES];
     
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
     
 }
 
@@ -78,6 +76,7 @@
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+
         
         return annotationView;
     }

@@ -4,9 +4,10 @@
 //
 //  Created by Evan Teague on 6/5/15.
 //  Copyright (c) 2015 Evan Teague. All rights reserved.
-//
+//  Info on Dropbox metadata http://pigtailsoft.com/blog/?p=166
 
 #import "ProjectsController.h"
+
 
 @interface ProjectsController ()
 
@@ -17,32 +18,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    /*Internal testing code to print out the location of the app's documents directory
     NSString *documentsDirectory = [NSHomeDirectory()
                                     stringByAppendingPathComponent:@"Documents"];
     
     NSString *filePath = documentsDirectory;
     NSLog(@"%@", filePath);
+    */
     
     //Initialize the database connection
-    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"entriesdb.sql"];
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FieldBookdb.sql"];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    
-    /*
+    /* Internal testing code to delete all info from the database
     NSString *delete1 = @"delete from projects";
     [self.dbManager executeQuery:delete1];
      NSString *delete2 = @"delete from entriesBasic";
      [self.dbManager executeQuery:delete2];
+    NSString *delete3 = @"delete from allReferences";
+    [self.dbManager executeQuery:delete3];
+    NSString *delete4 = @"delete from projectSettings";
+    [self.dbManager executeQuery:delete4];
     */
     
-    
-    
+    //Sets the navigation bar items
     _addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addProjectSegue)];
     _exportItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(selectExportOption)];
     _cancelExport = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelSelection)];
@@ -53,30 +52,46 @@
     NSArray *leftButtonItems = @[_exportItem];
     self.navigationItem.leftBarButtonItems = leftButtonItems;
     
+    //Enables multiple selection
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     self.selectedProjectsToExport = [[NSMutableArray alloc] init];
     
+    self.tableView.separatorInset = UIEdgeInsetsZero;
+    self.tableView.layoutMargins = UIEdgeInsetsZero;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
     self.restClient.delegate = self;
     
     [self loadData];
     
+    
+    
+    
 }
 
+//Dropbox code...leaving it here otherwise it may not work. Not sure why
+-(void)viewDidAppear:(BOOL)animated{
+    self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+    self.restClient.delegate = self;
+}
+
+//If the user cancels exporting
 -(void)cancelSelection{
     self.navigationItem.rightBarButtonItem = self.addItem;
     self.navigationItem.leftBarButtonItem = self.exportItem;
     [self.tableView setEditing:NO animated:YES];
     
 }
-
+//If the user selects "done" exporting
 -(void)finishExporting{
     self.navigationItem.rightBarButtonItem = self.addItem;
     self.navigationItem.leftBarButtonItem = self.exportItem;
     [self.tableView setEditing:NO animated:YES];
+    //Exports the selected projects
     ExportController *exporter = [[ExportController alloc] init];
-   
     [exporter exportSelectedProjects:_selectedProjectsToExport];
+    //If the user selects no projects, it gives an error. Otherwise, opens the mail controller
     if ([_selectedProjectsToExport count] == 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Export Error" message: @"No project selected" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -91,16 +106,8 @@
             NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
             NSString *fileName = [NSMutableString stringWithFormat:@"%@.kml", projectNm];
             NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
-
-            NSLog(@"%@", filePath);
-            //Email the entry
-            //Doesn't work on the simulator, but should on phone
             
             NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-            // Determine the MIME type
-            //NSString *mimeType = @"text/plain";
-            //NSString *mimeType = @"application/vnd.google-earth.kmz";
-            //This one may be the one that works...have to wait and see
             
             // Add attachment
             [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
@@ -123,33 +130,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-/*
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-*/
 
 
+//Gets the number of projects
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     return [_allProjectsFromDB count];
 }
 
-
+//Creates the projec cells
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *myIdentifier = @"ProjectCell";
     ProjectCell *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
     cell.projectLabel.text = [_allProjectsFromDB objectAtIndex:indexPath.row];
-    
+    cell.layoutMargins = UIEdgeInsetsZero;
     return cell;
 }
 
 
 
-
+//When the user is selecting multiple projects to export, adds it to an array
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.tableView.isEditing)
@@ -170,6 +170,7 @@
     }
 }
 
+//When the user is deselecting multiple projects to export, removes it from the array
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.tableView.isEditing) {
         ProjectCell *projectToEdit = (ProjectCell *)[self.tableView cellForRowAtIndexPath:indexPath];
@@ -182,47 +183,14 @@
     }
     
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+// Segues
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"AddProject"]) {
-        AddProjectController *addProject = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        AddProjectController *addProject = [navigationController viewControllers][0];
         addProject.delegate = self;
         [addProject setAddOrEdit:0 setOldProjectName:@""];
     }else if ([segue.identifier isEqualToString:@"ViewEntries"]){
@@ -230,25 +198,29 @@
         ProjectCell *projectToEdit = (ProjectCell *)[self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
         [entriesListController setProjectName:projectToEdit.projectLabel.text];
     }else if ([segue.identifier isEqualToString:@"EditProjectName"]){
-        AddProjectController *addProject = segue.destinationViewController;
+        UINavigationController *navigationController = segue.destinationViewController;
+        AddProjectController *addProject = [navigationController viewControllers][0];
         addProject.delegate = self;
         [addProject setAddOrEdit:1 setOldProjectName:oldProjectName];
     }
 }
 
+//If the user selects cancel
 - (void)addProjectCancel:(AddProjectController *) controller{
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
+//If the user saves the project
 - (void)addProjectSave:(AddProjectController *)controller textToSave:(NSString *)pn addOrEdit:(int)val{
+    //If it's a new project
     if (val == 0){
         NSString *query = [NSString stringWithFormat:@"insert into projects values(null, '%@')", pn];
         [self.dbManager executeQuery:query];
         NSString *addSettingsQuery = [NSString stringWithFormat:@"insert into projectSettings values(null, '%@', '%d', '%d','%d', '%d', '%d','%d', '%d', '%d','%d', '%d', '%d', '%d', '%d', '%d', '%d')",pn,1,0,1,1,1,1,0,1,0,0,1,0,0,1,0];
         [self.dbManager executeQuery:addSettingsQuery];
         [self dismissViewControllerAnimated:YES completion:nil];
+    //If it's an existing project
     }else {
-        
         NSString *query = [NSString stringWithFormat:@"update projects set projectName='%@' where projectName='%@'", pn, oldProjectName];
         [self.dbManager executeQuery:query];
         
@@ -256,7 +228,6 @@
         NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:allProjectEntries]];
         for (id entry in results){
             int tempID = [[entry objectAtIndex:0] intValue];
-            NSLog(@"tempID: %d", tempID);
             NSString *updateEntryQuery = [NSString stringWithFormat:@"update entriesBasic set projectName='%@' where entriesID=%d", pn, tempID];
             [self.dbManager executeQuery:updateEntryQuery];
         }
@@ -268,6 +239,7 @@
     
 }
 
+//Loads the projects
 -(void)loadData{
     NSString *query = [NSString stringWithFormat:@"select * from projects"];
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
@@ -281,7 +253,7 @@
     [self.tableView reloadData];
 }
 
-
+//If the user wants to edit or delete a project
 -(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     _projectCellToDelete = (ProjectCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     //Allows the user to swipe to delete
@@ -290,47 +262,46 @@
         [alert show];
         [alert setTag:1];
         
-        
     }
-    
-    
     
 }
 
+//Need to double check when the user is deleting a project
 -(void)doubleCheckCancel{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Are you sure you want to delete?" message: @"Deleting this project will also delete all associated entries" delegate: self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
     [alert show];
     [alert setTag:2];
 }
 
+//What happens when the user selects an option from an alert view
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"Button index: %ld", (long)buttonIndex);
+    //If the user really wants to delete a project
     if (alertView.tag == 1){
         if(buttonIndex != [alertView cancelButtonIndex] && buttonIndex != 2)
         {
             [self doubleCheckCancel];
-        
+        //If the user wants to edit a project name
         }else if (buttonIndex == 2){
         
             oldProjectName =_projectCellToDelete.projectLabel.text;
-            //NSString *query = [NSString stringWithFormat:@"select * from projects where projectName='%@'",    _projectCellToDelete.projectLabel.text];
-            //[self.dbManager executeQuery:query];
             [self performSegueWithIdentifier:@"EditProjectName" sender:self];
         }
+    //If a user does delete a project. Need to delete .kml, .pdf, the project, the entries, and the images
     }else if (alertView.tag == 2){
         if (buttonIndex == 1) {
             NSString *getAllEntriesQuery = [NSString stringWithFormat:@"select * from entriesBasic where projectName='%@'", _projectCellToDelete.projectLabel.text];
-            //NSLog(@"Query: %@", getAllEntriesQuery);
             NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:getAllEntriesQuery]];
-            //NSLog(@"Entries%@", results);
             for (id key in results) {
-                NSLog(@"Key: %@", key);
                 int entryIDToDelete = [[key objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"entriesID"]] intValue];
+                NSString *documentsDirectory = [NSHomeDirectory()
+                                                stringByAppendingPathComponent:@"Documents"];
                 NSString *deletePictureSketchQuery = [NSString stringWithFormat:@"select * from entriesBasic where entriesID=%d", entryIDToDelete];
                 NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:deletePictureSketchQuery]];
-                NSString *pictureFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames     indexOfObject:@"picture"]];
-                NSString *sketchFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]];
+                NSString *pictureName = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames     indexOfObject:@"picture"]];
+                NSString *pictureFilePath = [documentsDirectory stringByAppendingPathComponent:pictureName];
+                NSString *sketchName = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"sketch"]];
+                NSString *sketchFilePath = [documentsDirectory stringByAppendingPathComponent:sketchName];
                 [[NSFileManager defaultManager] removeItemAtPath: pictureFilePath error: nil];
                 [[NSFileManager defaultManager] removeItemAtPath: sketchFilePath error: nil];
 
@@ -351,6 +322,10 @@
             NSString *fileName = [NSMutableString stringWithFormat:@"%@.kml", _projectCellToDelete.projectLabel.text];
             NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
             [[NSFileManager defaultManager] removeItemAtPath: filePath error: nil];
+            
+            NSString *pdfName = [NSMutableString stringWithFormat:@"%@.pdf", _projectCellToDelete.projectLabel.text];
+            NSString *pdfPath = [documentsDirectory stringByAppendingPathComponent:pdfName];
+            [[NSFileManager defaultManager] removeItemAtPath: pdfPath error: nil];
         
             [self loadData];
         }
@@ -359,25 +334,29 @@
     
 }
 
+//Changes the swipe option label
 -(NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
     return @"Edit";
 }
 
+//What happens when the user selects the add project button
 -(void)addProjectSegue{
     [self performSegueWithIdentifier:@"AddProject" sender:self];
     
 }
 
+//The export menu
 -(void)selectExportOption{
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Export:"
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Mail All projects", @"Mail Selected Projects", @"Sync All Projects to Dropbox", nil];
+                                                    otherButtonTitles:@"E-mail All Projects (.kml)", @"E-mail Selected Projects (.kml)", @"Export to Dropbox (.kml & .pdf)", nil];
     actionSheet.tag = 1;
     [actionSheet showInView:self.view];
 }
 
+//Export multiple projects option changes the navigation items
 -(void)exportMultipleProjects{
     
     self.navigationItem.rightBarButtonItem = self.cancelExport;
@@ -385,8 +364,8 @@
     [self.tableView setEditing:YES animated:YES];
 }
 
+//What happens when the user selects which export option
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    //Sets the colors based on what the user selects
     if (actionSheet.tag == 1){
         switch(buttonIndex)
         {
@@ -394,12 +373,10 @@
                 [self exportAllProjects];
                 break;
             case 1:
-                NSLog(@"Export Selected Projects");
                 [self exportMultipleProjects];
                 break;
             case 2:
                 [self syncDropbox];
-                NSLog(@"Sync dropbox");
                 break;
             
         }
@@ -407,6 +384,7 @@
     
 }
 
+//Exports all of the projects to .kml
 -(void)exportAllProjects {
     ExportController *exporter = [[ExportController alloc] init];
     NSString *projectQuery = @"select projectName from projects";
@@ -421,19 +399,12 @@
         MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
         mc.mailComposeDelegate = self;
         for (id project in results){
-            //NSLog(@"Individual project: %@", project);
             NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
             NSString *fileName = [NSMutableString stringWithFormat:@"%@.kml", project];
             NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
-        
-            NSLog(@"%@", filePath);
-            //Email the entry
-            //Doesn't work on the simulator, but should on phone
+
             
             NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-            // Determine the MIME type
-            //NSString *mimeType = @"text/plain";
-            //This one may be the one that works...have to wait and see
             NSString *mimeType = @"application/vnd.google-earth.kml+xml";
             // Add attachment
             [mc addAttachmentData:fileData mimeType:mimeType fileName:fileName];
@@ -472,36 +443,65 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+//Syncs dropbox
 - (void) syncDropbox {
 
-    ExportController *exporter = [[ExportController alloc] init];
-    NSString *projectQuery = @"select projectName from projects";
-    NSArray *allProjects = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:projectQuery]];
-    //Need to convert the array to mutablearray
-    NSMutableArray *results = [[NSMutableArray alloc] init];
-    for (id key in allProjects){
-        [results addObject:[key objectAtIndex:0]];
+    if (![[DBSession sharedSession] isLinked]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"No Dropbox Account Linked" message: @"Go to App > Settings to link your account" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }else{
+        ExportController *exporter = [[ExportController alloc] init];
+        NSString *projectQuery = @"select projectName from projects";
+        NSArray *allProjects = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:projectQuery]];
+        NSMutableArray *results = [[NSMutableArray alloc] init];
+        for (id key in allProjects){
+            [results addObject:[key objectAtIndex:0]];
+        }
+        //Exports everything to .kml
+        [exporter exportSelectedProjects:results];
+        
+        //Exports everything to .pdf
+        [exporter exportAllToPDF];
+        
+        
+        //Goes through the app's documents directory and exports .png, .kml, and .pdf files
+        NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:localDir error:nil];
+        NSLog(@"Files: %@", files);
+        for (int i = 0; i < [files count]; i++){
+            if ([[files objectAtIndex:i] rangeOfString:@".png"].location != NSNotFound || [[files objectAtIndex:i] rangeOfString:@".kml"].location != NSNotFound || [[files objectAtIndex:i] rangeOfString:@".pdf"].location != NSNotFound){
+                filename = [files objectAtIndex:i];
+                localPath = [localDir stringByAppendingPathComponent:[files objectAtIndex:i]];
+                NSLog(@"File is a pic, kml, or pdf: %@", localPath);
+                [self.restClient loadMetadata:@"/"];
+                bool fileExists = NO;
+                for (DBMetadata *file in _metadataContents) {
+                    if ([file.filename isEqualToString:filename]){
+                        fileExists = YES;
+                    }
+                }
+                if (fileExists){
+                    [self.restClient loadMetadata:[NSString stringWithFormat:@"/%@", [files objectAtIndex:i]]];
+                }else{
+                    [self.restClient uploadFile:filename toPath:@"/" withParentRev:nil fromPath:localPath];
+                }
+                
+            }else{
+                NSLog(@"File: %@ isn't a pic, kml, or pdf", [files objectAtIndex:i]);
+            }
+        }
+        
+        
+        
     }
-    [exporter exportSelectedProjects:results];
+ 
     
-    NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:localDir error:nil];
-     for (int i = 0; i < [files count]; i++){
-         if ([[files objectAtIndex:i] rangeOfString:@".png"].location != NSNotFound || [[files objectAtIndex:i] rangeOfString:@".kml"].location != NSNotFound){
-             localPath = [localDir stringByAppendingPathComponent:[files objectAtIndex:i]];
-             filename = [files objectAtIndex:i];
-             NSLog(@"File is a pic or kml: %@", localPath);
-             [self.restClient loadMetadata:[NSString stringWithFormat:@"/%@", localPath]];
-     
-         }else{
-             NSLog(@"File: %@ isn't a pic or kml", [files objectAtIndex:i]);
-         }
-     }
 }
 
+//Dropbox delegate methods
 - (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath
               from:(NSString *)srcPath metadata:(DBMetadata *)metadata {
-    NSLog(@"File uploaded successfully to path: %@", metadata.path);
+    NSLog(@"File uploaded successfully to path: %@, %@", metadata.path, metadata.rev);
 }
 
 - (void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error {
@@ -510,17 +510,30 @@
 
 - (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
     NSLog(@"in loaded metadata: %@", metadata.filename);
-    [self uploadFile:metadata];
+    
+    if (metadata.isDirectory) {
+        NSLog(@"Getting directory");
+        _metadataContents = metadata.contents;
+    }else{
+        NSLog(@"Uploading file revision");
+        [self uploadFile:metadata];
+    }
     
 }
 
 - (void)restClient:(DBRestClient *)client
 loadMetadataFailedWithError:(NSError *)error {
+    NSLog(@"Error metadata");
     [self uploadFile:nil];
 }
 
 -(void)uploadFile: (DBMetadata*)meta {
-    [self.restClient uploadFile:filename toPath:@"/" withParentRev:meta.rev fromPath:localPath];
+    NSLog(@"trying to upload revision: %@", meta.filename);
+    [self.restClient uploadFile:meta.filename toPath:@"/" withParentRev:meta.rev fromPath:localPath];
 }
+
+
+
+
 
 @end

@@ -60,19 +60,20 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *sampleNumCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *partnersCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *dataSheetCell;
-@property (weak, nonatomic) IBOutlet UIButton *dateContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *goalContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *locationContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *sketchContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *pictureContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *notesContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *permissionsContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *partnersContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *dataSheetContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *strikeDipContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *outcropContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *structuralContentsLabel;
-@property (weak, nonatomic) IBOutlet UIButton *trendPlungeContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *dateContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *locationContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *goalContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *sketchContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *photoContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *notesContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *permissionsContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *partnersContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *datasheetContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *strikeDipContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *outcropContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *structuralContentsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *trendPlungeContentsLabel;
+
 
 //IBActions
 - (IBAction)cancelButton:(id)sender;

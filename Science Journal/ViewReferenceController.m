@@ -16,28 +16,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //Readjusts the UIImageview to correspond with the size of the picture
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    // Do any additional setup after loading the view.
     if (photoOrText == 0) {
         CGRect frame = CGRectMake(0, 120, 320, 370);
         imageView = [[UIImageView alloc] initWithFrame:frame];
-        NSLog(@"Contents: %@", contents);
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        //If the user is selecting the About Resources image
         if (referenceIDToEdit == 1){
             imageView.image = [UIImage imageNamed:@"About-Adding-Resources-Final.png"];
             _referenceNameField.enabled = NO;
             _editReferenceButton.enabled = NO;
             _changeImageButton.enabled = NO;
             [_changeImageButton removeFromSuperview];
+        //Otherwise loads the existing image
         }else{
             imageView.image = [UIImage imageWithContentsOfFile:contents];
         }
         [self.view addSubview:imageView];
         _referenceNameField.text = name;
-        //_referenceNameField.enabled = NO;
-        //_editReferenceButton.enabled = NO;
         [_editReferenceButton removeFromSuperview];
-        //If Text
+    //If Text
     }else{
         CGRect frame = CGRectMake(0, 120, 320, 470);
         self.note = [[NoteView alloc] initWithFrame:frame];
@@ -62,17 +61,9 @@
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
+//If the user edits the refernece, it saves the new data
 - (IBAction)editReference:(id)sender {
     
     NSString *savedPictureLocation;
@@ -89,18 +80,17 @@
     }
     
 }
-
+//Image picker if the user wants to change the picture
 - (IBAction)changeRefImage:(id)sender {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    NSLog(@"using photo");
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
+//Sets the existing data
 -(void)setPhotoOrText: (int) val setContents:(NSString *) cont setIdentifier: (int) iden setName: (NSString *) nm {
-    NSLog(@"Params: %i, %@, %i, %@",val, cont, iden, nm);
     photoOrText = val;
     contents = cont;
     referenceIDToEdit = iden;
@@ -108,6 +98,7 @@
     
 }
 
+//Delegate method for the image picker if the user picks an image
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
@@ -118,19 +109,11 @@
     
 }
 
+//Delegate method for the image picker if the user selects cancel
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
 @end

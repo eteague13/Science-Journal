@@ -19,9 +19,12 @@
 @interface AddProjectController : UIViewController<UITextFieldDelegate> {
     int addOrEdit;
     NSString *oldProjectName;
+    
 }
 //IBOutlets
 @property (weak, nonatomic) IBOutlet UITextField *projectAddField;
+@property (weak, nonatomic) IBOutlet UINavigationItem *projectLabel;
+
 
 //IBActions
 - (IBAction)cancelAddProject:(id)sender;

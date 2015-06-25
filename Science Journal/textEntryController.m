@@ -17,10 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //Write the correct title
-    
     if ([cellSelected isEqualToString:@"GoalID"]){
         _textEntryLabel.title = @"Goal";
-        
     }else if ([cellSelected isEqualToString:@"NotesID"]){
         _textEntryLabel.title = @"Notes";
     }else if ([cellSelected isEqualToString:@"PermissionsID"]){
@@ -34,10 +32,6 @@
     }
     
     
-    
-    
-    //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sandcropped1.jpg"]];
-    
     //Draws the text view
     CGRect frame = CGRectMake(0, 30, 320, 500);
     self.note = [[NoteView alloc] initWithFrame:frame];
@@ -47,60 +41,53 @@
     _note.delegate = self;
     [_note setScrollEnabled:YES];
     [self.view addSubview:_note];
-    
+    [_note becomeFirstResponder];
 }
-/*
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
- */
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
+//If the user selects cancel
 - (IBAction)textCancelButton:(id)sender {
     [self.delegate textEntryControllerCancel:self];
 }
 
+//If the user selects save
 - (IBAction)textSaveButton:(id)sender {
     
     [self.delegate textEntryControllerSave:self didSaveText:_note.text cellSelected:cellSelected];
 }
 
+//Has to pass the cell name so we can set the text entry title correctly
 - (void)updateCellSelected:(NSString *)cellID {
     cellSelected = cellID;
 }
 
 
-
+//Passes in the text to be loaded
 - (void)setTextValue:(NSString*)text{
     textArea = text;
 }
 
+//Sets the scrollview
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [_note setNeedsDisplay];
 }
 
+//If the user is editing the textview
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    CGRect frame = CGRectMake(0, 94, 320, 474);
+    CGRect frame = CGRectMake(0, 30, 320, 500);
     _note.frame = frame;
 }
 
+//If the user is done editng the text view
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    CGRect frame = CGRectMake(0, 94, 320, 474);
+    CGRect frame = CGRectMake(0, 30, 320, 500);
     _note.frame = frame;
 }
 
