@@ -25,7 +25,11 @@
     NSString *filePath = documentsDirectory;
     NSLog(@"%@", filePath);
     */
+    NSString *documentsDirectory = [NSHomeDirectory()
+                                    stringByAppendingPathComponent:@"Documents"];
     
+    NSString *filePath = documentsDirectory;
+    NSLog(@"%@", filePath);
     //Initialize the database connection
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FieldBookdb.sql"];
     
@@ -40,7 +44,6 @@
     NSString *delete4 = @"delete from projectSettings";
     [self.dbManager executeQuery:delete4];
     */
-    
     //Sets the navigation bar items
     _addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addProjectSegue)];
     _exportItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(selectExportOption)];
@@ -65,6 +68,7 @@
     
     [self loadData];
     
+    _dropboxFilesToUpload = [[NSMutableArray alloc] init];
     
     
     
@@ -74,6 +78,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
     self.restClient.delegate = self;
+    
 }
 
 //If the user cancels exporting
@@ -123,6 +128,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [self loadData];
+    
     
 }
 - (void)didReceiveMemoryWarning {
@@ -463,40 +469,33 @@
         //Exports everything to .pdf
         [exporter exportAllToPDF];
         
+        //metadataContents = [[NSArray alloc] init];
         
         //Goes through the app's documents directory and exports .png, .kml, and .pdf files
         NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
         NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:localDir error:nil];
-        NSLog(@"Files: %@", files);
+        //NSLog(@"Files: %@", files);
         for (int i = 0; i < [files count]; i++){
             if ([[files objectAtIndex:i] rangeOfString:@".png"].location != NSNotFound || [[files objectAtIndex:i] rangeOfString:@".kml"].location != NSNotFound || [[files objectAtIndex:i] rangeOfString:@".pdf"].location != NSNotFound){
-                filename = [files objectAtIndex:i];
-                localPath = [localDir stringByAppendingPathComponent:[files objectAtIndex:i]];
-                NSLog(@"File is a pic, kml, or pdf: %@", localPath);
-                [self.restClient loadMetadata:@"/"];
-                bool fileExists = NO;
-                for (DBMetadata *file in _metadataContents) {
-                    if ([file.filename isEqualToString:filename]){
-                        fileExists = YES;
-                    }
-                }
-                if (fileExists){
-                    [self.restClient loadMetadata:[NSString stringWithFormat:@"/%@", [files objectAtIndex:i]]];
-                }else{
-                    [self.restClient uploadFile:filename toPath:@"/" withParentRev:nil fromPath:localPath];
-                }
+
+                [_dropboxFilesToUpload addObject:[files objectAtIndex:i]];
                 
             }else{
                 NSLog(@"File: %@ isn't a pic, kml, or pdf", [files objectAtIndex:i]);
             }
         }
         
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"All projects exported to Dropbox" message: @"" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
         
-        
+        [self.restClient loadMetadata:@"/"];
     }
  
     
+    
 }
+
+
 
 //Dropbox delegate methods
 - (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath
@@ -509,30 +508,63 @@
 }
 
 - (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
-    NSLog(@"in loaded metadata: %@", metadata.filename);
     
+    //If I'm passing in the home directory
     if (metadata.isDirectory) {
-        NSLog(@"Getting directory");
-        _metadataContents = metadata.contents;
-    }else{
-        NSLog(@"Uploading file revision");
-        [self uploadFile:metadata];
-    }
+        NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        
+        //For each file to upload
+        for (NSString *fileName in _dropboxFilesToUpload){
+            bool doesExist = NO;
+            //For each file in dropbox already
+            for (DBMetadata *file in metadata.contents){
+                //If the file in dropbox matches the one to upload, upload with a revision
+                if ([file.filename isEqualToString:fileName]){
+                    /*
+                    NSString *projectNameSegment;
+                    if ([file.filename rangeOfString:@".png"].location != NSNotFound){
+                        projectNameSegment = [NSString stringWithFormat:@"/%@",[file.filename substringToIndex:1]];
+                        NSLog(@"name segment: %@", projectNameSegment);
+                    }else{
+                        int projectTitleLength = [file.filename length] - 4;
+                        projectNameSegment = [NSString stringWithFormat:@"/%@",[file.filename substringToIndex:projectTitleLength]];
+                        NSLog(@"name segment: %@", projectNameSegment);
+                    }
+                     */
+                    NSString *filePath = [localDir stringByAppendingPathComponent:fileName];
+                    [[self restClient] uploadFile:file.filename toPath:@"/" withParentRev:file.rev fromPath:filePath];
+                    doesExist = YES;
+                    break;
+                }
+            }
+            //If it didn't match any file in dropbox already, upload it as a new file
+            if (!doesExist){
+                /*
+                NSString *projectNameSegment;
+                if ([fileName rangeOfString:@".png"].location != NSNotFound){
+                    projectNameSegment = [NSString stringWithFormat:@"/",[fileName substringToIndex:1]];
+                    NSLog(@"name segment: %@", projectNameSegment);
+                }else{
+                    int projectTitleLength = [fileName length] - 4;
+                    projectNameSegment = [NSString stringWithFormat:@"/",[fileName substringToIndex:projectTitleLength]];
+                    NSLog(@"name segment: %@", projectNameSegment);
+                }
+                 */
+                //[[self restClient] createFolder:projectNameSegment];
+                
+                NSString *filePath = [localDir stringByAppendingPathComponent:fileName];
+                [[self restClient] uploadFile:fileName toPath:@"/" withParentRev:nil fromPath:filePath];
+            }
+        }
     
+    }
 }
 
 - (void)restClient:(DBRestClient *)client
 loadMetadataFailedWithError:(NSError *)error {
-    NSLog(@"Error metadata");
-    [self uploadFile:nil];
+    NSLog(@"Error metadata: %@", error);
+    //[self uploadFile:nil];
 }
-
--(void)uploadFile: (DBMetadata*)meta {
-    NSLog(@"trying to upload revision: %@", meta.filename);
-    [self.restClient uploadFile:meta.filename toPath:@"/" withParentRev:meta.rev fromPath:localPath];
-}
-
-
 
 
 

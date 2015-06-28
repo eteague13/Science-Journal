@@ -55,7 +55,7 @@
      picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
      [self presentViewController:picker animated:YES completion:NULL];
-    
+     UIImageWriteToSavedPhotosAlbum(_photoDisplay.image,nil , nil, nil);
 }
 //Presents the image picker
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -77,4 +77,5 @@
 - (void) setPhoto:(UIImage*) item{
     photo = item;
 }
+
 @end

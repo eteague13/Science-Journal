@@ -69,6 +69,9 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [_entryNameField becomeFirstResponder];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -107,7 +110,7 @@
     NSString *savedSketchName;
     NSLog(@"Sketch 2: %@", _sketch);
     if (_sketch != nil){
-        NSString *sketchname = [NSMutableString stringWithFormat:@"%@%@", _name, @"_sketch.png"];
+        NSString *sketchname = [NSMutableString stringWithFormat:@"%@_%@_sketch.png", _projectName, _name];
         NSString *documentsDirectory = [NSHomeDirectory()
                                         stringByAppendingPathComponent:@"Documents"];
         savedSketchLocation = [documentsDirectory stringByAppendingPathComponent:sketchname];
@@ -119,7 +122,7 @@
     NSString *savedPictureLocation;
     NSString *savedPictureName;
     if (_picture != nil){
-        NSString *picturename = [NSMutableString stringWithFormat:@"%@%@", _name, @"_picture.png"];
+        NSString *picturename = [NSMutableString stringWithFormat:@"%@_%@_picture.png", _projectName, _name];
         NSString *documentsDirectory = [NSHomeDirectory()
                                         stringByAppendingPathComponent:@"Documents"];
         savedPictureLocation = [documentsDirectory stringByAppendingPathComponent:picturename];
@@ -156,17 +159,26 @@
                 projectExists = YES;
             }
         }
-        //Check if the entry already exists
-        NSString *checkEntries = [NSString stringWithFormat:@"select name from entriesBasic where projectName = %@", _projectName];
-        NSArray *results2 = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:checkEntries]];
-        bool entryExists = NO;
-        for (id key in results2){
-            if ([[key objectAtIndex:0] isEqualToString:_name]){
-                entryExists = YES;
+        
+        bool newEntryAlreadyExists = NO;
+        //Check if the entry is new. If it is, you have to check if it's duplicating another entry
+        if (self.recordIDToEdit == -1){
+            NSString *checkEntries = [NSString stringWithFormat:@"select name from entriesBasic where projectName = %@", _projectName];
+            NSArray *results2 = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:checkEntries]];
+        
+            for (id key in results2){
+                if ([[key objectAtIndex:0] isEqualToString:_name]){
+                    newEntryAlreadyExists = YES;
+                }
             }
+        //If it's editing the same entry, then you can't
+        }else{
+            newEntryAlreadyExists = NO;
         }
+         
+        
         //If it exists, the entry can be moved to that project
-        if (projectExists && !entryExists){
+        if (projectExists && !newEntryAlreadyExists){
             [self.dbManager executeQuery:queryBasic];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Entry Saved" message: @"" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];

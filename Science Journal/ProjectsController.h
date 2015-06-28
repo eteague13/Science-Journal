@@ -21,7 +21,9 @@
     int oldProjectID;
     NSString *fileRevision;
     NSString *localPath;
-    NSString *filename;
+    NSString *metaRevision;
+    BOOL fileExists;
+    NSString *parentRevision;
 }
 
 //IBOutlets
@@ -39,7 +41,7 @@
 @property (nonatomic, strong) UIBarButtonItem *addItem;
 @property (nonatomic, strong) UIBarButtonItem *finishedSelection;
 @property (nonatomic, strong) DBRestClient *restClient;
-@property (nonatomic, strong) NSArray *metadataContents;
+@property (nonatomic, strong) NSMutableArray *dropboxFilesToUpload;
 //Methods
 
 

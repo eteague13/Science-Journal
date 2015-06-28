@@ -21,7 +21,7 @@
 }
 //IBOutlets
 @property (weak, nonatomic) IBOutlet UIImageView *photoDisplay;
-
+@property (weak, nonatomic) IBOutlet UIScrollView *cameraScrollView;
 //IBActions
 - (IBAction)cancelCameraButton:(id)sender;
 - (IBAction)saveCameraButton:(id)sender;
@@ -30,6 +30,7 @@
 
 //Variables
 @property (nonatomic, weak) id <CameraControllerDelegate> delegate;
+
 
 //Methods
 - (void) setPhoto:(UIImage*) item;

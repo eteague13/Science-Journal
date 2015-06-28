@@ -548,11 +548,11 @@
             [self drawTableAt: tableStart withRowHeight:30 andColumnWidth:50 andRowCount:numRows andColumnCount:numColumns];
             [self drawTableDataAt:tableStart withRowHeight:30 andColumnWidth:50 andRowCount:numRows andColumnCount:numColumns];
         }
-        
+        // Close the PDF context and write the contents out.
+        UIGraphicsEndPDFContext();
     }
     
-    // Close the PDF context and write the contents out.
-    UIGraphicsEndPDFContext();
+    
     
     
 

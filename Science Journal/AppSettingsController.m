@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self checkIfDropboxLinked];
-
+    self.clearsSelectionOnViewWillAppear = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,6 +28,8 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [self checkIfDropboxLinked];
+    //Disable the grey highlight of the About tab when the user swipes left
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
 }
 
 //If the user taps the dropbox switch
