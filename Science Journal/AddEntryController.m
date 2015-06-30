@@ -66,12 +66,10 @@
     
     [self checkProjectSettings];
     [self checkEntryContents];
-    
-}
-
--(void)viewDidAppear:(BOOL)animated {
     [_entryNameField becomeFirstResponder];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

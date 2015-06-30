@@ -15,10 +15,11 @@
 #import <Foundation/Foundation.h>
 
 
-@interface ExportController : UIViewController <MFMailComposeViewControllerDelegate> {
+@interface ExportController : UIViewController <MFMailComposeViewControllerDelegate, DBRestClientDelegate> {
     NSString *selectedProject;
     int numRows;
     int numColumns;
+
     
 }
 
@@ -30,12 +31,15 @@
 //Variables
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableDictionary *dataArray;
+@property (nonatomic, strong) DBRestClient *restClient;
 
 //Methods
 -(void) exportSelectedProjects:(NSMutableArray *) projects;
 -(void) exportAllProjects;
 -(void) drawImage:(UIImage*)image inRect:(CGRect)rect;
 -(void) exportAllToPDF;
+-(void)dropboxFileToSync:(NSString *)name withPath:(NSString *)namePath;
+-(void)createDropboxProjectFolders;
 
 
 

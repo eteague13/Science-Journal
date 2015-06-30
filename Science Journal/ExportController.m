@@ -28,6 +28,10 @@
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FieldBookdb.sql"];
     
     _dataArray = [[NSMutableDictionary alloc] init];
+    
+    self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+    self.restClient.delegate = self;
+    
     return self;
 }
 
@@ -347,6 +351,7 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            if ([date length] > 0){
             NSString *dateString = [NSString stringWithFormat:@"Date: %@", date];
             CGRect paragraphRect2 = [dateString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect2.origin.x = 20;
@@ -358,6 +363,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([goal length] > 0){
             NSString *goalString = [NSString stringWithFormat:@"Goal: %@", goal];
             CGRect paragraphRect3 = [goalString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect3.origin.x = 20;
@@ -369,6 +376,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([latitude length] > 0){
             NSString *latitudeString = [NSString stringWithFormat:@"Latitude: %@", latitude];
             CGRect paragraphRect4 = [latitudeString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect4.origin.x = 20;
@@ -380,6 +389,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([longitude length] > 0){
             NSString *longitudeString = [NSString stringWithFormat:@"Longitude: %@", longitude];
             CGRect paragraphRect5 = [longitudeString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect5.origin.x = 20;
@@ -391,6 +402,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([weather length] > 0){
             NSString *weatherString = [NSString stringWithFormat:@"Weather: %@", weather];
             CGRect paragraphRect6 = [weatherString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect6.origin.x = 20;
@@ -402,6 +415,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([notes length] > 0){
             NSString *notesString = [NSString stringWithFormat:@"Notes: %@", notes];
             CGRect paragraphRect7 = [notesString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect7.origin.x = 20;
@@ -414,6 +429,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([permissions length] > 0){
             NSString *permissionsString = [NSString stringWithFormat:@"Permissions: %@", permissions];
             CGRect paragraphRect8 = [permissionsString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect8.origin.x = 20;
@@ -425,6 +442,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([sampleNum length] > 0){
             NSString *sampleNumString = [NSString stringWithFormat:@"Sample Number: %@", sampleNum];
             CGRect paragraphRect9 = [sampleNumString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect9.origin.x = 20;
@@ -436,6 +455,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([partners length] > 0){
             NSString *partnersString = [NSString stringWithFormat:@"Partners: %@", partners];
             CGRect paragraphRect10 = [partnersString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect10.origin.x = 20;
@@ -447,6 +468,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([outcrop length] > 0){
             NSString *outcropString = [NSString stringWithFormat:@"Outcrop Description: %@", outcrop];
             CGRect paragraphRect11 = [outcropString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect11.origin.x = 20;
@@ -458,6 +481,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([structuralData length] > 0){
             NSString *structString = [NSString stringWithFormat:@"Structural Data: %@", structuralData];
             CGRect paragraphRect12 = [structString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect12.origin.x = 20;
@@ -469,6 +494,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([strike length] > 0){
             NSString *strikeString = [NSString stringWithFormat:@"Strike: %@", strike];
             CGRect paragraphRect13 = [strikeString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect13.origin.x = 20;
@@ -480,6 +507,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([dip length] > 0){
             NSString *dipString = [NSString stringWithFormat:@"Dip: %@", dip];
             CGRect paragraphRect14 = [dipString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect14.origin.x = 20;
@@ -491,6 +520,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([trend length] > 0){
             NSString *trendString = [NSString stringWithFormat:@"Trend: %@", trend];
             CGRect paragraphRect15 = [trendString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect15.origin.x = 20;
@@ -502,6 +533,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([plunge length] > 0){
             NSString *plungeString = [NSString stringWithFormat:@"Plunge: %@", plunge];
             CGRect paragraphRect16 = [plungeString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect16.origin.x = 20;
@@ -513,6 +546,8 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            if ([stopNum length] > 0){
             NSString *stopNumString = [NSString stringWithFormat:@"Stop Number: %@", stopNum];
             CGRect paragraphRect17 = [stopNumString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect17.origin.x = 20;
@@ -524,29 +559,38 @@
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            }
+            
             NSString *documentsDirectory = [NSHomeDirectory()
                                             stringByAppendingPathComponent:@"Documents"];
             NSString *savedPictureLocation = [documentsDirectory stringByAppendingPathComponent:picture];
             UIImage *pictureImage = [UIImage imageWithContentsOfFile:savedPictureLocation];
+            if (pictureImage != nil){
             CGRect rect19 = CGRectMake(20, yHeight, pictureImage.size.width / 3, pictureImage.size.height / 3);
             [self drawImage:pictureImage inRect:rect19];
             yHeight += (pictureImage.size.height / 3);
+            }
+            
             
             NSString *savedSketchLocation = [documentsDirectory stringByAppendingPathComponent:sketch];
             UIImage *sketchImage = [UIImage imageWithContentsOfFile:savedSketchLocation];
+            if (sketchImage != nil){
             CGRect rect20 = CGRectMake(20, yHeight, sketchImage.size.height / 3, sketchImage.size.height / 3);
             [self drawImage:sketchImage inRect:rect20];
             yHeight += (sketchImage.size.height / 3);
+            }
             
             
             if (yHeight > 1100){
                 UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 850, 1100), nil);
                 yHeight = 26;
             }
+            if ([dataSheet length] > 0){
             CGPoint tableStart = CGPointMake(20, yHeight);
             [self getNumRowsCols:dataSheet];
             [self drawTableAt: tableStart withRowHeight:30 andColumnWidth:50 andRowCount:numRows andColumnCount:numColumns];
             [self drawTableDataAt:tableStart withRowHeight:30 andColumnWidth:50 andRowCount:numRows andColumnCount:numColumns];
+            }
         }
         // Close the PDF context and write the contents out.
         UIGraphicsEndPDFContext();
@@ -661,5 +705,44 @@
     }    
 }
 
+
+//Dropbox delegate methods
+- (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath
+              from:(NSString *)srcPath metadata:(DBMetadata *)metadata {
+    NSLog(@"File uploaded successfully to path: %@, %@", metadata.path, metadata.rev);
+    
+}
+
+- (void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error {
+    NSLog(@"File upload failed with error: %@", error);
+    
+}
+
+-(void)createDropboxProjectFolders{
+    NSString *projectQuery = @"select projectName from projects";
+    NSArray *allProjects = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:projectQuery]];
+    for (id project in allProjects){
+        NSLog(@"%@", [project objectAtIndex:0]);
+        [self.restClient createFolder:[project objectAtIndex:0]];
+    }
+}
+-(void)dropboxFileToSync:(NSString *)name withPath:(NSString *)namePath{
+   
+    if ([name rangeOfString:@".png"].location == NSNotFound){
+        NSString *projectPath = [@"/" stringByAppendingString:[name substringToIndex:[name length]-4]];
+        [self.restClient uploadFile:name toPath:projectPath fromPath:namePath];
+    }else{
+        NSString *projectPath = [@"/" stringByAppendingString:[name substringToIndex:1]];
+        [self.restClient uploadFile:name toPath:projectPath fromPath:namePath];
+    }
+}
+
+-(void)restClient:(DBRestClient*)client createdFolder:(DBMetadata *)folder{
+    NSLog(@"Folder added!: %@",folder.filename);
+}
+
+- (void)restClient:(DBRestClient*)client createFolderFailedWithError:(NSError*)error{
+    NSLog(@"Folder already there: %@",error);
+}
 
 @end
