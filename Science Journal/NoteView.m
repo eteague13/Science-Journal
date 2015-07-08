@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor colorWithRed:224.0/255.0f green:224.0/255.0f blue:224.0/255.0f alpha:0.2f];
+        self.backgroundColor = [UIColor colorWithRed:217.0/255.0f green:217.0/255.0f blue:217.0/255.0f alpha:0.2f];
         self.font = [UIFont fontWithName:@"Helvetica" size:17];
     }
     return self;

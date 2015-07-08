@@ -61,4 +61,10 @@
     dateValue = date;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)aTextField
+{
+    [aTextField resignFirstResponder];
+    return YES;
+}
+
 @end

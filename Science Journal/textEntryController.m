@@ -32,6 +32,9 @@
     }
     
     
+    
+    [self registerForKeyboardNotifications];
+    
     //Draws the text view
     CGRect frame = CGRectMake(0, 30, 320, 500);
     self.note = [[NoteView alloc] initWithFrame:frame];
@@ -41,7 +44,8 @@
     _note.delegate = self;
     [_note setScrollEnabled:YES];
     [self.view addSubview:_note];
-    [_note becomeFirstResponder];
+    //[_note becomeFirstResponder];
+
 }
 
 
@@ -79,16 +83,30 @@
     [_note setNeedsDisplay];
 }
 
-//If the user is editing the textview
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-    CGRect frame = CGRectMake(0, 30, 320, 500);
-    _note.frame = frame;
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+
+    
 }
 
-//If the user is done editng the text view
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    CGRect frame = CGRectMake(0, 30, 320, 500);
-    _note.frame = frame;
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(30.0, 0.0, kbSize.height, 0.0);
+    _note.contentInset = contentInsets;
+    _note.scrollIndicatorInsets = contentInsets;
+    
+   
 }
+
+
+
 
 @end

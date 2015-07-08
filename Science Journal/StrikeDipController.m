@@ -44,5 +44,10 @@
     self.dip = dip;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)aTextField
+{
+    [aTextField resignFirstResponder];
+    return YES;
+}
 
 @end

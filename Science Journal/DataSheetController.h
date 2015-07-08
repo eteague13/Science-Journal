@@ -15,6 +15,9 @@
 @interface DataSheetController : UIViewController <UIScrollViewDelegate, UITextFieldDelegate> {
     int numColumns;
     int numRows;
+    UITextField *activeField;
+    int screenWidth;
+
 }
 
 //IBOutlets
@@ -30,6 +33,7 @@
 
 //Variables
 @property (nonatomic, strong) NSMutableDictionary *dataArray;
+@property (nonatomic, strong) NSMutableDictionary *dataArrayPassedIn;
 @property (nonatomic, weak) id <DataSheetControllerDelegate> delegate;
 
 //Methods

@@ -64,4 +64,10 @@
     addOrEdit = val;
     oldProjectName = pn;
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)aTextField
+{
+    [aTextField resignFirstResponder];
+    return YES;
+}
 @end

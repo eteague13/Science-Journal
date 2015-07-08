@@ -31,7 +31,10 @@
             [_changeImageButton removeFromSuperview];
         //Otherwise loads the existing image
         }else{
-            imageView.image = [UIImage imageWithContentsOfFile:contents];
+            NSString *documentsDirectory = [NSHomeDirectory()
+                                            stringByAppendingPathComponent:@"Documents"];
+            NSString *picturePath = [documentsDirectory stringByAppendingPathComponent:contents];
+            imageView.image = [UIImage imageWithContentsOfFile:picturePath];
         }
         [self.view addSubview:imageView];
         _referenceNameField.text = name;
@@ -74,7 +77,7 @@
         savedPictureLocation = [documentsDirectory stringByAppendingPathComponent:picturename];
         NSData *pictureData = UIImagePNGRepresentation(imageView.image);
         [pictureData writeToFile:savedPictureLocation atomically:NO];
-        [self.delegate viewReferenceSave:self setContents:_note.text setImageOrText:photoOrText setName:_referenceNameField.text setID:referenceIDToEdit];
+        [self.delegate viewReferenceSave:self setContents:picturename setImageOrText:photoOrText setName:_referenceNameField.text setID:referenceIDToEdit];
     }else if (photoOrText == 1){
         [self.delegate viewReferenceSave:self setContents:_note.text setImageOrText:photoOrText setName:_referenceNameField.text setID:referenceIDToEdit];
     }
@@ -113,6 +116,12 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)aTextField
+{
+    [aTextField resignFirstResponder];
+    return YES;
 }
 
 

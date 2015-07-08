@@ -76,8 +76,12 @@
         NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:deletePictureSketchQuery]];
         int photoOrTextDelete = [[[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"isImage"]] intValue];
         if (photoOrTextDelete == 0){
-            NSString *pictureFilePath = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"contents"]];
-            [[NSFileManager defaultManager] removeItemAtPath: pictureFilePath error: nil];
+            NSString *documentsDirectory = [NSHomeDirectory()
+                                            stringByAppendingPathComponent:@"Documents"];
+            
+            NSString *pictureFileName = [[results objectAtIndex:0] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"contents"]];
+            NSString *picturePath = [documentsDirectory stringByAppendingPathComponent:pictureFileName];
+            [[NSFileManager defaultManager] removeItemAtPath: picturePath error: nil];
         }
         NSString *query = [NSString stringWithFormat:@"delete from allReferences where referenceID=%d", recordIDToDelete];
         
@@ -111,7 +115,10 @@
         EntriesCell *referenceSelected = (EntriesCell *)[self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
         NSString *query = [NSString stringWithFormat:@"select * from allReferences where allReferences.referenceID = %i",referenceSelected.identifier];
         NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-        [viewReference setPhotoOrText: [[[results objectAtIndex:0] objectAtIndex:2] intValue] setContents:[[results objectAtIndex:0] objectAtIndex:1] setIdentifier: referenceSelected.identifier setName: [[results objectAtIndex:0] objectAtIndex:3]];
+        int photoOrTextVal = [[[results objectAtIndex:0] objectAtIndex:2] intValue];
+        NSString *resourceContents = [[results objectAtIndex:0] objectAtIndex:1];
+        NSString *resourceName = [[results objectAtIndex:0] objectAtIndex:3];
+        [viewReference setPhotoOrText: photoOrTextVal  setContents:resourceContents setIdentifier: referenceSelected.identifier setName: resourceName];
         
         
     }

@@ -66,7 +66,9 @@
     
     [self checkProjectSettings];
     [self checkEntryContents];
-    [_entryNameField becomeFirstResponder];
+    if ([_name length] == 0 ){
+        [_entryNameField becomeFirstResponder];
+    }
 }
 
 
@@ -267,7 +269,7 @@
     
 }
 
-//The textfield should be
+//The keyboard should disappear when the user hits return
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -779,6 +781,8 @@
     [self checkEntryContents];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 
 
 @end

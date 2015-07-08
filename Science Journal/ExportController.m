@@ -732,7 +732,8 @@
         NSString *projectPath = [@"/" stringByAppendingString:[name substringToIndex:[name length]-4]];
         [self.restClient uploadFile:name toPath:projectPath fromPath:namePath];
     }else{
-        NSString *projectPath = [@"/" stringByAppendingString:[name substringToIndex:1]];
+        long projectLoc = [name rangeOfString:@"_"].location;
+        NSString *projectPath = [@"/" stringByAppendingString:[name substringToIndex:projectLoc]];
         [self.restClient uploadFile:name toPath:projectPath fromPath:namePath];
     }
 }

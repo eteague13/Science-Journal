@@ -69,7 +69,7 @@
         savedPictureLocation = [documentsDirectory stringByAppendingPathComponent:picturename];
         NSData *pictureData = UIImagePNGRepresentation(imageView.image);
         [pictureData writeToFile:savedPictureLocation atomically:NO];
-        [self.delegate referenceSave:self setContents:savedPictureLocation setImageOrText:photoOrText setName:_referenceNameField.text];
+        [self.delegate referenceSave:self setContents:picturename setImageOrText:photoOrText setName:_referenceNameField.text];
     }else if (photoOrText == 1){
         [self.delegate referenceSave:self setContents:_note.text setImageOrText:(int) photoOrText setName:_referenceNameField.text];
     }
@@ -103,5 +103,10 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)aTextField
+{
+    [aTextField resignFirstResponder];
+    return YES;
+}
 
 @end

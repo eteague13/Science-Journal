@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "EntriesController.h"
 #import <DropboxSDK/DropboxSDK.h>
-static int version = 0.96;
+static int version = 0.97;
 
 @implementation AppDelegate
 //Initializes all of the switches in the Settings tab

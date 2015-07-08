@@ -19,6 +19,7 @@
 @interface textEntryController : UIViewController<UITextViewDelegate>{
     NSString *cellSelected;
     NSString *textArea;
+    int keyboardHeight;
     
 }
 
