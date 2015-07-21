@@ -404,7 +404,7 @@
             }
             }
             if ([weather length] > 0){
-            NSString *weatherString = [NSString stringWithFormat:@"Weather: %@", weather];
+            NSString *weatherString = weather;
             CGRect paragraphRect6 = [weatherString boundingRectWithSize:CGSizeMake(800, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributes context:nil];
             paragraphRect6.origin.x = 20;
             paragraphRect6.origin.y = yHeight;
