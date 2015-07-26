@@ -21,16 +21,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     //Initialize the database connection
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"FieldBookdb.sql"];
     
     //Labels the project field with the project name
     self.projectNameField.text = projectNameList;
     _projectName = projectNameList;
-    
+   
     //If the record ID is -1, create a new entry. Otherwise, edit the entry
     if (self.recordIDToEdit != -1) {
         [self loadInfoToEdit];
+        
         _entryTitleLabel.title = @"Edit Entry";
     }else{
         _date = @"";
@@ -65,10 +67,12 @@
     _stopNumField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
     
     [self checkProjectSettings];
+    NSLog(@"Record id in edit entry: %d", self.recordIDToEdit);
     [self checkEntryContents];
     if ([_name length] == 0 ){
         [_entryNameField becomeFirstResponder];
     }
+    
 }
 
 
@@ -560,6 +564,7 @@
 
 //Checks with the project settings to see which fields should be visible
 -(void)checkProjectSettings{
+    NSLog(@"project name: %@", _projectName);
     NSString *settingsQuery = [NSString stringWithFormat:@"select * from projectSettings where projectName='%@'", _projectName];
     NSArray *results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:settingsQuery]];
     

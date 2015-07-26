@@ -56,6 +56,7 @@
     }else{
         [self.delegate addProjectSave:self textToSave: _projectAddField.text addOrEdit:addOrEdit];
     }
+    NSLog(@"New project name: %@", _projectAddField.text);
 
 }
 

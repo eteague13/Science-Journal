@@ -1064,6 +1064,7 @@
                     <connections>
                         <outlet property="latitudeField" destination="EsE-RO-dS0" id="2kZ-Ug-ewB"/>
                         <outlet property="longitudeField" destination="xFa-Ys-uzs" id="NX8-z8-ccK"/>
+                        <outlet property="updateLocWeatherButton" destination="6Rh-As-HzK" id="hOY-sR-zAf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Ue-Oe-bgb" userLabel="First Responder" sceneMemberID="firstResponder"/>

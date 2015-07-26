@@ -202,11 +202,13 @@
     }else if ([segue.identifier isEqualToString:@"ViewEntries"]){
         EntriesController *entriesListController = segue.destinationViewController;
         ProjectCell *projectToEdit = (ProjectCell *)[self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        NSLog(@"project name to edit: %@", projectToEdit.projectLabel.text);
         [entriesListController setProjectName:projectToEdit.projectLabel.text];
     }else if ([segue.identifier isEqualToString:@"EditProjectName"]){
         UINavigationController *navigationController = segue.destinationViewController;
         AddProjectController *addProject = [navigationController viewControllers][0];
         addProject.delegate = self;
+        NSLog(@"Editing project name");
         [addProject setAddOrEdit:1 setOldProjectName:oldProjectName];
     }
 }
@@ -228,6 +230,7 @@
     //If it's an existing project
     }else {
         NSString *query = [NSString stringWithFormat:@"update projects set projectName='%@' where projectName='%@'", pn, oldProjectName];
+        NSLog(@"query project: %@", query);
         [self.dbManager executeQuery:query];
         
         NSString *allProjectEntries = [NSString stringWithFormat:@"select * from entriesBasic where projectName='%@'", oldProjectName];
@@ -238,10 +241,21 @@
             [self.dbManager executeQuery:updateEntryQuery];
         }
         
+        NSString *getSettingsEntry = [NSString stringWithFormat:@"select * from projectSettings where projectName='%@'", oldProjectName];
+        results = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:getSettingsEntry]];
+        for (id settings in results){
+            int tempSettingsID = [[settings objectAtIndex:0] intValue];
+            NSString *updateSettingsQuery = [NSString stringWithFormat:@"update projectSettings set projectName='%@' where settingsID='%d'", pn, tempSettingsID];
+            [self.dbManager executeQuery:updateSettingsQuery];
+        }
+        
+        
+        
         
         
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+    [self loadData];
     
 }
 

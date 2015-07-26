@@ -36,7 +36,7 @@
     [self registerForKeyboardNotifications];
     
     //Draws the text view
-    CGRect frame = CGRectMake(0, 30, 320, 500);
+    CGRect frame = CGRectMake(0, 30, 320, 540);
     self.note = [[NoteView alloc] initWithFrame:frame];
     if ([textArea length] != 0){
         _note.text = textArea;

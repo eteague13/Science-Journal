@@ -31,6 +31,7 @@
 //IBOutlets
 @property (weak, nonatomic) IBOutlet UITextField *latitudeField;
 @property (weak, nonatomic) IBOutlet UITextField *longitudeField;
+@property (weak, nonatomic) IBOutlet UIButton *updateLocWeatherButton;
 
 
 

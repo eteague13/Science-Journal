@@ -45,6 +45,7 @@
     NSArray *rightButtonItems = @[addItem, settingsItem];
     self.navigationItem.rightBarButtonItems = rightButtonItems;
     
+    
 }
 //Reloads the data each time the view appears
 -(void)viewDidAppear:(BOOL)animated {
@@ -95,6 +96,7 @@
     NSString *entryID = [[results objectAtIndex:indexPath.row] objectAtIndex:[self.dbManager.arrColumnNames indexOfObject:@"entriesID"]];
     cell.entryNameLabel.text = entryName;
     cell.identifier = [entryID intValue];
+    NSLog(@"Cell name: %@, cell id: %@", entryName, entryID);
     return cell;
 }
 
@@ -114,15 +116,18 @@
     
     else if ([segue.identifier isEqualToString:@"EditEntry"])
     {
+        NSLog(@"Trying to segue");
         UINavigationController *navigationController = segue.destinationViewController;
         AddEntryController *addEntryController = [navigationController viewControllers][0];
         addEntryController.delegate = self;
         [addEntryController setEditEntry:true];
+        [addEntryController setProjectNameList:self.projectNameList];
         //How I tell which entry is selected
-        addEntryController.recordIDToEdit = self.recordIDToEdit;
-        self.recordIDToEdit = (int)[self.tableView indexPathForSelectedRow].row + 1;
+        //addEntryController.recordIDToEdit = self.recordIDToEdit;
+        //self.recordIDToEdit = (int)[self.tableView indexPathForSelectedRow].row + 1;
         EntriesCell *entryToEdit = (EntriesCell *)[self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
         addEntryController.recordIDToEdit = entryToEdit.identifier;
+        NSLog(@"Record ID val: %d", addEntryController.recordIDToEdit);
         
     }else if ([segue.identifier isEqualToString:@"ProjectSettings"]){
         UINavigationController *navigationController = segue.destinationViewController;

@@ -91,6 +91,9 @@
 
 //Action called when the user presses the get location and weather button
 - (IBAction)updateLocWeather:(id)sender {
+    _weatherField.text = @"";
+    _updateLocWeatherButton.enabled = NO;
+    
     _bestEffortAtLocation = nil;
     _locManager.delegate = self;
     _locManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -104,11 +107,8 @@
     [self performSelector:@selector(stopUpdatingLocationWithMessage:) withObject:statusCode afterDelay:timeout];
     
     //Uses a RESTful API to get the weather data
-    _weatherField.text = @"";
-    NSString *currentLocationURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitudeValue, longitudeValue];
-    NSURL *myURL = [NSURL URLWithString:currentLocationURL];
-    NSURLRequest *myRequest = [NSURLRequest requestWithURL:myURL];
-    NSURLConnection *myConnection = [NSURLConnection connectionWithRequest:myRequest delegate:self];
+    
+    
 }
 
 //Delegate method for CLLocationManager
@@ -140,16 +140,14 @@
         CLLocationAccuracy accuracy = 10;
         NSLog(@"Desired accuracy %f, Horizontal accuracy %f", accuracy, newLocation.horizontalAccuracy);
         if (newLocation.horizontalAccuracy <= accuracy) {
-            NSString *statusCode2 = @"1";
+            //NSString *statusCode2 = @"1";
             
-            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocationWithMessage:) object:nil];
+            //[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocationWithMessage:) object:nil];
             
             updatingLocation = 0;
             bestAccuracyObtained = 1;
             
-            [self stopUpdatingLocationWithMessage:statusCode2];
-            
-            NSLog(@"Best accuracy: %d, Location updating status: %d", bestAccuracyObtained, updatingLocation);
+            //[self stopUpdatingLocationWithMessage:statusCode2];
             
             
         }
@@ -177,7 +175,7 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     jsonWeather = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     
-    
+    _weatherField.text = [_weatherField.text stringByAppendingString:@"\n"];
     //Parses the json
     for (id key in jsonWeather){
         if ([key isEqualToString:@"main"]){
@@ -199,11 +197,13 @@
             NSString *windDegree = [NSString stringWithFormat:@"Wind Degree: %@ degrees", [[jsonWeather objectForKey:key] objectForKey: @"deg"]];
             _weatherField.text = [_weatherField.text stringByAppendingString:windDegree];
             _weatherField.text = [_weatherField.text stringByAppendingString:@"\n"];
-            NSString *windSpeed = [NSString stringWithFormat:@"Wind Speed: %@ mps", [[jsonWeather objectForKey:key] objectForKey: @"speed"]];
+            NSString *windSpeed = [NSString stringWithFormat:@"Wind Speed: %@ m/s", [[jsonWeather objectForKey:key] objectForKey: @"speed"]];
             _weatherField.text = [_weatherField.text stringByAppendingString:windSpeed];
             _weatherField.text = [_weatherField.text stringByAppendingString:@"\n"];
         }
     }
+    _weatherField.text = [_weatherField.text stringByAppendingString:@"\n\n\n\n\n\n\n\n\n\n\n\n"];
+    _weatherField.text = [_weatherField.text stringByAppendingString:@"(Weather data courtesy of openweathermap.org)"];
     
 }
 
@@ -253,6 +253,8 @@
     
     [_locManager stopUpdatingLocation];
     _locManager.delegate = nil;
+    
+    _updateLocWeatherButton.enabled = YES;
     [_gettingLocationIndicator stopAnimating];
     [_gettingLocationIndicator removeFromSuperview];
     
@@ -263,7 +265,7 @@
         longitudeValue = _bestEffortAtLocation.coordinate.longitude;
         _latitudeField.text = [NSString stringWithFormat:@"%.8f", latitudeValue];
         _longitudeField.text = [NSString stringWithFormat:@"%.8f", longitudeValue];
-        _weatherField.text = [_weatherField.text stringByAppendingString:@"\n"];
+        
         NSString *accuracyString = [NSString stringWithFormat:@"Location recorded within %.f m of accuracy", _bestEffortAtLocation.horizontalAccuracy];
         _weatherField.text = [_weatherField.text stringByAppendingString: accuracyString];
         _weatherField.text = [_weatherField.text stringByAppendingString:@"\n"];
@@ -272,11 +274,15 @@
         longitudeValue = _bestEffortAtLocation.coordinate.longitude;
         _latitudeField.text = [NSString stringWithFormat:@"%.8f", latitudeValue];
         _longitudeField.text = [NSString stringWithFormat:@"%.8f", longitudeValue];
-        _weatherField.text = [_weatherField.text stringByAppendingString:@"\n"];
+        
         NSString *accuracyString = [NSString stringWithFormat:@"Location recorded within %.f m of accuracy", _bestEffortAtLocation.horizontalAccuracy];
         _weatherField.text = [_weatherField.text stringByAppendingString: accuracyString];
         _weatherField.text = [_weatherField.text stringByAppendingString:@"\n"];
     }
+    NSString *currentLocationURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f", latitudeValue, longitudeValue];
+    NSURL *myURL = [NSURL URLWithString:currentLocationURL];
+    NSURLRequest *myRequest = [NSURLRequest requestWithURL:myURL];
+    NSURLConnection *myConnection = [NSURLConnection connectionWithRequest:myRequest delegate:self];
     
 }
 
@@ -308,15 +314,7 @@
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
     _weatherField.contentInset = contentInsets;
     _weatherField.scrollIndicatorInsets = contentInsets;
-    /*
-    // If active text field is hidden by keyboard, scroll it so it's visible
-    // Your app might not need or want this behavior.
-    CGRect aRect = self.view.frame;
-    aRect.size.height -= kbSize.height;
-    if (!CGRectContainsPoint(aRect, _activeField.frame.origin) ) {
-        [_weatherField scrollRectToVisible:_activeField.frame animated:YES];
-    }
-     */
+    
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
